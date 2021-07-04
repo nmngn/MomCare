@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,12 @@
 		36EC54642691F37D00809FF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54622691F37D00809FF3 /* Main.storyboard */; };
 		36EC54662691F38000809FF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54652691F38000809FF3 /* Assets.xcassets */; };
 		36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54672691F38000809FF3 /* LaunchScreen.storyboard */; };
+		36FC461B26921AE200AAB868 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FC461A26921AE200AAB868 /* UIViewController+.swift */; };
+		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36EC54592691F37D00809FF3 /* MomCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MomCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36EC545C2691F37D00809FF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36EC545E2691F37D00809FF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		36EC54652691F38000809FF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36EC54682691F38000809FF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36EC546A2691F38000809FF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36FC461A26921AE200AAB868 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
+		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				36EC545B2691F37D00809FF3 /* MomCare */,
 				36EC545A2691F37D00809FF3 /* Products */,
+				7D638C6CF51B20B55B7058D4 /* Pods */,
+				5C76F9AB1ABE2CAD04579846 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +65,7 @@
 		36EC545B2691F37D00809FF3 /* MomCare */ = {
 			isa = PBXGroup;
 			children = (
+				36FC461926921AD400AAB868 /* Extension */,
 				36EC545C2691F37D00809FF3 /* AppDelegate.swift */,
 				36EC545E2691F37D00809FF3 /* SceneDelegate.swift */,
 				36EC54602691F37D00809FF3 /* ViewController.swift */,
@@ -67,6 +77,31 @@
 			path = MomCare;
 			sourceTree = "<group>";
 		};
+		36FC461926921AD400AAB868 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				36FC461A26921AE200AAB868 /* UIViewController+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5C76F9AB1ABE2CAD04579846 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08E9659231038AC3957DB0AF /* Pods_MomCare.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D638C6CF51B20B55B7058D4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */,
+				7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 36EC546D2691F38000809FF3 /* Build configuration list for PBXNativeTarget "MomCare" */;
 			buildPhases = (
+				4D47F3CD7ADD0D7537DD5215 /* [CP] Check Pods Manifest.lock */,
 				36EC54552691F37D00809FF3 /* Sources */,
 				36EC54562691F37D00809FF3 /* Frameworks */,
 				36EC54572691F37D00809FF3 /* Resources */,
+				7491B7C85EDBEAD175FF7576 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +169,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4D47F3CD7ADD0D7537DD5215 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MomCare-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7491B7C85EDBEAD175FF7576 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MomCare/Pods-MomCare-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MomCare/Pods-MomCare-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MomCare/Pods-MomCare-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		36EC54552691F37D00809FF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -139,6 +218,7 @@
 			files = (
 				36EC54612691F37D00809FF3 /* ViewController.swift in Sources */,
 				36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */,
+				36FC461B26921AE200AAB868 /* UIViewController+.swift in Sources */,
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +363,7 @@
 		};
 		36EC546E2691F38000809FF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +383,7 @@
 		};
 		36EC546F2691F38000809FF3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
