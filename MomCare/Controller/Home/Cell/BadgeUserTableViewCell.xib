@@ -85,6 +85,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="allUserLabel" destination="V3c-WJ-0DQ" id="Pn2-zt-SXU"/>
+                <outlet property="inMonthLabel" destination="JeE-hp-vAO" id="clV-Yw-rWV"/>
+            </connections>
             <point key="canvasLocation" x="-23" y="68"/>
         </tableViewCell>
     </objects>

@@ -27,12 +27,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Cp-9u-EBA">
                         <rect key="frame" x="16" y="12" width="343" height="96"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O4c-VG-rDG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="O4c-VG-rDG">
                                 <rect key="frame" x="12" y="20" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="fgz-Ad-nhF"/>
                                     <constraint firstAttribute="width" constant="56" id="hRx-aF-Kfv"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nguyeenx Thi A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLP-zH-ohs">
                                 <rect key="frame" x="76" y="24" width="98" height="17"/>
@@ -83,7 +88,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="avatarUser" destination="O4c-VG-rDG" id="qKN-Ah-sO1"/>
+                <outlet property="babyAgeLabel" destination="4ZY-Dh-GuL" id="ZiX-8R-1yG"/>
+                <outlet property="dayCreateLabel" destination="d5i-TA-qLc" id="qdS-LL-2LR"/>
+                <outlet property="subView" destination="0Cp-9u-EBA" id="Iia-GK-Gzs"/>
+                <outlet property="userNameLabel" destination="QLP-zH-ohs" id="Wek-5P-2rE"/>
+            </connections>
             <point key="canvasLocation" x="-226.81159420289856" y="67.633928571428569"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="avatar_placeholder" width="250" height="250"/>
+    </resources>
 </document>

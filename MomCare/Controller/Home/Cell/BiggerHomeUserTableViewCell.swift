@@ -8,16 +8,17 @@
 import UIKit
 
 class BiggerHomeUserTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var subView: UIView!
+    
+    @IBOutlet weak var avatarUser: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var dayCreateLabel: UILabel!
+    @IBOutlet weak var babyAgeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

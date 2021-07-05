@@ -23,7 +23,7 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dự kiến sinh trong tháng này (3)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gq8-Cg-8Df">
                         <rect key="frame" x="16" y="8" width="288" height="17"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,6 +37,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="titleLabel" destination="Gq8-Cg-8Df" id="5zx-bX-VCn"/>
+            </connections>
             <point key="canvasLocation" x="-23.188405797101453" y="63.950892857142854"/>
         </tableViewCell>
     </objects>

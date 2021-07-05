@@ -10,7 +10,7 @@ import UIKit
 enum HomeType {
     case badge
     case title
-    case smallUser
+    case sort
     case biggerUser
 }
 

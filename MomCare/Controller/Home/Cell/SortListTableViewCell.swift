@@ -1,5 +1,5 @@
 //
-//  SmallHomeUserTableViewCell.swift
+//  SortListTableViewCell.swift
 //  MomCare
 //
 //  Created by Nam Ngây on 05/07/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmallHomeUserTableViewCell: UITableViewCell {
+class SortListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
