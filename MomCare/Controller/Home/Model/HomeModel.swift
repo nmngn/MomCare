@@ -19,6 +19,7 @@ struct HomeModel {
     var title = ""
     var description = ""
     var image: UIImage?
+    var backgroundColor: UIColor?
 
     init(type: HomeType) {
         self.type = type

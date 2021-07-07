@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoUserTableViewCell" rowHeight="102" id="KGk-i7-Jjw" customClass="InfoUserTableViewCell" customModule="MomCare" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Họ tên" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBR-fo-8jh">
+                        <rect key="frame" x="28" y="16" width="319" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="lZM-xK-rnu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                        <color key="textColor" name="Neutral_300"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ox5-zW-CM4">
+                        <rect key="frame" x="28" y="48" width="319" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="dgj-E2-1qg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1a-y7-dWZ">
+                        <rect key="frame" x="321" y="57" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="0vY-Yw-DUO"/>
+                            <constraint firstAttribute="height" constant="22" id="bcJ-x7-hRM"/>
+                        </constraints>
+                        <state key="normal">
+                            <imageReference key="image" image="calendar" catalog="system" renderingMode="original"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="K1a-y7-dWZ" secondAttribute="trailing" constant="12" id="4tI-gV-KVs"/>
+                    <constraint firstItem="Ox5-zW-CM4" firstAttribute="top" secondItem="XBR-fo-8jh" secondAttribute="bottom" constant="12" id="5Co-Kk-tea"/>
+                    <constraint firstAttribute="bottom" secondItem="Ox5-zW-CM4" secondAttribute="bottom" id="AQv-ZI-ttj"/>
+                    <constraint firstItem="Ox5-zW-CM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Laq-3d-Bl3"/>
+                    <constraint firstAttribute="trailing" secondItem="XBR-fo-8jh" secondAttribute="trailing" constant="28" id="Z7G-Fm-0xb"/>
+                    <constraint firstItem="K1a-y7-dWZ" firstAttribute="centerY" secondItem="Ox5-zW-CM4" secondAttribute="centerY" id="guI-ok-MIU"/>
+                    <constraint firstItem="XBR-fo-8jh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="mHC-k4-WX5"/>
+                    <constraint firstAttribute="trailing" secondItem="Ox5-zW-CM4" secondAttribute="trailing" constant="28" id="or6-3l-9Y2"/>
+                    <constraint firstItem="XBR-fo-8jh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="uyU-dw-dz5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="-21.014492753623191" y="121.875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <namedColor name="Neutral_300">
+            <color red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

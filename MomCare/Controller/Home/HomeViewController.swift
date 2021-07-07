@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Then
 
 class HomeViewController: UIViewController {
     
@@ -98,6 +97,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     HomeTitleTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var model: HomeModel
+        model = modelIndexPath(indexPath: indexPath)
+        
+        switch model.type {
+        case .biggerUser:
+            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
         }
     }
     

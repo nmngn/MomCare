@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvatarUserTableViewCell" id="KGk-i7-Jjw" customClass="AvatarUserTableViewCell" customModule="MomCare" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-c0-Kp4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="GWJ-jf-79k">
+                                <rect key="frame" x="110.5" y="24" width="154" height="154"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="iNo-AY-P2J"/>
+                                    <constraint firstAttribute="height" constant="154" id="zmy-6l-dFs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="77"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gmy-vk-K5b">
+                                <rect key="frame" x="224.5" y="138" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Suc-dd-JKX"/>
+                                    <constraint firstAttribute="height" constant="40" id="rBY-uk-ozm"/>
+                                </constraints>
+                                <state key="normal" image="ic_take_photo"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="GWJ-jf-79k" secondAttribute="bottom" id="1i4-t6-ia2"/>
+                            <constraint firstAttribute="height" constant="178" id="9Pk-kD-HPM"/>
+                            <constraint firstItem="Gmy-vk-K5b" firstAttribute="bottom" secondItem="GWJ-jf-79k" secondAttribute="bottom" id="K6k-Hr-vx5"/>
+                            <constraint firstItem="Gmy-vk-K5b" firstAttribute="trailing" secondItem="GWJ-jf-79k" secondAttribute="trailing" id="KIY-Hg-3Tz"/>
+                            <constraint firstItem="GWJ-jf-79k" firstAttribute="centerX" secondItem="2Oq-c0-Kp4" secondAttribute="centerX" id="Yeh-kA-QDA"/>
+                            <constraint firstItem="GWJ-jf-79k" firstAttribute="top" secondItem="2Oq-c0-Kp4" secondAttribute="top" constant="24" id="oXr-GN-xuz"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="2Oq-c0-Kp4" secondAttribute="trailing" id="IBh-aa-Fkp"/>
+                    <constraint firstItem="2Oq-c0-Kp4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KJT-Ez-at0"/>
+                    <constraint firstItem="2Oq-c0-Kp4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bGg-8a-mdb"/>
+                    <constraint firstAttribute="bottom" secondItem="2Oq-c0-Kp4" secondAttribute="bottom" id="gAu-tY-JvJ"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="8"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="70.28985507246378" y="91.741071428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="avatar_placeholder" width="250" height="250"/>
+        <image name="ic_take_photo" width="48" height="48"/>
+    </resources>
+</document>
