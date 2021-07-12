@@ -9,15 +9,23 @@ import UIKit
 
 class NoteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var noteTextField: UITextField!
+    
+    weak var delegate: DetailUserInfo?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        noteTextField.makeShadow()
+        noteTextField.delegate = self
     }
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+extension NoteTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 0 {
+                delegate?.saveNote(text: text)
+            }
+        }
     }
-    
 }

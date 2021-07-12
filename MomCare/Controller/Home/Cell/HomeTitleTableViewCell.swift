@@ -10,13 +10,12 @@ import UIKit
 class HomeTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     func setupData(model: HomeModel) {
+        titleLabel.text = model.title
+    }
+    
+    func setupData(model: HistoryModel) {
         titleLabel.text = model.title
     }
     

@@ -15,6 +15,20 @@ enum DetailType {
     case note
     case photo
 }
+enum DataType {
+    case name
+    case address
+    case dob
+    case numberPhone
+    case height
+    case dateCalculate
+    case babyAge
+    case note
+    case momImage
+    case babyImage
+    case historyPicture
+    case dateSave
+}
 
 struct DetailModel {
     var type: DetailType
@@ -24,8 +38,10 @@ struct DetailModel {
     var image: UIImage?
     var date = ""
     var placeHolder = ""
+    var dataType: DataType
     
-    init(type: DetailType) {
+    init(type: DetailType, dataType: DataType) {
         self.type = type
+        self.dataType = dataType
     }
 }

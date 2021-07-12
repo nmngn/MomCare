@@ -9,15 +9,22 @@ import UIKit
 
 class BaybyAgeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dobLabel: UITextField!
+    @IBOutlet weak var ageLabel: UITextField!
+    
+    weak var delegate: DetailUserInfo?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        dobLabel.makeShadow()
+        ageLabel.makeShadow()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setupData(model: DetailModel) {
+        
     }
     
+    @IBAction func chooseDOB(_ sender: UIButton) {
+        delegate?.chooseBabyDOB()
+    }
 }

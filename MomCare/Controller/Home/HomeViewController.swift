@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HomeViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class HomeViewController: UIViewController {
         self.title = "Màn hình chính"
         configView()
         setupData()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     func configView() {
@@ -35,16 +37,19 @@ class HomeViewController: UIViewController {
     func setupData() {
         model.removeAll()
         let badge = HomeModel(type: .badge)
-        let header1 = HomeModel(type: .title)
+        var header1 = HomeModel(type: .title)
+        header1.title = "Dự kiến sinh trong tháng này"
         let biggerCell = HomeModel(type: .biggerUser)
         let sort = HomeModel(type: .sort)
+        var header2 = HomeModel(type: .title)
+        header2.title = "Tất cả bênh nhân"
         
         model.append(badge)
         model.append(header1)
         model.append(biggerCell)
         model.append(biggerCell)
         model.append(biggerCell)
-        model.append(header1)
+        model.append(header2)
         model.append(sort)
         model.append(biggerCell)
         model.append(biggerCell)
@@ -96,6 +101,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTitleTableViewCell", for: indexPath) as?
                     HomeTitleTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(model: model)
             return cell
         }
     }

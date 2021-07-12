@@ -35,8 +35,9 @@
                                         <color key="textColor" name="Neutral_300"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t7p-UX-FkZ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t7p-UX-FkZ">
                                         <rect key="frame" x="0.0" y="21" width="141.5" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="r8K-lI-U0Y"/>
                                         </constraints>
@@ -59,8 +60,9 @@
                                         <color key="textColor" name="Neutral_300"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rtX-Zn-X87">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rtX-Zn-X87">
                                         <rect key="frame" x="0.0" y="21" width="141.5" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="jkA-Yw-B8B"/>
                                         </constraints>
@@ -85,6 +87,9 @@
                         <state key="normal">
                             <imageReference key="image" image="calendar" catalog="system" renderingMode="original"/>
                         </state>
+                        <connections>
+                            <action selector="chooseDOB:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Q0I-eI-wDp"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -98,13 +103,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="ageLabel" destination="rtX-Zn-X87" id="oTk-DI-IHX"/>
+                <outlet property="dobLabel" destination="t7p-UX-FkZ" id="X2v-zG-wDR"/>
+            </connections>
             <point key="canvasLocation" x="-23.913043478260871" y="91.40625"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <namedColor name="Neutral_300">
-            <color red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.5220000147819519" green="0.5220000147819519" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

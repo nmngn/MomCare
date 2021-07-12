@@ -9,15 +9,20 @@ import UIKit
 
 class PhotoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var imgView: UIImageView!
+    
+    weak var delegate: DetailUserInfo?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        if imgView.image == nil {
+            imageHeight.constant = 0
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func chooseImage(_ sender: UIButton) {
+        delegate?.chooseImage()
     }
     
 }

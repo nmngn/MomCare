@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
+		3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */; };
+		3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */; };
+		3666F19F269982A300D80E06 /* NoteHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F19D269982A300D80E06 /* NoteHistoryTableViewCell.xib */; };
+		3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1AD26998D8600D80E06 /* RealmModel.swift */; };
 		366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366AE8A82692B5FB00B5262C /* Color.xcassets */; };
 		366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AE8B62692BC0C00B5262C /* UIView+.swift */; };
 		366AE8C02692BDEA00B5262C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AE8BF2692BDEA00B5262C /* HomeModel.swift */; };
@@ -22,6 +27,14 @@
 		366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366AE8E02692D2CC00B5262C /* SortListTableViewCell.xib */; };
 		366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AE8E42692D84000B5262C /* DetailUserViewController.swift */; };
 		366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366AE8E52692D84000B5262C /* DetailUserViewController.xib */; };
+		367335D02695D90000EB9DC0 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335CF2695D90000EB9DC0 /* String+.swift */; };
+		367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335D32695D9BE00EB9DC0 /* Toast.swift */; };
+		367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367AACEB2697FC4C0056601C /* HistoryViewController.swift */; };
+		367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367AACEC2697FC4C0056601C /* HistoryViewController.xib */; };
+		36B615E1269B515300F554E8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E0269B515300F554E8 /* UITextField+.swift */; };
+		36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */; };
+		36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */; };
+		36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90B952698AAC500817DC2 /* HistoryModel.swift */; };
 		36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4FF962694AAD700985C25 /* AvatarUserTableViewCell.swift */; };
 		36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D4FF972694AAD700985C25 /* AvatarUserTableViewCell.xib */; };
 		36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4FF9B2694ACC900985C25 /* GeneralInfoTableViewCell.swift */; };
@@ -47,6 +60,11 @@
 
 /* Begin PBXFileReference section */
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
+		3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPictureTableViewCell.xib; sourceTree = "<group>"; };
+		3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		3666F19D269982A300D80E06 /* NoteHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		3666F1AD26998D8600D80E06 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		366AE8A82692B5FB00B5262C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		366AE8B62692BC0C00B5262C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		366AE8BF2692BDEA00B5262C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -62,6 +80,14 @@
 		366AE8E02692D2CC00B5262C /* SortListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortListTableViewCell.xib; sourceTree = "<group>"; };
 		366AE8E42692D84000B5262C /* DetailUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserViewController.swift; sourceTree = "<group>"; };
 		366AE8E52692D84000B5262C /* DetailUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailUserViewController.xib; sourceTree = "<group>"; };
+		367335CF2695D90000EB9DC0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		367335D32695D9BE00EB9DC0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		367AACEB2697FC4C0056601C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		367AACEC2697FC4C0056601C /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		36B615E0269B515300F554E8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+.swift"; path = "../../../UITextField+.swift"; sourceTree = "<group>"; };
+		36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCalendarViewController.swift; sourceTree = "<group>"; };
+		36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCalendarViewController.xib; sourceTree = "<group>"; };
+		36B90B952698AAC500817DC2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		36D4FF962694AAD700985C25 /* AvatarUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUserTableViewCell.swift; sourceTree = "<group>"; };
 		36D4FF972694AAD700985C25 /* AvatarUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarUserTableViewCell.xib; sourceTree = "<group>"; };
 		36D4FF9B2694ACC900985C25 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3666F1AC26998D7900D80E06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3666F1AD26998D8600D80E06 /* RealmModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		366AE89C2692A96600B5262C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,12 +199,60 @@
 		366AE8E92692D84600B5262C /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				36B615E3269B540800F554E8 /* Popup */,
 				36D4FF942694AAC100985C25 /* Cell */,
 				36D4FF932694AABC00985C25 /* Model */,
 				366AE8E42692D84000B5262C /* DetailUserViewController.swift */,
 				366AE8E52692D84000B5262C /* DetailUserViewController.xib */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		367335CD2695D41800EB9DC0 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				36B90B942698AA3E00817DC2 /* Cell */,
+				36B90B932698AA3600817DC2 /* Model */,
+				367AACEB2697FC4C0056601C /* HistoryViewController.swift */,
+				367AACEC2697FC4C0056601C /* HistoryViewController.xib */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		367335D22695D9A700EB9DC0 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				367335D32695D9BE00EB9DC0 /* Toast.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		36B615E3269B540800F554E8 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */,
+				36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		36B90B932698AA3600817DC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36B90B952698AAC500817DC2 /* HistoryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36B90B942698AA3E00817DC2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */,
+				3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */,
+				3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */,
+				3666F19D269982A300D80E06 /* NoteHistoryTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		36D4FF932694AABC00985C25 /* Model */ = {
@@ -221,9 +303,12 @@
 		36EC545B2691F37D00809FF3 /* MomCare */ = {
 			isa = PBXGroup;
 			children = (
+				3666F1AC26998D7900D80E06 /* Model */,
+				367335D22695D9A700EB9DC0 /* Lib */,
 				366AE89C2692A96600B5262C /* AppDelegate */,
 				36FC461926921AD400AAB868 /* Extension */,
 				366AE8BB2692BD2A00B5262C /* Controller */,
+				367335CD2695D41800EB9DC0 /* History */,
 				366AE8AB2692B60C00B5262C /* Utils */,
 				36EC54672691F38000809FF3 /* LaunchScreen.storyboard */,
 				36EC546A2691F38000809FF3 /* Info.plist */,
@@ -237,6 +322,8 @@
 				36FC461A26921AE200AAB868 /* UIViewController+.swift */,
 				366AE8B62692BC0C00B5262C /* UIView+.swift */,
 				366AE8CB2692C1FA00B5262C /* UITableView+.swift */,
+				367335CF2695D90000EB9DC0 /* String+.swift */,
+				36B615E0269B515300F554E8 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -317,19 +404,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
 				366AE8D12692C2DE00B5262C /* HomeTitleTableViewCell.xib in Resources */,
+				3666F19F269982A300D80E06 /* NoteHistoryTableViewCell.xib in Resources */,
 				36D4FFA32694AEEA00985C25 /* InfoUserTableViewCell.xib in Resources */,
 				36D4FFAD2694B5FA00985C25 /* NoteTableViewCell.xib in Resources */,
 				36D4FFB22694B68200985C25 /* PhotoTableViewCell.xib in Resources */,
 				366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */,
 				366AE8C52692BF3300B5262C /* BadgeUserTableViewCell.xib in Resources */,
+				36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
+				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
 				36EC54642691F37D00809FF3 /* Main.storyboard in Resources */,
 				366AE8C82692C0AA00B5262C /* Roboto in Resources */,
@@ -385,23 +476,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */,
 				36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */,
 				366AE8CC2692C1FA00B5262C /* UITableView+.swift in Sources */,
+				367335D02695D90000EB9DC0 /* String+.swift in Sources */,
 				36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */,
 				366AE8C02692BDEA00B5262C /* HomeModel.swift in Sources */,
+				367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */,
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
 				36FC461B26921AE200AAB868 /* UIViewController+.swift in Sources */,
+				3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */,
 				366AE8D02692C2DE00B5262C /* HomeTitleTableViewCell.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
+				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
+				36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */,
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
+				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
+				367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
+				36B615E1269B515300F554E8 /* UITextField+.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
 			);
@@ -551,6 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JQK33626M;
 				INFOPLIST_FILE = MomCare/Info.plist;
@@ -560,6 +661,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuicoding.MomCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -571,6 +673,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JQK33626M;
 				INFOPLIST_FILE = MomCare/Info.plist;
@@ -580,6 +683,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuicoding.MomCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

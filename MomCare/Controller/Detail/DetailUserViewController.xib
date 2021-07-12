@@ -48,6 +48,9 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="showMore:" destination="-1" eventType="touchUpInside" id="B83-en-7HU"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ah3-Gh-wSy">
                             <rect key="frame" x="210" y="0.0" width="180" height="34"/>
@@ -64,6 +67,9 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="saveData:" destination="-1" eventType="touchUpInside" id="yqn-Lu-Y3V"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

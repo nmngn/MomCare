@@ -8,16 +8,29 @@
 import UIKit
 
 class GeneralInfoTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var dayCreate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupData()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setupData() {
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        
+        
+        let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
+                                             attributes: [.foregroundColor: UIColor.black,
+                                                          .font: UIFont.systemFont(ofSize: 14, weight: .regular)])
+        let day = NSMutableAttributedString(string: "\(dateString)",
+                                              attributes: [.foregroundColor: UIColor.black,
+                                                           .font: UIFont.systemFont(ofSize: 14, weight: .medium)])
+        text.append(day)
+        dayCreate.attributedText = text
     }
     
 }

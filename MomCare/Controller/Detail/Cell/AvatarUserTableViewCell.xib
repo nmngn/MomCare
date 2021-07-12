@@ -38,6 +38,9 @@
                                     <constraint firstAttribute="height" constant="40" id="rBY-uk-ozm"/>
                                 </constraints>
                                 <state key="normal" image="ic_take_photo"/>
+                                <connections>
+                                    <action selector="chooseAvatar:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nmQ-bW-toZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,6 +68,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="avatarImage" destination="GWJ-jf-79k" id="FNF-hy-YYa"/>
+                <outlet property="takeButton" destination="Gmy-vk-K5b" id="PYm-de-YTb"/>
+            </connections>
             <point key="canvasLocation" x="70.28985507246378" y="91.741071428571431"/>
         </tableViewCell>
     </objects>

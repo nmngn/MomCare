@@ -7,17 +7,33 @@
 
 import UIKit
 
+protocol DetailUserInfo: class {
+    func chooseAvatar()
+    func chooseDOB()
+    func chooseBabyDOB()
+    func chooseImage()
+    func sendString(dataType: DataType, text: String)
+    func showAlert()
+    func saveNote(text: String)
+}
+
 class AvatarUserTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var takeButton: UIButton!
+    
+    weak var delegate: DetailUserInfo?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        takeButton.makeShadow()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setupData(model: DetailModel) {
+        avatarImage.image = model.image
     }
     
+    @IBAction func chooseAvatar(_ sender: UIButton) {
+        delegate?.chooseAvatar()
+    }
 }

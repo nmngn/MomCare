@@ -29,9 +29,9 @@ extension UIView {
     func makeShadow() {
         self.layer.do {
             $0.masksToBounds = false
-            $0.shadowColor = UIColor(red: 1, green: 18, blue: 34, alpha: 0.05).cgColor
+            $0.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
             $0.shadowOpacity = 1
-            $0.shadowOffset = CGSize(width: 0, height: 2)
+            $0.shadowOffset = CGSize(width: 0, height: 1)
             $0.shadowRadius = 4
         }
     }

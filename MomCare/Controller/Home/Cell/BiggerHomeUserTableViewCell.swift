@@ -18,7 +18,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        subView.makeShadow()
+        subView.makeBorderColor()
     }
     
 }

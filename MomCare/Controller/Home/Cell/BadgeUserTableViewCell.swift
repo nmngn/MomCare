@@ -11,10 +11,11 @@ class BadgeUserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var allUserLabel: UILabel!
     @IBOutlet weak var inMonthLabel: UILabel!
+    @IBOutlet weak var subView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        subView.makeShadow()
     }
     
 }
