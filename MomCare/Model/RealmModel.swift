@@ -18,9 +18,12 @@ class User: Object {
     @objc dynamic var dateSave = ""
     @objc dynamic var babyAge = ""
     @objc dynamic var note = ""
-    @objc dynamic var momImage: UIImage?
-    @objc dynamic var babyImage: UIImage?
-    @objc dynamic var historyPicture: [[String: Any]]?
+    @objc dynamic var momImage: NSData?
+    @objc dynamic var babyImage: NSData?
+    dynamic var historyPicture = List<HistoryNote>()
 }
 
-
+class HistoryNote: Object {
+    @objc dynamic var time = ""
+    @objc dynamic var image: NSData?
+}

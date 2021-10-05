@@ -9,23 +9,24 @@ import UIKit
 
 class NoteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var noteTextField: UITextField!
+    @IBOutlet weak var noteTextView: UITextView!
     
+    var changeHeightCell: (() -> ())?
     weak var delegate: DetailUserInfo?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        noteTextField.makeShadow()
-        noteTextField.delegate = self
+        noteTextView.makeShadow()
+        noteTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        noteTextView.delegate = self
+        noteTextView.autocorrectionType = .no
+        noteTextView.isScrollEnabled = false
     }
+    
 }
 
-extension NoteTableViewCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count > 0 {
-                delegate?.saveNote(text: text)
-            }
-        }
+extension NoteTableViewCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        changeHeightCell?()
     }
 }

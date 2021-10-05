@@ -7,9 +7,8 @@
 
 import UIKit
 
-protocol DetailUserInfo: class {
+protocol DetailUserInfo: AnyObject {
     func chooseAvatar()
-    func chooseDOB()
     func chooseBabyDOB()
     func chooseImage()
     func sendString(dataType: DataType, text: String)
@@ -30,7 +29,7 @@ class AvatarUserTableViewCell: UITableViewCell {
     }
 
     func setupData(model: DetailModel) {
-        avatarImage.image = model.image
+        avatarImage.image = model.avatarImage
     }
     
     @IBAction func chooseAvatar(_ sender: UIButton) {

@@ -65,6 +65,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func addUser(_ sender: UIButton) {
+        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func modelIndexPath(indexPath: IndexPath) -> HomeModel {

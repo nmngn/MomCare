@@ -12,7 +12,6 @@ class InfoUserTableViewCell: UITableViewCell {
     weak var delegate: DetailUserInfo?
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var valueTextField: UITextField!
     
     var typeCell: DataType?
@@ -21,19 +20,15 @@ class InfoUserTableViewCell: UITableViewCell {
         super.awakeFromNib()
         valueTextField.delegate = self
         valueTextField.makeShadow()
-        valueTextField.setLeftPaddingPoints(10)
-        valueTextField.setRightPaddingPoints(10)
+        valueTextField.autocorrectionType = .no
+        valueTextField.setLeftPaddingPoints(16)
+        valueTextField.setRightPaddingPoints(16)
     }
     
     func setupData(model: DetailModel) {
         self.typeCell = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value
-        calendarButton.isHidden = !model.showCalendar
-    }
-    
-    @IBAction func chooseDate(_ sender: UIButton) {
-        delegate?.chooseDOB()
     }
     
 }
@@ -49,5 +44,9 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
                 delegate?.showAlert()
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
     }
 }

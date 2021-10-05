@@ -13,6 +13,7 @@ class PopupCalendarViewController: UIViewController {
     
     var openCalendar: (() -> ())?
     var closeCalendar: (() -> ())?
+    var selectDate: ((String) -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +37,10 @@ class PopupCalendarViewController: UIViewController {
     }
     
     func doneDatePicker(){
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        self.view.endEditing(true)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let todaysDate = dateFormatter.string(from: calendar.date)
+        selectDate?(todaysDate)
         closeCalendar?()
     }
     

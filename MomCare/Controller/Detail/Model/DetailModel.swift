@@ -14,6 +14,7 @@ enum DetailType {
     case age
     case note
     case photo
+    case imagePregnant
 }
 enum DataType {
     case name
@@ -25,7 +26,7 @@ enum DataType {
     case babyAge
     case note
     case momImage
-    case babyImage
+    case imagePregnant
     case historyPicture
     case dateSave
 }
@@ -35,7 +36,9 @@ struct DetailModel {
     var title = ""
     var value = ""
     var showCalendar = false
-    var image: UIImage?
+    var avatarImage: UIImage?
+    var babyImage: UIImage?
+    var babyAge = ""
     var date = ""
     var placeHolder = ""
     var dataType: DataType

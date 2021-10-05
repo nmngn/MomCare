@@ -8,6 +8,12 @@
 import UIKit
 import Then
 import RealmSwift
+import PhotosUI
+
+enum UserChoice {
+    case mom
+    case baby
+}
 
 class DetailUserViewController: UIViewController {
 
@@ -15,6 +21,12 @@ class DetailUserViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     var model = [DetailModel]()
+    let user = User()
+    var avatarImage = UIImage(named: "avatar_placeholder")
+    var babyImage: UIImage?
+    var userChoice: UserChoice?
+    var momDob = ""
+    var babyDob = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +58,15 @@ class DetailUserViewController: UIViewController {
             $0.registerNibCellFor(type: BaybyAgeTableViewCell.self)
             $0.registerNibCellFor(type: NoteTableViewCell.self)
             $0.registerNibCellFor(type: PhotoTableViewCell.self)
+            $0.registerNibCellFor(type: ImagePregnantTableViewCell.self)
         }
     }
     
     func setupData() {
-        var avatar = DetailModel(type: .avatar, dataType: .momImage)
-        avatar.image = UIImage(named: "avatar_placeholder")
+        let avatar = DetailModel(type: .avatar, dataType: .momImage)
         
         var general = DetailModel(type: .general, dataType: .dateSave)
-        general.date = "20/10/2020 19:25"
+        general.date = ""
         
         var name = DetailModel(type: .info, dataType: .name)
         name.title = "Họ và tên"
@@ -66,8 +78,7 @@ class DetailUserViewController: UIViewController {
         
         var birth = DetailModel(type: .info, dataType: .dob)
         birth.title = "Năm sinh"
-        birth.value = ""
-        birth.showCalendar = true
+        birth.value = momDob
         
         var number = DetailModel(type: .info, dataType: .numberPhone)
         number.title = "Số điện thoại"
@@ -81,7 +92,7 @@ class DetailUserViewController: UIViewController {
         
         let note = DetailModel(type: .note, dataType: .note)
         
-        let photo = DetailModel(type: .photo, dataType: .babyImage)
+        let photo = DetailModel(type: .photo, dataType: .imagePregnant)
         
         model.append(avatar)
         model.append(general)
@@ -128,16 +139,16 @@ class DetailUserViewController: UIViewController {
         present(vc, animated: true)
     }
     
-    func fromLibrary() {
-        openLibararies()
-    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                if image.pngData()?.count ?? 0 >= 12000 * 1000 {
-                    self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
-                }
-            self.tableView.reloadData()
+            if image.pngData()?.count ?? 0 >= 12000 * 1000 {
+                self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
+            }
+            guard let imgData = image.jpegData(compressionQuality: 0.9) else { return }
+            let data = NSData(data: imgData)
+            self.avatarImage = image
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexPath], with: .none)
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -161,14 +172,75 @@ class DetailUserViewController: UIViewController {
             self?.view.alpha = 1
             self?.navigationController?.navigationBar.alpha = 1
         }
+        
+        vc.selectDate = { [weak self] date in
+            switch self?.userChoice {
+            case .baby:
+                self?.babyDob = date
+       //         self?.saveDate(date: date)
+            default:
+                break
+            }
+            let indexPath = IndexPath(row: 7, section: 0)
+            self?.tableView.reloadRows(at: [indexPath], with: .none)
+        }
         present(vc, animated: true, completion: nil)
     }
     
-    func saveImage(image: UIImage) {
+    func saveAvatar(image: NSData) {
         let realm = try! Realm()
-            let model = User()
+        user.momImage = image
         
-
+        try! realm.write({
+            realm.add(user)
+        })
+    }
+    
+    func saveBabyImage(image: NSData) {
+        let realm = try! Realm()
+        user.babyImage = image
+        try! realm.write({
+            realm.add(user)
+        })
+    }
+    
+    func saveDate(date: String) {
+        let realm = try! Realm()
+        if userChoice == .mom {
+            user.dob = date
+        } else {
+            user.dateCalculate = date
+        }
+        try! realm.write({
+            realm.add(user)
+        })
+    }
+    
+    func saveInfoUser(model: DataType, text: String) {
+        let realm = try! Realm()
+        switch model {
+        case .name:
+            user.name = text
+        case .address:
+            user.address = text
+        case .numberPhone:
+            user.numberPhone = text
+        case .height:
+            user.height = text
+        case .note:
+            if text.count > 0 {
+                user.note = text
+            } else {
+                user.note = ""
+            }
+        case .dateSave:
+            user.dateSave = text
+        default:
+            break
+        }
+        try! realm.write({
+            realm.add(user)
+        })
     }
 }
 
@@ -186,6 +258,9 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AvatarUserTableViewCell.name, for: indexPath) as?
                     AvatarUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            if model.avatarImage == nil {
+                model.avatarImage = self.avatarImage
+            }
             cell.setupData(model: model)
             cell.delegate = self
             return cell
@@ -205,12 +280,20 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
                     BaybyAgeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            if model.babyAge.isEmpty {
+                model.babyAge = self.babyDob
+            }
+            cell.setupData(model: model)
             cell.delegate = self
             return cell
         case .note:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.name, for: indexPath) as?
                     NoteTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.changeHeightCell = { [weak self] in
+                self?.tableView.beginUpdates()
+                self?.tableView.endUpdates()
+            }
             return cell
         case .photo:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.name, for: indexPath) as?
@@ -218,39 +301,43 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.selectionStyle = .none
             cell.delegate = self
             return cell
+        case .imagePregnant:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.name, for: indexPath) as?
+                    PhotoTableViewCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            return cell
         }
     }
 }
 
 extension DetailUserViewController: DetailUserInfo {
     func saveNote(text: String) {
-        
+//       saveInfoUser(model: .note, text: text)
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống trường này", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống trường này", preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
     
     func sendString(dataType: DataType, text: String) {
-        
+ //       saveInfoUser(model: dataType, text: text)
     }
     
     func chooseAvatar() {
+        userChoice = .mom
         openLibararies()
     }
     
-    func chooseDOB() {
-        openDate()
-    }
-    
     func chooseBabyDOB() {
+        userChoice = .baby
         openDate()
     }
     
     func chooseImage() {
+        userChoice = .baby
         openLibararies()
     }
 }

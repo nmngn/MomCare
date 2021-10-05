@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,27 +45,12 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </textField>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1a-y7-dWZ">
-                        <rect key="frame" x="321" y="57" width="22" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="22" id="0vY-Yw-DUO"/>
-                            <constraint firstAttribute="height" constant="22" id="bcJ-x7-hRM"/>
-                        </constraints>
-                        <state key="normal">
-                            <imageReference key="image" image="calendar" catalog="system" renderingMode="original"/>
-                        </state>
-                        <connections>
-                            <action selector="chooseDate:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E7K-e8-qyd"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="K1a-y7-dWZ" secondAttribute="trailing" constant="12" id="4tI-gV-KVs"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="top" secondItem="XBR-fo-8jh" secondAttribute="bottom" constant="12" id="5Co-Kk-tea"/>
                     <constraint firstAttribute="bottom" secondItem="Ox5-zW-CM4" secondAttribute="bottom" constant="4" id="AQv-ZI-ttj"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Laq-3d-Bl3"/>
                     <constraint firstAttribute="trailing" secondItem="XBR-fo-8jh" secondAttribute="trailing" constant="28" id="Z7G-Fm-0xb"/>
-                    <constraint firstItem="K1a-y7-dWZ" firstAttribute="centerY" secondItem="Ox5-zW-CM4" secondAttribute="centerY" id="guI-ok-MIU"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="mHC-k4-WX5"/>
                     <constraint firstAttribute="trailing" secondItem="Ox5-zW-CM4" secondAttribute="trailing" constant="28" id="or6-3l-9Y2"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="uyU-dw-dz5"/>
@@ -75,7 +59,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="calendarButton" destination="K1a-y7-dWZ" id="kDL-7n-Baa"/>
                 <outlet property="titleLabel" destination="XBR-fo-8jh" id="DWz-Vj-MnR"/>
                 <outlet property="valueTextField" destination="Ox5-zW-CM4" id="7Y0-bz-sCs"/>
             </connections>
@@ -83,7 +66,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="calendar" catalog="system" width="128" height="106"/>
         <namedColor name="Neutral_300">
             <color red="0.5220000147819519" green="0.5220000147819519" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

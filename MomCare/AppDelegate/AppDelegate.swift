@@ -10,6 +10,7 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
