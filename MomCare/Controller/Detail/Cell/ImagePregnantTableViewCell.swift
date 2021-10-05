@@ -8,16 +8,19 @@
 import UIKit
 
 class ImagePregnantTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    @IBOutlet weak var imagePregnant: UIImageView!
+    @IBOutlet weak var subView: UIView!
+    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+    
+    func setupData(model: DetailModel) {
+        if let image = model.babyImage {
+            imagePregnant.image = image
+            let ratio = image.size.width / image.size.height
+            let newHeight = imagePregnant.frame.width / ratio
+            constraintHeight.constant = newHeight
+            subView.layoutIfNeeded()
+        }
     }
     
 }

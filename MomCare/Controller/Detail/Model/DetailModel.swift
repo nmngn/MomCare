@@ -35,10 +35,17 @@ struct DetailModel {
     var type: DetailType
     var title = ""
     var value = ""
-    var showCalendar = false
     var avatarImage: UIImage?
     var babyImage: UIImage?
+    var name = ""
+    var address = ""
+    var dob = ""
+    var numberPhone = ""
+    var height = ""
+    var dateCalculate = ""
     var babyAge = ""
+    var note = ""
+    var imagePregnant: UIImage?
     var date = ""
     var placeHolder = ""
     var dataType: DataType

@@ -21,11 +21,13 @@ class BaybyAgeTableViewCell: UITableViewCell {
         dobLabel.autocorrectionType = .no
         dobLabel.setLeftPaddingPoints(16)
         dobLabel.setRightPaddingPoints(16)
+        dobLabel.textColor = .black
         
         ageLabel.makeShadow()
         ageLabel.autocorrectionType = .no
         ageLabel.setLeftPaddingPoints(16)
         ageLabel.setRightPaddingPoints(16)
+        ageLabel.textColor = .black
     }
 
     func setupData(model: DetailModel) {

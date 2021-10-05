@@ -29,10 +29,9 @@
                         <color key="textColor" name="Neutral_300"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q3l-gp-c3o">
-                        <rect key="frame" x="28" y="45" width="319" height="48"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="j2E-qm-8U6">
+                        <rect key="frame" x="24" y="45" width="327" height="47"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <inset key="scrollIndicatorInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -45,19 +44,24 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="j2E-qm-8U6" secondAttribute="bottom" constant="12" id="8FA-fa-qh7"/>
                     <constraint firstAttribute="trailing" secondItem="qan-vg-aw9" secondAttribute="trailing" constant="28" id="GKC-yv-h3E"/>
-                    <constraint firstItem="q3l-gp-c3o" firstAttribute="top" secondItem="qan-vg-aw9" secondAttribute="bottom" constant="12" id="P5M-7N-xBH"/>
+                    <constraint firstItem="j2E-qm-8U6" firstAttribute="top" secondItem="qan-vg-aw9" secondAttribute="bottom" constant="12" id="XSv-fY-6BZ"/>
                     <constraint firstItem="qan-vg-aw9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="cnp-zc-vi0"/>
-                    <constraint firstAttribute="trailing" secondItem="q3l-gp-c3o" secondAttribute="trailing" constant="28" id="lAG-Ab-yhd"/>
+                    <constraint firstAttribute="trailing" secondItem="j2E-qm-8U6" secondAttribute="trailing" constant="24" id="dzN-AZ-qsp"/>
                     <constraint firstItem="qan-vg-aw9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="pra-ZT-nvN"/>
-                    <constraint firstItem="q3l-gp-c3o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="sTl-Dh-fR8"/>
-                    <constraint firstAttribute="bottom" secondItem="q3l-gp-c3o" secondAttribute="bottom" constant="11" id="trD-SQ-kT6"/>
+                    <constraint firstItem="j2E-qm-8U6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="zzZ-vH-rTl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="noteTextView" destination="q3l-gp-c3o" id="qcu-kz-FG9"/>
+                <outlet property="noteTextView" destination="j2E-qm-8U6" id="2Yr-DX-Lmz"/>
             </connections>
             <point key="canvasLocation" x="-23.913043478260871" y="86.383928571428569"/>
         </tableViewCell>

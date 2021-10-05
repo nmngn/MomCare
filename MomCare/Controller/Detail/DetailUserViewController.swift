@@ -19,11 +19,16 @@ class DetailUserViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     
     var model = [DetailModel]()
     let user = User()
     var avatarImage = UIImage(named: "avatar_placeholder")
-    var babyImage: UIImage?
+    var babyImage: UIImage? {
+        didSet {
+            setupData()
+        }
+    }
     var userChoice: UserChoice?
     var momDob = ""
     var babyDob = ""
@@ -34,11 +39,29 @@ class DetailUserViewController: UIViewController {
         setupData()
         setupBackButton()
         self.title = "Thông tin bệnh nhân"
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.bottomHeightConstraint.constant = keyboardHeight - 18
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        bottomHeightConstraint.constant = 16
+        self.view.layoutIfNeeded()
     }
     
     func setupBackButton() {
-      self.navigationItem.setHidesBackButton(true, animated: true)
-      let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
     }
     
@@ -63,6 +86,7 @@ class DetailUserViewController: UIViewController {
     }
     
     func setupData() {
+        model.removeAll()
         let avatar = DetailModel(type: .avatar, dataType: .momImage)
         
         var general = DetailModel(type: .general, dataType: .dateSave)
@@ -78,7 +102,7 @@ class DetailUserViewController: UIViewController {
         
         var birth = DetailModel(type: .info, dataType: .dob)
         birth.title = "Năm sinh"
-        birth.value = momDob
+        birth.value = ""
         
         var number = DetailModel(type: .info, dataType: .numberPhone)
         number.title = "Số điện thoại"
@@ -94,6 +118,8 @@ class DetailUserViewController: UIViewController {
         
         let photo = DetailModel(type: .photo, dataType: .imagePregnant)
         
+        let imagePregnant = DetailModel(type: .imagePregnant, dataType: .imagePregnant)
+        
         model.append(avatar)
         model.append(general)
         model.append(name)
@@ -104,6 +130,9 @@ class DetailUserViewController: UIViewController {
         model.append(age)
         model.append(note)
         model.append(photo)
+        if self.babyImage != nil {
+            model.append(imagePregnant)
+        }
     }
     
     func modelIndexPath(indexPath: IndexPath) -> DetailModel {
@@ -134,21 +163,26 @@ class DetailUserViewController: UIViewController {
         let vc = UIImagePickerController()
         vc.sourceType = type
         vc.videoQuality = .typeMedium
-        vc.allowsEditing = true
+        vc.allowsEditing = false
         vc.delegate = self
         present(vc, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if image.pngData()?.count ?? 0 >= 12000 * 1000 {
                 self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
             }
             guard let imgData = image.jpegData(compressionQuality: 0.9) else { return }
             let data = NSData(data: imgData)
-            self.avatarImage = image
-            let indexPath = IndexPath(row: 0, section: 0)
-            self.tableView.reloadRows(at: [indexPath], with: .none)
+            if userChoice == .mom {
+                self.avatarImage = image
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.tableView?.reloadRows(at: [indexPath], with: .none)
+            } else {
+                self.babyImage = image
+                self.tableView?.reloadData()
+            }
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -302,9 +336,13 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.delegate = self
             return cell
         case .imagePregnant:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.name, for: indexPath) as?
-                    PhotoTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as?
+                    ImagePregnantTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            if model.babyImage == nil {
+                model.babyImage = self.babyImage
+            }
+            cell.setupData(model: model)
             return cell
         }
     }

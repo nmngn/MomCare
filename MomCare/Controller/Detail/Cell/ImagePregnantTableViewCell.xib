@@ -18,6 +18,14 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-CH-DiK">
                         <rect key="frame" x="38" y="36" width="299" height="328"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="328" id="5Wg-Di-Oao"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -29,6 +37,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="constraintHeight" destination="5Wg-Di-Oao" id="zGb-SD-wee"/>
+                <outlet property="imagePregnant" destination="cKy-CH-DiK" id="k3z-wl-wCp"/>
+                <outlet property="subView" destination="H2p-sc-9uM" id="WTt-Y9-0gX"/>
+            </connections>
             <point key="canvasLocation" x="138.40579710144928" y="65.625"/>
         </tableViewCell>
     </objects>

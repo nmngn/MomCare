@@ -17,6 +17,8 @@ class NoteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         noteTextView.makeShadow()
+        noteTextView.backgroundColor = .white
+        noteTextView.textColor = .black
         noteTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         noteTextView.delegate = self
         noteTextView.autocorrectionType = .no
