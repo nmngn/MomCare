@@ -32,6 +32,7 @@ class DetailUserViewController: UIViewController {
     var userChoice: UserChoice?
     var momDob = ""
     var babyDob = ""
+    var currentModel = DetailModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,38 +88,58 @@ class DetailUserViewController: UIViewController {
     
     func setupData() {
         model.removeAll()
-        let avatar = DetailModel(type: .avatar, dataType: .momImage)
+        var avatar = currentModel
+        avatar.type = .avatar
+        avatar.dataType = .momImage
         
-        var general = DetailModel(type: .general, dataType: .dateSave)
-        general.date = ""
+        var general = currentModel
+        general.type = .general
         
-        var name = DetailModel(type: .info, dataType: .name)
+        var name = currentModel
+        name.type = .info
+        name.dataType = .name
         name.title = "Họ và tên"
-        name.value = ""
+        name.value = currentModel.name
         
-        var address = DetailModel(type: .info, dataType: .address)
+        var address = currentModel
+        address.type = .info
+        address.dataType = .address
         address.title = "Địa chỉ"
-        address.value = ""
+        address.value = currentModel.address
         
-        var birth = DetailModel(type: .info, dataType: .dob)
+        var birth = currentModel
+        birth.type = .info
+        birth.dataType = .dob
         birth.title = "Năm sinh"
-        birth.value = ""
+        birth.value = currentModel.dob
         
-        var number = DetailModel(type: .info, dataType: .numberPhone)
+        var number = currentModel
+        number.type = .info
+        number.dataType = .numberPhone
         number.title = "Số điện thoại"
-        birth.value = ""
+        birth.value = currentModel.numberPhone
         
-        var height = DetailModel(type: .info, dataType: .height)
+        var height = currentModel
+        height.type = .info
+        height.dataType = .height
         height.title = "Chiều cao"
-        height.value = ""
+        height.value = currentModel.height
         
-        let age = DetailModel(type: .age, dataType: .babyAge)
+        var age = currentModel
+        age.type = .age
+        age.dataType = .babyAge
         
-        let note = DetailModel(type: .note, dataType: .note)
+        var note = currentModel
+        note.type = .note
+        note.dataType = .note
         
-        let photo = DetailModel(type: .photo, dataType: .imagePregnant)
+        var photo = currentModel
+        photo.type = .photo
+        photo.dataType = .imagePregnant
         
-        let imagePregnant = DetailModel(type: .imagePregnant, dataType: .imagePregnant)
+        var imagePregnant = currentModel
+        imagePregnant.type = .imagePregnant
+        imagePregnant.dataType = .imagePregnant
         
         model.append(avatar)
         model.append(general)
@@ -170,9 +191,9 @@ class DetailUserViewController: UIViewController {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if image.pngData()?.count ?? 0 >= 12000 * 1000 {
-                self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
-            }
+//            if image.pngData()?.count ?? 0 >= 12000 * 1000 {
+//                self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
+//            }
             guard let imgData = image.jpegData(compressionQuality: 0.9) else { return }
             let data = NSData(data: imgData)
             if userChoice == .mom {
@@ -284,18 +305,17 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var model: DetailModel
-        model = modelIndexPath(indexPath: indexPath)
+        self.currentModel = modelIndexPath(indexPath: indexPath)
         
-        switch model.type {
+        switch currentModel.type {
         case .avatar:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AvatarUserTableViewCell.name, for: indexPath) as?
                     AvatarUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if model.avatarImage == nil {
-                model.avatarImage = self.avatarImage
+            if currentModel.avatarImage == nil {
+                currentModel.avatarImage = self.avatarImage
             }
-            cell.setupData(model: model)
+            cell.setupData(model: currentModel)
             cell.delegate = self
             return cell
         case .general:
@@ -308,16 +328,16 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     InfoUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.setupData(model: model)
+            cell.setupData(model: currentModel)
             return cell
         case .age:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
                     BaybyAgeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if model.babyAge.isEmpty {
-                model.babyAge = self.babyDob
+            if currentModel.babyAge.isEmpty {
+                currentModel.babyAge = self.babyDob
             }
-            cell.setupData(model: model)
+            cell.setupData(model: currentModel)
             cell.delegate = self
             return cell
         case .note:
@@ -339,11 +359,13 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as?
                     ImagePregnantTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if model.babyImage == nil {
-                model.babyImage = self.babyImage
+            if currentModel.babyImage == nil {
+                currentModel.babyImage = self.babyImage
             }
-            cell.setupData(model: model)
+            cell.setupData(model: currentModel)
             return cell
+        default:
+            return UITableViewCell()
         }
     }
 }
@@ -361,7 +383,27 @@ extension DetailUserViewController: DetailUserInfo {
     }
     
     func sendString(dataType: DataType, text: String) {
- //       saveInfoUser(model: dataType, text: text)
+        switch dataType {
+        case .name:
+            currentModel.name = text
+        case .address:
+            currentModel.address = text
+        case .dob:
+            currentModel.dob = text
+        case .numberPhone:
+            currentModel.numberPhone = text
+        case .height:
+            currentModel.height = text
+        case .babyAge:
+            currentModel.babyAge = text
+        case .dateCalculate:
+            currentModel.dateCalculate = text
+        case .note:
+            currentModel.note = text
+        default:
+            break
+        }
+        self.setupData()
     }
     
     func chooseAvatar() {

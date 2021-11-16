@@ -32,7 +32,7 @@ enum DataType {
 }
 
 struct DetailModel {
-    var type: DetailType
+    var type: DetailType?
     var title = ""
     var value = ""
     var avatarImage: UIImage?
@@ -48,10 +48,6 @@ struct DetailModel {
     var imagePregnant: UIImage?
     var date = ""
     var placeHolder = ""
-    var dataType: DataType
-    
-    init(type: DetailType, dataType: DataType) {
-        self.type = type
-        self.dataType = dataType
-    }
+    var dataType: DataType?
+
 }
