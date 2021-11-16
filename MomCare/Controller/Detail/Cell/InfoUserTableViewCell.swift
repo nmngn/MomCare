@@ -48,7 +48,9 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
                 self.textInput = text
                 self.saveInModel()
             } else {
-                delegate?.showAlert()
+                if let cellType = cellType {
+                    delegate?.showAlert(dataType: cellType)
+                }
             }
         }
     }

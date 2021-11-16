@@ -12,7 +12,7 @@ protocol DetailUserInfo: AnyObject {
     func chooseBabyDOB()
     func chooseImage()
     func sendString(dataType: DataType, text: String)
-    func showAlert()
+    func showAlert(dataType: DataType)
     func saveNote(text: String)
 }
 

@@ -30,7 +30,6 @@ class DetailUserViewController: UIViewController {
         }
     }
     var userChoice: UserChoice?
-    var momDob = ""
     var babyDob = ""
     var currentModel = DetailModel()
     
@@ -107,17 +106,17 @@ class DetailUserViewController: UIViewController {
         address.title = "Địa chỉ"
         address.value = currentModel.address
         
-        var birth = currentModel
-        birth.type = .info
-        birth.dataType = .dob
-        birth.title = "Năm sinh"
-        birth.value = currentModel.dob
+        var momBirth = currentModel
+        momBirth.type = .info
+        momBirth.dataType = .dob
+        momBirth.title = "Năm sinh"
+        momBirth.value = currentModel.dob
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
         number.title = "Số điện thoại"
-        birth.value = currentModel.numberPhone
+        number.value = currentModel.numberPhone
         
         var height = currentModel
         height.type = .info
@@ -145,7 +144,7 @@ class DetailUserViewController: UIViewController {
         model.append(general)
         model.append(name)
         model.append(address)
-        model.append(birth)
+        model.append(momBirth)
         model.append(number)
         model.append(height)
         model.append(age)
@@ -251,7 +250,7 @@ class DetailUserViewController: UIViewController {
         })
     }
     
-    func saveBabyImage(image: NSData) {
+    func saveImagePregnant(image: NSData) {
         let realm = try! Realm()
         user.babyImage = image
         try! realm.write({
@@ -375,8 +374,24 @@ extension DetailUserViewController: DetailUserInfo {
 //       saveInfoUser(model: .note, text: text)
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống trường này", preferredStyle: .actionSheet)
+    func showAlert(dataType: DataType) {
+        var typeCell = ""
+        switch dataType {
+        case .name:
+            typeCell = "tên tuổi"
+        case .address:
+            typeCell = "địa chỉ"
+        case .dob:
+            typeCell = "năm sinh"
+        case .numberPhone:
+            typeCell = "số điện thoại"
+        case .height:
+            typeCell = "chiều cao"
+        default:
+            break
+        }
+
+        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống \(typeCell)", preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
