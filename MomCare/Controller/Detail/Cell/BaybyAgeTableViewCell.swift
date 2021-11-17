@@ -13,6 +13,7 @@ class BaybyAgeTableViewCell: UITableViewCell {
     @IBOutlet weak var ageLabel: UITextField!
     
     weak var delegate: DetailUserInfo?
+    var cellType: DataType?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +33,10 @@ class BaybyAgeTableViewCell: UITableViewCell {
     }
 
     func setupData(model: DetailModel) {
+        self.cellType = model.dataType
         if !model.babyAge.isEmpty {
             dobLabel.text = model.babyAge
+            delegate?.sendString(dataType: .babyAge, text: model.babyAge)
             calculateBabyAge(dateString: model.babyAge)
         }
     }
@@ -61,6 +64,7 @@ class BaybyAgeTableViewCell: UITableViewCell {
         } else {
             ageLabel.text = "\(week)W \(day)D"
         }
+        delegate?.sendString(dataType: .dateCalculate, text: "\(week)W \(day)D")
     }
     
     @IBAction func chooseDOB(_ sender: UIButton) {

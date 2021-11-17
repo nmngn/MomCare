@@ -11,15 +11,15 @@ import RealmSwift
 class User: Object {
     @objc dynamic var name = ""
     @objc dynamic var address = ""
-    @objc dynamic var dob = ""
+    @objc dynamic var momBirth = ""
     @objc dynamic var numberPhone = ""
     @objc dynamic var height = ""
+    @objc dynamic var babyDateBorn = ""
     @objc dynamic var dateCalculate = ""
     @objc dynamic var dateSave = ""
-    @objc dynamic var babyAge = ""
     @objc dynamic var note = ""
-    @objc dynamic var momImage: NSData?
-    @objc dynamic var babyImage: NSData?
+    @objc dynamic var avatar: NSData?
+    @objc dynamic var imagePregnant: NSData?
     dynamic var historyPicture = List<HistoryNote>()
 }
 

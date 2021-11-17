@@ -13,7 +13,6 @@ protocol DetailUserInfo: AnyObject {
     func chooseImage()
     func sendString(dataType: DataType, text: String)
     func showAlert(dataType: DataType)
-    func saveNote(text: String)
 }
 
 class AvatarUserTableViewCell: UITableViewCell {

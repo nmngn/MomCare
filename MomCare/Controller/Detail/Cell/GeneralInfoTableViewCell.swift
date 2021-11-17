@@ -11,6 +11,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dayCreate: UILabel!
     
+    var saveDate: ((String) -> ())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupData()
@@ -31,6 +33,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
                                                            .font: UIFont.systemFont(ofSize: 14, weight: .medium)])
         text.append(day)
         dayCreate.attributedText = text
+        saveDate?(dateString)
     }
     
 }

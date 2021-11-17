@@ -23,15 +23,9 @@ class DetailUserViewController: UIViewController {
     
     var model = [DetailModel]()
     let user = User()
-    var avatarImage = UIImage(named: "avatar_placeholder")
-    var babyImage: UIImage? {
-        didSet {
-            setupData()
-        }
-    }
     var userChoice: UserChoice?
-    var babyDob = ""
     var currentModel = DetailModel()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +84,7 @@ class DetailUserViewController: UIViewController {
         var avatar = currentModel
         avatar.type = .avatar
         avatar.dataType = .momImage
+        avatar.avatarImage = currentModel.avatarImage
         
         var general = currentModel
         general.type = .general
@@ -110,7 +105,7 @@ class DetailUserViewController: UIViewController {
         momBirth.type = .info
         momBirth.dataType = .dob
         momBirth.title = "Năm sinh"
-        momBirth.value = currentModel.dob
+        momBirth.value = currentModel.momBirth
         
         var number = currentModel
         number.type = .info
@@ -127,6 +122,7 @@ class DetailUserViewController: UIViewController {
         var age = currentModel
         age.type = .age
         age.dataType = .babyAge
+        age.babyAge = currentModel.babyAge
         
         var note = currentModel
         note.type = .note
@@ -139,6 +135,7 @@ class DetailUserViewController: UIViewController {
         var imagePregnant = currentModel
         imagePregnant.type = .imagePregnant
         imagePregnant.dataType = .imagePregnant
+        imagePregnant.imagePregnant = currentModel.imagePregnant
         
         model.append(avatar)
         model.append(general)
@@ -150,7 +147,7 @@ class DetailUserViewController: UIViewController {
         model.append(age)
         model.append(note)
         model.append(photo)
-        if self.babyImage != nil {
+        if currentModel.imagePregnant != nil {
             model.append(imagePregnant)
         }
     }
@@ -183,7 +180,11 @@ class DetailUserViewController: UIViewController {
         let vc = UIImagePickerController()
         vc.sourceType = type
         vc.videoQuality = .typeMedium
-        vc.allowsEditing = false
+        if userChoice == .mom {
+            vc.allowsEditing = true
+        } else {
+            vc.allowsEditing = false
+        }
         vc.delegate = self
         present(vc, animated: true)
     }
@@ -193,14 +194,14 @@ class DetailUserViewController: UIViewController {
 //            if image.pngData()?.count ?? 0 >= 12000 * 1000 {
 //                self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
 //            }
-            guard let imgData = image.jpegData(compressionQuality: 0.9) else { return }
-            let data = NSData(data: imgData)
             if userChoice == .mom {
-                self.avatarImage = image
+                self.currentModel.avatarImage = image
+                self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView?.reloadRows(at: [indexPath], with: .none)
             } else {
-                self.babyImage = image
+                self.currentModel.imagePregnant = image
+                self.setupData()
                 self.tableView?.reloadData()
             }
         }
@@ -214,6 +215,15 @@ class DetailUserViewController: UIViewController {
     }
     
     @IBAction func saveData(_ sender: UIButton) {
+        if !currentModel.name.isEmpty && !currentModel.address.isEmpty &&
+            !currentModel.momBirth.isEmpty && !currentModel.height.isEmpty && !currentModel.numberPhone.isEmpty {
+            saveInfoUser()
+        } else {
+            let alert = UIAlertController(title: "Thông báo", message: "Đang thiếu thông tin", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func openDate() {
@@ -230,72 +240,17 @@ class DetailUserViewController: UIViewController {
         vc.selectDate = { [weak self] date in
             switch self?.userChoice {
             case .baby:
-                self?.babyDob = date
-       //         self?.saveDate(date: date)
+                self?.currentModel.babyAge = date
             default:
                 break
             }
+            self?.setupData()
             let indexPath = IndexPath(row: 7, section: 0)
             self?.tableView.reloadRows(at: [indexPath], with: .none)
         }
         present(vc, animated: true, completion: nil)
     }
     
-    func saveAvatar(image: NSData) {
-        let realm = try! Realm()
-        user.momImage = image
-        
-        try! realm.write({
-            realm.add(user)
-        })
-    }
-    
-    func saveImagePregnant(image: NSData) {
-        let realm = try! Realm()
-        user.babyImage = image
-        try! realm.write({
-            realm.add(user)
-        })
-    }
-    
-    func saveDate(date: String) {
-        let realm = try! Realm()
-        if userChoice == .mom {
-            user.dob = date
-        } else {
-            user.dateCalculate = date
-        }
-        try! realm.write({
-            realm.add(user)
-        })
-    }
-    
-    func saveInfoUser(model: DataType, text: String) {
-        let realm = try! Realm()
-        switch model {
-        case .name:
-            user.name = text
-        case .address:
-            user.address = text
-        case .numberPhone:
-            user.numberPhone = text
-        case .height:
-            user.height = text
-        case .note:
-            if text.count > 0 {
-                user.note = text
-            } else {
-                user.note = ""
-            }
-        case .dateSave:
-            user.dateSave = text
-        default:
-            break
-        }
-        try! realm.write({
-            realm.add(user)
-        })
-    }
 }
 
 extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -311,9 +266,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AvatarUserTableViewCell.name, for: indexPath) as?
                     AvatarUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if currentModel.avatarImage == nil {
-                currentModel.avatarImage = self.avatarImage
-            }
             cell.setupData(model: currentModel)
             cell.delegate = self
             return cell
@@ -321,6 +273,9 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralInfoTableViewCell.name, for: indexPath) as?
                     GeneralInfoTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.saveDate = { [weak self] date in
+                self?.currentModel.dateSave = date
+            }
             return cell
         case .info:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoUserTableViewCell.name, for: indexPath) as?
@@ -333,9 +288,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
                     BaybyAgeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if currentModel.babyAge.isEmpty {
-                currentModel.babyAge = self.babyDob
-            }
             cell.setupData(model: currentModel)
             cell.delegate = self
             return cell
@@ -358,9 +310,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as?
                     ImagePregnantTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            if currentModel.babyImage == nil {
-                currentModel.babyImage = self.babyImage
-            }
             cell.setupData(model: currentModel)
             return cell
         default:
@@ -370,28 +319,24 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
 }
 
 extension DetailUserViewController: DetailUserInfo {
-    func saveNote(text: String) {
-//       saveInfoUser(model: .note, text: text)
-    }
-    
     func showAlert(dataType: DataType) {
-        var typeCell = ""
+        var typeCellName = ""
         switch dataType {
         case .name:
-            typeCell = "tên tuổi"
+            typeCellName = "tên tuổi"
         case .address:
-            typeCell = "địa chỉ"
+            typeCellName = "địa chỉ"
         case .dob:
-            typeCell = "năm sinh"
+            typeCellName = "năm sinh"
         case .numberPhone:
-            typeCell = "số điện thoại"
+            typeCellName = "số điện thoại"
         case .height:
-            typeCell = "chiều cao"
+            typeCellName = "chiều cao"
         default:
             break
         }
 
-        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống \(typeCell)", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống \(typeCellName)", preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
@@ -404,7 +349,7 @@ extension DetailUserViewController: DetailUserInfo {
         case .address:
             currentModel.address = text
         case .dob:
-            currentModel.dob = text
+            currentModel.momBirth = text
         case .numberPhone:
             currentModel.numberPhone = text
         case .height:
@@ -435,4 +380,36 @@ extension DetailUserViewController: DetailUserInfo {
         userChoice = .baby
         openLibararies()
     }
+}
+
+extension DetailUserViewController {
+    func saveInfoUser() {
+        do {
+            realm.beginWrite()
+            if let image = currentModel.avatarImage {
+                user.avatar = currentModel.compressNSData(image: image)
+            }
+            
+            if let image = currentModel.imagePregnant {
+                user.imagePregnant = currentModel.compressNSData(image: image)
+            }
+            
+            user.name = currentModel.name
+            user.address = currentModel.address
+            user.momBirth = currentModel.momBirth
+            user.numberPhone = currentModel.numberPhone
+            user.height = currentModel.height
+            user.babyDateBorn = currentModel.babyAge
+            user.dateCalculate = currentModel.dateCalculate
+            if !currentModel.note.isEmpty {
+                user.note = currentModel.note
+            }
+            user.dateSave = currentModel.dateSave
+
+            try? realm.safeWrite({
+                realm.add(user)
+            })
+        }
+    }
+
 }

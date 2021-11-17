@@ -14,7 +14,7 @@ class ImagePregnantTableViewCell: UITableViewCell {
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
     func setupData(model: DetailModel) {
-        if let image = model.babyImage {
+        if let image = model.imagePregnant {
             imagePregnant.image = image
             let ratio = image.size.width / image.size.height
             let newHeight = imagePregnant.frame.width / ratio
@@ -23,4 +23,6 @@ class ImagePregnantTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func showImage(_ sender: UIButton) {
+    }
 }
