@@ -10,9 +10,7 @@ import UIKit
 class GeneralInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dayCreate: UILabel!
-    
-    var saveDate: ((String) -> ())?
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         setupData()
@@ -24,7 +22,6 @@ class GeneralInfoTableViewCell: UITableViewCell {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        
         let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
                                              attributes: [.foregroundColor: UIColor.black,
                                                           .font: UIFont.systemFont(ofSize: 14, weight: .regular)])
@@ -33,7 +30,6 @@ class GeneralInfoTableViewCell: UITableViewCell {
                                                            .font: UIFont.systemFont(ofSize: 14, weight: .medium)])
         text.append(day)
         dayCreate.attributedText = text
-        saveDate?(dateString)
     }
     
 }

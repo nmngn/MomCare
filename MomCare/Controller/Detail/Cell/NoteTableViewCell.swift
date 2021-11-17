@@ -31,4 +31,10 @@ extension NoteTableViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         changeHeightCell?()
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let text = textView.text {
+            delegate?.sendString(dataType: .note, text: text)
+        }
+    }
 }

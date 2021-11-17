@@ -31,41 +31,14 @@ class BaybyAgeTableViewCell: UITableViewCell {
         ageLabel.textColor = .black
         ageLabel.isEnabled = false
     }
-
+    
     func setupData(model: DetailModel) {
         self.cellType = model.dataType
-        if !model.babyAge.isEmpty {
-            dobLabel.text = model.babyAge
-            delegate?.sendString(dataType: .babyAge, text: model.babyAge)
-            calculateBabyAge(dateString: model.babyAge)
-        }
+        dobLabel.text = model.babyAge
+        ageLabel.text = model.dateCalculate
+        delegate?.sendString(dataType: .babyAge, text: model.babyAge)
     }
-    
-    func calculateBabyAge(dateString: String) {
-        let dateFormatter = DateFormatter()
-        let todayDate = Date()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let date = dateFormatter.date(from:dateString)
-        guard let timeLast = date?.millisecondsSince1970 else { return }
-        let timeToday = todayDate.millisecondsSince1970
-        let result = timeLast - timeToday
-        changeMilisToWeek(milis: result)
-    }
-    
-    func changeMilisToWeek(milis: Int64) {
-        let toDay = milis / 86400000
-        let ageDay = 280 - Int(toDay)
-        let week = Int(ageDay / 7)
-        let day = Int(ageDay % 7)
-        if week == 0 {
-            ageLabel.text = "\(day)D"
-        } else if day == 0 {
-            ageLabel.text = "\(week)W"
-        } else {
-            ageLabel.text = "\(week)W \(day)D"
-        }
-        delegate?.sendString(dataType: .dateCalculate, text: "\(week)W \(day)D")
-    }
+
     
     @IBAction func chooseDOB(_ sender: UIButton) {
         delegate?.chooseBabyDOB()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="07B-iB-Lfv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="07B-iB-Lfv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -51,7 +51,7 @@
                                 <action selector="searchUser:" destination="BYZ-38-t0r" id="Ncp-Ox-cc9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="tray.fill" catalog="system" id="r8F-G3-OxW">
+                        <barButtonItem key="rightBarButtonItem" image="doc.fill" catalog="system" id="r8F-G3-OxW">
                             <connections>
                                 <action selector="openCalculate:" destination="BYZ-38-t0r" id="R0o-NZ-Kdr"/>
                             </connections>
@@ -85,8 +85,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="ic_new_add " width="56" height="56"/>
-        <image name="tray.fill" catalog="system" width="128" height="88"/>
         <namedColor name="NewBG">
             <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

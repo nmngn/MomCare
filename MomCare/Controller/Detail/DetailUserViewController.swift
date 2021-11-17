@@ -32,6 +32,11 @@ class DetailUserViewController: UIViewController {
         configView()
         setupData()
         setupBackButton()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "trash.fill"),
+                                                                      style: .plain,
+                                                                      target: self,
+                                                                      action: #selector(removeUser))
+
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -61,6 +66,10 @@ class DetailUserViewController: UIViewController {
     
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func removeUser() {
+        
     }
     
     func configView() {
@@ -238,17 +247,32 @@ class DetailUserViewController: UIViewController {
         }
         
         vc.selectDate = { [weak self] date in
-            switch self?.userChoice {
-            case .baby:
-                self?.currentModel.babyAge = date
-            default:
-                break
-            }
+            self?.currentModel.babyAge = date
+            self?.calculateBabyAge(dateString: date)
             self?.setupData()
             let indexPath = IndexPath(row: 7, section: 0)
             self?.tableView.reloadRows(at: [indexPath], with: .none)
         }
         present(vc, animated: true, completion: nil)
+    }
+    
+    func calculateBabyAge(dateString: String) {
+        let dateFormatter = DateFormatter()
+        let todayDate = Date()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let date = dateFormatter.date(from:dateString)
+        guard let timeLast = date?.millisecondsSince1970 else { return }
+        let timeToday = todayDate.millisecondsSince1970
+        let result = timeLast - timeToday
+        changeMilisToWeek(milis: result)
+    }
+    
+    func changeMilisToWeek(milis: Int64) {
+        let toDay = milis / 86400000
+        let ageDay = 280 - Int(toDay)
+        let week = Int(ageDay / 7)
+        let day = Int(ageDay % 7)
+        self.currentModel.dateCalculate = "\(week)W \(day)D"
     }
     
 }
@@ -273,9 +297,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralInfoTableViewCell.name, for: indexPath) as?
                     GeneralInfoTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.saveDate = { [weak self] date in
-                self?.currentModel.dateSave = date
-            }
             return cell
         case .info:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoUserTableViewCell.name, for: indexPath) as?
@@ -295,6 +316,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.name, for: indexPath) as?
                     NoteTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.delegate = self
             cell.changeHeightCell = { [weak self] in
                 self?.tableView.beginUpdates()
                 self?.tableView.endUpdates()
@@ -401,13 +423,22 @@ extension DetailUserViewController {
             user.height = currentModel.height
             user.babyDateBorn = currentModel.babyAge
             user.dateCalculate = currentModel.dateCalculate
-            if !currentModel.note.isEmpty {
-                user.note = currentModel.note
-            }
-            user.dateSave = currentModel.dateSave
-
+            user.note = currentModel.note
+            
+            let dateFormatter : DateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+            let date = Date()
+            let dateString = dateFormatter.string(from: date)
+            
+            user.dateSave = dateString
+            
+            try? realm.commitWrite()
             try? realm.safeWrite({
                 realm.add(user)
+                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
             })
         }
     }
