@@ -35,6 +35,7 @@
 		36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */; };
 		36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */; };
 		36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90B952698AAC500817DC2 /* HistoryModel.swift */; };
+		36C012B32744AE220085A329 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C012B22744AE220085A329 /* Date+.swift */; };
 		36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4FF962694AAD700985C25 /* AvatarUserTableViewCell.swift */; };
 		36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D4FF972694AAD700985C25 /* AvatarUserTableViewCell.xib */; };
 		36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4FF9B2694ACC900985C25 /* GeneralInfoTableViewCell.swift */; };
@@ -90,6 +91,7 @@
 		36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCalendarViewController.swift; sourceTree = "<group>"; };
 		36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCalendarViewController.xib; sourceTree = "<group>"; };
 		36B90B952698AAC500817DC2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		36C012B22744AE220085A329 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		36D4FF962694AAD700985C25 /* AvatarUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarUserTableViewCell.swift; sourceTree = "<group>"; };
 		36D4FF972694AAD700985C25 /* AvatarUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarUserTableViewCell.xib; sourceTree = "<group>"; };
 		36D4FF9B2694ACC900985C25 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				366AE8B92692BD0800B5262C /* Home */,
 				366AE8E92692D84600B5262C /* Detail */,
+				367335CD2695D41800EB9DC0 /* History */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -314,7 +317,6 @@
 				366AE89C2692A96600B5262C /* AppDelegate */,
 				36FC461926921AD400AAB868 /* Extension */,
 				366AE8BB2692BD2A00B5262C /* Controller */,
-				367335CD2695D41800EB9DC0 /* History */,
 				366AE8AB2692B60C00B5262C /* Utils */,
 				36EC54672691F38000809FF3 /* LaunchScreen.storyboard */,
 				36EC546A2691F38000809FF3 /* Info.plist */,
@@ -330,6 +332,7 @@
 				366AE8CB2692C1FA00B5262C /* UITableView+.swift */,
 				367335CF2695D90000EB9DC0 /* String+.swift */,
 				36B615E0269B515300F554E8 /* UITextField+.swift */,
+				36C012B22744AE220085A329 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
 				36B615E1269B515300F554E8 /* UITextField+.swift in Sources */,
+				36C012B32744AE220085A329 /* Date+.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
 			);

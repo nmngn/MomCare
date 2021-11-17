@@ -32,19 +32,35 @@ class BaybyAgeTableViewCell: UITableViewCell {
     }
 
     func setupData(model: DetailModel) {
-        dobLabel.text = model.babyAge
-        changeStringToDate(dateString: model.babyAge)
+        if !model.babyAge.isEmpty {
+            dobLabel.text = model.babyAge
+            calculateBabyAge(dateString: model.babyAge)
+        }
     }
     
-    func changeStringToDate(dateString: String) {
+    func calculateBabyAge(dateString: String) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let date = dateFormatter.date(from:dateString)!
-        
+        let todayDate = Date()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let date = dateFormatter.date(from:dateString)
+        guard let timeLast = date?.millisecondsSince1970 else { return }
+        let timeToday = todayDate.millisecondsSince1970
+        let result = timeLast - timeToday
+        changeMilisToWeek(milis: result)
     }
     
-    func calculateBabyAge(date: Date) -> String {
-        return ""
+    func changeMilisToWeek(milis: Int64) {
+        let toDay = milis / 86400000
+        let ageDay = 280 - Int(toDay)
+        let week = Int(ageDay / 7)
+        let day = Int(ageDay % 7)
+        if week == 0 {
+            ageLabel.text = "\(day)D"
+        } else if day == 0 {
+            ageLabel.text = "\(week)W"
+        } else {
+            ageLabel.text = "\(week)W \(day)D"
+        }
     }
     
     @IBAction func chooseDOB(_ sender: UIButton) {

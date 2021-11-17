@@ -17,7 +17,10 @@ class PopupCalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        showDatePicker()
+        calendar.datePickerMode = .date
+        calendar.preferredDatePickerStyle = .wheels
+        calendar.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+        calendar.maximumDate = Calendar.current.date(byAdding: .month, value: 10, to: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,11 +33,6 @@ class PopupCalendarViewController: UIViewController {
         closeCalendar?()
     }
     
-    func showDatePicker(){
-        //Formate Date
-        calendar.datePickerMode = .date
-        calendar.preferredDatePickerStyle = .wheels
-    }
     
     func doneDatePicker(){
         let dateFormatter = DateFormatter()
