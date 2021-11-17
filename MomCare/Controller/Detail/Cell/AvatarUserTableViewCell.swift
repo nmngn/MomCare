@@ -28,7 +28,11 @@ class AvatarUserTableViewCell: UITableViewCell {
     }
 
     func setupData(model: DetailModel) {
-        avatarImage.image = model.avatarImage
+        if model.avatarImage == nil {
+            avatarImage.image = UIImage(named: "avatar_placeholder")
+        } else {
+            avatarImage.image = model.avatarImage
+        }
     }
     
     @IBAction func chooseAvatar(_ sender: UIButton) {

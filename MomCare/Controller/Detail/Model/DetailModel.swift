@@ -35,7 +35,7 @@ struct DetailModel {
     var type: DetailType?
     var title = ""
     var value = ""
-    var avatarImage = UIImage(named: "avatar_placeholder")
+    var avatarImage: UIImage?
     var name = ""
     var address = ""
     var momBirth = ""
