@@ -49,9 +49,13 @@ struct DetailModel {
     var placeHolder = ""
     var dataType: DataType?
     
-    func compressNSData(image: UIImage) -> NSData {
-        guard let imgData = image.jpegData(compressionQuality: 1) else { return NSData() }
-        return NSData(data: imgData)
+    func compressNSData(image: UIImage, type: UserChoice) -> NSData {
+        if type == .mom {
+            guard let imgData = image.jpegData(compressionQuality: 0.9) else { return NSData() }
+            return NSData(data: imgData)
+        } else {
+            guard let imgData = image.pngData() else { return NSData()}
+            return NSData(data: imgData)
+        }
     }
-
 }

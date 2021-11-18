@@ -12,13 +12,27 @@ class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     var model = [HomeModel]()
-
+    let realm = try! Realm()
+    var listUser: [User]? {
+        didSet {
+            self.setupData()
+            self.tableView?.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
         setupData()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        getListUser()
+    }
+    
+    func getListUser() {
+        do {
+            let info = realm.objects(User.self).toArray()
+            self.listUser = info
+        }
     }
     
     func configView() {
@@ -36,29 +50,29 @@ class HomeViewController: UIViewController {
     
     func setupData() {
         model.removeAll()
+        guard let listUser = self.listUser else { return }
+
         let badge = HomeModel(type: .badge)
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này"
         let biggerCell = HomeModel(type: .biggerUser)
         let sort = HomeModel(type: .sort)
         var header2 = HomeModel(type: .title)
-        header2.title = "Tất cả bênh nhân"
+        header2.title = "Tất cả bênh nhân(\(listUser.count))"
         
         model.append(badge)
         model.append(header1)
-        model.append(biggerCell)
-        model.append(biggerCell)
-        model.append(biggerCell)
         model.append(header2)
         model.append(sort)
-        model.append(biggerCell)
-        model.append(biggerCell)
-        model.append(biggerCell)
-        model.append(biggerCell)
+        
+        for _ in 0..<listUser.count {
+            model.append(biggerCell)
+        }
     }
 
 
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
+        getListUser()
     }
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {
@@ -83,16 +97,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var model: HomeModel
         model = modelIndexPath(indexPath: indexPath)
+        
         switch model.type {
         case .badge:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "BadgeUserTableViewCell", for: indexPath) as?
                     BadgeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            if let list = self.listUser {
+                cell.getNumberPatient(list: list)
+            }
             return cell
         case .biggerUser:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "BiggerHomeUserTableViewCell", for: indexPath) as?
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+//            if let list = self.listUser {
+//                cell.setupData(model: list[indexPath.row])
+//            }
             return cell
         case .sort:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?

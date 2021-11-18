@@ -10,7 +10,6 @@ import UIKit
 class BiggerHomeUserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var subView: UIView!
-    
     @IBOutlet weak var avatarUser: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dayCreateLabel: UILabel!
@@ -22,4 +21,10 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
+    func setupData(model: User) {
+        avatarUser.image = model.compressNSDataToImage(data: model.avatar ?? NSData(), type: .mom)
+        userNameLabel.text = model.name
+        dayCreateLabel.text = model.dateSave
+        babyAgeLabel.text = model.dateCalculate
+    }
 }

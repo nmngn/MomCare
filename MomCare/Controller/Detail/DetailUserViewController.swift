@@ -200,9 +200,6 @@ class DetailUserViewController: UIViewController {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            if image.pngData()?.count ?? 0 >= 12000 * 1000 {
-//                self.view.makeToast("Lỗi tải ảnh: Ảnh của bạn có thể sẽ bị thay đổi kích thước do vượt quá dung lượng (5MB).", duration: 1.5, position: .top)
-//            }
             if userChoice == .mom {
                 self.currentModel.avatarImage = image
                 self.setupData()
@@ -409,11 +406,11 @@ extension DetailUserViewController {
         do {
             realm.beginWrite()
             if let image = currentModel.avatarImage {
-                user.avatar = currentModel.compressNSData(image: image)
+                user.avatar = currentModel.compressNSData(image: image, type: .mom)
             }
             
             if let image = currentModel.imagePregnant {
-                user.imagePregnant = currentModel.compressNSData(image: image)
+                user.imagePregnant = currentModel.compressNSData(image: image, type: .baby)
             }
             
             user.name = currentModel.name

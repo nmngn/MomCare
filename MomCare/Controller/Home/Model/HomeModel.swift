@@ -20,6 +20,11 @@ struct HomeModel {
     var description = ""
     var image: UIImage?
     var backgroundColor: UIColor?
+    
+    var avatarImage: NSData?
+    var name = ""
+    var dateSave = ""
+    var dateCalculate = ""
 
     init(type: HomeType) {
         self.type = type
