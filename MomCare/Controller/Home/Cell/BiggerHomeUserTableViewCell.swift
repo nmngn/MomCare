@@ -21,8 +21,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
-    func setupData(model: User) {
-        avatarUser.image = model.compressNSDataToImage(data: model.avatar ?? NSData(), type: .mom)
+    func setupData(model: HomeModel) {
+        avatarUser.image = model.compressNSDataToImage(data: model.avatarImage ?? NSData(), type: .mom)
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         babyAgeLabel.text = model.dateCalculate

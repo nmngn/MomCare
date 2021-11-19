@@ -22,13 +22,6 @@ class User: Object {
     @objc dynamic var imagePregnant: NSData?
     dynamic var historyPicture = List<HistoryNote>()
     
-    func compressNSDataToImage(data: NSData, type: UserChoice) -> UIImage {
-        if type == .mom {
-            return UIImage(data: Data(referencing: data)) ?? UIImage(named: "avatar_placeholder")!
-        } else {
-            return UIImage(data: Data(referencing: data)) ?? UIImage()
-        }
-    }
 }
 
 class HistoryNote: Object {

@@ -11,7 +11,7 @@ enum HomeType {
     case badge
     case title
     case sort
-    case biggerUser
+    case infoUser
 }
 
 struct HomeModel {
@@ -25,8 +25,16 @@ struct HomeModel {
     var name = ""
     var dateSave = ""
     var dateCalculate = ""
-
+    
     init(type: HomeType) {
         self.type = type
+    }
+    
+    func compressNSDataToImage(data: NSData, type: UserChoice) -> UIImage {
+        if type == .mom {
+            return UIImage(data: Data(referencing: data)) ?? UIImage(named: "avatar_placeholder")!
+        } else {
+            return UIImage(data: Data(referencing: data)) ?? UIImage()
+        }
     }
 }

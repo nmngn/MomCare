@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     let realm = try! Realm()
     var listUser: [User]? {
         didSet {
-            self.setupData()
+            setupData()
             self.tableView?.reloadData()
         }
     }
@@ -24,8 +24,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
-        setupData()
         getListUser()
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
     func getListUser() {
@@ -55,7 +55,7 @@ class HomeViewController: UIViewController {
         let badge = HomeModel(type: .badge)
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này"
-        let biggerCell = HomeModel(type: .biggerUser)
+        var infoCell = HomeModel(type: .infoUser)
         let sort = HomeModel(type: .sort)
         var header2 = HomeModel(type: .title)
         header2.title = "Tất cả bênh nhân(\(listUser.count))"
@@ -65,17 +65,20 @@ class HomeViewController: UIViewController {
         model.append(header2)
         model.append(sort)
         
-        for _ in 0..<listUser.count {
-            model.append(biggerCell)
+        for i in 0..<listUser.count {
+            infoCell.avatarImage = listUser[i].avatar
+            infoCell.name = listUser[i].name
+            infoCell.dateSave = listUser[i].dateSave
+            infoCell.dateCalculate = listUser[i].dateCalculate
+            model.append(infoCell)
         }
     }
 
-
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
-        getListUser()
     }
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {
+        getListUser()
     }
     
     @IBAction func addUser(_ sender: UIButton) {
@@ -107,13 +110,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.getNumberPatient(list: list)
             }
             return cell
-        case .biggerUser:
+        case .infoUser:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "BiggerHomeUserTableViewCell", for: indexPath) as?
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-//            if let list = self.listUser {
-//                cell.setupData(model: list[indexPath.row])
-//            }
+            DispatchQueue.main.async {
+                cell.setupData(model: model)
+            }
             return cell
         case .sort:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
@@ -134,7 +137,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(indexPath: indexPath)
         
         switch model.type {
-        case .biggerUser:
+        case .infoUser:
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
@@ -142,6 +145,5 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             break
         }
     }
-    
     
 }

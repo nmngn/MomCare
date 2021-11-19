@@ -26,24 +26,36 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Xin chào" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW6-BB-4jr">
                                 <rect key="frame" x="16" y="16" width="311" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="K9z-Y7-JJr"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chúc bạn một ngày tốt lành !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfu-o1-Nsy">
-                                <rect key="frame" x="16" y="46" width="311" height="16.5"/>
+                                <rect key="frame" x="16" y="46" width="311" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="CpM-TV-Kvv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bạn hiện đang có tất cả 15 bệnh nhân " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3c-WJ-0DQ">
-                                <rect key="frame" x="16" y="78.5" width="311" height="17"/>
+                                <rect key="frame" x="16" y="80" width="311" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="e7U-1W-ahb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Có 3 bệnh nhân dự kiến sinh trong tháng này" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeE-hp-vAO">
-                                <rect key="frame" x="16" y="111.5" width="311" height="17"/>
+                                <rect key="frame" x="16" y="110" width="311" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="cxn-bM-abh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -54,11 +66,11 @@
                             <constraint firstItem="iW6-BB-4jr" firstAttribute="leading" secondItem="cIY-WT-n71" secondAttribute="leading" constant="16" id="1Da-dp-39Q"/>
                             <constraint firstAttribute="trailing" secondItem="iW6-BB-4jr" secondAttribute="trailing" constant="16" id="29S-Su-OMk"/>
                             <constraint firstItem="jfu-o1-Nsy" firstAttribute="leading" secondItem="cIY-WT-n71" secondAttribute="leading" constant="16" id="5Ca-fv-XcD"/>
-                            <constraint firstItem="JeE-hp-vAO" firstAttribute="top" secondItem="V3c-WJ-0DQ" secondAttribute="bottom" constant="16" id="G3h-f6-gCR"/>
+                            <constraint firstItem="JeE-hp-vAO" firstAttribute="top" secondItem="V3c-WJ-0DQ" secondAttribute="bottom" constant="12" id="G3h-f6-gCR"/>
                             <constraint firstAttribute="trailing" secondItem="jfu-o1-Nsy" secondAttribute="trailing" constant="16" id="JiD-0o-bVm"/>
                             <constraint firstItem="V3c-WJ-0DQ" firstAttribute="leading" secondItem="cIY-WT-n71" secondAttribute="leading" constant="16" id="Kyf-IG-0Ib"/>
-                            <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="JeE-hp-vAO" secondAttribute="bottom" constant="17" id="Nj7-OK-E7P"/>
                             <constraint firstItem="jfu-o1-Nsy" firstAttribute="top" secondItem="iW6-BB-4jr" secondAttribute="bottom" constant="8" id="Qid-qH-5S7"/>
+                            <constraint firstAttribute="bottom" secondItem="JeE-hp-vAO" secondAttribute="bottom" constant="16" id="awU-pV-4mz"/>
                             <constraint firstAttribute="trailing" secondItem="V3c-WJ-0DQ" secondAttribute="trailing" constant="16" id="nIU-sA-5Uq"/>
                             <constraint firstAttribute="height" constant="144" id="nzj-nb-N19"/>
                             <constraint firstItem="JeE-hp-vAO" firstAttribute="leading" secondItem="cIY-WT-n71" secondAttribute="leading" constant="16" id="wde-n6-mD2"/>
