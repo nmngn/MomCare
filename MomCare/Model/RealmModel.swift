@@ -18,8 +18,8 @@ class User: Object {
     @objc dynamic var dateCalculate = ""
     @objc dynamic var dateSave = ""
     @objc dynamic var note = ""
-    @objc dynamic var avatar: NSData?
-    @objc dynamic var imagePregnant: NSData?
+    @objc dynamic var avatar = ""
+    @objc dynamic var imagePregnant = ""
     dynamic var historyPicture = List<HistoryNote>()
     
 }

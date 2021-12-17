@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,21 +32,31 @@
                                 <rect key="frame" x="250.5" y="3" width="23.5" height="18"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Họ tên " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwr-ah-UnS">
-                                <rect key="frame" x="282" y="3.5" width="45" height="17"/>
+                                <rect key="frame" x="282" y="-3" width="45" height="30"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbp-VO-FLx">
+                                <rect key="frame" x="250.5" y="-3" width="76.5" height="30"/>
+                                <connections>
+                                    <action selector="selectSort:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="n3o-fH-pze"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fjS-fm-Zr1" firstAttribute="leading" secondItem="Zey-Y1-AnK" secondAttribute="leading" id="2Uy-6c-5ex"/>
                             <constraint firstAttribute="bottom" secondItem="fjS-fm-Zr1" secondAttribute="bottom" id="7aj-lL-S3Y"/>
                             <constraint firstItem="Vwr-ah-UnS" firstAttribute="leading" secondItem="Zey-Y1-AnK" secondAttribute="trailing" constant="8" id="H4I-QO-kZ3"/>
+                            <constraint firstItem="pbp-VO-FLx" firstAttribute="top" secondItem="Vwr-ah-UnS" secondAttribute="top" id="Mqt-kZ-fcm"/>
                             <constraint firstItem="fjS-fm-Zr1" firstAttribute="trailing" secondItem="Vwr-ah-UnS" secondAttribute="trailing" id="UM8-xU-cMN"/>
+                            <constraint firstItem="pbp-VO-FLx" firstAttribute="leading" secondItem="Zey-Y1-AnK" secondAttribute="leading" id="WDK-FL-H2q"/>
                             <constraint firstItem="Zey-Y1-AnK" firstAttribute="centerY" secondItem="Vwr-ah-UnS" secondAttribute="centerY" id="YbV-ob-HW5"/>
+                            <constraint firstItem="pbp-VO-FLx" firstAttribute="trailing" secondItem="Vwr-ah-UnS" secondAttribute="trailing" id="cVJ-t2-ZzN"/>
                             <constraint firstAttribute="height" constant="24" id="fYK-2e-1US"/>
                             <constraint firstItem="fjS-fm-Zr1" firstAttribute="top" secondItem="Q4C-uX-d5E" secondAttribute="top" id="gpY-eK-h0T"/>
+                            <constraint firstItem="pbp-VO-FLx" firstAttribute="bottom" secondItem="Vwr-ah-UnS" secondAttribute="bottom" id="lZL-2y-xMB"/>
                             <constraint firstItem="Vwr-ah-UnS" firstAttribute="centerY" secondItem="Q4C-uX-d5E" secondAttribute="centerY" id="mRA-mJ-pax"/>
                             <constraint firstAttribute="trailing" secondItem="Vwr-ah-UnS" secondAttribute="trailing" constant="16" id="tbf-l0-HYO"/>
                         </constraints>
@@ -61,7 +71,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <point key="canvasLocation" x="-23.188405797101453" y="67.633928571428569"/>
+            <point key="canvasLocation" x="-23.913043478260871" y="67.633928571428569"/>
         </tableViewCell>
     </objects>
     <resources>

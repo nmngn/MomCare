@@ -22,7 +22,9 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     }
     
     func setupData(model: HomeModel) {
-        avatarUser.image = model.compressNSDataToImage(data: model.avatarImage ?? NSData(), type: .mom)
+        DispatchQueue.main.async {
+            self.avatarUser.image = model.loadImageFromDiskWith(fileName: model.numberPhone) ?? UIImage(named: "avatar_placeholder")
+        }
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         babyAgeLabel.text = model.dateCalculate

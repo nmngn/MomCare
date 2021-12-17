@@ -25,6 +25,10 @@ class NoteTableViewCell: UITableViewCell {
         noteTextView.isScrollEnabled = false
     }
     
+    func setupData(model: DetailModel) {
+        noteTextView.text = model.note
+    }
+    
 }
 
 extension NoteTableViewCell: UITextViewDelegate {

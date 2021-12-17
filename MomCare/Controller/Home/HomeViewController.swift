@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
             self.tableView?.reloadData()
         }
     }
+    var sortType = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,11 @@ class HomeViewController: UIViewController {
         configView()
         getListUser()
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getListUser()
     }
     
     func getListUser() {
@@ -66,7 +72,14 @@ class HomeViewController: UIViewController {
         model.append(sort)
         
         for i in 0..<listUser.count {
+            infoCell.address = listUser[i].address
             infoCell.avatarImage = listUser[i].avatar
+            infoCell.babyAge = listUser[i].babyDateBorn
+            infoCell.height = listUser[i].height
+            infoCell.note = listUser[i].note
+            infoCell.momBirth = listUser[i].momBirth
+            infoCell.imagePregnant = listUser[i].imagePregnant
+            infoCell.numberPhone = listUser[i].numberPhone
             infoCell.name = listUser[i].name
             infoCell.dateSave = listUser[i].dateSave
             infoCell.dateCalculate = listUser[i].dateCalculate
@@ -90,10 +103,44 @@ class HomeViewController: UIViewController {
         return model[indexPath.row]
     }
     
+    func removeUser(dateSave: String, indexPath: Int) {
+        let item = realm.objects(User.self).filter("dateSave = %@", dateSave)
+        try! realm.write({
+            realm.delete(item)
+        })
+        self.model.remove(at: indexPath)
+        self.tableView.reloadData()
+    }
+    
+    func sortListUser() {
+        let alert = UIAlertController(title: "Sắp xếp", message: "Chọn cách sắp xếp", preferredStyle: .actionSheet)
+        let sortName = UIAlertAction(title: "Theo tên", style: .default, handler: { _ in
+            self.sortType = "Theo tên"
+            let _ = self.realm.objects(User.self).sorted(byKeyPath: "name", ascending: true)
+            self.getListUser()
+        })
+        let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
+            self.sortType = "Theo ngày lưu"
+            let _ = self.realm.objects(User.self).sorted(byKeyPath: "dateSave", ascending: true)
+            self.getListUser()
+        })
+        let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
+            self.sortType = "Theo tuổi tuần thai"
+            let _ = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: true)
+            self.getListUser()
+        })
+        
+        alert.addAction(sortName)
+        alert.addAction(sortDateSave)
+        alert.addAction(sortDateCal)
+        self.present(alert, animated: true, completion: nil)
+        tableView.reloadData()
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return model.count
     }
     
@@ -122,6 +169,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
                     SortListTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.selectSoft = { [weak self] in
+                self?.sortListUser()
+            }
             return cell
         case .title:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTitleTableViewCell", for: indexPath) as?
@@ -139,10 +189,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .infoUser:
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            vc.currentModel = model.convertToDetailModel()
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        var model: HomeModel
+        model = modelIndexPath(indexPath: indexPath)
+        
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            removeUser(dateSave: model.dateSave, indexPath: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
         }
     }
     

@@ -101,31 +101,31 @@ class DetailUserViewController: UIViewController {
         var name = currentModel
         name.type = .info
         name.dataType = .name
-        name.title = "Họ và tên"
+        name.title = "Họ và tên ⃰"
         name.value = currentModel.name
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
-        address.title = "Địa chỉ"
+        address.title = "Địa chỉ ⃰"
         address.value = currentModel.address
         
         var momBirth = currentModel
         momBirth.type = .info
         momBirth.dataType = .dob
-        momBirth.title = "Năm sinh"
+        momBirth.title = "Năm sinh ⃰"
         momBirth.value = currentModel.momBirth
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
-        number.title = "Số điện thoại"
+        number.title = "Số điện thoại ⃰"
         number.value = currentModel.numberPhone
         
         var height = currentModel
         height.type = .info
         height.dataType = .height
-        height.title = "Chiều cao"
+        height.title = "Chiều cao ⃰"
         height.value = currentModel.height
         
         var age = currentModel
@@ -294,6 +294,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralInfoTableViewCell.name, for: indexPath) as?
                     GeneralInfoTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(currentModel)
             return cell
         case .info:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoUserTableViewCell.name, for: indexPath) as?
@@ -314,6 +315,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     NoteTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
+            cell.setupData(model: currentModel)
             cell.changeHeightCell = { [weak self] in
                 self?.tableView.beginUpdates()
                 self?.tableView.endUpdates()
@@ -326,8 +328,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.delegate = self
             return cell
         case .imagePregnant:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as?
-                    ImagePregnantTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as? ImagePregnantTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setupData(model: currentModel)
             return cell
@@ -406,11 +407,13 @@ extension DetailUserViewController {
         do {
             realm.beginWrite()
             if let image = currentModel.avatarImage {
-                user.avatar = currentModel.compressNSData(image: image, type: .mom)
+                if image != UIImage(named: "avatar_placeholder") {
+                    user.avatar = currentModel.saveImage(imageName: "\(currentModel.numberPhone)", image: image)
+                }
             }
             
             if let image = currentModel.imagePregnant {
-                user.imagePregnant = currentModel.compressNSData(image: image, type: .baby)
+                user.imagePregnant = currentModel.saveImage(imageName: "\(currentModel.numberPhone)2", image: image)
             }
             
             user.name = currentModel.name
@@ -435,7 +438,9 @@ extension DetailUserViewController {
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
                 alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
+                self.present(alert, animated: true) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             })
         }
     }
