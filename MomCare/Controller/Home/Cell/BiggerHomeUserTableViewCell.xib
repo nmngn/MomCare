@@ -53,7 +53,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2W 3D" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZY-Dh-GuL">
-                                <rect key="frame" x="286" y="39.5" width="41" height="17"/>
+                                <rect key="frame" x="286" y="24" width="41" height="17"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/10/2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAB-HR-5jN">
+                                <rect key="frame" x="252" y="53" width="75" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -61,18 +67,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.73333333333333328" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="VAB-HR-5jN" firstAttribute="centerY" secondItem="d5i-TA-qLc" secondAttribute="centerY" id="1G2-K7-H8D"/>
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="top" secondItem="QLP-zH-ohs" secondAttribute="bottom" constant="12" id="2AU-kq-iXD"/>
                             <constraint firstAttribute="bottom" secondItem="d5i-TA-qLc" secondAttribute="bottom" constant="26" id="8eX-7F-Xi4"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="centerY" secondItem="0Cp-9u-EBA" secondAttribute="centerY" id="E61-bt-5Bl"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="Pro-yR-0Lc"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QLP-zH-ohs" secondAttribute="trailing" constant="32" id="RQh-rL-C1G"/>
                             <constraint firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" constant="16" id="Xh7-Ri-Ipi"/>
-                            <constraint firstItem="4ZY-Dh-GuL" firstAttribute="centerY" secondItem="O4c-VG-rDG" secondAttribute="centerY" id="cKK-3j-AuZ"/>
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="etB-zl-2C5"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="leading" secondItem="0Cp-9u-EBA" secondAttribute="leading" constant="12" id="iLm-UQ-Rzg"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="top" secondItem="0Cp-9u-EBA" secondAttribute="top" constant="24" id="kv5-BX-AtY"/>
+                            <constraint firstItem="4ZY-Dh-GuL" firstAttribute="centerY" secondItem="QLP-zH-ohs" secondAttribute="centerY" id="nkd-XI-8cr"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d5i-TA-qLc" secondAttribute="trailing" constant="32" id="rBQ-cW-dch"/>
                             <constraint firstAttribute="height" constant="96" id="rnZ-Pe-RUQ"/>
+                            <constraint firstItem="VAB-HR-5jN" firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" id="tcH-gm-Yif"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -93,6 +101,7 @@
             <connections>
                 <outlet property="avatarUser" destination="O4c-VG-rDG" id="qKN-Ah-sO1"/>
                 <outlet property="babyAgeLabel" destination="4ZY-Dh-GuL" id="ZiX-8R-1yG"/>
+                <outlet property="dateBornLabel" destination="VAB-HR-5jN" id="5SA-IO-bXy"/>
                 <outlet property="dayCreateLabel" destination="d5i-TA-qLc" id="qdS-LL-2LR"/>
                 <outlet property="subView" destination="0Cp-9u-EBA" id="Iia-GK-Gzs"/>
                 <outlet property="userNameLabel" destination="QLP-zH-ohs" id="Wek-5P-2rE"/>

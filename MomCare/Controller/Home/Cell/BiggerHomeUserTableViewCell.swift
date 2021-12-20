@@ -14,6 +14,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dayCreateLabel: UILabel!
     @IBOutlet weak var babyAgeLabel: UILabel!
+    @IBOutlet weak var dateBornLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +29,6 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         babyAgeLabel.text = model.dateCalculate
+        dateBornLabel.text = model.babyAge
     }
 }

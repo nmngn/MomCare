@@ -269,9 +269,8 @@ class DetailUserViewController: UIViewController {
         let ageDay = 280 - Int(toDay)
         let week = Int(ageDay / 7)
         let day = Int(ageDay % 7)
-        self.currentModel.dateCalculate = "\(week)W \(day)D"
+        self.currentModel.dateCalculate = week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
-    
 }
 
 extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -444,9 +443,7 @@ extension DetailUserViewController {
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
                 alert.addAction(action)
-                self.present(alert, animated: true) {
-                    self.navigationController?.popViewController(animated: true)
-                }
+                self.present(alert, animated: true, completion: nil)
             })
         }
     }

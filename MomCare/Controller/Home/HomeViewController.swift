@@ -132,15 +132,12 @@ class HomeViewController: UIViewController {
         return model[indexPath.row]
     }
     
-    func removeUser(dateSave: String, indexPath: [IndexPath]) {
+    func removeUser(dateSave: String, indexPath: Int) {
         let item = realm.objects(User.self).filter("dateSave = %@", dateSave)
         try! realm.write({
             realm.delete(item)
         })
-        for item in indexPath {
-            self.model.remove(at: item.row)
-        }
-        self.tableView.reloadData()
+        self.getListUser()
     }
     
     func sortListUser() {
@@ -157,7 +154,7 @@ class HomeViewController: UIViewController {
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
-            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: true)
+            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: false)
             self.listUser?.removeAll()
             self.listUser = items.toArray()
         })
@@ -231,22 +228,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        var model: HomeModel
-        model = modelIndexPath(indexPath: indexPath)
-        
-        if editingStyle == .delete {
-            tableView.beginUpdates()
-            removeUser(dateSave: model.dateSave, indexPath: [indexPath])
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
         }
     }
     
