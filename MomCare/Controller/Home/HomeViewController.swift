@@ -116,25 +116,29 @@ class HomeViewController: UIViewController {
         let alert = UIAlertController(title: "Sắp xếp", message: "Chọn cách sắp xếp", preferredStyle: .actionSheet)
         let sortName = UIAlertAction(title: "Theo tên", style: .default, handler: { _ in
             self.sortType = "Theo tên"
-            let _ = self.realm.objects(User.self).sorted(byKeyPath: "name", ascending: true)
-            self.getListUser()
-        })
+            let items = self.realm.objects(User.self).sorted(byKeyPath: "name", ascending: true)
+            self.listUser?.removeAll()
+            self.listUser = items.toArray()
+            })
         let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
             self.sortType = "Theo ngày lưu"
-            let _ = self.realm.objects(User.self).sorted(byKeyPath: "dateSave", ascending: true)
-            self.getListUser()
+            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateSave", ascending: true)
+            self.listUser?.removeAll()
+            self.listUser = items.toArray()
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
-            let _ = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: true)
-            self.getListUser()
+            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: true)
+            self.listUser?.removeAll()
+            self.listUser = items.toArray()
         })
         
         alert.addAction(sortName)
         alert.addAction(sortDateSave)
         alert.addAction(sortDateCal)
-        self.present(alert, animated: true, completion: nil)
-        tableView.reloadData()
+        self.present(alert, animated: true, completion: {
+            self.tableView.reloadData()
+        })
     }
 }
 
@@ -169,6 +173,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
                     SortListTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            self.sortType == "" ? cell.setupTitle(title: "Sắp xếp") : cell.setupTitle(title: self.sortType)
             cell.selectSoft = { [weak self] in
                 self?.sortListUser()
             }

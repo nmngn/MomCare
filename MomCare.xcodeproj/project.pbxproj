@@ -29,6 +29,7 @@
 		366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366AE8E52692D84000B5262C /* DetailUserViewController.xib */; };
 		367335D02695D90000EB9DC0 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335CF2695D90000EB9DC0 /* String+.swift */; };
 		367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335D32695D9BE00EB9DC0 /* Toast.swift */; };
+		3674240E27706EA10016477E /* Other+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3674240D27706EA10016477E /* Other+.swift */; };
 		367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367AACEB2697FC4C0056601C /* HistoryViewController.swift */; };
 		367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367AACEC2697FC4C0056601C /* HistoryViewController.xib */; };
 		36B615E1269B515300F554E8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E0269B515300F554E8 /* UITextField+.swift */; };
@@ -85,6 +86,7 @@
 		366AE8E52692D84000B5262C /* DetailUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailUserViewController.xib; sourceTree = "<group>"; };
 		367335CF2695D90000EB9DC0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		367335D32695D9BE00EB9DC0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		3674240D27706EA10016477E /* Other+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Other+.swift"; sourceTree = "<group>"; };
 		367AACEB2697FC4C0056601C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		367AACEC2697FC4C0056601C /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		36B615E0269B515300F554E8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+.swift"; path = "../../../UITextField+.swift"; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				367335CF2695D90000EB9DC0 /* String+.swift */,
 				36B615E0269B515300F554E8 /* UITextField+.swift */,
 				36C012B22744AE220085A329 /* Date+.swift */,
+				3674240D27706EA10016477E /* Other+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
 				36FC461B26921AE200AAB868 /* Realm+.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */,
+				3674240E27706EA10016477E /* Other+.swift in Sources */,
 				366AE8D02692C2DE00B5262C /* HomeTitleTableViewCell.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
