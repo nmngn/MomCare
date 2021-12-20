@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
-        getListUser()
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
@@ -34,10 +33,15 @@ class HomeViewController: UIViewController {
         getListUser()
     }
     
-    func getListUser() {
+    func getListUser(reverse: Bool = false) {
         do {
-            let info = realm.objects(User.self).toArray()
-            self.listUser = info
+            if !reverse {
+                let info = realm.objects(User.self).toArray()
+                self.listUser = info
+            } else {
+                let info = realm.objects(User.self).toArray()
+                self.listUser = info.reversed()
+            }
         }
     }
     
@@ -51,23 +55,48 @@ class HomeViewController: UIViewController {
             $0.registerNibCellFor(type: HomeTitleTableViewCell.self)
             $0.registerNibCellFor(type: SortListTableViewCell.self)
             $0.registerNibCellFor(type: BiggerHomeUserTableViewCell.self)
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 48, right: 0)
         }
     }
     
     func setupData() {
         model.removeAll()
         guard let listUser = self.listUser else { return }
+        let newList = listUser.filter ({ user in
+            let text = user.dateCalculate
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let endIndex = text.index(text.startIndex, offsetBy: 1)
+            let data = String(text[startIndex...endIndex])
+            let result = Int(data) ?? 0 >= 36
+            return result
+        })
 
         let badge = HomeModel(type: .badge)
         var header1 = HomeModel(type: .title)
-        header1.title = "Dự kiến sinh trong tháng này"
+        header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
         var infoCell = HomeModel(type: .infoUser)
         let sort = HomeModel(type: .sort)
         var header2 = HomeModel(type: .title)
-        header2.title = "Tất cả bênh nhân(\(listUser.count))"
+        header2.title = "Tất cả bệnh nhân(\(listUser.count))"
         
         model.append(badge)
         model.append(header1)
+        
+        for i in 0..<newList.count {
+            infoCell.address = newList[i].address
+            infoCell.avatarImage = newList[i].avatar
+            infoCell.babyAge = newList[i].babyDateBorn
+            infoCell.height = newList[i].height
+            infoCell.note = newList[i].note
+            infoCell.momBirth = newList[i].momBirth
+            infoCell.imagePregnant = newList[i].imagePregnant
+            infoCell.numberPhone = newList[i].numberPhone
+            infoCell.name = newList[i].name
+            infoCell.dateSave = newList[i].dateSave
+            infoCell.dateCalculate = newList[i].dateCalculate
+            model.append(infoCell)
+        }
+        
         model.append(header2)
         model.append(sort)
         
@@ -103,12 +132,14 @@ class HomeViewController: UIViewController {
         return model[indexPath.row]
     }
     
-    func removeUser(dateSave: String, indexPath: Int) {
+    func removeUser(dateSave: String, indexPath: [IndexPath]) {
         let item = realm.objects(User.self).filter("dateSave = %@", dateSave)
         try! realm.write({
             realm.delete(item)
         })
-        self.model.remove(at: indexPath)
+        for item in indexPath {
+            self.model.remove(at: item.row)
+        }
         self.tableView.reloadData()
     }
     
@@ -122,9 +153,7 @@ class HomeViewController: UIViewController {
             })
         let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
             self.sortType = "Theo ngày lưu"
-            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateSave", ascending: true)
-            self.listUser?.removeAll()
-            self.listUser = items.toArray()
+            self.getListUser(reverse: true)
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
@@ -132,10 +161,14 @@ class HomeViewController: UIViewController {
             self.listUser?.removeAll()
             self.listUser = items.toArray()
         })
+        let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        })
         
         alert.addAction(sortName)
         alert.addAction(sortDateSave)
         alert.addAction(sortDateCal)
+        alert.addAction(cancel)
         self.present(alert, animated: true, completion: {
             self.tableView.reloadData()
         })
@@ -144,7 +177,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return model.count
     }
     
@@ -212,7 +244,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             tableView.beginUpdates()
-            removeUser(dateSave: model.dateSave, indexPath: indexPath.row)
+            removeUser(dateSave: model.dateSave, indexPath: [indexPath])
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }

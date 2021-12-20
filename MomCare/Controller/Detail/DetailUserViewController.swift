@@ -404,6 +404,18 @@ extension DetailUserViewController: DetailUserInfo {
 
 extension DetailUserViewController {
     func saveInfoUser() {
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        
+        if !currentModel.dateSave.isEmpty {
+            let item = realm.objects(User.self).filter("dateSave = %@", currentModel.dateSave)
+            try! realm.write({
+                realm.delete(item)
+            })
+        }
+        
         do {
             realm.beginWrite()
             if let image = currentModel.avatarImage {
@@ -424,12 +436,6 @@ extension DetailUserViewController {
             user.babyDateBorn = currentModel.babyAge
             user.dateCalculate = currentModel.dateCalculate
             user.note = currentModel.note
-            
-            let dateFormatter : DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-            let date = Date()
-            let dateString = dateFormatter.string(from: date)
-            
             user.dateSave = dateString
             
             try? realm.commitWrite()

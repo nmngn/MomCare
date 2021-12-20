@@ -31,7 +31,16 @@ class BadgeUserTableViewCell: UITableViewCell {
         textAll.append(allPatient)
         allUserLabel.attributedText = textAll
         
-        let inMonthPatient = NSMutableAttributedString(string: "\(0)", attributes: [
+        let newList = list.filter ({ user in
+            let text = user.dateCalculate
+            let startIndex = text.index(text.startIndex, offsetBy: 0)
+            let endIndex = text.index(text.startIndex, offsetBy: 1)
+            let data = String(text[startIndex...endIndex])
+            let result = Int(data) ?? 0 >= 36
+            return result
+        })
+        
+        let inMonthPatient = NSMutableAttributedString(string: "\(newList.count)", attributes: [
             .foregroundColor : UIColor.black,
             .font : UIFont.systemFont(ofSize: 16, weight: .bold)
         ])
