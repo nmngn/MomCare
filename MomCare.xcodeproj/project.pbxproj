@@ -30,6 +30,10 @@
 		367335D02695D90000EB9DC0 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335CF2695D90000EB9DC0 /* String+.swift */; };
 		367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367335D32695D9BE00EB9DC0 /* Toast.swift */; };
 		3674240E27706EA10016477E /* Other+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3674240D27706EA10016477E /* Other+.swift */; };
+		367424122770C1090016477E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367424102770C1090016477E /* SearchViewController.swift */; };
+		367424132770C1090016477E /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367424112770C1090016477E /* SearchViewController.xib */; };
+		367424172770C34F0016477E /* SearchItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367424152770C34E0016477E /* SearchItemTableViewCell.swift */; };
+		367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367424162770C34F0016477E /* SearchItemTableViewCell.xib */; };
 		367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367AACEB2697FC4C0056601C /* HistoryViewController.swift */; };
 		367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367AACEC2697FC4C0056601C /* HistoryViewController.xib */; };
 		36B615E1269B515300F554E8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E0269B515300F554E8 /* UITextField+.swift */; };
@@ -87,6 +91,10 @@
 		367335CF2695D90000EB9DC0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		367335D32695D9BE00EB9DC0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		3674240D27706EA10016477E /* Other+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Other+.swift"; sourceTree = "<group>"; };
+		367424102770C1090016477E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		367424112770C1090016477E /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		367424152770C34E0016477E /* SearchItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemTableViewCell.swift; sourceTree = "<group>"; };
+		367424162770C34F0016477E /* SearchItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchItemTableViewCell.xib; sourceTree = "<group>"; };
 		367AACEB2697FC4C0056601C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		367AACEC2697FC4C0056601C /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		36B615E0269B515300F554E8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+.swift"; path = "../../../UITextField+.swift"; sourceTree = "<group>"; };
@@ -178,6 +186,7 @@
 				366AE8B92692BD0800B5262C /* Home */,
 				366AE8E92692D84600B5262C /* Detail */,
 				367335CD2695D41800EB9DC0 /* History */,
+				3674240F2770C0EC0016477E /* SearchVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -234,6 +243,25 @@
 				367335D32695D9BE00EB9DC0 /* Toast.swift */,
 			);
 			path = Lib;
+			sourceTree = "<group>";
+		};
+		3674240F2770C0EC0016477E /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				367424142770C2AE0016477E /* Cell */,
+				367424102770C1090016477E /* SearchViewController.swift */,
+				367424112770C1090016477E /* SearchViewController.xib */,
+			);
+			path = SearchVC;
+			sourceTree = "<group>";
+		};
+		367424142770C2AE0016477E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				367424152770C34E0016477E /* SearchItemTableViewCell.swift */,
+				367424162770C34F0016477E /* SearchItemTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		36B615E3269B540800F554E8 /* Popup */ = {
@@ -416,6 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */,
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
 				366AE8D12692C2DE00B5262C /* HomeTitleTableViewCell.xib in Resources */,
@@ -434,6 +463,7 @@
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
 				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
+				367424132770C1090016477E /* SearchViewController.xib in Resources */,
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
 				36EC54642691F37D00809FF3 /* Main.storyboard in Resources */,
 				366AE8C82692C0AA00B5262C /* Roboto in Resources */,
@@ -493,12 +523,14 @@
 				36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */,
 				366AE8CC2692C1FA00B5262C /* UITableView+.swift in Sources */,
 				367335D02695D90000EB9DC0 /* String+.swift in Sources */,
+				367424172770C34F0016477E /* SearchItemTableViewCell.swift in Sources */,
 				36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */,
 				366AE8C02692BDEA00B5262C /* HomeModel.swift in Sources */,
 				367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */,
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
+				367424122770C1090016477E /* SearchViewController.swift in Sources */,
 				36FC461B26921AE200AAB868 /* Realm+.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */,
 				3674240E27706EA10016477E /* Other+.swift in Sources */,
