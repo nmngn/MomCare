@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="NJg-fv-WCy" id="sq3-Nt-Qwh"/>
+                <outlet property="tableView" destination="g16-j4-Rtq" id="NJs-VL-TtI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +25,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g16-j4-Rtq">
-                    <rect key="frame" x="0.0" y="95" width="414" height="751"/>
+                    <rect key="frame" x="0.0" y="95" width="414" height="767"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -36,7 +38,7 @@
                 <constraint firstItem="NJg-fv-WCy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="V4t-Ne-YP3"/>
                 <constraint firstItem="NJg-fv-WCy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ceg-A0-zvW"/>
                 <constraint firstItem="g16-j4-Rtq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gr2-y9-l1k"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="g16-j4-Rtq" secondAttribute="bottom" constant="16" id="y5o-py-vOI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="g16-j4-Rtq" secondAttribute="bottom" id="y5o-py-vOI"/>
             </constraints>
             <point key="canvasLocation" x="62" y="64"/>
         </view>

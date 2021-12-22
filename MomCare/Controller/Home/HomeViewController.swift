@@ -64,13 +64,16 @@ class HomeViewController: UIViewController {
         guard let listUser = self.listUser else { return }
         let newList = listUser.filter ({ user in
             let text = user.dateCalculate
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let endIndex = text.index(text.startIndex, offsetBy: 1)
-            let data = String(text[startIndex...endIndex])
-            let result = Int(data) ?? 0 >= 36
-            return result
+            if !text.isEmpty {
+                let startIndex = text.index(text.startIndex, offsetBy: 0)
+                let endIndex = text.index(text.startIndex, offsetBy: 1)
+                let data = String(text[startIndex...endIndex])
+                let result = Int(data) ?? 0 >= 36
+                return result
+            }
+            return false
         })
-
+        
         let badge = HomeModel(type: .badge)
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
@@ -117,6 +120,8 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
+        let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {

@@ -22,6 +22,22 @@ class User: Object {
     @objc dynamic var imagePregnant = ""
     dynamic var historyPicture = List<HistoryNote>()
     
+    func convertToDetailModel() -> DetailModel {
+        var model = DetailModel()
+        model.address = address
+        model.numberPhone = numberPhone
+  //      model.avatarImage = loadImageFromDiskWith(fileName: avatarImage)
+        model.name = name
+        model.momBirth = momBirth
+        model.height = height
+        model.dateSave = dateSave
+        model.dateCalculate = dateCalculate
+        model.babyAge = babyDateBorn
+        model.note = note
+ //       model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
+        return model
+    }
+
 }
 
 class HistoryNote: Object {

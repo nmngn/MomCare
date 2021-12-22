@@ -22,14 +22,11 @@ class SearchItemTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
-    func setupData(model: HomeModel) {
-        DispatchQueue.main.async {
-            self.avatarUser.image = model.loadImageFromDiskWith(fileName: model.numberPhone) ?? UIImage(named: "avatar_placeholder")
-        }
+    func setupData(model: User) {
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         babyAgeLabel.text = model.dateCalculate
-        dateBornLabel.text = model.babyAge
+        dateBornLabel.text = model.babyDateBorn
     }
 
 }

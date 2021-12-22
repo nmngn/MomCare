@@ -33,11 +33,14 @@ class BadgeUserTableViewCell: UITableViewCell {
         
         let newList = list.filter ({ user in
             let text = user.dateCalculate
-            let startIndex = text.index(text.startIndex, offsetBy: 0)
-            let endIndex = text.index(text.startIndex, offsetBy: 1)
-            let data = String(text[startIndex...endIndex])
-            let result = Int(data) ?? 0 >= 36
-            return result
+            if !text.isEmpty {
+                let startIndex = text.index(text.startIndex, offsetBy: 0)
+                let endIndex = text.index(text.startIndex, offsetBy: 1)
+                let data = String(text[startIndex...endIndex])
+                let result = Int(data) ?? 0 >= 36
+                return result
+            }
+            return false
         })
         
         let inMonthPatient = NSMutableAttributedString(string: "\(newList.count)", attributes: [
