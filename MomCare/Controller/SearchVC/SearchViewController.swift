@@ -22,7 +22,19 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Tìm kiếm"
         configView()
+        setupBackButton()
+    }
+    
+    func setupBackButton() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
+        navigationItem.leftBarButtonItems = [backItem]
+    }
+    
+    @objc func touchBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func configView() {

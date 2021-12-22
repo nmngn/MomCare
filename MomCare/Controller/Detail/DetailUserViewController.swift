@@ -31,12 +31,8 @@ class DetailUserViewController: UIViewController {
         super.viewDidLoad()
         configView()
         setupData()
-        setupBackButton()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "trash.fill"),
-                                                                      style: .plain,
-                                                                      target: self,
-                                                                      action: #selector(removeUser))
-
+        setupNavigationButton()
+        
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -58,10 +54,14 @@ class DetailUserViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func setupBackButton() {
+    func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
         let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
+        
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action:
+                                        #selector(removeUser))
+        navigationItem.rightBarButtonItem = rightItem
     }
     
     @objc func touchBackButton() {
@@ -69,7 +69,29 @@ class DetailUserViewController: UIViewController {
     }
     
     @objc func removeUser() {
-        
+        if currentModel.dateSave.isEmpty {
+            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+                self.saveData()
+            }
+            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
+                let item = self.realm.objects(User.self).filter("dateSave = %@", self.currentModel.dateSave)
+                try! self.realm.write({
+                    self.realm.delete(item)
+                })
+                self.navigationController?.popViewController(animated: true)
+            }
+            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func configView() {
@@ -213,14 +235,30 @@ class DetailUserViewController: UIViewController {
         }
         picker.dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func showMore(_ sender: UIButton) {
-        let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        if currentModel.dateSave.isEmpty {
+            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+                self.saveData()
+            }
+            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
+            vc.hidesBottomBarWhenPushed = true
+            vc.identifyUser = currentModel.dateSave
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func saveData(_ sender: UIButton) {
+        saveData()
+    }
+    
+    func saveData() {
         if !currentModel.name.isEmpty && !currentModel.address.isEmpty &&
             !currentModel.momBirth.isEmpty && !currentModel.height.isEmpty && !currentModel.numberPhone.isEmpty {
             saveInfoUser()
@@ -441,7 +479,9 @@ extension DetailUserViewController {
             try? realm.safeWrite({
                 realm.add(user)
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             })

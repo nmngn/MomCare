@@ -137,14 +137,6 @@ class HomeViewController: UIViewController {
         return model[indexPath.row]
     }
     
-    func removeUser(dateSave: String, indexPath: Int) {
-        let item = realm.objects(User.self).filter("dateSave = %@", dateSave)
-        try! realm.write({
-            realm.delete(item)
-        })
-        self.getListUser()
-    }
-    
     func sortListUser() {
         let alert = UIAlertController(title: "Sắp xếp", message: "Chọn cách sắp xếp", preferredStyle: .actionSheet)
         let sortName = UIAlertAction(title: "Theo tên", style: .default, handler: { _ in

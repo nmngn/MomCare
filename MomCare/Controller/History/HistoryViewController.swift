@@ -12,6 +12,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
+    var identifyUser = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
