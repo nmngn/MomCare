@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
+		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
 		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
 		3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */; };
 		3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */; };
@@ -68,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
+		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
 		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
 		3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPictureTableViewCell.xib; sourceTree = "<group>"; };
 		3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,6 +146,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3614AA3527758F24005FC96D /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */,
+				3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		3666F1AC26998D7900D80E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +242,7 @@
 		367335CD2695D41800EB9DC0 /* History */ = {
 			isa = PBXGroup;
 			children = (
+				3614AA3527758F24005FC96D /* Popup */,
 				36B90B942698AA3E00817DC2 /* Cell */,
 				36B90B932698AA3600817DC2 /* Model */,
 				367AACEB2697FC4C0056601C /* HistoryViewController.swift */,
@@ -460,6 +474,7 @@
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
+				3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */,
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
 				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
@@ -533,6 +548,7 @@
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
 				36FC461B26921AE200AAB868 /* Realm+.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */,
+				3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */,
 				3674240E27706EA10016477E /* Other+.swift in Sources */,
 				366AE8D02692C2DE00B5262C /* HomeTitleTableViewCell.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,

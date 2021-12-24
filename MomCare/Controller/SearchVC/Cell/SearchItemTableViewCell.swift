@@ -25,8 +25,14 @@ class SearchItemTableViewCell: UITableViewCell {
     func setupData(model: User) {
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
-        babyAgeLabel.text = model.dateCalculate
-        dateBornLabel.text = model.babyDateBorn
+        if model.dateCalculate.isEmpty {
+            babyAgeLabel.text = "Chưa cập nhật"
+            dateBornLabel.text = "Chưa cập nhật"
+        } else {
+            babyAgeLabel.text = model.dateCalculate
+            dateBornLabel.text = model.babyDateBorn
+        }
+
     }
 
 }

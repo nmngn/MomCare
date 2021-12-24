@@ -20,7 +20,6 @@ class User: Object {
     @objc dynamic var note = ""
     @objc dynamic var avatar = ""
     @objc dynamic var imagePregnant = ""
-    dynamic var historyPicture = List<HistoryNote>()
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
@@ -41,6 +40,7 @@ class User: Object {
 }
 
 class HistoryNote: Object {
+    @objc dynamic var identifyUser = ""
     @objc dynamic var time = ""
     @objc dynamic var image: NSData?
 }

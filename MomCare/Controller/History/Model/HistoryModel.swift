@@ -16,6 +16,7 @@ enum HistoryType {
 struct HistoryModel {
     var type: HistoryType
     var title = ""
+    var dataImage : NSData?
     
     init(type: HistoryType) {
         self.type = type

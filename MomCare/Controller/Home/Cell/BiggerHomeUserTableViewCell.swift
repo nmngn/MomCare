@@ -28,7 +28,12 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         }
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
-        babyAgeLabel.text = model.dateCalculate
-        dateBornLabel.text = model.babyAge
+        if model.dateCalculate.isEmpty {
+            babyAgeLabel.text = "Chưa cập nhật"
+            dateBornLabel.text = "Chưa cập nhật"
+        } else {
+            babyAgeLabel.text = model.dateCalculate
+            dateBornLabel.text = model.babyAge
+        }
     }
 }

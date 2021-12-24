@@ -10,10 +10,15 @@ import UIKit
 class NoteHistoryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var subView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         subView.makeShadow()
+    }
+    
+    func setupData(text: String) {
+        titleLabel.text = "Thời gian: \(text)"
     }
 
 }
