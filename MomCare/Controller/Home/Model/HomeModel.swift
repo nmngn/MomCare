@@ -21,7 +21,7 @@ struct HomeModel {
     var image: UIImage?
     var backgroundColor: UIColor?
     
-    var avatarImage = ""
+    var avatarImage: NSData?
     var name = ""
     var address = ""
     var momBirth = ""
@@ -30,34 +30,18 @@ struct HomeModel {
     var dateCalculate = ""
     var babyAge = ""
     var note = ""
-    var imagePregnant = ""
+    var imagePregnant: NSData?
     var dateSave = ""
     
     init(type: HomeType) {
         self.type = type
     }
     
-    func loadImageFromDiskWith(fileName: String) -> UIImage? {
-        if fileName != "" {
-            let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-            
-            let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-            let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
-            
-            if let dirPath = paths.first {
-                let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
-                let image = UIImage(contentsOfFile: imageUrl.path)
-                return image
-            }
-        }
-        return UIImage()
-    }
-    
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
         model.address = address
         model.numberPhone = numberPhone
-        model.avatarImage = loadImageFromDiskWith(fileName: avatarImage)
+        model.avatarImage = UIImage(data: Data(referencing: avatarImage ?? NSData()))
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -65,7 +49,7 @@ struct HomeModel {
         model.dateCalculate = dateCalculate
         model.babyAge = babyAge
         model.note = note
- //       model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
+        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
         return model
     }
 }

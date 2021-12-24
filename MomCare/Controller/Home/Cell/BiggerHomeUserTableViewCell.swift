@@ -24,7 +24,11 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     
     func setupData(model: HomeModel) {
         DispatchQueue.main.async {
-            self.avatarUser.image = model.loadImageFromDiskWith(fileName: model.numberPhone) ?? UIImage(named: "avatar_placeholder")
+            if let avatar = model.avatarImage {
+                self.avatarUser.image = UIImage(data: Data(referencing: avatar))
+            } else {
+                self.avatarUser.image = UIImage(named: "avatar_placeholder")
+            }
         }
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave

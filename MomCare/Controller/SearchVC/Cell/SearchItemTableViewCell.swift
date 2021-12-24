@@ -23,6 +23,14 @@ class SearchItemTableViewCell: UITableViewCell {
     }
     
     func setupData(model: User) {
+        DispatchQueue.main.async {
+            if let avatar = model.avatar {
+                self.avatarUser.image = UIImage(data: Data(referencing: avatar))
+            } else {
+                self.avatarUser.image = UIImage(named: "avatar_placeholder")
+            }
+        }
+
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         if model.dateCalculate.isEmpty {

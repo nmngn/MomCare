@@ -18,14 +18,14 @@ class User: Object {
     @objc dynamic var dateCalculate = ""
     @objc dynamic var dateSave = ""
     @objc dynamic var note = ""
-    @objc dynamic var avatar = ""
-    @objc dynamic var imagePregnant = ""
+    @objc dynamic var avatar: NSData?
+    @objc dynamic var imagePregnant: NSData?
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
         model.address = address
         model.numberPhone = numberPhone
-  //      model.avatarImage = loadImageFromDiskWith(fileName: avatarImage)
+        model.avatarImage = UIImage(data: Data(referencing: avatar ?? NSData()))
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -33,7 +33,7 @@ class User: Object {
         model.dateCalculate = dateCalculate
         model.babyAge = babyDateBorn
         model.note = note
- //       model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
+        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
         return model
     }
 

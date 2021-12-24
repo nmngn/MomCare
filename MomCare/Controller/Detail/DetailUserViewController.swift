@@ -457,12 +457,12 @@ extension DetailUserViewController {
             realm.beginWrite()
             if let image = currentModel.avatarImage {
                 if image != UIImage(named: "avatar_placeholder") {
-                    user.avatar = currentModel.saveImage(imageName: "\(currentModel.numberPhone)", image: image)
+                    user.avatar = currentModel.changeImage(image: image, type: .mom)
                 }
             }
             
             if let image = currentModel.imagePregnant {
-                user.imagePregnant = currentModel.saveImage(imageName: "\(currentModel.numberPhone)2", image: image)
+                user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
             }
             
             user.name = currentModel.name
@@ -480,7 +480,7 @@ extension DetailUserViewController {
                 realm.add(user)
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
