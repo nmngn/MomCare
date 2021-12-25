@@ -16,7 +16,6 @@ class User: Object {
     @objc dynamic var numberPhone = ""
     @objc dynamic var height = ""
     @objc dynamic var babyDateBorn = ""
-    @objc dynamic var dateCalculate = ""
     @objc dynamic var dateSave = ""
     @objc dynamic var note = ""
     @objc dynamic var avatar: NSData?
@@ -32,11 +31,27 @@ class User: Object {
         model.momBirth = momBirth
         model.height = height
         model.dateSave = dateSave
-        model.dateCalculate = dateCalculate
+        model.dateCalculate = updateTime(dateString: babyDateBorn)
         model.babyAge = babyDateBorn
         model.note = note
         model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
         return model
+    }
+
+    func updateTime(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        let todayDate = Date()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let date = dateFormatter.date(from: dateString)
+        guard let timeLast = date?.millisecondsSince1970 else { return ""}
+        let timeToday = todayDate.millisecondsSince1970
+        let result = timeLast - timeToday
+        
+        let toDay = result / 86400000
+        let ageDay = 280 - Int(toDay)
+        let week = Int(ageDay / 7)
+        let day = Int(ageDay % 7)
+        return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
 
 }

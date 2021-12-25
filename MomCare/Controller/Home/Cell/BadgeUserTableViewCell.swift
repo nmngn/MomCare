@@ -32,7 +32,7 @@ class BadgeUserTableViewCell: UITableViewCell {
         allUserLabel.attributedText = textAll
         
         let newList = list.filter ({ user in
-            let text = user.dateCalculate
+            let text = updateTime(dateString: user.babyDateBorn)
             if !text.isEmpty {
                 let startIndex = text.index(text.startIndex, offsetBy: 0)
                 let endIndex = text.index(text.startIndex, offsetBy: 1)

@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         model.removeAll()
         guard let listUser = self.listUser else { return }
         let newList = listUser.filter ({ user in
-            let text = user.dateCalculate
+            let text = updateTime(dateString: user.babyDateBorn)
             if !text.isEmpty {
                 let startIndex = text.index(text.startIndex, offsetBy: 0)
                 let endIndex = text.index(text.startIndex, offsetBy: 1)
@@ -97,7 +97,7 @@ class HomeViewController: UIViewController {
             infoCell.numberPhone = newList[i].numberPhone
             infoCell.name = newList[i].name
             infoCell.dateSave = newList[i].dateSave
-            infoCell.dateCalculate = newList[i].dateCalculate
+            infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
             model.append(infoCell)
         }
         
@@ -116,7 +116,7 @@ class HomeViewController: UIViewController {
             infoCell.numberPhone = listUser[i].numberPhone
             infoCell.name = listUser[i].name
             infoCell.dateSave = listUser[i].dateSave
-            infoCell.dateCalculate = listUser[i].dateCalculate
+            infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
             model.append(infoCell)
         }
     }

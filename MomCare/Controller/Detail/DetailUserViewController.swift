@@ -477,7 +477,6 @@ extension DetailUserViewController {
             user.numberPhone = currentModel.numberPhone
             user.height = currentModel.height
             user.babyDateBorn = currentModel.babyAge
-            user.dateCalculate = currentModel.dateCalculate
             user.note = currentModel.note
             user.dateSave = dateString
             
@@ -521,7 +520,6 @@ extension DetailUserViewController {
                 user.numberPhone = currentModel.numberPhone
                 user.height = currentModel.height
                 user.babyDateBorn = currentModel.babyAge
-                user.dateCalculate = currentModel.dateCalculate
                 user.note = currentModel.note
                 user.dateSave = dateString
                 
