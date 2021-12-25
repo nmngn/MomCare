@@ -374,6 +374,12 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ImagePregnantTableViewCell.name, for: indexPath) as? ImagePregnantTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setupData(model: currentModel)
+            cell.showImage = { [weak self] in
+                let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
+                vc.inDetail = true
+                vc.imageInDetail = self?.currentModel.imagePregnant
+                self?.present(vc, animated: true, completion: nil)
+            }
             return cell
         default:
             return UITableViewCell()

@@ -127,7 +127,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {
-        getListUser()
+        
     }
     
     @IBAction func addUser(_ sender: UIButton) {

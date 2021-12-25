@@ -11,10 +11,16 @@ class ShowImageDetailViewController: UIViewController {
 
     @IBOutlet weak var viewImage: UIImageView!
     var imageData: NSData?
+    var imageInDetail: UIImage?
+    var inDetail = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showImage()
+        if !inDetail {
+            showImage()
+        } else {
+            showImageInDetail()
+        }
     }
     
     func showImage() {
@@ -26,6 +32,13 @@ class ShowImageDetailViewController: UIViewController {
                 view.addGestureRecognizer(pinchGesture)
             }
         }
+    }
+    
+    func showImageInDetail() {
+        viewImage.image = imageInDetail
+        viewImage.isUserInteractionEnabled = true
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchImage))
+        view.addGestureRecognizer(pinchGesture)
     }
     
     @objc func pinchImage(sender: UIPinchGestureRecognizer) {

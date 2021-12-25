@@ -13,6 +13,8 @@ class ImagePregnantTableViewCell: UITableViewCell {
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
+    var showImage: (() -> ())?
+    
     func setupData(model: DetailModel) {
         if let image = model.imagePregnant {
             imagePregnant.image = image
@@ -24,5 +26,6 @@ class ImagePregnantTableViewCell: UITableViewCell {
     }
     
     @IBAction func showImage(_ sender: UIButton) {
+        showImage?()
     }
 }
