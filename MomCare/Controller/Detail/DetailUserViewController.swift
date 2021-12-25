@@ -81,11 +81,13 @@ class DetailUserViewController: UIViewController {
         } else {
             let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
             let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
-                let item = self.realm.objects(User.self).filter("dateSave = %@", self.currentModel.dateSave)
+                let user = self.realm.objects(User.self).filter("id = %d", self.currentModel.id)
+                let history = self.realm.objects(HistoryNote.self).filter("identifyUser = %d", self.currentModel.id)
                 try! self.realm.write({
-                    self.realm.delete(item)
+                    self.realm.delete(user)
+                    self.realm.delete(history)
                 })
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
             }
             let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
             alert.addAction(action)
@@ -249,13 +251,17 @@ class DetailUserViewController: UIViewController {
         } else {
             let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
             vc.hidesBottomBarWhenPushed = true
-            vc.identifyUser = currentModel.dateSave
+            vc.identifyUser = currentModel.id
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     @IBAction func saveData(_ sender: UIButton) {
-        saveData()
+        if currentModel.id != 0 {
+            updateUser(id: currentModel.id)
+        } else {
+            saveData()
+        }
     }
     
     func saveData() {
@@ -445,16 +451,10 @@ extension DetailUserViewController {
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-        
-        if !currentModel.dateSave.isEmpty {
-            let item = realm.objects(User.self).filter("dateSave = %@", currentModel.dateSave)
-            try! realm.write({
-                realm.delete(item)
-            })
-        }
-        
+                
         do {
             realm.beginWrite()
+            user.id = realm.objects(User.self).count + 1
             if let image = currentModel.avatarImage {
                 if image != UIImage(named: "avatar_placeholder") {
                     user.avatar = currentModel.changeImage(image: image, type: .mom)
@@ -485,6 +485,47 @@ extension DetailUserViewController {
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             })
+        }
+    }
+    
+    func updateUser(id: Int) {
+        let users = realm.objects(User.self).filter("id = %d", id)
+        
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+
+        let realm = try! Realm()
+        if let user = users.first {
+            try! realm.write {
+                if let image = currentModel.avatarImage {
+                    if image != UIImage(named: "avatar_placeholder") {
+                        user.avatar = currentModel.changeImage(image: image, type: .mom)
+                    }
+                }
+                
+                if let image = currentModel.imagePregnant {
+                    user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
+                }
+                
+                user.name = currentModel.name
+                user.address = currentModel.address
+                user.momBirth = currentModel.momBirth
+                user.numberPhone = currentModel.numberPhone
+                user.height = currentModel.height
+                user.babyDateBorn = currentModel.babyAge
+                user.dateCalculate = currentModel.dateCalculate
+                user.note = currentModel.note
+                user.dateSave = dateString
+                
+                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 

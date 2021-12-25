@@ -13,9 +13,8 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
-    var identifyUser = ""
+    var identifyUser = 0
     let realm = try! Realm()
-    var history = HistoryNote()
     var listHistory: [HistoryNote]? {
         didSet {
             setupData()
@@ -26,10 +25,14 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
-        setupData()
         setupBackButton()
         getListHistory()
         self.title = "Lịch sử ghi chú"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupData()
     }
     
     func setupBackButton() {
@@ -90,6 +93,7 @@ class HistoryViewController: UIViewController {
             self.realm.delete(item)
         })
         self.model.remove(at: index)
+        self.getListHistory()
         self.tableView.reloadData()
     }
 }
@@ -213,10 +217,11 @@ extension HistoryViewController {
         
         do {
             realm.beginWrite()
+            let history = HistoryNote()
             history.identifyUser = self.identifyUser
             history.time = dateString
             history.image = imageData
-            
+
             try? realm.commitWrite()
             try? realm.safeWrite {
                 realm.add(history)

@@ -21,6 +21,7 @@ struct HomeModel {
     var image: UIImage?
     var backgroundColor: UIColor?
     
+    var id = 0
     var avatarImage: NSData?
     var name = ""
     var address = ""
@@ -39,6 +40,7 @@ struct HomeModel {
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
+        model.id = id
         model.address = address
         model.numberPhone = numberPhone
         model.avatarImage = UIImage(data: Data(referencing: avatarImage ?? NSData()))

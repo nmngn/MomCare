@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 
 class User: Object {
+    @objc dynamic var id = 0
     @objc dynamic var name = ""
     @objc dynamic var address = ""
     @objc dynamic var momBirth = ""
@@ -23,6 +24,7 @@ class User: Object {
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
+        model.id = id
         model.address = address
         model.numberPhone = numberPhone
         model.avatarImage = UIImage(data: Data(referencing: avatar ?? NSData()))
@@ -40,7 +42,7 @@ class User: Object {
 }
 
 class HistoryNote: Object {
-    @objc dynamic var identifyUser = ""
+    @objc dynamic var identifyUser = 0
     @objc dynamic var time = ""
     @objc dynamic var image: NSData?
 }

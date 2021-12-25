@@ -86,6 +86,7 @@ class HomeViewController: UIViewController {
         model.append(header1)
         
         for i in 0..<newList.count {
+            infoCell.id = newList[i].id
             infoCell.address = newList[i].address
             infoCell.avatarImage = newList[i].avatar
             infoCell.babyAge = newList[i].babyDateBorn
@@ -104,6 +105,7 @@ class HomeViewController: UIViewController {
         model.append(sort)
         
         for i in 0..<listUser.count {
+            infoCell.id = listUser[i].id
             infoCell.address = listUser[i].address
             infoCell.avatarImage = listUser[i].avatar
             infoCell.babyAge = listUser[i].babyDateBorn
