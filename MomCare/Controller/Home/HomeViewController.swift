@@ -153,9 +153,11 @@ class HomeViewController: UIViewController {
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
-            let items = self.realm.objects(User.self).sorted(byKeyPath: "dateCalculate", ascending: false)
-            self.listUser?.removeAll()
-            self.listUser = items.toArray()
+            if let listUser = self.listUser {
+                let newList = listUser.sorted(by: {$0.updateTime(dateString: $0.babyDateBorn) > $1.updateTime(dateString: $1.babyDateBorn)})
+                self.listUser?.removeAll()
+                self.listUser = newList
+            }
         })
         let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: { _ in
             self.dismiss(animated: true, completion: nil)

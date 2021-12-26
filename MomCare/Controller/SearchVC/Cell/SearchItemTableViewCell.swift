@@ -33,11 +33,11 @@ class SearchItemTableViewCell: UITableViewCell {
 
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
-        if updateTime(dateString: model.babyDateBorn).isEmpty {
+        if model.updateTime(dateString: model.babyDateBorn).isEmpty {
             babyAgeLabel.text = "Chưa cập nhật"
             dateBornLabel.text = "Chưa cập nhật"
         } else {
-            babyAgeLabel.text = updateTime(dateString: model.babyDateBorn)
+            babyAgeLabel.text = model.updateTime(dateString: model.babyDateBorn)
             dateBornLabel.text = model.babyDateBorn
         }
 

@@ -15,11 +15,17 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var dayCreateLabel: UILabel!
     @IBOutlet weak var babyAgeLabel: UILabel!
     @IBOutlet weak var dateBornLabel: UILabel!
+    @IBOutlet weak var starImage: UIImageView!
+    @IBOutlet weak var buttonCheck: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         subView.makeShadow()
         subView.makeBorderColor()
+        buttonCheck.titleLabel?.text = ""
+        buttonCheck.adjustsImageWhenHighlighted = false
+        buttonCheck.adjustsImageWhenDisabled = false
     }
     
     func setupData(model: HomeModel) {
@@ -39,5 +45,10 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
             babyAgeLabel.text = model.dateCalculate
             dateBornLabel.text = model.babyAge
         }
+    }
+    
+    @IBAction func makeHightlight(_ sender: UIButton) {
+        starImage.image = sender.isSelected ? UIImage(named: "unstar") : UIImage(named: "star")
+        sender.isSelected = !sender.isSelected
     }
 }

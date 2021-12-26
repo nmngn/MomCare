@@ -54,17 +54,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2W 3D" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZY-Dh-GuL">
-                                <rect key="frame" x="286" y="24" width="41" height="17"/>
+                                <rect key="frame" x="266" y="24" width="41" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/10/2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAB-HR-5jN">
-                                <rect key="frame" x="252" y="53" width="75" height="17"/>
+                                <rect key="frame" x="232" y="53" width="75" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unstar" translatesAutoresizingMaskIntoConstraints="NO" id="gU3-L6-j9t">
+                                <rect key="frame" x="311" y="36" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="QCk-dj-xGy"/>
+                                    <constraint firstAttribute="height" constant="24" id="fb4-aO-ULA"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-uw-OrC">
+                                <rect key="frame" x="303" y="28" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="makeHightlight:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lrH-5q-nQb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.73333333333333328" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -72,15 +88,22 @@
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="top" secondItem="QLP-zH-ohs" secondAttribute="bottom" constant="12" id="2AU-kq-iXD"/>
                             <constraint firstAttribute="bottom" secondItem="d5i-TA-qLc" secondAttribute="bottom" constant="26" id="8eX-7F-Xi4"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="centerY" secondItem="0Cp-9u-EBA" secondAttribute="centerY" id="E61-bt-5Bl"/>
+                            <constraint firstAttribute="trailing" secondItem="gU3-L6-j9t" secondAttribute="trailing" constant="8" id="KHI-7y-rbF"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="Pro-yR-0Lc"/>
+                            <constraint firstItem="VAB-HR-5jN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d5i-TA-qLc" secondAttribute="trailing" constant="8" id="PuL-4W-dX4"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QLP-zH-ohs" secondAttribute="trailing" constant="32" id="RQh-rL-C1G"/>
-                            <constraint firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" constant="16" id="Xh7-Ri-Ipi"/>
+                            <constraint firstItem="b6t-uw-OrC" firstAttribute="top" secondItem="gU3-L6-j9t" secondAttribute="top" constant="-8" id="U4W-lY-hq2"/>
+                            <constraint firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" constant="36" id="Xh7-Ri-Ipi"/>
+                            <constraint firstItem="b6t-uw-OrC" firstAttribute="bottom" secondItem="gU3-L6-j9t" secondAttribute="bottom" constant="8" id="XoV-C9-1Tg"/>
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="etB-zl-2C5"/>
+                            <constraint firstItem="gU3-L6-j9t" firstAttribute="centerY" secondItem="0Cp-9u-EBA" secondAttribute="centerY" id="hFB-t6-CLW"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="leading" secondItem="0Cp-9u-EBA" secondAttribute="leading" constant="12" id="iLm-UQ-Rzg"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="top" secondItem="0Cp-9u-EBA" secondAttribute="top" constant="24" id="kv5-BX-AtY"/>
                             <constraint firstItem="4ZY-Dh-GuL" firstAttribute="centerY" secondItem="QLP-zH-ohs" secondAttribute="centerY" id="nkd-XI-8cr"/>
+                            <constraint firstItem="b6t-uw-OrC" firstAttribute="leading" secondItem="gU3-L6-j9t" secondAttribute="leading" constant="-8" id="oka-ws-z4k"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d5i-TA-qLc" secondAttribute="trailing" constant="32" id="rBQ-cW-dch"/>
                             <constraint firstAttribute="height" constant="96" id="rnZ-Pe-RUQ"/>
+                            <constraint firstItem="b6t-uw-OrC" firstAttribute="trailing" secondItem="gU3-L6-j9t" secondAttribute="trailing" constant="8" id="smP-jI-vRT"/>
                             <constraint firstItem="VAB-HR-5jN" firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" id="tcH-gm-Yif"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -102,8 +125,10 @@
             <connections>
                 <outlet property="avatarUser" destination="O4c-VG-rDG" id="qKN-Ah-sO1"/>
                 <outlet property="babyAgeLabel" destination="4ZY-Dh-GuL" id="ZiX-8R-1yG"/>
+                <outlet property="buttonCheck" destination="b6t-uw-OrC" id="TjO-3p-4Rc"/>
                 <outlet property="dateBornLabel" destination="VAB-HR-5jN" id="5SA-IO-bXy"/>
                 <outlet property="dayCreateLabel" destination="d5i-TA-qLc" id="qdS-LL-2LR"/>
+                <outlet property="starImage" destination="gU3-L6-j9t" id="EUe-Co-bhu"/>
                 <outlet property="subView" destination="0Cp-9u-EBA" id="Iia-GK-Gzs"/>
                 <outlet property="userNameLabel" destination="QLP-zH-ohs" id="Wek-5P-2rE"/>
             </connections>
@@ -112,6 +137,7 @@
     </objects>
     <resources>
         <image name="avatar_placeholder" width="250" height="250"/>
+        <image name="unstar" width="23" height="22"/>
         <namedColor name="Neutral_300">
             <color red="0.5220000147819519" green="0.5220000147819519" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

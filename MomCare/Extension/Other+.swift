@@ -39,21 +39,3 @@ extension UIViewController {
         return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
 }
-
-extension UIView {
-    func updateTime(dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        let todayDate = Date()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let date = dateFormatter.date(from: dateString)
-        guard let timeLast = date?.millisecondsSince1970 else { return ""}
-        let timeToday = todayDate.millisecondsSince1970
-        let result = timeLast - timeToday
-        
-        let toDay = result / 86400000
-        let ageDay = 280 - Int(toDay)
-        let week = Int(ageDay / 7)
-        let day = Int(ageDay % 7)
-        return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
-    }
-}

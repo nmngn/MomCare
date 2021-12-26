@@ -239,7 +239,7 @@ class DetailUserViewController: UIViewController {
     }
     
     @IBAction func showMore(_ sender: UIButton) {
-        if currentModel.dateSave.isEmpty {
+        if currentModel.id == 0 {
             let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
             let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
                 self.saveData()
