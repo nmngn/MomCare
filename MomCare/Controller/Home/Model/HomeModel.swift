@@ -33,6 +33,7 @@ struct HomeModel {
     var note = ""
     var imagePregnant: NSData?
     var dateSave = ""
+    var isStar = false
     
     init(type: HomeType) {
         self.type = type

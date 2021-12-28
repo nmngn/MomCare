@@ -98,6 +98,7 @@ class HomeViewController: UIViewController {
             infoCell.name = newList[i].name
             infoCell.dateSave = newList[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
+            infoCell.isStar = newList[i].isStar
             model.append(infoCell)
         }
         
@@ -117,6 +118,7 @@ class HomeViewController: UIViewController {
             infoCell.name = listUser[i].name
             infoCell.dateSave = listUser[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
+            infoCell.isStar = listUser[i].isStar
             model.append(infoCell)
         }
     }
@@ -154,7 +156,8 @@ class HomeViewController: UIViewController {
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
             if let listUser = self.listUser {
-                let newList = listUser.sorted(by: {$0.updateTime(dateString: $0.babyDateBorn) > $1.updateTime(dateString: $1.babyDateBorn)})
+                let newList = listUser.sorted(by: {$0.updateTime(dateString: $0.babyDateBorn) >
+                    $1.updateTime(dateString: $1.babyDateBorn)})
                 self.listUser?.removeAll()
                 self.listUser = newList
             }
@@ -167,9 +170,7 @@ class HomeViewController: UIViewController {
         alert.addAction(sortDateSave)
         alert.addAction(sortDateCal)
         alert.addAction(cancel)
-        self.present(alert, animated: true, completion: {
-            self.tableView.reloadData()
-        })
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -197,6 +198,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             DispatchQueue.main.async {
                 cell.setupData(model: model)
+            }
+            cell.isStar = { [weak self] isStar in
+                self?.saveStarStatus(id: model.id, isStar)
             }
             return cell
         case .sort:
@@ -229,6 +233,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
+        }
+    }
+    
+}
+
+extension HomeViewController {
+    func saveStarStatus(id: Int,_ isStar: Bool) {
+        let users = realm.objects(User.self).filter("id = %d", id)
+        
+        if let user = users.first {
+            try! realm.write {
+                user.isStar = isStar
+            }
+            self.getListUser()
+            self.tableView.reloadData()
         }
     }
     

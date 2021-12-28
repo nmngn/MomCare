@@ -20,6 +20,7 @@ class User: Object {
     @objc dynamic var note = ""
     @objc dynamic var avatar: NSData?
     @objc dynamic var imagePregnant: NSData?
+    @objc dynamic var isStar = false
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()

@@ -501,7 +501,6 @@ extension DetailUserViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
 
-        let realm = try! Realm()
         if let user = users.first {
             try! realm.write {
                 if let image = currentModel.avatarImage {

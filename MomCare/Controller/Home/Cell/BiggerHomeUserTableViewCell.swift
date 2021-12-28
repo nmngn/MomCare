@@ -18,6 +18,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var starImage: UIImageView!
     @IBOutlet weak var buttonCheck: UIButton!
     
+    var isStar: ((Bool) -> ())?
+    var model : HomeModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +31,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     }
     
     func setupData(model: HomeModel) {
+        self.model = model
         DispatchQueue.main.async {
             if let avatar = model.avatarImage {
                 self.avatarUser.image = UIImage(data: Data(referencing: avatar))
@@ -36,6 +39,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
                 self.avatarUser.image = UIImage(named: "avatar_placeholder")
             }
         }
+        starImage.image = model.isStar ? UIImage(named: "star") : UIImage(named: "unstar")
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         if model.dateCalculate.isEmpty {
@@ -48,7 +52,11 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func makeHightlight(_ sender: UIButton) {
-        starImage.image = sender.isSelected ? UIImage(named: "unstar") : UIImage(named: "star")
+        if let model = self.model {
+            sender.isSelected = model.isStar ? false : true
+        }
+        starImage.image = sender.isSelected ? UIImage(named: "star") : UIImage(named: "unstar")
+        isStar?(sender.isSelected)
         sender.isSelected = !sender.isSelected
     }
 }
