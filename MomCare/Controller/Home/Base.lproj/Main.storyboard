@@ -23,19 +23,6 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaI-7I-7be">
-                                <rect key="frame" x="334" y="778" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="U5o-JR-sJd"/>
-                                    <constraint firstAttribute="width" constant="64" id="YM8-cB-xwE"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="-7" minY="-10" maxX="-10" maxY="-7"/>
-                                <inset key="imageEdgeInsets" minX="-20" minY="-20" maxX="-20" maxY="-20"/>
-                                <state key="normal" image="ic_new_add "/>
-                                <connections>
-                                    <action selector="addUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AvX-ql-XZo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,9 +30,7 @@
                             <constraint firstItem="hFx-lc-072" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Vfw-qH-rFe"/>
                             <constraint firstAttribute="bottom" secondItem="hFx-lc-072" secondAttribute="bottom" id="WGz-IV-l6w"/>
                             <constraint firstItem="hFx-lc-072" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ccN-ci-A9s"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YaI-7I-7be" secondAttribute="trailing" constant="16" id="egv-Ut-rOW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XSr-gy-kRt" secondAttribute="bottom" id="gT1-bO-gJp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YaI-7I-7be" secondAttribute="bottom" constant="20" id="jp6-CW-Uji"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hFx-lc-072" secondAttribute="trailing" id="mCH-8p-A1W"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XSr-gy-kRt" secondAttribute="trailing" id="nAf-1g-KZc"/>
                             <constraint firstItem="XSr-gy-kRt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vjG-Cb-uyY"/>
@@ -93,7 +78,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_new_add " width="56" height="56"/>
         <image name="network" catalog="system" width="128" height="121"/>
         <image name="time2" width="2559" height="1443"/>
     </resources>

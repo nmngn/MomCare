@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
 		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
+		3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */; };
+		3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3615AA3C277B6E9B007F01C3 /* AddUserTableViewCell.xib */; };
 		3643A8ED277B31A30002FE79 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3643A8EB277B31A30002FE79 /* InfoViewController.swift */; };
 		3643A8EE277B31A30002FE79 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3643A8EC277B31A30002FE79 /* InfoViewController.xib */; };
 		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
@@ -74,6 +76,8 @@
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
 		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
+		3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
+		3615AA3C277B6E9B007F01C3 /* AddUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddUserTableViewCell.xib; sourceTree = "<group>"; };
 		3643A8EB277B31A30002FE79 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3643A8EC277B31A30002FE79 /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				366AE8D42692C46400B5262C /* BiggerHomeUserTableViewCell.xib */,
 				366AE8DF2692D2CC00B5262C /* SortListTableViewCell.swift */,
 				366AE8E02692D2CC00B5262C /* SortListTableViewCell.xib */,
+				3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */,
+				3615AA3C277B6E9B007F01C3 /* AddUserTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -473,6 +479,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */,
 				367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */,
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
@@ -578,6 +585,7 @@
 				367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
+				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,

@@ -12,6 +12,7 @@ enum HomeType {
     case title
     case sort
     case infoUser
+    case addUser
 }
 
 struct HomeModel {

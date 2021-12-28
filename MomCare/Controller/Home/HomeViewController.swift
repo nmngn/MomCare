@@ -92,6 +92,7 @@ class HomeViewController: UIViewController {
             $0.registerNibCellFor(type: BadgeUserTableViewCell.self)
             $0.registerNibCellFor(type: HomeTitleTableViewCell.self)
             $0.registerNibCellFor(type: SortListTableViewCell.self)
+            $0.registerNibCellFor(type: AddUserTableViewCell.self)
             $0.registerNibCellFor(type: BiggerHomeUserTableViewCell.self)
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 48, right: 0)
         }
@@ -115,6 +116,9 @@ class HomeViewController: UIViewController {
         var badge = HomeModel(type: .badge)
         badge.contrastColor = contrastColor
         
+        var addUser = HomeModel(type: .addUser)
+        addUser.contrastColor = contrastColor
+        
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
         header1.contrastColor = contrastColor
@@ -130,6 +134,7 @@ class HomeViewController: UIViewController {
         header2.contrastColor = contrastColor
         
         model.append(badge)
+        model.append(addUser)
         model.append(header1)
         
         for i in 0..<newList.count {
@@ -177,11 +182,6 @@ class HomeViewController: UIViewController {
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {
         let vc = InfoViewController.init(nibName: "InfoViewController", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction func addUser(_ sender: UIButton) {
-        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -240,6 +240,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.getNumberPatient(list: list, contrastColor: self.contrastColor)
             }
             return cell
+        case .addUser:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddUserTableViewCell", for: indexPath) as?
+                    AddUserTableViewCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            cell.setupData(model: model)
+            return cell
         case .infoUser:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "BiggerHomeUserTableViewCell", for: indexPath) as?
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
@@ -274,6 +280,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(indexPath: indexPath)
         
         switch model.type {
+        case .addUser:
+            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
             vc.currentModel = model.convertToDetailModel()

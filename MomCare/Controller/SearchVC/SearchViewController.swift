@@ -13,6 +13,9 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var theme: UIImageView!
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     
     var listResult: [User]? {
         didSet {
@@ -34,6 +37,30 @@ class SearchViewController: UIViewController {
         } else {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
+        setupStatus(isHidden: false, title: "Hãy bắt đầu tìm kiếm")
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.bottomHeightConstraint.constant = keyboardHeight - 18
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        bottomHeightConstraint.constant = 16
+        self.view.layoutIfNeeded()
+    }
+
+    
+    func setupStatus(isHidden: Bool, title: String) {
+        resultView.isHidden = isHidden
+        statusLabel.text = title
+        statusLabel.textColor = contrastColor
     }
     
     func changeTheme() {
@@ -76,6 +103,7 @@ class SearchViewController: UIViewController {
             $0.tableFooterView = UIView()
             $0.separatorStyle = .none
             $0.registerNibCellFor(type: SearchItemTableViewCell.self)
+            $0.keyboardDismissMode = .onDrag
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         }
         
@@ -113,8 +141,21 @@ extension SearchViewController: UISearchBarDelegate {
             if !text.isEmpty {
                 let predicate = NSPredicate(format: "name contains[c]         %@", text)
                 let result = realm.objects(User.self).filter(predicate)
-                self.listResult = result.toArray()
+                if result.count == 0 {
+                    self.listResult?.removeAll()
+                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
+                } else {
+                    setupStatus(isHidden: true, title: "")
+                    self.listResult = result.toArray()
+                }
+            } else {
+                self.listResult?.removeAll()
+                setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
 }
