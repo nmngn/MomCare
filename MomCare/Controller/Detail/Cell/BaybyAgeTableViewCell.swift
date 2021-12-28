@@ -34,16 +34,16 @@ class BaybyAgeTableViewCell: UITableViewCell {
         ageLabel.isEnabled = false
     }
     
-    func setupData(model: DetailModel, contrastColor: UIColor) {
+    func setupData(model: DetailModel) {
         self.cellType = model.dataType
         dobLabel.text = model.babyAge
         ageLabel.text = model.dateCalculate
         
-        dobTitle.textColor = contrastColor
-        dobLabel.textColor = contrastColor
-        ageLabel.textColor = contrastColor
-        ageTitle.textColor = contrastColor
-        if contrastColor == .black {
+        dobTitle.textColor = model.contrastColor
+        dobLabel.textColor = model.contrastColor
+        ageLabel.textColor = model.contrastColor
+        ageTitle.textColor = model.contrastColor
+        if model.contrastColor == .black {
             dobLabel.backgroundColor = .white
             ageLabel.backgroundColor = .white
         } else {

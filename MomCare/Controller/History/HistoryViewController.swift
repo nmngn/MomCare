@@ -10,6 +10,7 @@ import RealmSwift
 
 class HistoryViewController: UIViewController {
 
+    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
@@ -21,18 +22,47 @@ class HistoryViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    var contrastColor = UIColor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
         setupBackButton()
         getListHistory()
+        if self.traitCollection.userInterfaceStyle == .light {
+            contrastColor = .black
+        } else {
+            contrastColor = UIColor.white.withAlphaComponent(0.8)
+        }
         self.title = "Lịch sử ghi chú"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupData()
+        changeTheme()
+    }
+    
+    func changeTheme() {
+        DispatchQueue.main.async {
+            self.view.backgroundColor = .clear
+            let hour = Calendar.current.component(.hour, from: Date())
+            if hour < 5 {
+                self.theme.image = UIImage(named: "time1")
+            } else if hour >= 5 && hour < 7 {
+                self.theme.image = UIImage(named: "time2")
+            } else if hour >= 7 && hour < 9 {
+                self.theme.image = UIImage(named: "time3")
+            } else if hour >= 9 && hour < 17 {
+                self.theme.image = UIImage(named: "time4")
+            } else if hour >= 17 && hour < 19 {
+                self.theme.image = UIImage(named: "time5")
+            } else if hour >= 19 && hour < 23 {
+                self.theme.image = UIImage(named: "time2")
+            } else {
+                self.theme.image = UIImage(named: "time1")
+            }
+        }
     }
     
     func setupBackButton() {
@@ -67,10 +97,15 @@ class HistoryViewController: UIViewController {
     
     func setupData() {
         model.removeAll()
-        let add = HistoryModel(type: .add)
+        var add = HistoryModel(type: .add)
+        add.contrastColor = contrastColor
+        
         var title = HistoryModel(type: .title)
         title.title = "Các ghi chú đã ghi (\(self.listHistory?.count ?? 0))"
+        title.contrastColor = contrastColor
+        
         var cell = HistoryModel(type: .cell)
+        cell.contrastColor = contrastColor
         
         model.append(add)
         model.append(title)
@@ -112,6 +147,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddPictureTableViewCell.name, for: indexPath) as?
                     AddPictureTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            cell.setupData(model: model)
             return cell
         case .title:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTitleTableViewCell.name, for: indexPath) as?
@@ -123,7 +159,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteHistoryTableViewCell.name, for: indexPath) as?
                     NoteHistoryTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(text: model.title)
+            cell.setupData(model: model)
             return cell
         }
     }

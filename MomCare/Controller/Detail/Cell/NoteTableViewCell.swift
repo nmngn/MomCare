@@ -26,11 +26,11 @@ class NoteTableViewCell: UITableViewCell {
         noteTextView.isScrollEnabled = false
     }
     
-    func setupData(model: DetailModel, contrastColor: UIColor) {
+    func setupData(model: DetailModel) {
         noteTextView.text = model.note
-        noteLabel.textColor = contrastColor
-        noteTextView.textColor = contrastColor
-        if contrastColor == .black {
+        noteLabel.textColor = model.contrastColor
+        noteTextView.textColor = model.contrastColor
+        if model.contrastColor == .black {
             noteTextView.backgroundColor = .white
         } else {
             noteTextView.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)

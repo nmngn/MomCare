@@ -17,8 +17,14 @@ class NoteHistoryTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func setupData(text: String) {
-        titleLabel.text = "Thời gian: \(text)"
+    func setupData(model: HistoryModel) {
+        titleLabel.text = "Thời gian: \(model.title)"
+        titleLabel.textColor = model.contrastColor
+        if model.contrastColor == .black {
+            subView.backgroundColor = .white
+        } else {
+            subView.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+        }
     }
 
 }

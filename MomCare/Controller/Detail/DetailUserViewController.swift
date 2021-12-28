@@ -32,15 +32,15 @@ class DetailUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
-        setupData()
         setupNavigationButton()
         changeTheme()
         
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
-            contrastColor = UIColor.white.withAlphaComponent(0.75)
+            contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
+        setupData()
         
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -150,57 +150,68 @@ class DetailUserViewController: UIViewController {
         avatar.type = .avatar
         avatar.dataType = .momImage
         avatar.avatarImage = currentModel.avatarImage
+        avatar.contrastColor = contrastColor
         
         var general = currentModel
         general.type = .general
+        general.contrastColor = contrastColor
         
         var name = currentModel
         name.type = .info
         name.dataType = .name
         name.title = "Họ và tên ⃰"
         name.value = currentModel.name
+        name.contrastColor = contrastColor
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
         address.title = "Địa chỉ ⃰"
         address.value = currentModel.address
+        address.contrastColor = contrastColor
         
         var momBirth = currentModel
         momBirth.type = .info
         momBirth.dataType = .dob
         momBirth.title = "Năm sinh ⃰"
         momBirth.value = currentModel.momBirth
+        momBirth.contrastColor = contrastColor
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
         number.title = "Số điện thoại ⃰"
         number.value = currentModel.numberPhone
+        number.contrastColor = contrastColor
         
         var height = currentModel
         height.type = .info
         height.dataType = .height
         height.title = "Chiều cao ⃰"
         height.value = currentModel.height
+        height.contrastColor = contrastColor
         
         var age = currentModel
         age.type = .age
         age.dataType = .babyAge
         age.babyAge = currentModel.babyAge
+        age.contrastColor = contrastColor
         
         var note = currentModel
         note.type = .note
         note.dataType = .note
+        note.contrastColor = contrastColor
         
         var photo = currentModel
         photo.type = .photo
         photo.dataType = .imagePregnant
+        photo.contrastColor = contrastColor
         
         var imagePregnant = currentModel
         imagePregnant.type = .imagePregnant
         imagePregnant.dataType = .imagePregnant
         imagePregnant.imagePregnant = currentModel.imagePregnant
+        imagePregnant.contrastColor = contrastColor
         
         model.append(avatar)
         model.append(general)
@@ -376,13 +387,13 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     InfoUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
+            cell.setupData(model: currentModel)
             return cell
         case .age:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
                     BaybyAgeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
+            cell.setupData(model: currentModel)
             cell.delegate = self
             return cell
         case .note:
@@ -390,7 +401,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     NoteTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
+            cell.setupData(model: currentModel)
             cell.changeHeightCell = { [weak self] in
                 self?.tableView.beginUpdates()
                 self?.tableView.endUpdates()

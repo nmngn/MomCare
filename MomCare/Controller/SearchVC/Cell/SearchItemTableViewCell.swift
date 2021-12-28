@@ -22,7 +22,7 @@ class SearchItemTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
-    func setupData(model: User) {
+    func setupData(model: User, contrastColor: UIColor) {
         DispatchQueue.main.async {
             if let avatar = model.avatar {
                 self.avatarUser.image = UIImage(data: Data(referencing: avatar))
@@ -40,7 +40,16 @@ class SearchItemTableViewCell: UITableViewCell {
             babyAgeLabel.text = model.updateTime(dateString: model.babyDateBorn)
             dateBornLabel.text = model.babyDateBorn
         }
-
+        
+        userNameLabel.textColor = contrastColor
+        dayCreateLabel.textColor = contrastColor
+        babyAgeLabel.textColor = contrastColor
+        dateBornLabel.textColor = contrastColor
+        
+        if contrastColor == .black {
+            subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
+        } else {
+            subView.backgroundColor = UIColor(red: 0.36, green: 0.30, blue: 0.59, alpha: 1.00)
+        }
     }
-
 }

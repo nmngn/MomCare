@@ -49,6 +49,7 @@ struct DetailModel {
     var dateSave = ""
     var placeHolder = ""
     var dataType: DataType?
+    var contrastColor = UIColor()
     
     func changeImage(image: UIImage, type: UserChoice) -> NSData {
         if type == .baby {

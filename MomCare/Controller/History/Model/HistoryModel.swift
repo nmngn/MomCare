@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum HistoryType {
     case add
@@ -17,6 +18,7 @@ struct HistoryModel {
     var type: HistoryType
     var title = ""
     var dataImage : NSData?
+    var contrastColor = UIColor()
     
     init(type: HistoryType) {
         self.type = type

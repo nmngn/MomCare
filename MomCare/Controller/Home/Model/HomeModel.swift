@@ -34,6 +34,7 @@ struct HomeModel {
     var imagePregnant: NSData?
     var dateSave = ""
     var isStar = false
+    var contrastColor = UIColor()
     
     init(type: HomeType) {
         self.type = type
@@ -53,6 +54,7 @@ struct HomeModel {
         model.babyAge = babyAge
         model.note = note
         model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
+        model.contrastColor = contrastColor
         return model
     }
 }

@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
-            contrastColor = UIColor.white.withAlphaComponent(0.75)
+            contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
         
@@ -112,13 +112,22 @@ class HomeViewController: UIViewController {
             return false
         })
         
-        let badge = HomeModel(type: .badge)
+        var badge = HomeModel(type: .badge)
+        badge.contrastColor = contrastColor
+        
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
+        header1.contrastColor = contrastColor
+        
         var infoCell = HomeModel(type: .infoUser)
-        let sort = HomeModel(type: .sort)
+        infoCell.contrastColor = contrastColor
+        
+        var sort = HomeModel(type: .sort)
+        sort.contrastColor = contrastColor
+        
         var header2 = HomeModel(type: .title)
         header2.title = "Tất cả bệnh nhân(\(listUser.count))"
+        header2.contrastColor = contrastColor
         
         model.append(badge)
         model.append(header1)
@@ -236,7 +245,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             DispatchQueue.main.async {
-                cell.setupData(model: model, contrastColor: self.contrastColor)
+                cell.setupData(model: model)
             }
             cell.isStar = { [weak self] isStar in
                 self?.saveStarStatus(id: model.id, isStar)
@@ -255,7 +264,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTitleTableViewCell", for: indexPath) as?
                     HomeTitleTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(model: model, contrastColor: self.contrastColor)
+            cell.setupData(model: model)
             return cell
         }
     }
