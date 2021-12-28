@@ -20,18 +20,27 @@ class DetailUserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var theme: UIImageView!
     
     var model = [DetailModel]()
     let user = User()
     var userChoice: UserChoice?
     var currentModel = DetailModel()
     let realm = try! Realm()
+    var contrastColor = UIColor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
         setupData()
         setupNavigationButton()
+        changeTheme()
+        
+        if self.traitCollection.userInterfaceStyle == .light {
+            contrastColor = .black
+        } else {
+            contrastColor = UIColor.white.withAlphaComponent(0.75)
+        }
         
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -39,6 +48,29 @@ class DetailUserViewController: UIViewController {
         let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
+    
+    func changeTheme() {
+        DispatchQueue.main.async {
+            self.view.backgroundColor = .clear
+            let hour = Calendar.current.component(.hour, from: Date())
+            if hour < 5 {
+                self.theme.image = UIImage(named: "time1")
+            } else if hour >= 5 && hour < 7 {
+                self.theme.image = UIImage(named: "time2")
+            } else if hour >= 7 && hour < 9 {
+                self.theme.image = UIImage(named: "time3")
+            } else if hour >= 9 && hour < 17 {
+                self.theme.image = UIImage(named: "time4")
+            } else if hour >= 17 && hour < 19 {
+                self.theme.image = UIImage(named: "time5")
+            } else if hour >= 19 && hour < 23 {
+                self.theme.image = UIImage(named: "time2")
+            } else {
+                self.theme.image = UIImage(named: "time1")
+            }
+        }
+    }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
@@ -344,13 +376,13 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     InfoUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.setupData(model: currentModel)
+            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
             return cell
         case .age:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
                     BaybyAgeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(model: currentModel)
+            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
             cell.delegate = self
             return cell
         case .note:
@@ -358,7 +390,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     NoteTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.setupData(model: currentModel)
+            cell.setupData(model: currentModel, contrastColor: self.contrastColor)
             cell.changeHeightCell = { [weak self] in
                 self?.tableView.beginUpdates()
                 self?.tableView.endUpdates()

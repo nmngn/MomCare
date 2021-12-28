@@ -27,10 +27,17 @@ class InfoUserTableViewCell: UITableViewCell {
         valueTextField.textColor = .black
     }
     
-    func setupData(model: DetailModel) {
+    func setupData(model: DetailModel, contrastColor: UIColor) {
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value
+        titleLabel.textColor = contrastColor
+        valueTextField.textColor = contrastColor
+        if contrastColor == .black {
+            valueTextField.backgroundColor = .white
+        } else {
+            valueTextField.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+        }
     }
     
     func saveInModel() {

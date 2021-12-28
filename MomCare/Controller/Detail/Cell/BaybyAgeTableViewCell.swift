@@ -9,6 +9,8 @@ import UIKit
 
 class BaybyAgeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dobTitle: UILabel!
+    @IBOutlet weak var ageTitle: UILabel!
     @IBOutlet weak var dobLabel: UITextField!
     @IBOutlet weak var ageLabel: UITextField!
     
@@ -32,10 +34,23 @@ class BaybyAgeTableViewCell: UITableViewCell {
         ageLabel.isEnabled = false
     }
     
-    func setupData(model: DetailModel) {
+    func setupData(model: DetailModel, contrastColor: UIColor) {
         self.cellType = model.dataType
         dobLabel.text = model.babyAge
         ageLabel.text = model.dateCalculate
+        
+        dobTitle.textColor = contrastColor
+        dobLabel.textColor = contrastColor
+        ageLabel.textColor = contrastColor
+        ageTitle.textColor = contrastColor
+        if contrastColor == .black {
+            dobLabel.backgroundColor = .white
+            ageLabel.backgroundColor = .white
+        } else {
+            dobLabel.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+            ageLabel.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+        }
+
         delegate?.sendString(dataType: .babyAge, text: model.babyAge)
     }
 

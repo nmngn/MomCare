@@ -30,8 +30,15 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         buttonCheck.adjustsImageWhenDisabled = false
     }
     
-    func setupData(model: HomeModel) {
+    func setupData(model: HomeModel, contrastColor: UIColor) {
         self.model = model
+        
+        if contrastColor == .black {
+            subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
+        } else {
+            subView.backgroundColor = UIColor(red: 0.36, green: 0.30, blue: 0.59, alpha: 1.00)
+        }
+        
         DispatchQueue.main.async {
             if let avatar = model.avatarImage {
                 self.avatarUser.image = UIImage(data: Data(referencing: avatar))
@@ -41,7 +48,11 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         }
         starImage.image = model.isStar ? UIImage(named: "star") : UIImage(named: "unstar")
         userNameLabel.text = model.name
+        userNameLabel.textColor = contrastColor
+        
         dayCreateLabel.text = model.dateSave
+        dayCreateLabel.textColor = contrastColor
+        
         if model.dateCalculate.isEmpty {
             babyAgeLabel.text = "Chưa cập nhật"
             dateBornLabel.text = "Chưa cập nhật"
@@ -49,6 +60,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
             babyAgeLabel.text = model.dateCalculate
             dateBornLabel.text = model.babyAge
         }
+        babyAgeLabel.textColor = contrastColor
+        dateBornLabel.textColor = contrastColor
     }
     
     @IBAction func makeHightlight(_ sender: UIButton) {

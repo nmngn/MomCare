@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +40,7 @@
                         </connections>
                     </button>
                 </subviews>
-                <color key="backgroundColor" name="NewBG"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="GNi-ar-i0g" firstAttribute="leading" secondItem="cKy-CH-DiK" secondAttribute="leading" id="9C4-dW-gvi"/>
                     <constraint firstItem="cKy-CH-DiK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="36" id="9Kn-gk-l5S"/>
@@ -59,6 +58,7 @@
                 </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                     <real key="value" value="8"/>
@@ -72,9 +72,4 @@
             <point key="canvasLocation" x="138.40579710144928" y="65.625"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <namedColor name="NewBG">
-            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

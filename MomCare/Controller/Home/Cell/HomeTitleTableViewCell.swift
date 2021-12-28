@@ -11,8 +11,9 @@ class HomeTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
 
-    func setupData(model: HomeModel) {
+    func setupData(model: HomeModel, contrastColor: UIColor) {
         titleLabel.text = model.title
+        titleLabel.textColor = contrastColor
     }
     
     func setupData(model: HistoryModel) {

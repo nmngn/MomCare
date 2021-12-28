@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time2" translatesAutoresizingMaskIntoConstraints="NO" id="hFx-lc-072">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XSr-gy-kRt">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,11 +38,15 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="NewBG"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="hFx-lc-072" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Vfw-qH-rFe"/>
+                            <constraint firstAttribute="bottom" secondItem="hFx-lc-072" secondAttribute="bottom" id="WGz-IV-l6w"/>
+                            <constraint firstItem="hFx-lc-072" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ccN-ci-A9s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YaI-7I-7be" secondAttribute="trailing" constant="16" id="egv-Ut-rOW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XSr-gy-kRt" secondAttribute="bottom" id="gT1-bO-gJp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YaI-7I-7be" secondAttribute="bottom" constant="20" id="jp6-CW-Uji"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hFx-lc-072" secondAttribute="trailing" id="mCH-8p-A1W"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XSr-gy-kRt" secondAttribute="trailing" id="nAf-1g-KZc"/>
                             <constraint firstItem="XSr-gy-kRt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vjG-Cb-uyY"/>
                             <constraint firstItem="XSr-gy-kRt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wOg-g5-trT"/>
@@ -52,7 +58,7 @@
                                 <action selector="searchUser:" destination="BYZ-38-t0r" id="Ncp-Ox-cc9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="gobackward" catalog="system" id="r8F-G3-OxW">
+                        <barButtonItem key="rightBarButtonItem" image="network" catalog="system" id="r8F-G3-OxW">
                             <connections>
                                 <action selector="openCalculate:" destination="BYZ-38-t0r" id="R0o-NZ-Kdr"/>
                             </connections>
@@ -60,6 +66,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="XSr-gy-kRt" id="PEv-eu-58v"/>
+                        <outlet property="theme" destination="hFx-lc-072" id="0xF-Sr-Bnb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -86,10 +93,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gobackward" catalog="system" width="121" height="128"/>
         <image name="ic_new_add " width="56" height="56"/>
-        <namedColor name="NewBG">
-            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="network" catalog="system" width="128" height="121"/>
+        <image name="time2" width="2559" height="1443"/>
     </resources>
 </document>

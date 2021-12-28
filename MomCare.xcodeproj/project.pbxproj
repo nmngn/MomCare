@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
 		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
+		3643A8ED277B31A30002FE79 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3643A8EB277B31A30002FE79 /* InfoViewController.swift */; };
+		3643A8EE277B31A30002FE79 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3643A8EC277B31A30002FE79 /* InfoViewController.xib */; };
 		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
 		3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */; };
 		3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */; };
@@ -72,6 +74,8 @@
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
 		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
+		3643A8EB277B31A30002FE79 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		3643A8EC277B31A30002FE79 /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
 		3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPictureTableViewCell.xib; sourceTree = "<group>"; };
 		3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,6 +159,15 @@
 			path = Popup;
 			sourceTree = "<group>";
 		};
+		3643A8E5277B31510002FE79 /* InfoVC */ = {
+			isa = PBXGroup;
+			children = (
+				3643A8EB277B31A30002FE79 /* InfoViewController.swift */,
+				3643A8EC277B31A30002FE79 /* InfoViewController.xib */,
+			);
+			path = InfoVC;
+			sourceTree = "<group>";
+		};
 		3666F1AC26998D7900D80E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +213,7 @@
 				366AE8E92692D84600B5262C /* Detail */,
 				367335CD2695D41800EB9DC0 /* History */,
 				3674240F2770C0EC0016477E /* SearchVC */,
+				3643A8E5277B31510002FE79 /* InfoVC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -432,6 +446,7 @@
 				TargetAttributes = {
 					36EC54582691F37D00809FF3 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -481,6 +496,7 @@
 				367424132770C1090016477E /* SearchViewController.xib in Resources */,
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
 				36EC54642691F37D00809FF3 /* Main.storyboard in Resources */,
+				3643A8EE277B31A30002FE79 /* InfoViewController.xib in Resources */,
 				366AE8C82692C0AA00B5262C /* Roboto in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +574,7 @@
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
+				3643A8ED277B31A30002FE79 /* InfoViewController.swift in Sources */,
 				367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
@@ -715,6 +732,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JQK33626M;
@@ -726,6 +744,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuicoding.MomCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -737,6 +756,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JQK33626M;

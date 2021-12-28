@@ -9,6 +9,7 @@ import UIKit
 
 class NoteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var noteTextView: UITextView!
     
     var changeHeightCell: (() -> ())?
@@ -25,10 +26,16 @@ class NoteTableViewCell: UITableViewCell {
         noteTextView.isScrollEnabled = false
     }
     
-    func setupData(model: DetailModel) {
+    func setupData(model: DetailModel, contrastColor: UIColor) {
         noteTextView.text = model.note
+        noteLabel.textColor = contrastColor
+        noteTextView.textColor = contrastColor
+        if contrastColor == .black {
+            noteTextView.backgroundColor = .white
+        } else {
+            noteTextView.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+        }
     }
-    
 }
 
 extension NoteTableViewCell: UITextViewDelegate {
