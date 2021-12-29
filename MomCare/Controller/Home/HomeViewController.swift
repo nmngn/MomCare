@@ -7,8 +7,9 @@
 
 import UIKit
 import RealmSwift
+import NotificationCenter
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet weak var theme: UIImageView!
@@ -23,17 +24,20 @@ class HomeViewController: UIViewController {
     }
     var sortType = ""
     var contrastColor = UIColor()
+    let userNotificationCenter = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
-        
+        userNotificationCenter.delegate = self
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
+        self.requestNotificationAuthorization()
+        self.sendNotification()
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
         
     }
@@ -47,6 +51,52 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        
+        self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
+            if let error = error {
+                print("Error: ", error)
+            }
+        }
+    }
+
+    func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "Test"
+        notificationContent.body = "Test body"
+        notificationContent.badge = NSNumber(value: 3)
+        
+        if let url = Bundle.main.url(forResource: "dune",
+                                     withExtension: "png") {
+            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+                                                              url: url,
+                                                              options: nil) {
+                notificationContent.attachments = [attachment]
+            }
+        }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                        repeats: false)
+        let request = UNNotificationRequest(identifier: "Notification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .badge, .sound])
     }
     
     func changeTheme() {
@@ -181,7 +231,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func openCalculate(_ sender: UIBarButtonItem) {
-        let vc = InfoViewController.init(nibName: "InfoViewController", bundle: nil)
+        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

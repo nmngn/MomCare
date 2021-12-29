@@ -38,4 +38,15 @@ extension UIViewController {
         let day = Int(ageDay % 7)
         return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
+    
+    func transitionVC(vc: UIViewController, duration: CFTimeInterval, type: CATransitionSubtype) {
+        let customVcTransition = vc
+        let transition = CATransition()
+        transition.duration = duration
+        transition.type = CATransitionType.push
+        transition.subtype = type
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(customVcTransition, animated: false, completion: nil)
+    }
 }

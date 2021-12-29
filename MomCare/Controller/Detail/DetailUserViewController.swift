@@ -421,7 +421,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                 let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
                 vc.inDetail = true
                 vc.imageInDetail = self?.currentModel.imagePregnant
-                self?.present(vc, animated: true, completion: nil)
+                self?.transitionVC(vc: vc, duration: 0.5, type: .fromTop)
             }
             return cell
         default:

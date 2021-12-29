@@ -174,7 +174,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         case .cell:
             let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
             vc.imageData = model.dataImage
-            present(vc, animated: true, completion: nil)
+            transitionVC(vc: vc, duration: 0.5, type: .fromRight)
         default:
             break
         }

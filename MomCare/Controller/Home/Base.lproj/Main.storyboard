@@ -43,7 +43,7 @@
                                 <action selector="searchUser:" destination="BYZ-38-t0r" id="Ncp-Ox-cc9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="network" catalog="system" id="r8F-G3-OxW">
+                        <barButtonItem key="rightBarButtonItem" image="bell" catalog="system" id="r8F-G3-OxW">
                             <connections>
                                 <action selector="openCalculate:" destination="BYZ-38-t0r" id="R0o-NZ-Kdr"/>
                             </connections>
@@ -78,7 +78,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="network" catalog="system" width="128" height="121"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="time2" width="2559" height="1443"/>
     </resources>
 </document>
