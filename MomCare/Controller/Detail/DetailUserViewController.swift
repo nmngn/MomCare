@@ -183,6 +183,7 @@ class DetailUserViewController: UIViewController {
         number.title = "Số điện thoại ⃰"
         number.value = currentModel.numberPhone
         number.contrastColor = contrastColor
+        number.isCall = true
         
         var height = currentModel
         height.type = .info

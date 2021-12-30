@@ -50,6 +50,7 @@ struct DetailModel {
     var placeHolder = ""
     var dataType: DataType?
     var contrastColor = UIColor()
+    var isCall = false
     
     func changeImage(image: UIImage, type: UserChoice) -> NSData {
         if type == .baby {

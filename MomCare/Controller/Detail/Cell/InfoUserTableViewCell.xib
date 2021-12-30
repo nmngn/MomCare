@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ox5-zW-CM4">
-                        <rect key="frame" x="28" y="48" width="319" height="40"/>
+                        <rect key="frame" x="28" y="48" width="283" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="dgj-E2-1qg"/>
@@ -45,24 +47,60 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WM-Zh-RvS">
+                        <rect key="frame" x="323" y="48" width="40" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="BAE-xi-z3D"/>
+                            <constraint firstAttribute="height" constant="40" id="r68-qg-GWx"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal">
+                            <imageReference key="image" image="phone.arrow.up.right" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                <hierarchicalColors>
+                                    <color systemColor="systemGreenColor"/>
+                                    <color systemColor="systemGreenColor"/>
+                                    <color systemColor="systemGreenColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="callNumber:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rX4-DX-afj"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="0WM-Zh-RvS" secondAttribute="trailing" constant="12" id="0WE-bA-Hmz"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="top" secondItem="XBR-fo-8jh" secondAttribute="bottom" constant="12" id="5Co-Kk-tea"/>
+                    <constraint firstItem="0WM-Zh-RvS" firstAttribute="centerY" secondItem="Ox5-zW-CM4" secondAttribute="centerY" id="8HV-xV-TAU"/>
                     <constraint firstAttribute="bottom" secondItem="Ox5-zW-CM4" secondAttribute="bottom" constant="4" id="AQv-ZI-ttj"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Laq-3d-Bl3"/>
+                    <constraint firstItem="0WM-Zh-RvS" firstAttribute="leading" secondItem="Ox5-zW-CM4" secondAttribute="trailing" constant="12" id="Vye-OO-hN9"/>
                     <constraint firstAttribute="trailing" secondItem="XBR-fo-8jh" secondAttribute="trailing" constant="28" id="Z7G-Fm-0xb"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="mHC-k4-WX5"/>
-                    <constraint firstAttribute="trailing" secondItem="Ox5-zW-CM4" secondAttribute="trailing" constant="28" id="or6-3l-9Y2"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="uyU-dw-dz5"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="callButton" destination="0WM-Zh-RvS" id="lNW-ce-igk"/>
                 <outlet property="titleLabel" destination="XBR-fo-8jh" id="DWz-Vj-MnR"/>
                 <outlet property="valueTextField" destination="Ox5-zW-CM4" id="7Y0-bz-sCs"/>
+                <outlet property="widthCallButtonConstraint" destination="BAE-xi-z3D" id="0eS-mK-qG4"/>
             </connections>
             <point key="canvasLocation" x="-21.014492753623191" y="121.875"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="phone.arrow.up.right" catalog="system" width="128" height="115"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
