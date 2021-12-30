@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         didSet {
             setupData()
             getUserToPushNoti()
+            setupNavigationButton()
             self.tableView?.reloadData()
         }
     }
@@ -33,7 +34,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.title = "Màn hình chính"
         configView()
         userNotificationCenter.delegate = self
-        setupNavigationButton()
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
@@ -82,7 +82,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func sendNotification(noti: [NotificationModel]) {
-        
+        let application = UIApplication.shared
         let notificationContent = UNMutableNotificationContent()
         if noti.count == 1 {
             notificationContent.title = "Thông báo về: \(noti.first?.name ?? "")"
@@ -93,7 +93,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             notificationContent.body =
             "Chú ý: \(self.notiModel.count) bệnh nhân đã bước vào tháng cuối \nCần chú ý !"
         }
-        notificationContent.badge = NSNumber(value: noti.count)
+        application.applicationIconBadgeNumber = noti.count
         
         if let url = Bundle.main.url(forResource: "dune",
                                      withExtension: "png") {
@@ -108,13 +108,16 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         date.hour = 7
         date.minute = 30
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "Notification",
                                             content: notificationContent,
                                             trigger: trigger)
         
-        userNotificationCenter.add(request) { (error) in
-            if let error = error {
-                print("Notification Error: ", error)
+        if !noti.isEmpty {
+            userNotificationCenter.add(request) { (error) in
+                if let error = error {
+                    print("Notification Error: ", error)
+                }
             }
         }
     }
@@ -152,9 +155,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             for user in newList {
                 self.notiModel.append(user.convertToNotiModel())
             }
-            if !self.notiModel.isEmpty {
-                self.sendNotification(noti: self.notiModel)
-            }
+            self.sendNotification(noti: self.notiModel)
         }
     }
     

@@ -42,40 +42,44 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLO-fl-gnN">
-                                <rect key="frame" x="60" y="8" width="263" height="19"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2Q-cR-eJ0">
-                                <rect key="frame" x="60" y="46" width="263" height="17"/>
+                                <rect key="frame" x="60" y="36" width="145" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="ib1-AP-lMG"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpG-aE-O2B">
-                                <rect key="frame" x="60" y="29" width="263" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpG-aE-O2B">
+                                <rect key="frame" x="217" y="36" width="106" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                 <color key="textColor" name="Neutral_300"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLO-fl-gnN">
+                                <rect key="frame" x="60" y="12" width="263" height="19"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="RpG-aE-O2B" firstAttribute="leading" secondItem="Jiy-NB-HaA" secondAttribute="trailing" constant="12" id="1ay-wB-59W"/>
-                            <constraint firstAttribute="trailing" secondItem="o2Q-cR-eJ0" secondAttribute="trailing" constant="12" id="4IZ-Oy-s4g"/>
-                            <constraint firstAttribute="trailing" secondItem="JLO-fl-gnN" secondAttribute="trailing" constant="12" id="52A-WZ-TZe"/>
-                            <constraint firstItem="o2Q-cR-eJ0" firstAttribute="top" secondItem="RpG-aE-O2B" secondAttribute="bottom" constant="2" id="69P-LD-IsR"/>
+                            <constraint firstItem="o2Q-cR-eJ0" firstAttribute="leading" secondItem="Jiy-NB-HaA" secondAttribute="trailing" constant="12" id="0mc-kc-22E"/>
+                            <constraint firstItem="RpG-aE-O2B" firstAttribute="bottom" secondItem="o2Q-cR-eJ0" secondAttribute="bottom" id="74q-66-jUN"/>
+                            <constraint firstItem="JLO-fl-gnN" firstAttribute="top" secondItem="4Sw-Iu-Fh2" secondAttribute="top" constant="12" id="7Fv-gg-uEr"/>
+                            <constraint firstAttribute="bottom" secondItem="o2Q-cR-eJ0" secondAttribute="bottom" constant="12" id="7aE-AC-cIv"/>
                             <constraint firstItem="Jiy-NB-HaA" firstAttribute="centerY" secondItem="4Sw-Iu-Fh2" secondAttribute="centerY" id="BTy-qc-I0s"/>
-                            <constraint firstItem="RpG-aE-O2B" firstAttribute="top" secondItem="JLO-fl-gnN" secondAttribute="bottom" constant="2" id="CzV-ep-ERj"/>
-                            <constraint firstItem="o2Q-cR-eJ0" firstAttribute="leading" secondItem="Jiy-NB-HaA" secondAttribute="trailing" constant="12" id="I4B-eO-ooc"/>
-                            <constraint firstAttribute="bottom" secondItem="o2Q-cR-eJ0" secondAttribute="bottom" constant="2" id="J7r-Pf-wZJ"/>
+                            <constraint firstAttribute="trailing" secondItem="RpG-aE-O2B" secondAttribute="trailing" constant="12" id="E8f-Tp-hLp"/>
+                            <constraint firstItem="JLO-fl-gnN" firstAttribute="leading" secondItem="Jiy-NB-HaA" secondAttribute="trailing" constant="12" id="GpL-Mv-Bcl"/>
+                            <constraint firstItem="RpG-aE-O2B" firstAttribute="leading" relation="lessThanOrEqual" secondItem="o2Q-cR-eJ0" secondAttribute="trailing" constant="12" id="IQM-TT-LpS"/>
+                            <constraint firstItem="o2Q-cR-eJ0" firstAttribute="top" relation="lessThanOrEqual" secondItem="JLO-fl-gnN" secondAttribute="bottom" constant="8" id="ITK-7F-UEC"/>
                             <constraint firstItem="Jiy-NB-HaA" firstAttribute="leading" secondItem="4Sw-Iu-Fh2" secondAttribute="leading" constant="8" id="VTZ-FQ-Q1c"/>
-                            <constraint firstItem="JLO-fl-gnN" firstAttribute="leading" secondItem="Jiy-NB-HaA" secondAttribute="trailing" constant="12" id="VoB-XK-wao"/>
-                            <constraint firstAttribute="trailing" secondItem="RpG-aE-O2B" secondAttribute="trailing" constant="12" id="mB0-AT-eAw"/>
-                            <constraint firstItem="JLO-fl-gnN" firstAttribute="top" secondItem="4Sw-Iu-Fh2" secondAttribute="top" constant="8" id="xbU-gc-cnY"/>
+                            <constraint firstItem="RpG-aE-O2B" firstAttribute="centerY" secondItem="o2Q-cR-eJ0" secondAttribute="centerY" id="jV2-S2-loX"/>
+                            <constraint firstAttribute="trailing" secondItem="JLO-fl-gnN" secondAttribute="trailing" constant="12" id="rWu-Rp-ikF"/>
                             <constraint firstAttribute="height" constant="65" id="y8A-gl-7kU"/>
+                            <constraint firstItem="RpG-aE-O2B" firstAttribute="top" secondItem="o2Q-cR-eJ0" secondAttribute="top" id="yQ1-gb-mKv"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

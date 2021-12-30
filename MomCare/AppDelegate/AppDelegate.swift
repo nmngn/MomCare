@@ -9,15 +9,18 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.badge, .alert, .sound]) { _, _ in }
+        } else {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        }
+        application.registerForRemoteNotifications()
         return true
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
     }
 
     // MARK: UISceneSession Lifecycle
@@ -36,4 +39,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

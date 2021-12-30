@@ -19,9 +19,9 @@ class NotificationTableViewCell: UITableViewCell {
     }
     
     func setupData(model: NotificationModel, contrastColor: UIColor) {
-        titleLabel.text = model.name
-        timeLabel.text = model.babyDateBorn
-        descriptionLabel.text = model.dateCalculate
+        titleLabel.text = "Họ và tên: \(model.name)"
+        timeLabel.text = "Ngày dự sinh: \(model.babyDateBorn)"
+        descriptionLabel.text = "Tuổi tuần thai: \(model.dateCalculate)"
         
         titleLabel.textColor = contrastColor
         descriptionLabel.textColor = contrastColor
