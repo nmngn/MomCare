@@ -38,6 +38,15 @@ class User: Object {
         model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
         return model
     }
+    
+    func convertToNotiModel() -> NotificationModel {
+        var model = NotificationModel()
+        model.name = name
+        model.babyDateBorn = babyDateBorn
+        model.dateCalculate = updateTime(dateString: babyDateBorn)
+        model.id = id
+        return model
+    }
 
     func updateTime(dateString: String) -> String {
         let dateFormatter = DateFormatter()

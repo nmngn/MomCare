@@ -19,25 +19,27 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var listUser: [User]? {
         didSet {
             setupData()
+            getUserToPushNoti()
             self.tableView?.reloadData()
         }
     }
     var sortType = ""
     var contrastColor = UIColor()
     let userNotificationCenter = UNUserNotificationCenter.current()
+    var notiModel = [NotificationModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
         userNotificationCenter.delegate = self
+        setupNavigationButton()
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
         self.requestNotificationAuthorization()
-        self.sendNotification()
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
         
     }
@@ -53,6 +55,22 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.navigationController?.navigationBar.isTranslucent = true
     }
     
+    func setupNavigationButton() {
+        var imageName = "bell"
+        if !notiModel.isEmpty {
+            imageName = "bell.badge"
+        }
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: imageName), style: .plain, target: self
+                                        , action: #selector(openNoti))
+        navigationItem.rightBarButtonItem = rightItem
+    }
+    
+    @objc func openNoti() {
+        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+        vc.notiModel = self.notiModel
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func requestNotificationAuthorization() {
         let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
         
@@ -62,12 +80,20 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             }
         }
     }
-
-    func sendNotification() {
+    
+    func sendNotification(noti: [NotificationModel]) {
+        
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "Test"
-        notificationContent.body = "Test body"
-        notificationContent.badge = NSNumber(value: 3)
+        if noti.count == 1 {
+            notificationContent.title = "Thông báo về: \(noti.first?.name ?? "")"
+            notificationContent.body =
+            "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
+        } else {
+            notificationContent.title = "Thông báo về \(self.notiModel.count) bệnh nhân tháng cuối"
+            notificationContent.body =
+            "Chú ý: \(self.notiModel.count) bệnh nhân đã bước vào tháng cuối \nCần chú ý !"
+        }
+        notificationContent.badge = NSNumber(value: noti.count)
         
         if let url = Bundle.main.url(forResource: "dune",
                                      withExtension: "png") {
@@ -78,8 +104,10 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
-                                                        repeats: false)
+        var date = DateComponents()
+        date.hour = 7
+        date.minute = 30
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
         let request = UNNotificationRequest(identifier: "Notification",
                                             content: notificationContent,
                                             trigger: trigger)
@@ -92,11 +120,42 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
+        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+        vc.notiModel = self.notiModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .badge, .sound])
+    }
+    
+    func getUserToPushNoti() {
+        self.notiModel.removeAll()
+        if let listUser = self.listUser {
+            let newList = listUser.filter ({ user in
+                let text = updateTime(dateString: user.babyDateBorn)
+                if !text.isEmpty {
+                    let wStartIndex = text.index(text.startIndex, offsetBy: 0)
+                    let wEndIndex = text.index(text.startIndex, offsetBy: 1)
+                    let weekData = String(text[wStartIndex...wEndIndex])
+                    
+                    let dStartIndex = text.index(text.startIndex, offsetBy: 4)
+                    let dEndIndex = text.index(text.startIndex, offsetBy: 5)
+                    let dayData = String(text[dStartIndex...dEndIndex])
+                    
+                    let dResult = dayData == "0D" ? true : false
+                    let wResult = Int(weekData) ?? 0 >= 36
+                    return wResult && dResult
+                }
+                return false
+            })
+            for user in newList {
+                self.notiModel.append(user.convertToNotiModel())
+            }
+            if !self.notiModel.isEmpty {
+                self.sendNotification(noti: self.notiModel)
+            }
+        }
     }
     
     func changeTheme() {
@@ -227,11 +286,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
         let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction func openCalculate(_ sender: UIBarButtonItem) {
-        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
