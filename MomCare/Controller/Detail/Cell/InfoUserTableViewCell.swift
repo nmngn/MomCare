@@ -30,6 +30,9 @@ class InfoUserTableViewCell: UITableViewCell {
     }
     
     func setupData(model: DetailModel) {
+        if model.dataType == .numberPhone {
+            valueTextField.keyboardType = .numberPad
+        }
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value

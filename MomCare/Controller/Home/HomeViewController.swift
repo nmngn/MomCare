@@ -8,6 +8,8 @@
 import UIKit
 import RealmSwift
 import NotificationCenter
+import SwiftCSV
+import PopupDialog
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -24,6 +26,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             self.tableView?.reloadData()
         }
     }
+    
     var sortType = ""
     var contrastColor = UIColor()
     let userNotificationCenter = UNUserNotificationCenter.current()
@@ -49,7 +52,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getListUser()
-        changeTheme()
+        changeTheme(self.theme)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -158,29 +161,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             self.sendNotification(noti: self.notiModel)
         }
     }
-    
-    func changeTheme() {
-        DispatchQueue.main.async {
-            self.view.backgroundColor = .clear
-            let hour = Calendar.current.component(.hour, from: Date())
-            if hour < 5 {
-                self.theme.image = UIImage(named: "time1")
-            } else if hour >= 5 && hour < 7 {
-                self.theme.image = UIImage(named: "time2")
-            } else if hour >= 7 && hour < 9 {
-                self.theme.image = UIImage(named: "time3")
-            } else if hour >= 9 && hour < 17 {
-                self.theme.image = UIImage(named: "time4")
-            } else if hour >= 17 && hour < 19 {
-                self.theme.image = UIImage(named: "time5")
-            } else if hour >= 19 && hour < 23 {
-                self.theme.image = UIImage(named: "time2")
-            } else {
-                self.theme.image = UIImage(named: "time1")
-            }
-        }
-    }
-    
+        
     func getListUser(reverse: Bool = false) {
         do {
             if !reverse {
@@ -361,6 +342,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.isStar = { [weak self] isStar in
                 self?.saveStarStatus(id: model.id, isStar)
             }
+            cell.showInfo = { [weak self] age in
+                self?.getAgeData(age)
+            }
             return cell
         case .sort:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
@@ -413,4 +397,32 @@ extension HomeViewController {
         }
     }
     
+}
+
+extension HomeViewController {
+    func getAgeData(_ age: Int) {
+        let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
+
+        do {
+            let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
+            let rows = csv.namedRows
+            
+            for row in rows {
+                if let data = row["\(age)"] {
+                    let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
+                    vc.age = age
+                    vc.text = data
+                    vc.contrastColor = self.contrastColor
+                    let popup = PopupDialog(viewController: vc,
+                                            buttonAlignment: .horizontal,
+                                            transitionStyle: .fadeIn,
+                                            tapGestureDismissal: true,
+                                            panGestureDismissal: false)
+                    self.present(popup, animated: true, completion: nil)
+                }
+            }
+        } catch {
+            print("Parsing CSV file has error \(error)")
+        }
+    }
 }

@@ -53,13 +53,13 @@
                                 <color key="textColor" name="Neutral_300"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2W 3D" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZY-Dh-GuL">
-                                <rect key="frame" x="266" y="24" width="41" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2W 3D" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZY-Dh-GuL">
+                                <rect key="frame" x="232" y="24" width="47" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/10/2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAB-HR-5jN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/10/2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAB-HR-5jN">
                                 <rect key="frame" x="232" y="53" width="75" height="17"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,29 +81,45 @@
                                     <action selector="makeHightlight:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lpj-b4-suy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMe-iz-AVa">
+                                <rect key="frame" x="279" y="18.5" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="lDN-gM-idX"/>
+                                    <constraint firstAttribute="width" constant="28" id="mus-UQ-3P9"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="info.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="openNote:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M3I-Y0-c3h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.73333333333333328" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6E0-OF-F5d" firstAttribute="centerY" secondItem="0Cp-9u-EBA" secondAttribute="centerY" id="1Ep-lt-HDj"/>
                             <constraint firstItem="VAB-HR-5jN" firstAttribute="centerY" secondItem="d5i-TA-qLc" secondAttribute="centerY" id="1G2-K7-H8D"/>
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="top" secondItem="QLP-zH-ohs" secondAttribute="bottom" constant="12" id="2AU-kq-iXD"/>
+                            <constraint firstItem="4ZY-Dh-GuL" firstAttribute="leading" secondItem="VAB-HR-5jN" secondAttribute="leading" id="4YX-Wz-C9i"/>
                             <constraint firstAttribute="bottom" secondItem="d5i-TA-qLc" secondAttribute="bottom" constant="26" id="8eX-7F-Xi4"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="centerY" secondItem="0Cp-9u-EBA" secondAttribute="centerY" id="E61-bt-5Bl"/>
                             <constraint firstItem="RD1-As-2aD" firstAttribute="top" secondItem="6E0-OF-F5d" secondAttribute="top" constant="-8" id="FhW-97-Keu"/>
                             <constraint firstAttribute="trailing" secondItem="6E0-OF-F5d" secondAttribute="trailing" constant="8" id="M3X-KJ-hd8"/>
+                            <constraint firstAttribute="trailing" secondItem="VAB-HR-5jN" secondAttribute="trailing" constant="36" id="MhH-yR-grI"/>
                             <constraint firstItem="RD1-As-2aD" firstAttribute="leading" secondItem="6E0-OF-F5d" secondAttribute="leading" constant="-8" id="PaH-kT-URE"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="Pro-yR-0Lc"/>
                             <constraint firstItem="VAB-HR-5jN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="d5i-TA-qLc" secondAttribute="trailing" constant="8" id="PuL-4W-dX4"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QLP-zH-ohs" secondAttribute="trailing" constant="32" id="RQh-rL-C1G"/>
-                            <constraint firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" constant="36" id="Xh7-Ri-Ipi"/>
+                            <constraint firstItem="QMe-iz-AVa" firstAttribute="centerY" secondItem="4ZY-Dh-GuL" secondAttribute="centerY" id="Wmv-sm-sLH"/>
+                            <constraint firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" constant="64" id="Xh7-Ri-Ipi"/>
                             <constraint firstItem="d5i-TA-qLc" firstAttribute="leading" secondItem="O4c-VG-rDG" secondAttribute="trailing" constant="8" id="etB-zl-2C5"/>
                             <constraint firstItem="RD1-As-2aD" firstAttribute="bottom" secondItem="6E0-OF-F5d" secondAttribute="bottom" constant="8" id="evR-R1-J9y"/>
                             <constraint firstItem="O4c-VG-rDG" firstAttribute="leading" secondItem="0Cp-9u-EBA" secondAttribute="leading" constant="12" id="iLm-UQ-Rzg"/>
                             <constraint firstItem="QLP-zH-ohs" firstAttribute="top" secondItem="0Cp-9u-EBA" secondAttribute="top" constant="24" id="kv5-BX-AtY"/>
                             <constraint firstItem="4ZY-Dh-GuL" firstAttribute="centerY" secondItem="QLP-zH-ohs" secondAttribute="centerY" id="nkd-XI-8cr"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d5i-TA-qLc" secondAttribute="trailing" constant="32" id="rBQ-cW-dch"/>
+                            <constraint firstAttribute="trailing" secondItem="QMe-iz-AVa" secondAttribute="trailing" constant="36" id="rGj-fY-mdK"/>
+                            <constraint firstItem="QMe-iz-AVa" firstAttribute="leading" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" id="riB-Dk-qDT"/>
                             <constraint firstAttribute="height" constant="96" id="rnZ-Pe-RUQ"/>
-                            <constraint firstItem="VAB-HR-5jN" firstAttribute="trailing" secondItem="4ZY-Dh-GuL" secondAttribute="trailing" id="tcH-gm-Yif"/>
                             <constraint firstItem="RD1-As-2aD" firstAttribute="trailing" secondItem="6E0-OF-F5d" secondAttribute="trailing" constant="8" id="yb1-hW-CWz"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -137,6 +153,7 @@
     </objects>
     <resources>
         <image name="avatar_placeholder" width="250" height="250"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="unstar" width="23" height="22"/>
         <namedColor name="Neutral_300">
             <color red="0.5220000147819519" green="0.5220000147819519" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

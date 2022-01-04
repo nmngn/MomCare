@@ -40,29 +40,7 @@ class HistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupData()
-        changeTheme()
-    }
-    
-    func changeTheme() {
-        DispatchQueue.main.async {
-            self.view.backgroundColor = .clear
-            let hour = Calendar.current.component(.hour, from: Date())
-            if hour < 5 {
-                self.theme.image = UIImage(named: "time1")
-            } else if hour >= 5 && hour < 7 {
-                self.theme.image = UIImage(named: "time2")
-            } else if hour >= 7 && hour < 9 {
-                self.theme.image = UIImage(named: "time3")
-            } else if hour >= 9 && hour < 17 {
-                self.theme.image = UIImage(named: "time4")
-            } else if hour >= 17 && hour < 19 {
-                self.theme.image = UIImage(named: "time5")
-            } else if hour >= 19 && hour < 23 {
-                self.theme.image = UIImage(named: "time2")
-            } else {
-                self.theme.image = UIImage(named: "time1")
-            }
-        }
+        changeTheme(self.theme)
     }
     
     func setupBackButton() {

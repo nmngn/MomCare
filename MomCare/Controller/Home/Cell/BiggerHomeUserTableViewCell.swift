@@ -19,6 +19,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonCheck: UIButton!
     
     var isStar: ((Bool) -> ())?
+    var showInfo: ((Int) -> ())?
     var model : HomeModel?
     
     override func awakeFromNib() {
@@ -32,7 +33,6 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     
     func setupData(model: HomeModel) {
         self.model = model
-        
         if model.contrastColor == .black {
             subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
         } else {
@@ -71,5 +71,16 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         starImage.image = sender.isSelected ? UIImage(named: "star") : UIImage(named: "unstar")
         isStar?(sender.isSelected)
         sender.isSelected = !sender.isSelected
+    }
+    
+    @IBAction func openNote(_ sender: UIButton) {
+        if let week = model?.dateCalculate {
+            let startIndex = week.index(week.startIndex, offsetBy: 0)
+            let endIndex = week.index(week.startIndex, offsetBy: 1)
+            let data = String(week[startIndex...endIndex])
+            if let age = Int(data) {
+                showInfo?(age)
+            }
+        }
     }
 }
