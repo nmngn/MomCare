@@ -144,14 +144,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
                     let wStartIndex = text.index(text.startIndex, offsetBy: 0)
                     let wEndIndex = text.index(text.startIndex, offsetBy: 1)
                     let weekData = String(text[wStartIndex...wEndIndex])
-                    
-                    let dStartIndex = text.index(text.startIndex, offsetBy: 4)
-                    let dEndIndex = text.index(text.startIndex, offsetBy: 5)
-                    let dayData = String(text[dStartIndex...dEndIndex])
-                    
-                    let dResult = dayData == "0D" ? true : false
-                    let wResult = Int(weekData) ?? 0 >= 36
-                    return wResult && dResult
+                
+                    let wResult = Int(weekData) ?? 0 >= 38
+                    return wResult
                 }
                 return false
             })
@@ -246,7 +241,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
         
         model.append(header2)
-        model.append(sort)
+        if !listUser.isEmpty {
+            model.append(sort)
+        }
         
         for i in 0..<listUser.count {
             infoCell.id = listUser[i].id

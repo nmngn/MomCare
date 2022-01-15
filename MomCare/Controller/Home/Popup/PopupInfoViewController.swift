@@ -12,13 +12,13 @@ class PopupInfoViewController: UIViewController {
     @IBOutlet weak var weekLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var age: Int? {
+    var age = 0 {
         didSet {
             setupData()
         }
     }
     
-    var text: String? {
+    var text = "" {
         didSet {
             setupData()
         }
@@ -36,8 +36,12 @@ class PopupInfoViewController: UIViewController {
     }
     
     func setupData() {
-        weekLabel?.text = "Tuần thai thứ \(age ?? 0)"
-        descriptionLabel?.text = text ?? ""
+        if weekLabel == nil {
+            return
+        }
+        weekLabel?.text = "Tuần thai thứ \(age)"
+        descriptionLabel?.text = text
+        view.backgroundColor = contrastColor == .black ? .white : .black
         weekLabel?.textColor = contrastColor
         descriptionLabel?.textColor = contrastColor
     }

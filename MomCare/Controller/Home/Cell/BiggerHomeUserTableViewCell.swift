@@ -75,11 +75,13 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     
     @IBAction func openNote(_ sender: UIButton) {
         if let week = model?.dateCalculate {
-            let startIndex = week.index(week.startIndex, offsetBy: 0)
-            let endIndex = week.index(week.startIndex, offsetBy: 1)
-            let data = String(week[startIndex...endIndex])
-            if let age = Int(data) {
-                showInfo?(age)
+            if !week.isEmpty {
+                let startIndex = week.index(week.startIndex, offsetBy: 0)
+                let endIndex = week.index(week.startIndex, offsetBy: 1)
+                let data = String(week[startIndex...endIndex])
+                if let age = Int(data) {
+                    showInfo?(age)
+                }
             }
         }
     }

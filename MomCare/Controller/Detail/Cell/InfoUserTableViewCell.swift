@@ -32,6 +32,7 @@ class InfoUserTableViewCell: UITableViewCell {
     func setupData(model: DetailModel) {
         if model.dataType == .numberPhone {
             valueTextField.keyboardType = .numberPad
+            textInput = model.numberPhone
         }
         self.cellType = model.dataType
         titleLabel.text = model.title
@@ -59,7 +60,7 @@ class InfoUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func callNumber(_ sender: UIButton) {
-        if let url = URL(string: "tel://\(self.textInput)"),
+        if let url = URL(string: "telprompt://\(self.textInput)"),
            UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler:nil)
