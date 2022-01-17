@@ -12,6 +12,11 @@ class AddUserTableViewCell: UITableViewCell {
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var title: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        subView.makeShadow()
+    }
+    
     func setupData(model: HomeModel) {
         if model.contrastColor == .black {
             subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)

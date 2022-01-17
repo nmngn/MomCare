@@ -96,6 +96,7 @@ class DetailUserViewController: UIViewController {
                     self.realm.delete(user)
                     self.realm.delete(history)
                 })
+                self.updateID(self.currentModel.id)
                 self.navigationController?.popToRootViewController(animated: true)
             }
             let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
@@ -104,6 +105,16 @@ class DetailUserViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
     }
+    
+    func updateID(_ id: Int) {
+        let list = self.realm.objects(User.self).filter({$0.id > id})
+        for item in list {
+            try! self.realm.write({
+                item.id -= 1
+            })
+        }
+    }
+
     
     func configView() {
         tableView.do {
