@@ -45,7 +45,13 @@
 		367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367424162770C34F0016477E /* SearchItemTableViewCell.xib */; };
 		367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367AACEB2697FC4C0056601C /* HistoryViewController.swift */; };
 		367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367AACEC2697FC4C0056601C /* HistoryViewController.xib */; };
-		36B615E1269B515300F554E8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E0269B515300F554E8 /* UITextField+.swift */; };
+		368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */; };
+		368BE028279679EA00ED457C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE027279679EA00ED457C /* UITextField+.swift */; };
+		368BE02B27967BCC00ED457C /* LogInView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368BE02927967BCC00ED457C /* LogInView.storyboard */; };
+		368BE02C27967BCC00ED457C /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368BE02A27967BCC00ED457C /* Signup.storyboard */; };
+		368BE02E27967BDD00ED457C /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE02D27967BDD00ED457C /* LogInViewController.swift */; };
+		368BE03027967BE400ED457C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE02F27967BE400ED457C /* SignupViewController.swift */; };
+		368BE0322796C34C00ED457C /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE0312796C34C00ED457C /* Session.swift */; };
 		36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */; };
 		36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */; };
 		36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90B952698AAC500817DC2 /* HistoryModel.swift */; };
@@ -66,8 +72,6 @@
 		36E9CBAE277C5B9600E1B319 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9CBAC277C5B9600E1B319 /* NotificationTableViewCell.swift */; };
 		36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E9CBAD277C5B9600E1B319 /* NotificationTableViewCell.xib */; };
 		36E9CBB2277C670900E1B319 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E9CBB1277C670900E1B319 /* NotificationModel.swift */; };
-		36EA35E22782EF6100DE4F44 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EA35E02782EF6100DE4F44 /* MainTabbarViewController.swift */; };
-		36EA35E32782EF6100DE4F44 /* MainTabbarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36EA35E12782EF6100DE4F44 /* MainTabbarViewController.xib */; };
 		36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EC545C2691F37D00809FF3 /* AppDelegate.swift */; };
 		36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EC545E2691F37D00809FF3 /* SceneDelegate.swift */; };
 		36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EC54602691F37D00809FF3 /* HomeViewController.swift */; };
@@ -120,7 +124,13 @@
 		367424162770C34F0016477E /* SearchItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchItemTableViewCell.xib; sourceTree = "<group>"; };
 		367AACEB2697FC4C0056601C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		367AACEC2697FC4C0056601C /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
-		36B615E0269B515300F554E8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+.swift"; path = "../../../UITextField+.swift"; sourceTree = "<group>"; };
+		368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		368BE027279679EA00ED457C /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		368BE02927967BCC00ED457C /* LogInView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogInView.storyboard; sourceTree = "<group>"; };
+		368BE02A27967BCC00ED457C /* Signup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		368BE02D27967BDD00ED457C /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		368BE02F27967BE400ED457C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		368BE0312796C34C00ED457C /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCalendarViewController.swift; sourceTree = "<group>"; };
 		36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCalendarViewController.xib; sourceTree = "<group>"; };
 		36B90B952698AAC500817DC2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -141,8 +151,6 @@
 		36E9CBAC277C5B9600E1B319 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		36E9CBAD277C5B9600E1B319 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		36E9CBB1277C670900E1B319 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
-		36EA35E02782EF6100DE4F44 /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
-		36EA35E12782EF6100DE4F44 /* MainTabbarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTabbarViewController.xib; sourceTree = "<group>"; };
 		36EC54592691F37D00809FF3 /* MomCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MomCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36EC545C2691F37D00809FF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36EC545E2691F37D00809FF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 		3666F1AC26998D7900D80E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				368BE0312796C34C00ED457C /* Session.swift */,
 				3666F1AD26998D8600D80E06 /* RealmModel.swift */,
 			);
 			path = Model;
@@ -242,7 +251,7 @@
 		366AE8BB2692BD2A00B5262C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				36EA35DF2782EF2700DE4F44 /* Tabbar */,
+				368BE0262796782A00ED457C /* LogInSignUp */,
 				366AE8B92692BD0800B5262C /* Home */,
 				366AE8E92692D84600B5262C /* Detail */,
 				367335CD2695D41800EB9DC0 /* History */,
@@ -328,6 +337,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		368BE0262796782A00ED457C /* LogInSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				368BE02927967BCC00ED457C /* LogInView.storyboard */,
+				368BE02D27967BDD00ED457C /* LogInViewController.swift */,
+				368BE02A27967BCC00ED457C /* Signup.storyboard */,
+				368BE02F27967BE400ED457C /* SignupViewController.swift */,
+			);
+			path = LogInSignUp;
+			sourceTree = "<group>";
+		};
 		36B615E3269B540800F554E8 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,15 +422,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		36EA35DF2782EF2700DE4F44 /* Tabbar */ = {
-			isa = PBXGroup;
-			children = (
-				36EA35E02782EF6100DE4F44 /* MainTabbarViewController.swift */,
-				36EA35E12782EF6100DE4F44 /* MainTabbarViewController.xib */,
-			);
-			path = Tabbar;
-			sourceTree = "<group>";
-		};
 		36EC54502691F37D00809FF3 = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +451,7 @@
 				366AE8AB2692B60C00B5262C /* Utils */,
 				36EC54672691F38000809FF3 /* LaunchScreen.storyboard */,
 				36EC546A2691F38000809FF3 /* Info.plist */,
+				368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */,
 			);
 			path = MomCare;
 			sourceTree = "<group>";
@@ -451,9 +463,9 @@
 				366AE8B62692BC0C00B5262C /* UIView+.swift */,
 				366AE8CB2692C1FA00B5262C /* UITableView+.swift */,
 				367335CF2695D90000EB9DC0 /* String+.swift */,
-				36B615E0269B515300F554E8 /* UITextField+.swift */,
 				36C012B22744AE220085A329 /* Date+.swift */,
 				3674240D27706EA10016477E /* Other+.swift */,
+				368BE027279679EA00ED457C /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -550,9 +562,9 @@
 				36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
+				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
-				36EA35E32782EF6100DE4F44 /* MainTabbarViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
 				3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */,
 				3600356E278415C30067ECEA /* Book1.csv in Resources */,
@@ -564,6 +576,8 @@
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
 				36EC54642691F37D00809FF3 /* Main.storyboard in Resources */,
 				366AE8C82692C0AA00B5262C /* Roboto in Resources */,
+				368BE02B27967BCC00ED457C /* LogInView.storyboard in Resources */,
+				368BE02C27967BCC00ED457C /* Signup.storyboard in Resources */,
 				3626C3FB277C3DDC00434B63 /* NotificationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +645,7 @@
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
 				36FC461B26921AE200AAB868 /* Realm+.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* RealmModel.swift in Sources */,
+				368BE0322796C34C00ED457C /* Session.swift in Sources */,
 				3626C3FA277C3DDC00434B63 /* NotificationViewController.swift in Sources */,
 				3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */,
 				3674240E27706EA10016477E /* Other+.swift in Sources */,
@@ -644,15 +659,16 @@
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
 				367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */,
-				36EA35E22782EF6100DE4F44 /* MainTabbarViewController.swift in Sources */,
 				36E9CBAE277C5B9600E1B319 /* NotificationTableViewCell.swift in Sources */,
+				368BE02E27967BDD00ED457C /* LogInViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
+				368BE03027967BE400ED457C /* SignupViewController.swift in Sources */,
+				368BE028279679EA00ED457C /* UITextField+.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
-				36B615E1269B515300F554E8 /* UITextField+.swift in Sources */,
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
@@ -804,6 +820,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -828,6 +845,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

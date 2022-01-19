@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>659878727434-5i12an5tmhdc9n9l0gti9bs2ir76m9el.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.659878727434-5i12an5tmhdc9n9l0gti9bs2ir76m9el</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDRJupA-pbXCSle06Nrv8ZrOt6fW1z14B0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>659878727434</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tuicoding.momcare</string>
+	<key>PROJECT_ID</key>
+	<string>momcare-ee987</string>
+	<key>STORAGE_BUCKET</key>
+	<string>momcare-ee987.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:659878727434:ios:c5f363b7ab743dd6e534f3</string>
+</dict>
+</plist>

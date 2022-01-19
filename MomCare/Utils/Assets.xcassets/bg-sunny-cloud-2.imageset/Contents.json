@@ -1,17 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "585e4ae1cb11b227491c3393.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "585e4ae1cb11b227491c3393-1.png",
+      "filename" : "bg-sunny-cloud-2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "585e4ae1cb11b227491c3393-2.png",
+      "filename" : "bg-sunny-cloud-2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

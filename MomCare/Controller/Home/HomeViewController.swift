@@ -37,6 +37,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.title = "Màn hình chính"
         configView()
         userNotificationCenter.delegate = self
+        navigationController?.isNavigationBarHidden = false
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
