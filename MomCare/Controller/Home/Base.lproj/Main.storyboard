@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,7 +40,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Màn hình chính" id="RzB-Gf-Gy0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="noZ-pK-S1e">
+                        <barButtonItem key="leftBarButtonItem" id="noZ-pK-S1e">
+                            <imageReference key="image" image="magnifyingglass" catalog="system" renderingMode="hierarchical-single">
+                                <hierarchicalColors>
+                                    <color systemColor="labelColor"/>
+                                    <color systemColor="secondaryLabelColor"/>
+                                    <color systemColor="tertiaryLabelColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
                             <connections>
                                 <action selector="searchUser:" destination="BYZ-38-t0r" id="Ncp-Ox-cc9"/>
                             </connections>
@@ -74,6 +83,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="time2" width="2559" height="1443"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

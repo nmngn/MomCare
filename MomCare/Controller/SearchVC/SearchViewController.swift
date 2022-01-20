@@ -65,7 +65,8 @@ class SearchViewController: UIViewController {
     
     func setupBackButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+                                       , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
     }
     

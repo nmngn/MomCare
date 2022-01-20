@@ -65,10 +65,12 @@ class DetailUserViewController: UIViewController {
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow"), style: .plain, target: self, action: #selector(touchBackButton))
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+                                       , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
         
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action:
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "trash")?.toHierachicalImage()
+                                        , style: .plain, target: self, action:
                                         #selector(removeUser))
         navigationItem.rightBarButtonItem = rightItem
     }

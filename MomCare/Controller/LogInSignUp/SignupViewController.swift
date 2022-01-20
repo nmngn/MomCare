@@ -85,7 +85,7 @@ class SignupViewController: UIViewController {
                     }
                 }
             } else {
-                
+                openAlert("Mật khẩu không trùng khớp")
             }
         }
         
@@ -100,7 +100,7 @@ class SignupViewController: UIViewController {
     }
     
     func openAlert(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Lỗi", message: message, preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)

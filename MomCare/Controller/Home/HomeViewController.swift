@@ -38,7 +38,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         customPresenter.transitionType = .coverHorizontalFromRight
         customPresenter.dismissTransitionType = .coverHorizontalFromRight
         customPresenter.dismissOnSwipe = true
-        customPresenter.dismissOnSwipeDirection = .top
+        customPresenter.dismissAnimated = true
+        customPresenter.dismissOnSwipeDirection = .default
         return customPresenter
     }()
     
@@ -70,7 +71,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func setupNavigationButton() {
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(openMore))
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet")?.toHierachicalImage()
+                                        , style: .plain, target: self, action: #selector(openMore))
         navigationItem.rightBarButtonItem = rightItem
     }
     

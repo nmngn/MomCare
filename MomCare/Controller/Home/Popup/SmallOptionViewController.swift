@@ -14,22 +14,24 @@ class SmallOptionViewController: UIViewController {
     @IBOutlet weak var dismissView: UIView!
     @IBOutlet weak var theme: UIImageView!
     
-    var notiModel = [NotificationModel]() {
-        didSet {
-            if notiModel.isEmpty {
-                notiImage?.image = UIImage(systemName: "bell")
-            } else {
-                notiImage?.image = UIImage(systemName: "bell.badge")
-            }
-        }
-    }
+    var notiModel = [NotificationModel]()
     var navigation = UINavigationController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        notiImage.image = UIImage(systemName: "bell")?.toHierachicalImage()
         theme.applyBlurEffect()
         let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
         dismissView.addGestureRecognizer(tapGestureReconizer)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !notiModel.isEmpty {
+            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                self.notiImage.image = UIImage(systemName: "bell.badge")?.toHierachicalImage()
+            }, completion: nil)
+        }
     }
     
     @objc func dismissVC() {
@@ -71,7 +73,9 @@ class SmallOptionViewController: UIViewController {
     }
     
     @IBAction func openNetwork(_ sender: UIButton) {
-        
+        let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
+        dismissVC()
+        navigation.pushViewController(vc, animated: true)
     }
     
     @IBAction func logOut(_ sender: UIButton) {

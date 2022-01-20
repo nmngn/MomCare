@@ -21,6 +21,15 @@ class BadgeUserTableViewCell: UITableViewCell {
     }
     
     func getNumberPatient(list: [User], contrastColor: UIColor) {
+        let text = NSMutableAttributedString(string: "Xin chào ", attributes: [
+            .foregroundColor : contrastColor,
+            .font : UIFont.systemFont(ofSize: 18, weight: .medium)])
+        let user = NSMutableAttributedString(string: "\(Session.shared.userProfile.userEmail)", attributes: [
+            .foregroundColor : contrastColor,
+            .font : UIFont.systemFont(ofSize: 18, weight: .bold)])
+        text.append(user)
+        helloTitle.attributedText = text
+        
         helloTitle.textColor = contrastColor
         goodDayTitle.textColor = contrastColor
         
