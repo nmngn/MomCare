@@ -16,6 +16,10 @@
 		3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3615AA3C277B6E9B007F01C3 /* AddUserTableViewCell.xib */; };
 		3626C3FA277C3DDC00434B63 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3626C3F8277C3DDC00434B63 /* NotificationViewController.swift */; };
 		3626C3FB277C3DDC00434B63 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3626C3F9277C3DDC00434B63 /* NotificationViewController.xib */; };
+		365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */; };
+		365F0B1F27982E6C001BE7D1 /* SmallOptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F0B1D27982E6C001BE7D1 /* SmallOptionViewController.xib */; };
+		365F0B21279842EC001BE7D1 /* DismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F0B20279842EC001BE7D1 /* DismissTransition.swift */; };
+		365F0B23279842F6001BE7D1 /* PresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F0B22279842F6001BE7D1 /* PresentTransition.swift */; };
 		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
 		3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */; };
 		3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */; };
@@ -95,6 +99,10 @@
 		3615AA3C277B6E9B007F01C3 /* AddUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddUserTableViewCell.xib; sourceTree = "<group>"; };
 		3626C3F8277C3DDC00434B63 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		3626C3F9277C3DDC00434B63 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOptionViewController.swift; sourceTree = "<group>"; };
+		365F0B1D27982E6C001BE7D1 /* SmallOptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallOptionViewController.xib; sourceTree = "<group>"; };
+		365F0B20279842EC001BE7D1 /* DismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissTransition.swift; sourceTree = "<group>"; };
+		365F0B22279842F6001BE7D1 /* PresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentTransition.swift; sourceTree = "<group>"; };
 		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
 		3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPictureTableViewCell.xib; sourceTree = "<group>"; };
 		3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +191,8 @@
 			children = (
 				3600357027841F270067ECEA /* PopupInfoViewController.swift */,
 				3600357127841F270067ECEA /* PopupInfoViewController.xib */,
+				365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */,
+				365F0B1D27982E6C001BE7D1 /* SmallOptionViewController.xib */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -466,6 +476,8 @@
 				36C012B22744AE220085A329 /* Date+.swift */,
 				3674240D27706EA10016477E /* Other+.swift */,
 				368BE027279679EA00ED457C /* UITextField+.swift */,
+				365F0B22279842F6001BE7D1 /* PresentTransition.swift */,
+				365F0B20279842EC001BE7D1 /* DismissTransition.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -559,6 +571,7 @@
 				36D4FFB22694B68200985C25 /* PhotoTableViewCell.xib in Resources */,
 				366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */,
 				366AE8C52692BF3300B5262C /* BadgeUserTableViewCell.xib in Resources */,
+				365F0B1F27982E6C001BE7D1 /* SmallOptionViewController.xib in Resources */,
 				36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
@@ -632,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */,
+				365F0B21279842EC001BE7D1 /* DismissTransition.swift in Sources */,
 				36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */,
 				366AE8CC2692C1FA00B5262C /* UITableView+.swift in Sources */,
 				367335D02695D90000EB9DC0 /* String+.swift in Sources */,
@@ -651,11 +665,13 @@
 				3674240E27706EA10016477E /* Other+.swift in Sources */,
 				366AE8D02692C2DE00B5262C /* HomeTitleTableViewCell.swift in Sources */,
 				36E9CBB2277C670900E1B319 /* NotificationModel.swift in Sources */,
+				365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
 				36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */,
 				36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */,
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,
+				365F0B23279842F6001BE7D1 /* PresentTransition.swift in Sources */,
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
 				367335D42695D9BE00EB9DC0 /* Toast.swift in Sources */,

@@ -247,10 +247,11 @@ extension SignupViewController {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let homeVC = storyboard.instantiateViewController(withIdentifier: "Main") as? HomeViewController {
-                self.navigationController?.pushViewController(homeVC, animated: true)
-            }
+            let homeVC = storyboard.instantiateInitialViewController()
+            UIApplication.shared.windows.first?.rootViewController = homeVC
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
+    
         UIView.animate(withDuration: 1.5, delay: 0.5, options: [], animations: {
             self.confirmPwLabel.center.x += self.view.bounds.width
         }, completion: nil)

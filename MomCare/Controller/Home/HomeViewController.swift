@@ -10,6 +10,7 @@ import RealmSwift
 import NotificationCenter
 import SwiftCSV
 import PopupDialog
+import Presentr
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -31,6 +32,15 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var contrastColor = UIColor()
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
+    
+    let presenter: Presentr = {
+        let customPresenter = Presentr(presentationType: .fullScreen)
+        customPresenter.transitionType = .coverHorizontalFromRight
+        customPresenter.dismissTransitionType = .coverHorizontalFromRight
+        customPresenter.dismissOnSwipe = true
+        customPresenter.dismissOnSwipeDirection = .top
+        return customPresenter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,19 +70,15 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func setupNavigationButton() {
-        var imageName = "bell"
-        if !notiModel.isEmpty {
-            imageName = "bell.badge"
-        }
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: imageName), style: .plain, target: self
-                                        , action: #selector(openNoti))
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(openMore))
         navigationItem.rightBarButtonItem = rightItem
     }
     
-    @objc func openNoti() {
-        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+    @objc func openMore() {
+        let vc = SmallOptionViewController.init(nibName: "SmallOptionViewController", bundle: nil)
         vc.notiModel = self.notiModel
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.navigation = self.navigationController ?? UINavigationController()
+        customPresentViewController(presenter, viewController: vc, animated: true)
     }
     
     func requestNotificationAuthorization() {
@@ -288,8 +294,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
             if let listUser = self.listUser {
-                let newList = listUser.sorted(by: {$0.updateTime(dateString: $0.babyDateBorn) >
-                    $1.updateTime(dateString: $1.babyDateBorn)})
+                let newList = listUser.sorted(by: {$0.updateTime() >
+                    $1.updateTime()})
                 self.listUser?.removeAll()
                 self.listUser = newList
             }

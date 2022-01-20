@@ -32,7 +32,7 @@ class User: Object {
         model.momBirth = momBirth
         model.height = height
         model.dateSave = dateSave
-        model.dateCalculate = updateTime(dateString: babyDateBorn)
+        model.dateCalculate = updateTime()
         model.babyAge = babyDateBorn
         model.note = note
         model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
@@ -43,16 +43,16 @@ class User: Object {
         var model = NotificationModel()
         model.name = name
         model.babyDateBorn = babyDateBorn
-        model.dateCalculate = updateTime(dateString: babyDateBorn)
+        model.dateCalculate = updateTime()
         model.id = id
         return model
     }
 
-    func updateTime(dateString: String) -> String {
+    func updateTime() -> String {
         let dateFormatter = DateFormatter()
         let todayDate = Date()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        let date = dateFormatter.date(from: dateString)
+        let date = dateFormatter.date(from: babyDateBorn)
         guard let timeLast = date?.millisecondsSince1970 else { return ""}
         let timeToday = todayDate.millisecondsSince1970
         let result = timeLast - timeToday

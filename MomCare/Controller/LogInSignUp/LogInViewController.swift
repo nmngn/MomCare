@@ -232,9 +232,9 @@ extension LogInViewController {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let homeVC = storyboard.instantiateViewController(withIdentifier: "Main") as? HomeViewController {
-                self.navigationController?.pushViewController(homeVC, animated: true)
-            }
+            let homeVC = storyboard.instantiateInitialViewController()
+            UIApplication.shared.windows.first?.rootViewController = homeVC
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
         UIView.animate(withDuration: 1, delay: 0.25, options: []) {
             self.cloud1.center.x += self.view.bounds.width

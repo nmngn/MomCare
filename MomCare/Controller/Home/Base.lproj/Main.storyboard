@@ -43,7 +43,7 @@
                                 <action selector="searchUser:" destination="BYZ-38-t0r" id="Ncp-Ox-cc9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="bell.badge" catalog="system" id="r8F-G3-OxW"/>
+                        <barButtonItem key="rightBarButtonItem" id="r8F-G3-OxW"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="XSr-gy-kRt" id="PEv-eu-58v"/>
@@ -74,7 +74,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bell.badge" catalog="system" width="128" height="124"/>
         <image name="time2" width="2559" height="1443"/>
     </resources>
 </document>
