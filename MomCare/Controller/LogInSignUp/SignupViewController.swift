@@ -79,8 +79,8 @@ class SignupViewController: UIViewController {
                         }
                     } else {
                         print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
-                        Session.shared.userProfile.userEmail = email
-                        UserDefaults.standard.set(email, forKey: "email")
+                        Session.shared.userProfile.userNumberPhone = email
+                        UserDefaults.standard.set(email, forKey: "sdt")
                         self.animateAfterSignUp()
                     }
                 }

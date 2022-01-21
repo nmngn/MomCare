@@ -51,6 +51,7 @@ struct DetailModel {
     var dataType: DataType?
     var contrastColor = UIColor()
     var isCall = false
+    var isEnable = true
     
     func changeImage(image: UIImage, type: UserChoice) -> NSData {
         if type == .baby {

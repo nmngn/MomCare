@@ -69,7 +69,15 @@ class SmallOptionViewController: UIViewController {
 
     
     @IBAction func openProfile(_ sender: UIButton) {
-        
+        let vc = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
+        dismissVC()
+        navigation.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func openChat(_ sender: UIButton) {
+        let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
+        dismissVC()
+        navigation.pushViewController(vc, animated: true)
     }
     
     @IBAction func openNetwork(_ sender: UIButton) {

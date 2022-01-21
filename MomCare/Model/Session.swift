@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Session {
     static var shared = Session()
@@ -15,5 +16,5 @@ class Session {
 }
 
 final class UserLogIn {
-    var userEmail = ""
+    var userNumberPhone = ""   
 }

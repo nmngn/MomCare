@@ -18,7 +18,6 @@ enum UserChoice {
 class DetailUserViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var theme: UIImageView!
     
@@ -28,25 +27,28 @@ class DetailUserViewController: UIViewController {
     var currentModel = DetailModel()
     let realm = try! Realm()
     var contrastColor = UIColor()
+    let adminInfo = Session.shared.userProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
+        setupView()
+        setupData()
         setupNavigationButton()
         changeTheme(self.theme)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func setupView() {
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
-        setupData()
-        
         self.title = "Thông tin bệnh nhân"
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

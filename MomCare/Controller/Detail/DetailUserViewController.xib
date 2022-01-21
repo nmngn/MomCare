@@ -18,7 +18,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailUserViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
                 <outlet property="bottomHeightConstraint" destination="a9K-b0-Mk4" id="bkp-dI-s0k"/>
-                <outlet property="saveButton" destination="Ah3-Gh-wSy" id="7OO-9t-l51"/>
                 <outlet property="tableView" destination="b2h-qd-ZCS" id="PVz-ZQ-rIc"/>
                 <outlet property="theme" destination="Wdg-mD-owM" id="GBo-0U-Tlm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

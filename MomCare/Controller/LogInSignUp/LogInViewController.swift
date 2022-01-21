@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import LocalAuthentication
+import RealmSwift
 
 // A delay function
 func delay(seconds: Double, completion: @escaping () -> Void) {
@@ -35,8 +36,9 @@ class LogInViewController: UIViewController {
     let label = UILabel()
     let messages = ["Connecting ..."]
     var animationContainerView: UIView!
-    var autoEmail = UserDefaults.standard.string(forKey: "email")
+    var autoEmail = UserDefaults.standard.string(forKey: "sdt")
     var statusPosition = CGPoint.zero
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +74,8 @@ class LogInViewController: UIViewController {
             var number = email
             number.append("@gmail.com")
             Auth.auth().signIn(withEmail: number, password: password) { [weak self] _, error in
-                Session.shared.userProfile.userEmail = email
-                UserDefaults.standard.set(email, forKey: "email")
+                Session.shared.userProfile.userNumberPhone = email
+                UserDefaults.standard.set(email, forKey: "sdt")
                 if let error = error {
                     self?.openAlert()
                     print(error)
