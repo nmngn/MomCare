@@ -14,8 +14,8 @@ class ChatTableViewCell: UITableViewCell {
     @IBOutlet weak var messLbl: UILabel!
     @IBOutlet weak var rightImage: UIImageView!
     @IBOutlet weak var leftImage: UIImageView!
-    @IBOutlet var rightConstraint: NSLayoutConstraint!
-    @IBOutlet var leftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
     
     func setupData(message: Message) {
         if message.sender == Auth.auth().currentUser?.email {

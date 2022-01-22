@@ -71,8 +71,7 @@ class LogInViewController: UIViewController {
     
     @IBAction func login() {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            var number = email
-            number.append("@gmail.com")
+            let number = email + "@gmail.com"
             Auth.auth().signIn(withEmail: number, password: password) { [weak self] _, error in
                 Session.shared.userProfile.userNumberPhone = email
                 UserDefaults.standard.set(email, forKey: "sdt")

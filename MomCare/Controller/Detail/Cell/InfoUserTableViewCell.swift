@@ -14,7 +14,10 @@ class InfoUserTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     @IBOutlet weak var callButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var widthCallButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var widthMessageButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var spacingButton: NSLayoutConstraint!
     
     var cellType: DataType?
     var textInput = ""
@@ -44,9 +47,13 @@ class InfoUserTableViewCell: UITableViewCell {
         titleLabel.textColor = model.contrastColor
         valueTextField.textColor = model.contrastColor
         if !model.isCall {
-            widthCallButtonConstraint.constant = 4
+            widthCallButtonConstraint.constant = 0
             callButton.isEnabled = false
             callButton.isHidden = true
+            widthMessageButtonConstraint.constant = 0
+            messageButton.isHidden = true
+            messageButton.isEnabled = false
+            spacingButton.constant = 4
         }
         if model.contrastColor == .black {
             valueTextField.backgroundColor = .white
@@ -72,6 +79,10 @@ class InfoUserTableViewCell: UITableViewCell {
                 UIApplication.shared.openURL(url)
             }
         }
+    }
+    
+    @IBAction func letChat(_ sender: UIButton) {
+        delegate?.letChat()
     }
 }
 

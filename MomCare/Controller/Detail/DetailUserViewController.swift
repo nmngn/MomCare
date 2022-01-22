@@ -424,6 +424,14 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
 }
 
 extension DetailUserViewController: DetailUserInfo {
+    func letChat() {
+        if !currentModel.numberPhone.isEmpty {
+            let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
+            vc.detailUser = currentModel
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func showAlert(dataType: DataType) {
         var typeCellName = ""
         switch dataType {

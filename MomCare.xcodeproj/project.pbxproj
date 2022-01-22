@@ -68,6 +68,8 @@
 		368BE0322796C34C00ED457C /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE0312796C34C00ED457C /* Session.swift */; };
 		36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */; };
 		36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */; };
+		36B8A2EE279BEF81009186FC /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B8A2EC279BEF81009186FC /* UserViewController.swift */; };
+		36B8A2EF279BEF81009186FC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B8A2ED279BEF81009186FC /* UserViewController.xib */; };
 		36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90B952698AAC500817DC2 /* HistoryModel.swift */; };
 		36BC4DC327991951006DFC30 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BC4DC127991951006DFC30 /* WebViewController.swift */; };
 		36BC4DC427991951006DFC30 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BC4DC227991951006DFC30 /* WebViewController.xib */; };
@@ -163,6 +165,8 @@
 		368BE0312796C34C00ED457C /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCalendarViewController.swift; sourceTree = "<group>"; };
 		36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCalendarViewController.xib; sourceTree = "<group>"; };
+		36B8A2EC279BEF81009186FC /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		36B8A2ED279BEF81009186FC /* UserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		36B90B952698AAC500817DC2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		36BC4DC127991951006DFC30 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		36BC4DC227991951006DFC30 /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 		366AE8BB2692BD2A00B5262C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				36B8A2EB279BEBB4009186FC /* User */,
 				36807831279A8D13008ACD0B /* Chat */,
 				36807827279A8ACB008ACD0B /* ListChat */,
 				36807822279969C0008ACD0B /* Admin */,
@@ -442,6 +447,15 @@
 				36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */,
 			);
 			path = Popup;
+			sourceTree = "<group>";
+		};
+		36B8A2EB279BEBB4009186FC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				36B8A2EC279BEF81009186FC /* UserViewController.swift */,
+				36B8A2ED279BEF81009186FC /* UserViewController.xib */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		36B90B932698AA3600817DC2 /* Model */ = {
@@ -664,6 +678,7 @@
 				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
+				36B8A2EF279BEF81009186FC /* UserViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
 				3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */,
 				3600356E278415C30067ECEA /* Book1.csv in Resources */,
@@ -775,6 +790,7 @@
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
 				368BE03027967BE400ED457C /* SignupViewController.swift in Sources */,
+				36B8A2EE279BEF81009186FC /* UserViewController.swift in Sources */,
 				36BC4DC327991951006DFC30 /* WebViewController.swift in Sources */,
 				368BE028279679EA00ED457C /* UITextField+.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,

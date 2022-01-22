@@ -16,6 +16,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var theme : UIImageView!
     
     var messages : [Message] = []
+    var detailUser = DetailModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +29,36 @@ class ChatViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = detailUser.name
+    }
+    
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
         let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
+        
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "phone.arrow.up.right")?.toHierachicalImage()
+                                        , style: .plain, target: self, action:
+                                        #selector(call))
+        navigationItem.rightBarButtonItem = rightItem
     }
     
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func call() {
+        if let url = URL(string: "telprompt://\(self.detailUser.numberPhone)"),
+           UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -57,8 +79,6 @@ class ChatViewController: UIViewController {
     
     func configView() {
         messageTextField.delegate = self
-//        messageTextView.text = "Nhập tin nhắn"
-//        messageTextView.textColor = UIColor.lightGray
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -71,14 +91,18 @@ class ChatViewController: UIViewController {
     
     func scrollToBottom(){
         DispatchQueue.main.async {
-            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            if !self.messages.isEmpty {
+                UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut]) {
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+            }
         }
     }
     
     func loadMessage(){
         let messageDB = Database.database().reference().child("messages")
-        
+
         messageDB.observe(.childAdded) { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String, String>
             let received = snapshotValue["received"] ?? ""
@@ -86,10 +110,13 @@ class ChatViewController: UIViewController {
             let sender = snapshotValue["sender"] ?? ""
             
             print(text, sender, received)
-            var message = Message()
-            message.body = text
-            message.sender = sender
-            self.messages.append(message)
+            if received == self.detailUser.email() {
+                var message = Message()
+                message.body = text
+                message.sender = sender
+                message.received = received
+                self.messages.append(message)
+            }
             self.tableView.reloadData()
             self.scrollToBottom()
         }
@@ -101,7 +128,7 @@ class ChatViewController: UIViewController {
                 let messagesDB = Database.database().reference().child("messages")
                 let messageDictionary = ["sender": Auth.auth().currentUser?.email,
                                          "body": text,
-                                         "received": "hien chua co"]
+                                         "received": detailUser.email()]
                 messagesDB.childByAutoId().setValue(messageDictionary) {
                     (error, reference) in
                     if error != nil {

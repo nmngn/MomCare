@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="j2E-qm-8U6">
-                        <rect key="frame" x="24" y="44.5" width="327" height="37.5"/>
+                        <rect key="frame" x="28" y="44.5" width="319" height="37.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -49,9 +49,9 @@
                     <constraint firstAttribute="trailing" secondItem="qan-vg-aw9" secondAttribute="trailing" constant="28" id="GKC-yv-h3E"/>
                     <constraint firstItem="j2E-qm-8U6" firstAttribute="top" secondItem="qan-vg-aw9" secondAttribute="bottom" constant="12" id="XSv-fY-6BZ"/>
                     <constraint firstItem="qan-vg-aw9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="cnp-zc-vi0"/>
-                    <constraint firstAttribute="trailing" secondItem="j2E-qm-8U6" secondAttribute="trailing" constant="24" id="dzN-AZ-qsp"/>
+                    <constraint firstAttribute="trailing" secondItem="j2E-qm-8U6" secondAttribute="trailing" constant="28" id="dzN-AZ-qsp"/>
                     <constraint firstItem="qan-vg-aw9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="pra-ZT-nvN"/>
-                    <constraint firstItem="j2E-qm-8U6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="zzZ-vH-rTl"/>
+                    <constraint firstItem="j2E-qm-8U6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="zzZ-vH-rTl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

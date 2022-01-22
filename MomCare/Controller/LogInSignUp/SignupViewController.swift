@@ -61,8 +61,7 @@ class SignupViewController: UIViewController {
         if let email = emailTextField.text, let password = passwordTextField.text,
            let confirmPw = confirmPwLabel.text {
             if confirmPw == password {
-                var number = email
-                number.append("@gmail.com")
+                let number = email + "@gmail.com"
                 Auth.auth().createUser(withEmail: number, password: password) { (authDataResult, error) in
                     if let error = error {
                         print("Create error: \(error.localizedDescription)")
