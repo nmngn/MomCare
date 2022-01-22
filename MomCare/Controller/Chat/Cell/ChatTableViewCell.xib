@@ -51,14 +51,10 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWQ-7E-fH3">
                                 <rect key="frame" x="8" y="8" width="223" height="81"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,9 +86,11 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="MessLbl" destination="hWQ-7E-fH3" id="qec-1u-6bO"/>
-                <outlet property="MessView" destination="TGl-Ic-V72" id="6pg-si-jWT"/>
+                <outlet property="leftConstraint" destination="urG-SM-nVZ" id="uiM-EV-FPH"/>
                 <outlet property="leftImage" destination="5jB-Fb-mSe" id="lYB-co-3YS"/>
+                <outlet property="messLbl" destination="hWQ-7E-fH3" id="qec-1u-6bO"/>
+                <outlet property="messView" destination="TGl-Ic-V72" id="6pg-si-jWT"/>
+                <outlet property="rightConstraint" destination="D4o-xO-mUu" id="0S5-6r-0BW"/>
                 <outlet property="rightImage" destination="shh-Z0-dIM" id="9b7-1H-RCy"/>
             </connections>
             <point key="canvasLocation" x="171.73913043478262" y="94.084821428571431"/>
