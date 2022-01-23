@@ -25,13 +25,6 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var cloud3: UIImageView!
     @IBOutlet weak var cloud4: UIImageView!
     
-    let spinner = UIActivityIndicatorView(style: .medium)
-    let status = UIImageView(image: UIImage(named: "banner"))
-    let label = UILabel()
-    let messages = ["Connecting ..."]
-    var animationContainerView: UIView!
-    var statusPosition = CGPoint.zero
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
@@ -58,11 +51,11 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func signup() {
+        self.loading()
         if let email = emailTextField.text, let password = passwordTextField.text,
            let confirmPw = confirmPwLabel.text {
             if confirmPw == password {
-                let number = email + "@gmail.com"
-                Auth.auth().createUser(withEmail: number, password: password) { (authDataResult, error) in
+                Auth.auth().createUser(withEmail: email + "@admin.com", password: password) { (authDataResult, error) in
                     if let error = error {
                         print("Create error: \(error.localizedDescription)")
                         if let error = error as NSError? {
@@ -80,6 +73,7 @@ class SignupViewController: UIViewController {
                         print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
                         Session.shared.userProfile.userNumberPhone = email
                         UserDefaults.standard.set(email, forKey: "sdt")
+                        self.dismissLoading()
                         self.animateAfterSignUp()
                     }
                 }
@@ -96,13 +90,6 @@ class SignupViewController: UIViewController {
             LogInViewController {
             navigationController?.pushViewController(logInVC, animated: true)
         }
-    }
-    
-    func openAlert(_ message: String) {
-        let alert = UIAlertController(title: "Lỗi", message: message, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
     }
     
     func checkTextField() {
@@ -143,20 +130,6 @@ extension SignupViewController {
         signUpButton.layer.cornerRadius = signUpButton.frame.size.height / 10
         signUpButton.layer.masksToBounds = true
         signUpButton.setTitle("Đăng kí", for: .normal)
-        
-        spinner.center = CGPoint(x: signUpButton.bounds.width / 2,
-                                 y: signUpButton.bounds.height / 2)
-        spinner.alpha = 1
-        signUpButton.addSubview(spinner)
-        
-        status.isHidden = true
-        status.center = view.center
-        
-        label.frame = CGRect(x: 0.0, y: 0.0, width: status.frame.size.width, height: status.frame.size.height)
-        label.font = UIFont(name: "HelveticaNeue", size: 18.0)
-        label.textColor = UIColor(red: 0.89, green: 0.38, blue: 0.0, alpha: 1.0)
-        label.textAlignment = .center
-        status.addSubview(label)
     }
     
     func setUpUI() {

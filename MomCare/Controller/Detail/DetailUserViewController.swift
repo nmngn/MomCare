@@ -9,6 +9,7 @@ import UIKit
 import Then
 import RealmSwift
 import PhotosUI
+import Firebase
 
 enum UserChoice {
     case mom
@@ -534,6 +535,7 @@ extension DetailUserViewController {
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
             })
+            createFirebaseUser()
         }
     }
     
@@ -574,6 +576,29 @@ extension DetailUserViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        if user.numberPhone != currentModel.numberPhone {
+            createFirebaseUser()
+        }
     }
-
+    
+    func createFirebaseUser() {
+        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { (authDataResult, error) in
+            if let error = error {
+                print("Create error: \(error.localizedDescription)")
+                if let error = error as NSError? {
+                    print("Error code: \(error.code)")
+                    switch error.code {
+                    case 17007:
+                        self.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
+                    case 17026:
+                        self.openAlert("Mật khẩu phải dài hơn 6 kí tự")
+                    default:
+                        break
+                    }
+                }
+            } else {
+                print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
+            }
+        }
+    }    
 }

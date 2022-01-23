@@ -9,8 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import LocalAuthentication
-import RealmSwift
+import CoreMedia
 
 // A delay function
 func delay(seconds: Double, completion: @escaping () -> Void) {
@@ -30,15 +29,10 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var cloud2: UIImageView!
     @IBOutlet weak var cloud3: UIImageView!
     @IBOutlet weak var cloud4: UIImageView!
+
     
-    let spinner = UIActivityIndicatorView(style: .medium)
-    let status = UIImageView(image: UIImage(named: "banner"))
-    let label = UILabel()
-    let messages = ["Connecting ..."]
-    var animationContainerView: UIView!
     var autoEmail = UserDefaults.standard.string(forKey: "sdt")
-    var statusPosition = CGPoint.zero
-    let realm = try! Realm()
+    var endText = "@user.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,18 +62,34 @@ class LogInViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+        
     @IBAction func login() {
+        self.loading()
         if let email = emailTextField.text, let password = passwordTextField.text {
-            let number = email + "@gmail.com"
-            Auth.auth().signIn(withEmail: number, password: password) { [weak self] _, error in
-                Session.shared.userProfile.userNumberPhone = email
-                UserDefaults.standard.set(email, forKey: "sdt")
+            Auth.auth().signIn(withEmail: email + endText, password: password) { [weak self] _, error in
+                self?.dismissLoading()
+                if let _ = error {
+                    self?.endText = "@admin.com"
+                    self?.tryingLoginAgain()
+                } else {
+                    Session.shared.userProfile.userNumberPhone = email
+                    UserDefaults.standard.set(email, forKey: "sdt")
+                    self?.animateAfterLogin()
+                }
+            }
+        }
+    }
+    
+    func tryingLoginAgain() {
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            Auth.auth().signIn(withEmail: email + endText, password: password) { _, error in
                 if let error = error {
-                    self?.openAlert()
+                    self.openAlert()
                     print(error)
                 } else {
-                    self?.animateAfterLogin()
+                    Session.shared.userProfile.userNumberPhone = email
+                    UserDefaults.standard.set(email, forKey: "sdt")
+                    self.animateAfterLogin()
                 }
             }
         }
@@ -137,20 +147,6 @@ extension LogInViewController {
         loginButton.layer.cornerRadius = loginButton.frame.size.height / 10
         loginButton.layer.masksToBounds = true
         loginButton.setTitle("Đăng nhập", for: .normal)
-        
-        spinner.center = CGPoint(x: loginButton.bounds.width / 2,
-                                 y: loginButton.bounds.height / 2)
-        spinner.alpha = 1
-        loginButton.addSubview(spinner)
-        
-        status.isHidden = true
-        status.center = view.center
-        
-        label.frame = CGRect(x: 0.0, y: 0.0, width: status.frame.size.width, height: status.frame.size.height)
-        label.font = UIFont(name: "HelveticaNeue", size: 18.0)
-        label.textColor = UIColor(red: 0.89, green: 0.38, blue: 0.0, alpha: 1.0)
-        label.textAlignment = .center
-        status.addSubview(label)
     }
     
     func setUpUI() {

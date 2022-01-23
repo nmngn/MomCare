@@ -32,8 +32,6 @@ extension LAContext {
                 return .touchID
             case .faceID:
                 return .faceID
-            @unknown default:
-                #warning("Handle new Biometric type")
             }
         }
         
@@ -105,7 +103,7 @@ extension UIViewController {
     }
     
     func loading() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Vui lòng đợi...", preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -117,7 +115,14 @@ extension UIViewController {
     }
     
     func dismissLoading() {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func openAlert(_ message: String) {
+        let alert = UIAlertController(title: "Lỗi", message: message, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 

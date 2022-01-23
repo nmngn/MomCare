@@ -58,9 +58,11 @@ class InfoUserTableViewCell: UITableViewCell {
         if model.contrastColor == .black {
             valueTextField.backgroundColor = .white
             callButton.backgroundColor = .white
+            messageButton.backgroundColor = .white
         } else {
             valueTextField.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
             callButton.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+            messageButton.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
         }
     }
     

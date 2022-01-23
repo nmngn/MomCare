@@ -54,7 +54,7 @@ struct DetailModel {
     var isEnable = true
     
     func email() -> String {
-        return numberPhone + "@gmail.com"
+        return numberPhone + "@user.com"
     }
     
     func changeImage(image: UIImage, type: UserChoice) -> NSData {

@@ -1,13 +1,13 @@
 //
-//  UserChatTableViewCell.swift
+//  UserInfoTableViewCell.swift
 //  MomCare
 //
-//  Created by Nam Ngây on 21/01/2022.
+//  Created by Nam Ngây on 23/01/2022.
 //
 
 import UIKit
 
-class UserChatTableViewCell: UITableViewCell {
+class UserInfoTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

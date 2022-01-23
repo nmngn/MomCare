@@ -74,10 +74,6 @@ class SmallOptionViewController: UIViewController {
         navigation.pushViewController(vc, animated: true)
     }
     
-    @IBAction func openChat(_ sender: UIButton) {
-
-    }
-    
     @IBAction func openNetwork(_ sender: UIButton) {
         let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
         dismissVC()
