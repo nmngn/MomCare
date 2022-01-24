@@ -32,7 +32,7 @@ enum DataType {
 }
 
 struct DetailModel {
-    var id = 0
+    var id = ""
     var type: DetailType?
     var title = ""
     var value = ""

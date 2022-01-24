@@ -228,10 +228,15 @@ extension LogInViewController {
         UIView.animate(withDuration: 1.5, delay: 0.75, options: []) {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeVC = storyboard.instantiateInitialViewController()
-            UIApplication.shared.windows.first?.rootViewController = homeVC
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            if self.endText == "@admin.com" {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let homeVC = storyboard.instantiateInitialViewController()
+                UIApplication.shared.windows.first?.rootViewController = homeVC
+                UIApplication.shared.windows.first?.makeKeyAndVisible()
+            } else {
+                let vc = UserViewController.init(nibName: "UserViewController", bundle: nil)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         UIView.animate(withDuration: 1, delay: 0.25, options: []) {
             self.cloud1.center.x += self.view.bounds.width

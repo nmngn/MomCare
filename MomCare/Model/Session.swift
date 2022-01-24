@@ -16,5 +16,24 @@ class Session {
 }
 
 final class UserLogIn {
-    var userNumberPhone = ""   
+    var userNumberPhone = ""
+    var idAdmin = ""
+}
+
+struct URLs {
+    private static var baseUrl = "https://localhost:3001/"
+    
+    var createAdmin = baseUrl + "admin/"
+    var updateAdmin = baseUrl + "admin/"
+    
+    var createUser = baseUrl + "user/"
+    var updateUser = baseUrl + "user/"
+    var deleteUser = baseUrl + "user/"
+    var getAllUser = baseUrl + "user/"
+    var getOneUser = baseUrl + "user/"
+    
+    var createNote = baseUrl + "note/"
+    var deleteNote = baseUrl + "note/"
+    var getOneNote = baseUrl + "note/"
+    var getAllNote = baseUrl + "note/"
 }

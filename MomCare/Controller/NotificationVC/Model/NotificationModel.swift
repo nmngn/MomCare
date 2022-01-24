@@ -12,5 +12,5 @@ struct NotificationModel {
     var name = ""
     var babyDateBorn = ""
     var dateCalculate = ""
-    var id = 0
+    var id = ""
 }

@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="OQf-I4-ui7" id="d7E-86-T0B"/>
+                <outlet property="theme" destination="geu-pQ-Lfv" id="oX5-cZ-gjQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
