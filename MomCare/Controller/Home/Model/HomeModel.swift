@@ -22,7 +22,7 @@ struct HomeModel {
     var image: UIImage?
     var backgroundColor: UIColor?
     
-    var id = 0
+    var id = ""
     var avatarImage: NSData?
     var name = ""
     var address = ""

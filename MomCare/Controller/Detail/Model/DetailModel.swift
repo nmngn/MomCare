@@ -53,7 +53,10 @@ struct DetailModel {
     var isCall = false
     var isEnable = true
     
-    func email() -> String {
+    func email(isAdmin: Bool = false) -> String {
+        if isAdmin {
+            return numberPhone + "@admin.com"
+        }
         return numberPhone + "@user.com"
     }
     

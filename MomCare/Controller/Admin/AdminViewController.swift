@@ -8,7 +8,38 @@
 import UIKit
 
 class AdminViewController: DetailUserViewController {
-
+    
+    let repo = Repositories(api: .share)
+    let idAdmin = Session.shared.userProfile.idAdmin
+    var adminInfo: Admin? {
+        didSet {
+            setupData()
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configView()
+        setupView()
+        getDataAdmin()
+        changeTheme(self.theme)
+        setupNavigationButton()
+    }
+    
+    func getDataAdmin() {
+        repo.getOneAdmin(idAdmin: idAdmin) { [weak self] value in
+            switch value {
+            case .success(let data):
+                if let data = data {
+                    self?.adminInfo = data
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
+    }
+    
     override func setupData() {
         model.removeAll()
         var avatar = currentModel
@@ -21,14 +52,14 @@ class AdminViewController: DetailUserViewController {
         name.type = .info
         name.dataType = .name
         name.title = "Họ và tên"
-//        name.value = adminInfo.userName
+        name.value = adminInfo?.name ?? ""
         name.contrastColor = contrastColor
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
         address.title = "Địa chỉ"
-//        address.value = adminInfo.userAddress
+        address.value = adminInfo?.address ?? ""
         address.contrastColor = contrastColor
         
         var number = currentModel
@@ -36,14 +67,14 @@ class AdminViewController: DetailUserViewController {
         number.dataType = .numberPhone
         number.title = "Số điện thoại ⃰"
         number.isEnable = false
-        number.value = adminInfo.userNumberPhone
+        number.value = adminInfo?.numberPhone ?? Session.shared.userProfile.userNumberPhone
         number.contrastColor = contrastColor
         
         var email = currentModel
         email.type = .info
         email.dataType = .height // height luu cho email
         email.title = "Email"
-//        email.value = adminInfo.userEmail
+        email.value = adminInfo?.email ?? ""
         email.contrastColor = contrastColor
         
         model.append(avatar)
@@ -63,9 +94,18 @@ class AdminViewController: DetailUserViewController {
     }
     
     @IBAction override func saveData(_ sender: UIButton) {
-        view.makeToast("Cập nhật thành công")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.navigationController?.popToRootViewController(animated: true)
+        repo.updateAdmin(idAdmin: idAdmin, avatar: "", name: currentModel.name, address: currentModel.address,
+                         email: currentModel.email(isAdmin: true)) { [weak self] value in
+            switch value {
+            case.success(let data):
+                print(data as Any)
+                self?.view.makeToast("Cập nhật thành công")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
         }
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class HistoryViewController: UIViewController {
 
@@ -15,7 +14,6 @@ class HistoryViewController: UIViewController {
     
     var model = [HistoryModel]()
     var identifyUser = 0
-    let realm = try! Realm()
     var listHistory: [HistoryNote]? {
         didSet {
             setupData()
@@ -55,11 +53,11 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-        let result = realm.objects(HistoryNote.self).toArray()
-        let newList = result.filter({$0.identifyUser == self.identifyUser})
-        if !newList.isEmpty {
-            self.listHistory = newList
-        }
+//        let result = realm.objects(HistoryNote.self).toArray()
+//        let newList = result.filter({$0.identifyUser == self.identifyUser})
+//        if !newList.isEmpty {
+//            self.listHistory = newList
+//        }
     }
     
     func configView() {
@@ -92,7 +90,7 @@ class HistoryViewController: UIViewController {
         guard let list = self.listHistory else { return }
         for item in list {
             cell.title = item.time
-            cell.dataImage = item.image
+//            cell.dataImage = item.image
             model.append(cell)
         }
     }
@@ -102,13 +100,13 @@ class HistoryViewController: UIViewController {
     }
     
     func removeNote(dateSave: String, index: Int) {
-        let item = self.realm.objects(HistoryNote.self).filter("time = %@", dateSave)
-        try! self.realm.write({
-            self.realm.delete(item)
-        })
-        self.model.remove(at: index)
-        self.getListHistory()
-        self.tableView.reloadData()
+//        let item = self.realm.objects(HistoryNote.self).filter("time = %@", dateSave)
+//        try! self.realm.write({
+//            self.realm.delete(item)
+//        })
+//        self.model.remove(at: index)
+//        self.getListHistory()
+//        self.tableView.reloadData()
     }
 }
 
@@ -230,18 +228,18 @@ extension HistoryViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        do {
-            realm.beginWrite()
-            let history = HistoryNote()
-            history.identifyUser = self.identifyUser
-            history.time = dateString
-            history.image = imageData
-
-            try? realm.commitWrite()
-            try? realm.safeWrite {
-                realm.add(history)
-            }
-        }
+//        do {
+//            realm.beginWrite()
+//            let history = HistoryNote()
+//            history.identifyUser = self.identifyUser
+//            history.time = dateString
+//            history.image = imageData
+//
+//            try? realm.commitWrite()
+//            try? realm.safeWrite {
+//                realm.add(history)
+//            }
+//        }
         self.getListHistory()
         self.tableView.reloadData()
     }

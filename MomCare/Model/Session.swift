@@ -21,19 +21,11 @@ final class UserLogIn {
 }
 
 struct URLs {
-    private static var baseUrl = "https://localhost:3001/"
+    private static var baseUrl = "http://localhost:3001/"
     
-    var createAdmin = baseUrl + "admin/"
-    var updateAdmin = baseUrl + "admin/"
+    static var adminUrl = baseUrl + "admin/"
     
-    var createUser = baseUrl + "user/"
-    var updateUser = baseUrl + "user/"
-    var deleteUser = baseUrl + "user/"
-    var getAllUser = baseUrl + "user/"
-    var getOneUser = baseUrl + "user/"
+    static var userUrl = baseUrl + "user/"
     
-    var createNote = baseUrl + "note/"
-    var deleteNote = baseUrl + "note/"
-    var getOneNote = baseUrl + "note/"
-    var getAllNote = baseUrl + "note/"
+    static var noteUrl = baseUrl + "note/"
 }

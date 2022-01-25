@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class NotificationViewController: UIViewController {
 
@@ -15,7 +14,6 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var bellView: UIView!
     @IBOutlet weak var titleBell: UILabel!
     
-    let realm = try? Realm()
     var contrastColor = UIColor()
     var notiModel = [NotificationModel]()
     
@@ -87,7 +85,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
         let id = notiModel[indexPath.row].id
-        vc.currentModel = (realm?.objects(User.self).filter({$0.id == id}).first?.convertToDetailModel()) ?? DetailModel()
+//        vc.currentModel = (realm?.objects(User.self).filter({$0.id == id}).first?.convertToDetailModel()) ?? DetailModel()
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }

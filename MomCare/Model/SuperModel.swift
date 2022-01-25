@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-class SuperAdmin: Mappable {
+struct SuperAdmin: Mappable {
     var admins: [Admin]?
     
     init?(map: Map) {
@@ -20,7 +20,7 @@ class SuperAdmin: Mappable {
     }
 }
 
-class SuperUser: Mappable {
+struct SuperUser: Mappable {
     var users: [User]?
     
     init?(map: Map) {
@@ -32,7 +32,7 @@ class SuperUser: Mappable {
     }
 }
 
-class SuperNote: Mappable {
+struct SuperNote: Mappable {
     var notes: [HistoryNote]?
     
     init?(map: Map) {

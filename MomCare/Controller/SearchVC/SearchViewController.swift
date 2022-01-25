@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class SearchViewController: UIViewController {
 
@@ -22,7 +21,6 @@ class SearchViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    let realm = try! Realm()
     var userSearch = ""
     var contrastColor = UIColor()
     
@@ -119,14 +117,14 @@ extension SearchViewController: UISearchBarDelegate {
         if let text = searchBar.text {
             if !text.isEmpty {
                 let predicate = NSPredicate(format: "name contains[c]         %@", text)
-                let result = realm.objects(User.self).filter(predicate)
-                if result.count == 0 {
-                    self.listResult?.removeAll()
-                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
-                } else {
-                    setupStatus(isHidden: true, title: "")
-                    self.listResult = result.toArray()
-                }
+//                let result = realm.objects(User.self).filter(predicate)
+//                if result.count == 0 {
+//                    self.listResult?.removeAll()
+//                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
+//                } else {
+//                    setupStatus(isHidden: true, title: "")
+//                    self.listResult = result.toArray()
+//                }
             } else {
                 self.listResult?.removeAll()
                 setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import AlamofireObjectMapper
+import ObjectMapper
+import Alamofire
 
 struct Admin: Mappable {
     var idAdmin = ""
@@ -14,6 +15,7 @@ struct Admin: Mappable {
     var email = ""
     var address = ""
     var image = ""
+    var numberPhone = ""
     
     init?(map: Map) {
         mapping(map: map)
@@ -24,7 +26,8 @@ struct Admin: Mappable {
         name <- map["name"]
         email <- map["email"]
         address <- map["address"]
-        image <- map[image]
+        image <- map["image"]
+        numberPhone <- map["numberPhone"]
     }
 }
 
@@ -69,7 +72,7 @@ struct User : Mappable {
         model.id = idUser
         model.address = address
         model.numberPhone = numberPhone
-        model.avatarImage = UIImage(data: Data(referencing: avatar ?? NSData()))
+//        model.avatarImage = UIImage(data: Data(referencing: avatar ?? NSData()))
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -77,7 +80,7 @@ struct User : Mappable {
         model.dateCalculate = updateTime()
         model.babyAge = babyDateBorn
         model.note = note
-        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
+//        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
         return model
     }
     

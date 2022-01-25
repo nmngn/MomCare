@@ -11,21 +11,21 @@ import Alamofire
 class UserRequest: BaseRequest {
     
     required init(idAdmin: String) { //getAll
-        let url = String(format: URLs.getAllUser, arguments: idAdmin)
-        let body: [String: Any] = []
+        let url = URLs.userUrl + idAdmin
+        let body: [String: Any] = [:]
         super.init(url: url, requestType: .get, body: body)
     }
     
-    required init(idUser: String) { //getOne
-        let url = String(format: URLs.getOneUser, arguments: idUser)
-        let body: [String: Any] = []
-        super.init(url: url, requestType: .get, body: body)
+    required init(idUser: String, type: Alamofire.HTTPMethod) { //getOne
+        let url = URLs.userUrl + idUser
+        let body: [String: Any] = [:]
+        super.init(url: url, requestType: type, body: body)
     }
     
     required init(idAdmin: String, name: String, address: String, momBirth: String, numberPhone: String,
                   height: String, babyDateBorn: String, dateSave: String, note: String, avatar: String,
-                  imagePregnant: String, isStar: Bool) { //create
-        let url = String(format: URLs.createUser, arguments: idAdmin)
+                  imagePregnant: String) { //create
+        let url = URLs.userUrl + idAdmin
         let body: [String: Any] = [
             "name": name,
             "address": address,
@@ -36,21 +36,20 @@ class UserRequest: BaseRequest {
             "dateSave": dateSave,
             "note": note,
             "avatar": avatar,
-            "imagePregnant": imagePregnant,
-            "isStar": isStar]
+            "imagePregnant": imagePregnant]
         super.init(url: url, requestType: .post, body: body)
     }
     
     required init(idUser: String) { //delete
-        let url = String(format: URLs.deleteUser, arguments: idUser)
-        let body: [String: Any] = []
+        let url = URLs.userUrl + idUser
+        let body: [String: Any] = [:]
         super.init(url: url, requestType: .delete, body: body)
     }
     
     required init(idUser: String, name: String, address: String, momBirth: String, numberPhone: String,
                   height: String, babyDateBorn: String, dateSave: String, note: String, avatar: String,
-                  imagePregnant: String, isStar: Bool) { //update
-        let url = String(format: URLs.updateUser, arguments: idUser)
+                  imagePregnant: String) { //update
+        let url = URLs.userUrl + idUser
         let body: [String: Any] = [
             "name": name,
             "address": address,
@@ -61,7 +60,13 @@ class UserRequest: BaseRequest {
             "dateSave": dateSave,
             "note": note,
             "avatar": avatar,
-            "imagePregnant": imagePregnant,
+            "imagePregnant": imagePregnant]
+        super.init(url: url, requestType: .put, body: body)
+    }
+    
+    required init(idUser: String, isStar: Bool) {
+        let url = URLs.userUrl + idUser
+        let body: [String: Any] = [
             "isStar": isStar]
         super.init(url: url, requestType: .put, body: body)
     }

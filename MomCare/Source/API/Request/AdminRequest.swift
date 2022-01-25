@@ -10,15 +10,15 @@ import Alamofire
 
 class AdminRequest: BaseRequest {
     required init(numberPhone: String) { //create
-        let url = URL(string: URLs.createAdmin)
+        let url = URLs.adminUrl
         let body: [String: Any] = [
-            "number": numberPhone
+            "numberPhone": numberPhone
         ]
         super.init(url: url, requestType: .post, body: body)
     }
     
     required init(idAdmin: String, avatar: String, name: String, address: String, email: String) { //update
-        let url = String(format: URLs.updateAdmin, arguments: idAdmin)
+        let url = URLs.adminUrl + idAdmin
         let body: [String: Any] = [
             "name": name,
             "avatar": avatar,
@@ -26,6 +26,12 @@ class AdminRequest: BaseRequest {
             "email": email
         ]
         super.init(url: url, requestType: .put, body: body)
+    }
+    
+    required init(idAdmin: String) { //get One
+        let url = URLs.adminUrl + idAdmin
+        let body: [String: Any] = [:]
+        super.init(url: url, requestType: .get, body: body)
     }
 
 }

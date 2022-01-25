@@ -7,7 +7,6 @@
 
 import UIKit
 import Then
-import RealmSwift
 import PhotosUI
 import Firebase
 
@@ -23,24 +22,18 @@ class DetailUserViewController: UIViewController {
     @IBOutlet weak var theme: UIImageView!
     
     var model = [DetailModel]()
-    let user = User()
+//    let user = User()
     var userChoice: UserChoice?
     var currentModel = DetailModel()
-    let realm = try! Realm()
     var contrastColor = UIColor()
-    let adminInfo = Session.shared.userProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
         setupView()
         setupData()
-        setupNavigationButton()
         changeTheme(self.theme)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+        setupNavigationButton()
     }
     
     func setupView() {
@@ -50,6 +43,10 @@ class DetailUserViewController: UIViewController {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
         self.title = "Thông tin bệnh nhân"
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -95,13 +92,13 @@ class DetailUserViewController: UIViewController {
         } else {
             let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
             let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
-                let user = self.realm.objects(User.self).filter("id = %d", self.currentModel.id)
-                let history = self.realm.objects(HistoryNote.self).filter("identifyUser = %d", self.currentModel.id)
-                try! self.realm.write({
-                    self.realm.delete(user)
-                    self.realm.delete(history)
-                })
-                self.updateID(self.currentModel.id)
+//                let user = self.realm.objects(User.self).filter("id = %d", self.currentModel.id)
+//                let history = self.realm.objects(HistoryNote.self).filter("identifyUser = %d", self.currentModel.id)
+//                try! self.realm.write({
+//                    self.realm.delete(user)
+//                    self.realm.delete(history)
+//                })
+//                self.updateID(self.currentModel.id)
                 self.navigationController?.popToRootViewController(animated: true)
             }
             let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
@@ -112,12 +109,12 @@ class DetailUserViewController: UIViewController {
     }
     
     func updateID(_ id: Int) {
-        let list = self.realm.objects(User.self).filter({$0.id > id})
-        for item in list {
-            try! self.realm.write({
-                item.id -= 1
-            })
-        }
+//        let list = self.realm.objects(User.self).filter({$0.id > id})
+//        for item in list {
+//            try! self.realm.write({
+//                item.id -= 1
+//            })
+//        }
     }
 
     
@@ -276,29 +273,29 @@ class DetailUserViewController: UIViewController {
     }
     
     @IBAction func showMore(_ sender: UIButton) {
-        if currentModel.id == 0 {
-            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
-                self.saveData()
-            }
-            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
-            vc.hidesBottomBarWhenPushed = true
-            vc.identifyUser = currentModel.id
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+//        if currentModel.id == 0 {
+//            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+//            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+//                self.saveData()
+//            }
+//            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+//            alert.addAction(action)
+//            alert.addAction(cancel)
+//            self.present(alert, animated: true, completion: nil)
+//        } else {
+//            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
+//            vc.hidesBottomBarWhenPushed = true
+//            vc.identifyUser = currentModel.id
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     @IBAction func saveData(_ sender: UIButton) {
-        if currentModel.id != 0 {
-            updateUser(id: currentModel.id)
-        } else {
-            saveData()
-        }
+//        if currentModel.id != 0 {
+//            updateUser(id: currentModel.id)
+//        } else {
+//            saveData()
+//        }
     }
     
     func saveData() {
@@ -498,107 +495,107 @@ extension DetailUserViewController: DetailUserInfo {
 
 extension DetailUserViewController {
     func saveInfoUser() {
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-                
-        do {
-            realm.beginWrite()
-            user.id = realm.objects(User.self).count + 1
-            if let image = currentModel.avatarImage {
-                if image != UIImage(named: "avatar_placeholder") {
-                    user.avatar = currentModel.changeImage(image: image, type: .mom)
-                }
-            }
-            
-            if let image = currentModel.imagePregnant {
-                user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
-            }
-            
-            user.name = currentModel.name
-            user.address = currentModel.address
-            user.momBirth = currentModel.momBirth
-            user.numberPhone = currentModel.numberPhone
-            user.height = currentModel.height
-            user.babyDateBorn = currentModel.babyAge
-            user.note = currentModel.note
-            user.dateSave = dateString
-            
-            try? realm.commitWrite()
-            try? realm.safeWrite({
-                realm.add(user)
-                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            })
-            createFirebaseUser()
-        }
+//        let dateFormatter : DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+//        let date = Date()
+//        let dateString = dateFormatter.string(from: date)
+//
+//        do {
+//            realm.beginWrite()
+//            user.id = realm.objects(User.self).count + 1
+//            if let image = currentModel.avatarImage {
+//                if image != UIImage(named: "avatar_placeholder") {
+//                    user.avatar = currentModel.changeImage(image: image, type: .mom)
+//                }
+//            }
+//
+//            if let image = currentModel.imagePregnant {
+//                user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
+//            }
+//
+//            user.name = currentModel.name
+//            user.address = currentModel.address
+//            user.momBirth = currentModel.momBirth
+//            user.numberPhone = currentModel.numberPhone
+//            user.height = currentModel.height
+//            user.babyDateBorn = currentModel.babyAge
+//            user.note = currentModel.note
+//            user.dateSave = dateString
+//
+//            try? realm.commitWrite()
+//            try? realm.safeWrite({
+//                realm.add(user)
+//                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+//                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+//                    self.navigationController?.popToRootViewController(animated: true)
+//                }
+//                alert.addAction(action)
+//                self.present(alert, animated: true, completion: nil)
+//            })
+//            createFirebaseUser()
+//        }
     }
     
     func updateUser(id: Int) {
-        let users = realm.objects(User.self).filter("id = %d", id)
-        
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-
-        if let user = users.first {
-            try! realm.write {
-                if let image = currentModel.avatarImage {
-                    if image != UIImage(named: "avatar_placeholder") {
-                        user.avatar = currentModel.changeImage(image: image, type: .mom)
-                    }
-                }
-                
-                if let image = currentModel.imagePregnant {
-                    user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
-                }
-                
-                user.name = currentModel.name
-                user.address = currentModel.address
-                user.momBirth = currentModel.momBirth
-                user.numberPhone = currentModel.numberPhone
-                user.height = currentModel.height
-                user.babyDateBorn = currentModel.babyAge
-                user.note = currentModel.note
-                user.dateSave = dateString
-                
-                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-        if user.numberPhone != currentModel.numberPhone {
-            createFirebaseUser()
-        }
+//        let users = realm.objects(User.self).filter("id = %d", id)
+//
+//        let dateFormatter : DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+//        let date = Date()
+//        let dateString = dateFormatter.string(from: date)
+//
+//        if let user = users.first {
+//            try! realm.write {
+//                if let image = currentModel.avatarImage {
+//                    if image != UIImage(named: "avatar_placeholder") {
+//                        user.avatar = currentModel.changeImage(image: image, type: .mom)
+//                    }
+//                }
+//
+//                if let image = currentModel.imagePregnant {
+//                    user.imagePregnant = currentModel.changeImage(image: image, type: .baby)
+//                }
+//
+//                user.name = currentModel.name
+//                user.address = currentModel.address
+//                user.momBirth = currentModel.momBirth
+//                user.numberPhone = currentModel.numberPhone
+//                user.height = currentModel.height
+//                user.babyDateBorn = currentModel.babyAge
+//                user.note = currentModel.note
+//                user.dateSave = dateString
+//
+//                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+//                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+//                    self.navigationController?.popToRootViewController(animated: true)
+//                }
+//                alert.addAction(action)
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//        if user.numberPhone != currentModel.numberPhone {
+//            createFirebaseUser()
+//        }
     }
     
     func createFirebaseUser() {
-        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { (authDataResult, error) in
-            if let error = error {
-                print("Create error: \(error.localizedDescription)")
-                if let error = error as NSError? {
-                    print("Error code: \(error.code)")
-                    switch error.code {
-                    case 17007:
-                        self.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
-                    case 17026:
-                        self.openAlert("Mật khẩu phải dài hơn 6 kí tự")
-                    default:
-                        break
-                    }
-                }
-            } else {
-                print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
-            }
-        }
+//        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { (authDataResult, error) in
+//            if let error = error {
+//                print("Create error: \(error.localizedDescription)")
+//                if let error = error as NSError? {
+//                    print("Error code: \(error.code)")
+//                    switch error.code {
+//                    case 17007:
+//                        self.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
+//                    case 17026:
+//                        self.openAlert("Mật khẩu phải dài hơn 6 kí tự")
+//                    default:
+//                        break
+//                    }
+//                }
+//            } else {
+//                print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
+//            }
+//        }
     }    
 }

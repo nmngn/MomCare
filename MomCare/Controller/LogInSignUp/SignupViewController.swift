@@ -25,6 +25,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var cloud3: UIImageView!
     @IBOutlet weak var cloud4: UIImageView!
     
+    let repo = Repositories(api: .share)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
@@ -71,9 +73,21 @@ class SignupViewController: UIViewController {
                         }
                     } else {
                         print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
-                        Session.shared.userProfile.userNumberPhone = email
-                        UserDefaults.standard.set(email, forKey: "sdt")
                         self.dismissLoading()
+                        self.repo.createAdmin(numberPhone: email) { [weak self] response in
+                            switch response {
+                                case .success(let data):
+                                if let data = data {
+                                    Session.shared.userProfile.userNumberPhone = email
+                                    Session.shared.userProfile.idAdmin = data.idAdmin
+                                    UserDefaults.standard.set(email, forKey: "sdt")
+                                    UserDefaults.standard.set(data.idAdmin, forKey: "idAdmin")
+                                    print(data)
+                                }
+                            case .failure(let error):
+                                print(error as Any)
+                            }
+                        }
                         self.animateAfterSignUp()
                     }
                 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 import NotificationCenter
 import SwiftCSV
 import PopupDialog
@@ -18,12 +17,10 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var theme: UIImageView!
     
     var model = [HomeModel]()
-    let realm = try! Realm()
     var listUser: [User]? {
         didSet {
             setupData()
             getUserToPushNoti()
-            setupNavigationButton()
             self.tableView?.reloadData()
         }
     }
@@ -47,6 +44,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         configView()
+        setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
         if self.traitCollection.userInterfaceStyle == .light {
@@ -55,7 +53,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             contrastColor = UIColor.white.withAlphaComponent(0.8)
         }
         self.requestNotificationAuthorization()
-        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
         
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -168,13 +165,13 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         
     func getListUser(reverse: Bool = false) {
         do {
-            if !reverse {
-                let info = realm.objects(User.self).toArray()
-                self.listUser = info
-            } else {
-                let info = realm.objects(User.self).toArray()
-                self.listUser = info.reversed()
-            }
+//            if !reverse {
+//                let info = realm.objects(User.self).toArray()
+//                self.listUser = info
+//            } else {
+//                let info = realm.objects(User.self).toArray()
+//                self.listUser = info.reversed()
+//            }
         }
     }
     
@@ -233,20 +230,20 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         model.append(header1)
         
         for i in 0..<newList.count {
-            infoCell.id = newList[i].id
-            infoCell.address = newList[i].address
-            infoCell.avatarImage = newList[i].avatar
-            infoCell.babyAge = newList[i].babyDateBorn
-            infoCell.height = newList[i].height
-            infoCell.note = newList[i].note
-            infoCell.momBirth = newList[i].momBirth
-            infoCell.imagePregnant = newList[i].imagePregnant
-            infoCell.numberPhone = newList[i].numberPhone
-            infoCell.name = newList[i].name
-            infoCell.dateSave = newList[i].dateSave
-            infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
-            infoCell.isStar = newList[i].isStar
-            model.append(infoCell)
+//            infoCell.id = newList[i].id
+//            infoCell.address = newList[i].address
+//            infoCell.avatarImage = newList[i].avatar
+//            infoCell.babyAge = newList[i].babyDateBorn
+//            infoCell.height = newList[i].height
+//            infoCell.note = newList[i].note
+//            infoCell.momBirth = newList[i].momBirth
+//            infoCell.imagePregnant = newList[i].imagePregnant
+//            infoCell.numberPhone = newList[i].numberPhone
+//            infoCell.name = newList[i].name
+//            infoCell.dateSave = newList[i].dateSave
+//            infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
+//            infoCell.isStar = newList[i].isStar
+//            model.append(infoCell)
         }
         
         model.append(header2)
@@ -255,20 +252,20 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
         
         for i in 0..<listUser.count {
-            infoCell.id = listUser[i].id
-            infoCell.address = listUser[i].address
-            infoCell.avatarImage = listUser[i].avatar
-            infoCell.babyAge = listUser[i].babyDateBorn
-            infoCell.height = listUser[i].height
-            infoCell.note = listUser[i].note
-            infoCell.momBirth = listUser[i].momBirth
-            infoCell.imagePregnant = listUser[i].imagePregnant
-            infoCell.numberPhone = listUser[i].numberPhone
-            infoCell.name = listUser[i].name
-            infoCell.dateSave = listUser[i].dateSave
-            infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
-            infoCell.isStar = listUser[i].isStar
-            model.append(infoCell)
+//            infoCell.id = listUser[i].id
+//            infoCell.address = listUser[i].address
+//            infoCell.avatarImage = listUser[i].avatar
+//            infoCell.babyAge = listUser[i].babyDateBorn
+//            infoCell.height = listUser[i].height
+//            infoCell.note = listUser[i].note
+//            infoCell.momBirth = listUser[i].momBirth
+//            infoCell.imagePregnant = listUser[i].imagePregnant
+//            infoCell.numberPhone = listUser[i].numberPhone
+//            infoCell.name = listUser[i].name
+//            infoCell.dateSave = listUser[i].dateSave
+//            infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
+//            infoCell.isStar = listUser[i].isStar
+//            model.append(infoCell)
         }
     }
 
@@ -285,9 +282,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let alert = UIAlertController(title: "Sắp xếp", message: "Chọn cách sắp xếp", preferredStyle: .actionSheet)
         let sortName = UIAlertAction(title: "Theo tên", style: .default, handler: { _ in
             self.sortType = "Theo tên"
-            let items = self.realm.objects(User.self).sorted(byKeyPath: "name", ascending: true)
+//            let items = self.realm.objects(User.self).sorted(byKeyPath: "name", ascending: true)
             self.listUser?.removeAll()
-            self.listUser = items.toArray()
+//            self.listUser = items.toArray()
             })
         let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
             self.sortType = "Theo ngày lưu"
@@ -346,7 +343,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setupData(model: model)
             }
             cell.isStar = { [weak self] isStar in
-                self?.saveStarStatus(id: model.id, isStar)
+//                self?.saveStarStatus(id: model.id, isStar)
             }
             cell.showInfo = { [weak self] age in
                 self?.getAgeData(age)
@@ -392,15 +389,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     func saveStarStatus(id: Int,_ isStar: Bool) {
-        let users = realm.objects(User.self).filter("id = %d", id)
-        
-        if let user = users.first {
-            try! realm.write {
-                user.isStar = isStar
-            }
-            self.getListUser()
-            self.tableView.reloadData()
-        }
+//        let users = realm.objects(User.self).filter("id = %d", id)
+//
+//        if let user = users.first {
+//            try! realm.write {
+//                user.isStar = isStar
+//            }
+//            self.getListUser()
+//            self.tableView.reloadData()
+//        }
     }
     
 }

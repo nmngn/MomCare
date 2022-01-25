@@ -28,6 +28,7 @@
 		36607F09279EAFB300F34640 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36607F08279EAFB300F34640 /* BaseRequest.swift */; };
 		36607F0B279EB18C00F34640 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36607F0A279EB18C00F34640 /* UserRequest.swift */; };
 		36607F0D279EB7F100F34640 /* NoteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36607F0C279EB7F100F34640 /* NoteRequest.swift */; };
+		36607F0F279EBBD900F34640 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36607F0E279EBBD900F34640 /* Repository.swift */; };
 		3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */; };
 		3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */; };
 		3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */; };
@@ -111,7 +112,6 @@
 		36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54672691F38000809FF3 /* LaunchScreen.storyboard */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
-		36FC461B26921AE200AAB868 /* Realm+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FC461A26921AE200AAB868 /* Realm+.swift */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +138,7 @@
 		36607F08279EAFB300F34640 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		36607F0A279EB18C00F34640 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
 		36607F0C279EB7F100F34640 /* NoteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRequest.swift; sourceTree = "<group>"; };
+		36607F0E279EBBD900F34640 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		3666F1972699819900D80E06 /* AddPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPictureTableViewCell.swift; sourceTree = "<group>"; };
 		3666F1982699819900D80E06 /* AddPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPictureTableViewCell.xib; sourceTree = "<group>"; };
 		3666F19C269982A300D80E06 /* NoteHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 		36EC546A2691F38000809FF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePregnantTableViewCell.swift; sourceTree = "<group>"; };
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
-		36FC461A26921AE200AAB868 /* Realm+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+.swift"; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
 		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,6 +284,7 @@
 			children = (
 				36607EF4279E9D4500F34640 /* Service */,
 				36607EF3279E9D3700F34640 /* API */,
+				36607F0E279EBBD900F34640 /* Repository.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -656,7 +657,6 @@
 		36FC461926921AD400AAB868 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				36FC461A26921AE200AAB868 /* Realm+.swift */,
 				366AE8B62692BC0C00B5262C /* UIView+.swift */,
 				366AE8CB2692C1FA00B5262C /* UITableView+.swift */,
 				367335CF2695D90000EB9DC0 /* String+.swift */,
@@ -854,7 +854,6 @@
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
-				36FC461B26921AE200AAB868 /* Realm+.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* Model.swift in Sources */,
 				36607EF1279E7B3E00F34640 /* UserModel.swift in Sources */,
 				368BE0322796C34C00ED457C /* Session.swift in Sources */,
@@ -881,6 +880,7 @@
 				368BE02E27967BDD00ED457C /* LogInViewController.swift in Sources */,
 				36607F0D279EB7F100F34640 /* NoteRequest.swift in Sources */,
 				36940556279D511600F1E3C6 /* UserInfoTableViewCell.swift in Sources */,
+				36607F0F279EBBD900F34640 /* Repository.swift in Sources */,
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
 				36807834279A8D25008ACD0B /* ChatViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,

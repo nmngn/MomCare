@@ -11,7 +11,6 @@ import ObjectMapper
 
 struct ApiService {
     
-    
     static let share = ApiService()
     
     private var alamofireManager = Alamofire.SessionManager.default
@@ -24,6 +23,7 @@ struct ApiService {
         }
         alamofireManager = Alamofire.SessionManager(configuration: configuration)
     }
+    
     func request<T: Mappable>(input: BaseRequest, completion: @escaping (_ value: T?, _ error: BaseError?) -> Void) {
         alamofireManager.request(input.url, method: input.requestType, parameters: input.body, encoding: input.encoding)
             .validate(statusCode: 200..<500)

@@ -33,6 +33,7 @@ class LogInViewController: UIViewController {
     
     var autoEmail = UserDefaults.standard.string(forKey: "sdt")
     var endText = "@user.com"
+    let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,7 @@ class LogInViewController: UIViewController {
         view.endEditing(true)
     }
         
-    @IBAction func login() {
+    @IBAction func login() { //login user
         self.loading()
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().signIn(withEmail: email + endText, password: password) { [weak self] _, error in
@@ -80,13 +81,14 @@ class LogInViewController: UIViewController {
         }
     }
     
-    func tryingLoginAgain() {
+    func tryingLoginAgain() { //login admin
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().signIn(withEmail: email + endText, password: password) { _, error in
                 if let error = error {
                     self.openAlert()
                     print(error)
                 } else {
+                    self.getDataAdmin()
                     Session.shared.userProfile.userNumberPhone = email
                     UserDefaults.standard.set(email, forKey: "sdt")
                     self.animateAfterLogin()
@@ -94,6 +96,22 @@ class LogInViewController: UIViewController {
             }
         }
     }
+    
+    func getDataAdmin() {
+        let idAdmin = UserDefaults.standard.string(forKey: "idAdmin")
+        if let id = idAdmin {
+            repo.getOneAdmin(idAdmin: id) { [weak self] value in
+                switch value {
+                case .success( _):
+                    Session.shared.userProfile.idAdmin = id
+                    print("Get Data Admin success")
+                case .failure(let error):
+                    print(error as Any)
+                }
+            }
+        }
+    }
+
     
     @IBAction func signup(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Signup", bundle: nil)
