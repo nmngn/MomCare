@@ -29,6 +29,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var contrastColor = UIColor()
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
+    let repo = Repositories(api: .share)
+    let idAdmin = Session.shared.userProfile.idAdmin
     
     let presenter: Presentr = {
         let customPresenter = Presentr(presentationType: .fullScreen)
@@ -164,7 +166,16 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
         
     func getListUser(reverse: Bool = false) {
-        do {
+//        repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
+//            switch value {
+//            case .success(let data):
+//                if let data = data {
+//                    self.listUser = data
+//                }
+//            }
+//        }
+        
+//        do {
 //            if !reverse {
 //                let info = realm.objects(User.self).toArray()
 //                self.listUser = info
@@ -172,7 +183,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
 //                let info = realm.objects(User.self).toArray()
 //                self.listUser = info.reversed()
 //            }
-        }
+ //       }
     }
     
     func configView() {

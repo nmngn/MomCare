@@ -33,14 +33,6 @@ class InfoUserTableViewCell: UITableViewCell {
     }
     
     func setupData(model: DetailModel) {
-        if model.dataType == .numberPhone {
-            valueTextField.keyboardType = .numberPad
-            textInput = model.numberPhone
-        }
-        valueTextField.isEnabled = model.isEnable
-        if !model.isEnable {
-            valueTextField.alpha = 0.8
-        }
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value

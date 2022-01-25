@@ -29,6 +29,16 @@ struct Admin: Mappable {
         image <- map["image"]
         numberPhone <- map["numberPhone"]
     }
+    
+    func convertToDetailModel() -> DetailModel {
+        var model = DetailModel()
+        model.name = name
+        model.numberPhone = numberPhone
+        model.height = email
+//        model.avatarImage = image
+        model.address = address
+        return model
+    }
 }
 
 struct User : Mappable {

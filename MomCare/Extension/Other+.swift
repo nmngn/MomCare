@@ -88,12 +88,12 @@ extension UIViewController {
         }
     }
     
-    func saveImage(imageName: String, image: UIImage) {
-     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+    func saveImage(imageName: String, image: UIImage) -> String {
+     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return "" }
 
         let fileName = imageName
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
-        guard let data = image.jpegData(compressionQuality: 1) else { return }
+        guard let data = image.jpegData(compressionQuality: 1) else { return ""}
         if FileManager.default.fileExists(atPath: fileURL.path) {
             do {
                 try FileManager.default.removeItem(atPath: fileURL.path)
@@ -107,6 +107,7 @@ extension UIViewController {
         } catch let error {
             print("error saving file with error", error)
         }
+        return fileURL.path
     }
 
     func loadImageFromDiskWith(fileName: String) -> UIImage? {

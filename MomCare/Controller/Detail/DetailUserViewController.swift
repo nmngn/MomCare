@@ -26,6 +26,7 @@ class DetailUserViewController: UIViewController {
     var userChoice: UserChoice?
     var currentModel = DetailModel()
     var contrastColor = UIColor()
+    var saveAdminImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -260,6 +261,9 @@ class DetailUserViewController: UIViewController {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if userChoice == .mom {
                 self.currentModel.avatarImage = image
+                if saveAdminImage {
+                    var _ = saveImage(imageName: "adminImage", image: image)
+                }
                 self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView?.reloadRows(at: [indexPath], with: .none)
