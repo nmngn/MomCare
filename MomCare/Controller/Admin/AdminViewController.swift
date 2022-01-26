@@ -9,16 +9,11 @@ import UIKit
 
 class AdminViewController: DetailUserViewController {
     
-    let repo = Repositories(api: .share)
     let idAdmin = Session.shared.userProfile.idAdmin
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        changeTheme(self.theme)
-        configView()
         getDataAdmin()
-        setupNavigationButton()
         saveAdminImage = true
     }
     
@@ -35,8 +30,10 @@ class AdminViewController: DetailUserViewController {
             case .success(let data):
                 if let data = data {
                     self?.currentModel = data.convertToDetailModel()
-                    self?.setupData()
-                    self?.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self?.setupData()
+                        self?.tableView.reloadData()
+                    }
                 }
             case .failure(let error):
                 print(error as Any)

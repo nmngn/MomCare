@@ -170,10 +170,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             switch value {
             case .success(let data):
                 if let data = data {
+                    let list = data.users?.filter({$0.idAdmin == self?.idAdmin})
                     if !reverse {
-                        self?.listUser = data.users
+                        self?.listUser = list
                     } else {
-                        self?.listUser = data.users?.reversed()
+                        self?.listUser = list?.reversed()
                     }
                 }
             case .failure(let error):
@@ -398,13 +399,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     func saveStarStatus(id: String,_ isStar: Bool) {
-        repo.makeStar(idUser: id, isStar: isStar) { response in
+        repo.makeStar(idUser: id, isStar: isStar) { [weak self] response in
             switch response {
             case .success(_):
-                self.getListUser()
-                self.tableView.reloadData()
+                self?.getListUser()
+                self?.tableView.reloadData()
             case .failure(let error):
-                self.openAlert(error?.errorMessage ?? "")
+                self?.openAlert(error?.errorMessage ?? "")
             }
         }
     }

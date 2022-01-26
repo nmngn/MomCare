@@ -11,7 +11,7 @@ import Alamofire
 class UserRequest: BaseRequest {
     
     required init(idAdmin: String) { //getAll
-        let url = URLs.getAllUrl + idAdmin
+        let url = URLs.getAllUrl
         let body: [String: Any] = [:]
         super.init(url: url, requestType: .get, body: body)
     }
@@ -25,8 +25,9 @@ class UserRequest: BaseRequest {
     required init(idAdmin: String, name: String, address: String, momBirth: String, numberPhone: String,
                   height: String, babyDateBorn: String, dateSave: String, note: String, avatar: String,
                   imagePregnant: String) { //create
-        let url = URLs.userUrl + idAdmin
+        let url = URLs.userUrl
         let body: [String: Any] = [
+            "idAdmin": idAdmin,
             "name": name,
             "address": address,
             "momBirth": momBirth,

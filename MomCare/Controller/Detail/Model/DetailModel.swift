@@ -58,17 +58,4 @@ struct DetailModel {
         }
         return numberPhone + "@user.com"
     }
-    
-    func changeImage(image: UIImage, type: UserChoice) -> NSData {
-        if type == .baby {
-            if let data = image.jpegData(compressionQuality: 1) as NSData? {
-                return data
-            }
-        } else {
-            if let data = image.jpegData(compressionQuality: 0) as NSData? {
-                return data
-            }
-        }
-        return NSData()
-    }
 }
