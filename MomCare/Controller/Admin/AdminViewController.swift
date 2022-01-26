@@ -103,7 +103,7 @@ class AdminViewController: DetailUserViewController {
         if let image = currentModel.avatarImage {
             avatar = image
         }
-        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage", image: avatar), name: currentModel.name, address: currentModel.address,
+        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage", image: avatar, type: .mom), name: currentModel.name, address: currentModel.address,
                          email: currentModel.height) { [weak self] value in
             switch value {
             case.success(let data):

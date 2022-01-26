@@ -240,12 +240,12 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         for i in 0..<newList.count {
             infoCell.id = newList[i].idUser
             infoCell.address = newList[i].address
-            infoCell.avatarImage = loadImageFromDiskWith(fileName: newList[i].avatar)
+            infoCell.avatarImage = newList[i].avatar
             infoCell.babyAge = newList[i].babyDateBorn
             infoCell.height = newList[i].height
             infoCell.note = newList[i].note
             infoCell.momBirth = newList[i].momBirth
-            infoCell.imagePregnant = loadImageFromDiskWith(fileName: newList[i].imagePregnant)
+            infoCell.imagePregnant = newList[i].imagePregnant
             infoCell.numberPhone = newList[i].numberPhone
             infoCell.name = newList[i].name
             infoCell.dateSave = newList[i].dateSave
@@ -262,12 +262,12 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         for i in 0..<listUser.count {
             infoCell.id = listUser[i].idUser
             infoCell.address = listUser[i].address
-            infoCell.avatarImage = loadImageFromDiskWith(fileName: listUser[i].avatar)
+            infoCell.avatarImage = listUser[i].avatar
             infoCell.babyAge = listUser[i].babyDateBorn
             infoCell.height = listUser[i].height
             infoCell.note = listUser[i].note
             infoCell.momBirth = listUser[i].momBirth
-            infoCell.imagePregnant = loadImageFromDiskWith(fileName: listUser[i].imagePregnant)
+            infoCell.imagePregnant = listUser[i].imagePregnant
             infoCell.numberPhone = listUser[i].numberPhone
             infoCell.name = listUser[i].name
             infoCell.dateSave = listUser[i].dateSave

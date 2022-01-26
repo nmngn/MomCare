@@ -253,7 +253,7 @@ class DetailUserViewController: UIViewController {
             if userChoice == .mom {
                 self.currentModel.avatarImage = image
                 if saveAdminImage {
-                    var _ = saveImage(imageName: "adminImage", image: image)
+                    var _ = saveImage(imageName: "adminImage", image: image, type: .mom)
                 }
                 self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
@@ -506,9 +506,11 @@ extension DetailUserViewController {
                         dateSave: dateString,
                         note: currentModel.note,
                         avatar: saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!),
+                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                          type: .mom),
                         imagePregnant: saveImage(imageName: "imagePregnant_\(currentModel.numberPhone)",
-                                                 image: currentModel.imagePregnant ?? nil)) { [weak self] value in
+                                                 image: currentModel.imagePregnant ?? nil,
+                                                 type: .baby)) { [weak self] value in
             switch value {
             case .success(let data):
                 print(data as Any)
@@ -541,9 +543,11 @@ extension DetailUserViewController {
                         dateSave: dateString,
                         note: currentModel.note,
                         avatar: saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!),
+                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                          type: .mom),
                         imagePregnant: saveImage(imageName: "imagePregnant_\(currentModel.numberPhone)",
-                                                 image: currentModel.imagePregnant ?? nil)) { [weak self] response in
+                                                 image: currentModel.imagePregnant ?? nil,
+                                                 type: .baby)) { [weak self] response in
             switch response {
             case .success(let data):
                 print(data as Any)

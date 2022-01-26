@@ -40,8 +40,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         }
         
         DispatchQueue.main.async {
-            if let avatar = model.avatarImage {
-                self.avatarUser.image = avatar
+            if !model.avatarImage.isEmpty {
+                self.avatarUser.image = loadImageFromDiskWith(fileName: model.avatarImage)
             } else {
                 self.avatarUser.image = UIImage(named: "avatar_placeholder")
             }
