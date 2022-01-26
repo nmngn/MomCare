@@ -41,7 +41,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         
         DispatchQueue.main.async {
             if let avatar = model.avatarImage {
-                self.avatarUser.image = UIImage(data: Data(referencing: avatar))
+                self.avatarUser.image = avatar
             } else {
                 self.avatarUser.image = UIImage(named: "avatar_placeholder")
             }

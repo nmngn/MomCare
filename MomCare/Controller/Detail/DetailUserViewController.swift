@@ -109,16 +109,6 @@ class DetailUserViewController: UIViewController {
         }
     }
     
-    func updateID(_ id: Int) {
-//        let list = self.realm.objects(User.self).filter({$0.id > id})
-//        for item in list {
-//            try! self.realm.write({
-//                item.id -= 1
-//            })
-//        }
-    }
-
-    
     func configView() {
         tableView.do {
             $0.delegate = self

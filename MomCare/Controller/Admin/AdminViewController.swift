@@ -15,8 +15,8 @@ class AdminViewController: DetailUserViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        configView()
         changeTheme(self.theme)
+        configView()
         getDataAdmin()
         setupNavigationButton()
         saveAdminImage = true
@@ -40,6 +40,7 @@ class AdminViewController: DetailUserViewController {
                 }
             case .failure(let error):
                 print(error as Any)
+                self?.openAlert(error?.errorMessage ?? "")
             }
         }
     }
@@ -116,6 +117,7 @@ class AdminViewController: DetailUserViewController {
                 }
             case .failure(let error):
                 print(error as Any)
+                self?.openAlert(error?.errorMessage ?? "")
             }
         }
     }

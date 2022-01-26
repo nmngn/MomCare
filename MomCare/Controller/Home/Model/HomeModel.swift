@@ -23,7 +23,7 @@ struct HomeModel {
     var backgroundColor: UIColor?
     
     var id = ""
-    var avatarImage: NSData?
+    var avatarImage: UIImage?
     var name = ""
     var address = ""
     var momBirth = ""
@@ -32,7 +32,7 @@ struct HomeModel {
     var dateCalculate = ""
     var babyAge = ""
     var note = ""
-    var imagePregnant: NSData?
+    var imagePregnant: UIImage?
     var dateSave = ""
     var isStar = false
     var contrastColor = UIColor()
@@ -46,7 +46,7 @@ struct HomeModel {
         model.id = id
         model.address = address
         model.numberPhone = numberPhone
-        model.avatarImage = UIImage(data: Data(referencing: avatarImage ?? NSData()))
+        model.avatarImage = avatarImage
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -54,7 +54,7 @@ struct HomeModel {
         model.dateCalculate = dateCalculate
         model.babyAge = babyAge
         model.note = note
-        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
+        model.imagePregnant = imagePregnant
         model.contrastColor = contrastColor
         return model
     }

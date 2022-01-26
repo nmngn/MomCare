@@ -82,9 +82,9 @@ struct Repositories {
         }
     }
     
-    func getAllUser(idAdmin: String, completion: @escaping (BaseResult<User>) -> Void) {
+    func getAllUser(idAdmin: String, completion: @escaping (BaseResult<SuperUser>) -> Void) {
         let input = UserRequest(idAdmin: idAdmin)
-        api.request(input: input) { (object : User?, error) in
+        api.request(input: input) { (object : SuperUser?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {

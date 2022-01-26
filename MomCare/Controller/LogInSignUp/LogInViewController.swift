@@ -107,6 +107,7 @@ class LogInViewController: UIViewController {
                     print("Get Data Admin success")
                 case .failure(let error):
                     print(error as Any)
+                    self?.openAlert(error?.errorMessage ?? "")
                 }
             }
         }

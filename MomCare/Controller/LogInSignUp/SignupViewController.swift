@@ -85,6 +85,7 @@ class SignupViewController: UIViewController {
                                     print(data)
                                 }
                             case .failure(let error):
+                                self?.openAlert(error?.errorMessage ?? "")
                                 print(error as Any)
                             }
                         }

@@ -21,7 +21,7 @@ class AdminRequest: BaseRequest {
         let url = URLs.adminUrl + idAdmin
         let body: [String: Any] = [
             "name": name,
-            "avatar": avatar,
+            "image": avatar,
             "address": address,
             "email": email
         ]
