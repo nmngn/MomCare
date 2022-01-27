@@ -93,20 +93,32 @@ class DetailUserViewController: UIViewController {
         } else {
             let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
             let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
-                self.repo.deleteUser(idUser: self.currentModel.id) { [weak self] response in
-                    switch response {
-                    case .success(_):
-                        self?.navigationController?.popToRootViewController(animated: true)
-                    case .failure(let error):
-                        self?.openAlert(error?.errorMessage ?? "")
-                        print(error as Any)
-                    }
-                }
+                self.deleteUser()
             }
             let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func deleteUser() {
+        self.repo.deleteUser(idUser: self.currentModel.id) { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.navigationController?.popToRootViewController(animated: true)
+            case .failure(let error):
+                self?.openAlert(error?.errorMessage ?? "")
+                print(error as Any)
+            }
+        }
+        self.repo.deleteNotes(idUser: self.currentModel.id) { [weak self] response in
+            switch response {
+            case .success(_):
+                print("Delete notes success")
+            case .failure(_):
+                print("Delete notes failed")
+            }
         }
     }
     

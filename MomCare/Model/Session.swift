@@ -18,6 +18,7 @@ class Session {
 final class UserLogIn {
     var userNumberPhone = ""
     var idAdmin = ""
+    var idUser = ""
 }
 
 struct URLs {
@@ -25,11 +26,17 @@ struct URLs {
     
     static var adminUrl = baseUrl + "admin/"
     
+    static var adminDatabByNumberPhone = adminUrl + "/phone/"
+    
     static var userUrl = baseUrl + "user/"
     
     static var getAllUser = userUrl + "all/"
     
+    static var userDatabByNumberPhone = userUrl + "/phone/"
+    
     static var noteUrl = baseUrl + "note/"
     
     static var getAllNote = noteUrl + "all/"
+    
+    static var deleteNotes = noteUrl + "deleteNotes/"
 }

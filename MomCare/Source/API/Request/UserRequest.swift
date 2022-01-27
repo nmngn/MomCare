@@ -10,6 +10,12 @@ import Alamofire
 
 class UserRequest: BaseRequest {
     
+    required init(numberPhone: String) { //get data by numberPhone
+        let url = URLs.userDatabByNumberPhone + numberPhone
+        let body: [String: Any] = [:]
+        super.init(url: url, requestType: .get, body: body)
+    }
+    
     required init(idAdmin: String) { //getAll
         let url = URLs.getAllUser
         let body: [String: Any] = [:]

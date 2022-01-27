@@ -47,7 +47,7 @@ class AdminViewController: DetailUserViewController {
         var avatar = currentModel
         avatar.type = .avatar
         avatar.dataType = .momImage
-        avatar.avatarImage = loadImageFromDiskWith(fileName: "adminImage") ?? UIImage(named: "avatar_placeholder")
+        avatar.avatarImage = loadImageFromDiskWith(fileName: "adminImage_\(currentModel.numberPhone)") ?? UIImage(named: "avatar_placeholder")
         avatar.contrastColor = contrastColor
         
         var name = currentModel
@@ -100,10 +100,11 @@ class AdminViewController: DetailUserViewController {
     
     @IBAction override func saveData(_ sender: UIButton) {
         var avatar = UIImage(named: "avatar_placeholder")!
+        let numberPhone = currentModel.numberPhone
         if let image = currentModel.avatarImage {
             avatar = image
         }
-        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage", image: avatar, type: .mom),
+        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage_\(numberPhone)", image: avatar, type: .mom),
                          name: currentModel.name, address: currentModel.address,
                          email: currentModel.height) { [weak self] value in
             switch value {

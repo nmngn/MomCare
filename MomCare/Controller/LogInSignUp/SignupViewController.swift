@@ -59,6 +59,7 @@ class SignupViewController: UIViewController {
             if confirmPw == password {
                 Auth.auth().createUser(withEmail: email + "@admin.com", password: password) { (authDataResult, error) in
                     if let error = error {
+                        self.dismissLoading()
                         print("Create error: \(error.localizedDescription)")
                         if let error = error as NSError? {
                             print("Error code: \(error.code)")

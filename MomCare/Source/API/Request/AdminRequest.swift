@@ -33,5 +33,11 @@ class AdminRequest: BaseRequest {
         let body: [String: Any] = [:]
         super.init(url: url, requestType: .get, body: body)
     }
+    
+    required init(_ numberPhone: String) { //get data by numberphone
+        let url = URLs.adminDatabByNumberPhone + numberPhone
+        let body: [String: Any] = [:]
+        super.init(url: url, requestType: .get, body: body)
+    }
 
 }

@@ -73,8 +73,16 @@ class LogInViewController: UIViewController {
                     self?.endText = "@admin.com"
                     self?.tryingLoginAgain()
                 } else {
-                    Session.shared.userProfile.userNumberPhone = email
-                    UserDefaults.standard.set(email, forKey: "sdt")
+                    self?.repo.getDataUserByNumber(numberPhone: email) { [weak self] response in
+                        switch response {
+                        case .success(let data):
+                            Session.shared.userProfile.idUser = data?.idUser ?? ""
+                            Session.shared.userProfile.userNumberPhone = email
+                            UserDefaults.standard.set(email, forKey: "sdt")
+                        case .failure(let error):
+                            print(error as Any)
+                        }
+                    }
                     self?.animateAfterLogin()
                 }
             }
@@ -88,7 +96,7 @@ class LogInViewController: UIViewController {
                     self.openAlert()
                     print(error)
                 } else {
-                    self.getDataAdmin()
+                    self.getDataAdmin(numberPhone: email)
                     Session.shared.userProfile.userNumberPhone = email
                     UserDefaults.standard.set(email, forKey: "sdt")
                     self.animateAfterLogin()
@@ -97,18 +105,18 @@ class LogInViewController: UIViewController {
         }
     }
     
-    func getDataAdmin() {
-        let idAdmin = UserDefaults.standard.string(forKey: "idAdmin")
-        if let id = idAdmin {
-            repo.getOneAdmin(idAdmin: id) { [weak self] value in
-                switch value {
-                case .success( _):
-                    Session.shared.userProfile.idAdmin = id
-                    print("Get Data Admin success")
-                case .failure(let error):
-                    print(error as Any)
-                    self?.openAlert(error?.errorMessage ?? "")
+    func getDataAdmin(numberPhone: String) {
+        repo.getDataAdminByNumber(numberPhone: numberPhone) { [weak self] value in
+            switch value {
+            case .success(let data):
+                if let data = data {
+                    Session.shared.userProfile.idAdmin = data.idAdmin
+                    UserDefaults.standard.set(data.idAdmin, forKey: "idAdmin")
                 }
+                print("Get Data Admin success")
+            case .failure(let error):
+                print(error as Any)
+                self?.openAlert(error?.errorMessage ?? "")
             }
         }
     }

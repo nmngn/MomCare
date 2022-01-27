@@ -50,6 +50,32 @@ struct Repositories {
         }
     }
     
+    func getDataAdminByNumber(numberPhone: String,  completion: @escaping (BaseResult<Admin>) -> Void) {
+        let input = AdminRequest(numberPhone)
+        api.request(input: input) { (object: Admin?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
+    func getDataUserByNumber(numberPhone: String,  completion: @escaping (BaseResult<User>) -> Void) {
+        let input = UserRequest(numberPhone: numberPhone)
+        api.request(input: input) { (object: User?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
     func createUser(idAdmin: String, name: String, address: String, momBirth: String, numberPhone: String,
                     height: String, babyDateBorn: String, dateSave: String, note: String, avatar: String,
                     imagePregnant: String,
@@ -175,6 +201,19 @@ struct Repositories {
     
     func getOneNote(idNote: String, completion: @escaping (BaseResult<HistoryNote>) -> Void) {
         let input = NoteRequest(idNote: idNote, type: .get)
+        api.request(input: input) { (object : HistoryNote?, error) in
+            if let object = object {
+                completion(.success(object))
+            } else if let error = error {
+                completion(.failure(error: error))
+            } else {
+                completion(.failure(error: nil))
+            }
+        }
+    }
+    
+    func deleteNotes(idUser: String, completion: @escaping (BaseResult<HistoryNote>) -> Void) {
+        let input = NoteRequest(idUser)
         api.request(input: input) { (object : HistoryNote?, error) in
             if let object = object {
                 completion(.success(object))
