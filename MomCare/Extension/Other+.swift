@@ -143,7 +143,7 @@ extension UIViewController {
     }
     
     func dismissLoading() {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func openAlert(_ message: String) {

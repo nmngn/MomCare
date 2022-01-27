@@ -40,22 +40,4 @@ struct HomeModel {
     init(type: HomeType) {
         self.type = type
     }
-    
-    func convertToDetailModel() -> DetailModel {
-        var model = DetailModel()
-        model.id = id
-        model.address = address
-        model.numberPhone = numberPhone
-        model.avatarImage = loadImageFromDiskWith(fileName: avatarImage)
-        model.name = name
-        model.momBirth = momBirth
-        model.height = height
-        model.dateSave = dateSave
-        model.dateCalculate = dateCalculate
-        model.babyAge = babyAge
-        model.note = note
-        model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
-        model.contrastColor = contrastColor
-        return model
-    }
 }

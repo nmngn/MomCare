@@ -23,10 +23,13 @@ class SearchViewController: UIViewController {
     }
     var userSearch = ""
     var contrastColor = UIColor()
+    let repo = Repositories(api: .share)
+    var listUser = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tìm kiếm"
+        getListUser()
         configView()
         setupBackButton()
         changeTheme(self.theme)
@@ -53,7 +56,20 @@ class SearchViewController: UIViewController {
         bottomHeightConstraint.constant = 16
         self.view.layoutIfNeeded()
     }
-
+    
+    func getListUser() {
+        let idAdmin = Session.shared.userProfile.idAdmin
+        repo.getAllUser(idAdmin: idAdmin) { [weak self] response in
+            switch response {
+            case .success(let data):
+                if let data = data?.users {
+                    self?.listUser = data
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
+    }
     
     func setupStatus(isHidden: Bool, title: String) {
         resultView.isHidden = isHidden
@@ -116,15 +132,14 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             if !text.isEmpty {
-                let predicate = NSPredicate(format: "name contains[c]         %@", text)
-//                let result = realm.objects(User.self).filter(predicate)
-//                if result.count == 0 {
-//                    self.listResult?.removeAll()
-//                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
-//                } else {
-//                    setupStatus(isHidden: true, title: "")
-//                    self.listResult = result.toArray()
-//                }
+                let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
+                if result.count == 0 {
+                    self.listResult?.removeAll()
+                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
+                } else {
+                    setupStatus(isHidden: true, title: "")
+                    self.listResult = result
+                }
             } else {
                 self.listResult?.removeAll()
                 setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")

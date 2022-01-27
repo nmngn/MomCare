@@ -24,11 +24,11 @@ class SearchItemTableViewCell: UITableViewCell {
     
     func setupData(model: User, contrastColor: UIColor) {
         DispatchQueue.main.async {
-//            if let avatar = model.avatar {
-//                self.avatarUser.image = UIImage(data: Data(referencing: avatar))
-//            } else {
-//                self.avatarUser.image = UIImage(named: "avatar_placeholder")
-//            }
+            if model.avatar != "" {
+                self.avatarUser.image = loadImageFromDiskWith(fileName: model.avatar)
+            } else {
+                self.avatarUser.image = UIImage(named: "avatar_placeholder")
+            }
         }
 
         userNameLabel.text = model.name

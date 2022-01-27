@@ -35,7 +35,7 @@ struct Admin: Mappable {
         model.name = name
         model.numberPhone = numberPhone
         model.height = email
-//        model.avatarImage = image
+        model.avatarImage = loadImageFromDiskWith(fileName: image)
         model.address = address
         return model
     }
@@ -82,7 +82,7 @@ struct User : Mappable {
         model.id = idUser
         model.address = address
         model.numberPhone = numberPhone
-//        model.avatarImage = UIImage(data: Data(referencing: avatar ?? NSData()))
+        model.avatarImage = loadImageFromDiskWith(fileName: avatar)
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -90,7 +90,7 @@ struct User : Mappable {
         model.dateCalculate = updateTime()
         model.babyAge = babyDateBorn
         model.note = note
-//        model.imagePregnant = UIImage(data: Data(referencing: imagePregnant ?? NSData()))
+        model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
         return model
     }
     

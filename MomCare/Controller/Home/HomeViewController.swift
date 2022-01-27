@@ -239,14 +239,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         for i in 0..<newList.count {
             infoCell.id = newList[i].idUser
-            infoCell.address = newList[i].address
             infoCell.avatarImage = newList[i].avatar
             infoCell.babyAge = newList[i].babyDateBorn
-            infoCell.height = newList[i].height
-            infoCell.note = newList[i].note
-            infoCell.momBirth = newList[i].momBirth
-            infoCell.imagePregnant = newList[i].imagePregnant
-            infoCell.numberPhone = newList[i].numberPhone
             infoCell.name = newList[i].name
             infoCell.dateSave = newList[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
@@ -261,14 +255,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         for i in 0..<listUser.count {
             infoCell.id = listUser[i].idUser
-            infoCell.address = listUser[i].address
             infoCell.avatarImage = listUser[i].avatar
             infoCell.babyAge = listUser[i].babyDateBorn
-            infoCell.height = listUser[i].height
-            infoCell.note = listUser[i].note
-            infoCell.momBirth = listUser[i].momBirth
-            infoCell.imagePregnant = listUser[i].imagePregnant
-            infoCell.numberPhone = listUser[i].numberPhone
             infoCell.name = listUser[i].name
             infoCell.dateSave = listUser[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
@@ -386,10 +374,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
-            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-            vc.currentModel = model.convertToDetailModel()
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            repo.getOneUser(idUser: model.id) { [weak self] response in
+                switch response {
+                case .success(let data):
+                    if let data = data {
+                        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+                        vc.currentModel = data.convertToDetailModel()
+                        vc.hidesBottomBarWhenPushed = true
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                case .failure(let error):
+                    print(error as Any)
+                }
+            }
+
         default:
             break
         }
