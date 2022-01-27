@@ -10,7 +10,7 @@ import UIKit
 class ShowImageDetailViewController: UIViewController {
 
     @IBOutlet weak var viewImage: UIImageView!
-    var imageData: NSData?
+    var imageData = ""
     var imageInDetail: UIImage?
     var inDetail = false
     
@@ -24,8 +24,8 @@ class ShowImageDetailViewController: UIViewController {
     }
     
     func showImage() {
-        if let data = self.imageData {
-            if let image = UIImage(data: Data(referencing: data)) {
+        if self.imageData != "" {
+            if let image = loadImageFromDiskWith(fileName: imageData) {
                 viewImage.image = image
                 viewImage.isUserInteractionEnabled = true
                 let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchImage))

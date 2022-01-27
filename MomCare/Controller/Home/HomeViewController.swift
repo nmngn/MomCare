@@ -58,8 +58,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
-       return .default
-   }
+        return .default
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getListUser()

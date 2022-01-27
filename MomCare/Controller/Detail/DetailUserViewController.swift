@@ -268,21 +268,21 @@ class DetailUserViewController: UIViewController {
     }
     
     @IBAction func showMore(_ sender: UIButton) {
-//        if currentModel.id == 0 {
-//            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
-//            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
-//                self.saveData()
-//            }
-//            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
-//            alert.addAction(action)
-//            alert.addAction(cancel)
-//            self.present(alert, animated: true, completion: nil)
-//        } else {
-//            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
-//            vc.hidesBottomBarWhenPushed = true
-//            vc.identifyUser = currentModel.id
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
+        if currentModel.id == "" {
+            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+                self.saveData()
+            }
+            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
+            vc.hidesBottomBarWhenPushed = true
+            vc.identifyUser = currentModel.id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func saveData(_ sender: UIButton) {

@@ -27,7 +27,9 @@ struct URLs {
     
     static var userUrl = baseUrl + "user/"
     
-    static var getAllUrl = userUrl + "all/"
+    static var getAllUser = userUrl + "all/"
     
     static var noteUrl = baseUrl + "note/"
+    
+    static var getAllNote = noteUrl + "all/"
 }

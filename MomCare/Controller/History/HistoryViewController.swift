@@ -13,7 +13,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
-    var identifyUser = 0
+    var identifyUser = ""
     var listHistory: [HistoryNote]? {
         didSet {
             setupData()
@@ -21,6 +21,7 @@ class HistoryViewController: UIViewController {
         }
     }
     var contrastColor = UIColor()
+    let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +54,16 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-//        let result = realm.objects(HistoryNote.self).toArray()
-//        let newList = result.filter({$0.identifyUser == self.identifyUser})
-//        if !newList.isEmpty {
-//            self.listHistory = newList
-//        }
+        repo.getAllNote(idUser: identifyUser) { [weak self] response in
+            switch response {
+            case .success(let data):
+                if let data = data?.notes {
+                    self?.listHistory = data.filter({$0.idUser == self?.identifyUser})
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
     }
     
     func configView() {
@@ -89,8 +95,9 @@ class HistoryViewController: UIViewController {
         
         guard let list = self.listHistory else { return }
         for item in list {
+            cell.idNote = item.idNote
             cell.title = item.time
-//            cell.dataImage = item.image
+            cell.dataImage = item.image
             model.append(cell)
         }
     }
@@ -99,14 +106,15 @@ class HistoryViewController: UIViewController {
         return model[indexPath.row]
     }
     
-    func removeNote(dateSave: String, index: Int) {
-//        let item = self.realm.objects(HistoryNote.self).filter("time = %@", dateSave)
-//        try! self.realm.write({
-//            self.realm.delete(item)
-//        })
-//        self.model.remove(at: index)
-//        self.getListHistory()
-//        self.tableView.reloadData()
+    func removeNote(id: String) {
+        repo.deleteNote(idNote: id) { [weak self] response in
+            switch response {
+            case .success(let value):
+                print(value as Any)
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
     }
 }
 
@@ -169,14 +177,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        var model: HistoryModel
-        model = modelIndexPath(indexPath: indexPath)
-        
         if editingStyle == .delete {
             tableView.beginUpdates()
-            removeNote(dateSave: model.title, index: indexPath.row)
+            removeNote(id: model[indexPath.row].idNote)
+            self.model.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .none)
             tableView.endUpdates()
+            self.getListHistory()
         }
     }
     
@@ -214,7 +221,6 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            guard let image = image.jpegData(compressionQuality: 1) as NSData? else { return }
             self.saveData(imageData: image)
         }
         picker.dismiss(animated: true, completion: nil)
@@ -222,25 +228,27 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 extension HistoryViewController {
-    func saveData(imageData: NSData) {
+    func saveData(imageData: UIImage) {
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-//        do {
-//            realm.beginWrite()
-//            let history = HistoryNote()
-//            history.identifyUser = self.identifyUser
-//            history.time = dateString
-//            history.image = imageData
-//
-//            try? realm.commitWrite()
-//            try? realm.safeWrite {
-//                realm.add(history)
-//            }
-//        }
-        self.getListHistory()
-        self.tableView.reloadData()
+        let imageAddress = saveImage(imageName:
+        "note_\(dateString.replacingOccurrences(of: "/", with: "."))",
+                                     image: imageData, type: .baby)
+        repo.createNote(idUser: self.identifyUser,
+                        time: dateString,
+                        image: imageAddress)
+        { [weak self] response in
+            switch response {
+            case .success(_):
+                self?.getListHistory()
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
+        
     }
 }

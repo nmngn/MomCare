@@ -10,12 +10,13 @@ import Alamofire
 
 class NoteRequest: BaseRequest {
     required init(idUser: String, time: String, image: String) { //create
-        let url = URLs.noteUrl + idUser
+        let url = URLs.noteUrl
         let body: [String: Any] = [
+            "idUser": idUser,
             "time": time,
             "image": image
         ]
-        super.init(url: url, requestType: .get, body: body)
+        super.init(url: url, requestType: .post, body: body)
     }
     
     required init(idNote: String) { //delete
@@ -31,7 +32,7 @@ class NoteRequest: BaseRequest {
     }
     
     required init(idUser: String) { //getAll
-        let url = URLs.noteUrl + idUser
+        let url = URLs.getAllNote
         let body: [String: Any] = [:]
         super.init(url: url, requestType: .get, body: body)
     }

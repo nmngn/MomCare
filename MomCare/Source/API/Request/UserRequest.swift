@@ -11,7 +11,7 @@ import Alamofire
 class UserRequest: BaseRequest {
     
     required init(idAdmin: String) { //getAll
-        let url = URLs.getAllUrl
+        let url = URLs.getAllUser
         let body: [String: Any] = [:]
         super.init(url: url, requestType: .get, body: body)
     }

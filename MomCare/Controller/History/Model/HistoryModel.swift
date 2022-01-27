@@ -16,8 +16,10 @@ enum HistoryType {
 
 struct HistoryModel {
     var type: HistoryType
+    var idNote = ""
+    var idUser = ""
     var title = ""
-    var dataImage : NSData?
+    var dataImage = ""
     var contrastColor = UIColor()
     
     init(type: HistoryType) {

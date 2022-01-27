@@ -160,9 +160,9 @@ struct Repositories {
         }
     }
     
-    func getAllNote(idUser: String, completion: @escaping (BaseResult<HistoryNote>) -> Void) {
+    func getAllNote(idUser: String, completion: @escaping (BaseResult<SuperNote>) -> Void) {
         let input = NoteRequest(idUser: idUser)
-        api.request(input: input) { (object : HistoryNote?, error) in
+        api.request(input: input) { (object : SuperNote?, error) in
             if let object = object {
                 completion(.success(object))
             } else if let error = error {
