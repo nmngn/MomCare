@@ -79,6 +79,7 @@ class ChatViewController: UIViewController {
     
     func configView() {
         messageTextField.delegate = self
+        messageTextField.autocorrectionType = .no
         tableView.do {
             $0.delegate = self
             $0.dataSource = self

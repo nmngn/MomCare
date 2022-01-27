@@ -103,6 +103,22 @@ struct User : Mappable {
         return model
     }
     
+    func convertToUserModel() -> UserInfo {
+        var model = UserInfo()
+        model.name = name
+        model.address = address
+        model.numberPhone = numberPhone
+        model.height = height
+        model.momBirth = momBirth
+        model.dateCalculate = updateTime()
+        model.babyAge = babyDateBorn
+        model.note = note
+        model.dateSave = dateSave
+        model.avatarImage = loadImageFromDiskWith(fileName: avatar)
+        model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
+        return model
+    }
+    
     func updateTime() -> String {
         let dateFormatter = DateFormatter()
         let todayDate = Date()

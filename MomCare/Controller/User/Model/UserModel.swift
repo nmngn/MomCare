@@ -14,7 +14,7 @@ enum UserType {
 }
 
 struct UserInfo {
-    var type: UserType
+    var type: UserType?
     var title = ""
     var value = ""
     var avatarImage: UIImage?
@@ -28,8 +28,4 @@ struct UserInfo {
     var note = ""
     var imagePregnant: UIImage?
     var dateSave = ""
-    
-    init(type: UserType) {
-        self.type = type
-    }
 }

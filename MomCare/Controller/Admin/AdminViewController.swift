@@ -8,9 +8,7 @@
 import UIKit
 
 class AdminViewController: DetailUserViewController {
-    
-    let idAdmin = Session.shared.userProfile.idAdmin
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         getDataAdmin()
@@ -47,7 +45,7 @@ class AdminViewController: DetailUserViewController {
         var avatar = currentModel
         avatar.type = .avatar
         avatar.dataType = .momImage
-        avatar.avatarImage = loadImageFromDiskWith(fileName: "adminImage_\(currentModel.numberPhone)") ?? UIImage(named: "avatar_placeholder")
+        avatar.avatarImage = loadImageFromDiskWith(fileName: "adminImage_\(idAdmin)") ?? UIImage(named: "avatar_placeholder")
         avatar.contrastColor = contrastColor
         
         var name = currentModel
@@ -67,9 +65,10 @@ class AdminViewController: DetailUserViewController {
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
-        number.title = "Số điện thoại ⃰"
+        number.title = "Số điện thoại( Không thay đổi)"
         number.value = currentModel.numberPhone
         number.contrastColor = contrastColor
+        number.isActive = false
         
         var email = currentModel
         email.type = .info
@@ -100,11 +99,10 @@ class AdminViewController: DetailUserViewController {
     
     @IBAction override func saveData(_ sender: UIButton) {
         var avatar = UIImage(named: "avatar_placeholder")!
-        let numberPhone = currentModel.numberPhone
         if let image = currentModel.avatarImage {
             avatar = image
         }
-        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage_\(numberPhone)", image: avatar, type: .mom),
+        repo.updateAdmin(idAdmin: idAdmin, avatar: saveImage(imageName: "adminImage_\(idAdmin)", image: avatar, type: .mom),
                          name: currentModel.name, address: currentModel.address,
                          email: currentModel.height) { [weak self] value in
             switch value {

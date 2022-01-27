@@ -21,9 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6sV-xJ-p7c">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6sV-xJ-p7c">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-1" translatesAutoresizingMaskIntoConstraints="NO" id="mL6-Bz-131">
                                         <rect key="frame" x="-120" y="179" width="159" height="50"/>
@@ -91,6 +90,12 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6sV-xJ-p7c" secondAttribute="trailing" id="VtW-6d-DvD"/>
+                                    <constraint firstItem="6sV-xJ-p7c" firstAttribute="leading" secondItem="RQg-dj-tqL" secondAttribute="leading" id="f4J-aH-Hi1"/>
+                                    <constraint firstItem="6sV-xJ-p7c" firstAttribute="top" secondItem="RQg-dj-tqL" secondAttribute="top" id="rCs-6h-WfL"/>
+                                    <constraint firstAttribute="bottom" secondItem="6sV-xJ-p7c" secondAttribute="bottom" id="vrA-TB-vSg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rlj-X8-Ejl"/>

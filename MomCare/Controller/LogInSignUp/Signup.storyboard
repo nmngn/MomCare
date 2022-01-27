@@ -25,9 +25,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T69-3b-b9i">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T69-3b-b9i">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-1" translatesAutoresizingMaskIntoConstraints="NO" id="WtF-1X-TTY">
                                                 <rect key="frame" x="-120" y="179" width="159" height="50"/>
@@ -96,6 +95,12 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="T69-3b-b9i" secondAttribute="trailing" id="CST-kP-0cZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="T69-3b-b9i" secondAttribute="bottom" id="Ci9-VK-u7k"/>
+                                            <constraint firstItem="T69-3b-b9i" firstAttribute="leading" secondItem="f3g-gg-rE3" secondAttribute="leading" id="Orb-Q1-izr"/>
+                                            <constraint firstItem="T69-3b-b9i" firstAttribute="top" secondItem="f3g-gg-rE3" secondAttribute="top" id="rCS-UN-a3l"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="W4i-Oy-cvI"/>

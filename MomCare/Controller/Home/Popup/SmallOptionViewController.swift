@@ -66,7 +66,6 @@ class SmallOptionViewController: UIViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-
     
     @IBAction func openProfile(_ sender: UIButton) {
         let vc = AdminViewController.init(nibName: "AdminViewController", bundle: nil)

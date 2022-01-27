@@ -73,16 +73,8 @@ class LogInViewController: UIViewController {
                     self?.endText = "@admin.com"
                     self?.tryingLoginAgain()
                 } else {
-                    self?.repo.getDataUserByNumber(numberPhone: email) { [weak self] response in
-                        switch response {
-                        case .success(let data):
-                            Session.shared.userProfile.idUser = data?.idUser ?? ""
-                            Session.shared.userProfile.userNumberPhone = email
-                            UserDefaults.standard.set(email, forKey: "sdt")
-                        case .failure(let error):
-                            print(error as Any)
-                        }
-                    }
+                    Session.shared.userProfile.userNumberPhone = email
+                    UserDefaults.standard.set(email, forKey: "sdt")
                     self?.animateAfterLogin()
                 }
             }

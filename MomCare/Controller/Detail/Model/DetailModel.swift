@@ -51,6 +51,7 @@ struct DetailModel {
     var dataType: DataType?
     var contrastColor = UIColor()
     var isCall = false
+    var isActive = true
     
     func email(isAdmin: Bool = false) -> String {
         if isAdmin {

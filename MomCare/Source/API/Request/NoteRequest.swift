@@ -37,9 +37,9 @@ class NoteRequest: BaseRequest {
         super.init(url: url, requestType: .get, body: body)
     }
     
-    required init(_ idUser: String) {
+    required init(_ idUser: String) { //delete many
         let url = URLs.deleteNotes + idUser
         let body: [String: Any] = [:]
-        super.init(url: url, requestType: .delete, body: body)
+        super.init(url: url, requestType: .get, body: body)
     }
 }

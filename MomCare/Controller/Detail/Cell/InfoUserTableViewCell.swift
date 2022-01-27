@@ -21,6 +21,7 @@ class InfoUserTableViewCell: UITableViewCell {
     
     var cellType: DataType?
     var textInput = ""
+    var isAdmin = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +34,7 @@ class InfoUserTableViewCell: UITableViewCell {
     }
     
     func setupData(model: DetailModel) {
+        valueTextField.isEnabled = model.isActive
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value
@@ -87,8 +89,10 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
                 self.textInput = text
                 self.saveInModel()
             } else {
-                if let cellType = cellType {
-                    delegate?.showAlert(dataType: cellType)
+                if !isAdmin {
+                    if let cellType = cellType {
+                        delegate?.showAlert(dataType: cellType)
+                    }
                 }
             }
         }

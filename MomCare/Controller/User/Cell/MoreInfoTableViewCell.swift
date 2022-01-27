@@ -9,15 +9,16 @@ import UIKit
 
 class MoreInfoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var textDataLabel: UILabel!
+    @IBOutlet weak var theme: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        theme.applyBlurEffect()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setupData(text: String) {
+        textDataLabel.text = text
     }
     
 }

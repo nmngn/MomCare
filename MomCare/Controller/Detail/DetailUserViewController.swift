@@ -27,6 +27,7 @@ class DetailUserViewController: UIViewController {
     var contrastColor = UIColor()
     var saveAdminImage = false
     let repo = Repositories(api: .share)
+    let idAdmin = Session.shared.userProfile.idAdmin
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -265,7 +266,7 @@ class DetailUserViewController: UIViewController {
             if userChoice == .mom {
                 self.currentModel.avatarImage = image
                 if saveAdminImage {
-                    var _ = saveImage(imageName: "adminImage", image: image, type: .mom)
+                    var _ = saveImage(imageName: "adminImage_\(idAdmin)", image: image, type: .mom)
                 }
                 self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
@@ -385,6 +386,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     InfoUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
+            cell.isAdmin = saveAdminImage
             cell.setupData(model: currentModel)
             return cell
         case .age:
