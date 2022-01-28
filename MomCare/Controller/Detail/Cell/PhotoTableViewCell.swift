@@ -18,7 +18,7 @@ class PhotoTableViewCell: UITableViewCell {
         if self.traitCollection.userInterfaceStyle == .light {
             title.textColor = .black
         } else {
-            title.textColor = UIColor.white.withAlphaComponent(0.8)
+            title.textColor = .white
         }
     }
 

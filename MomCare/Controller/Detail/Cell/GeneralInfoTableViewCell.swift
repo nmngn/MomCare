@@ -23,8 +23,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
             generalTitle.textColor = .black
             contrastColor = .black
         } else {
-            generalTitle.textColor = UIColor.white.withAlphaComponent(0.8)
-            contrastColor = UIColor.white.withAlphaComponent(0.8)
+            generalTitle.textColor = .white
+            contrastColor = .white
         }
         if model?.dateSave == "" {
             let dateFormatter : DateFormatter = DateFormatter()

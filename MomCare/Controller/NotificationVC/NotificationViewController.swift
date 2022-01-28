@@ -16,6 +16,7 @@ class NotificationViewController: UIViewController {
     
     var contrastColor = UIColor()
     var notiModel = [NotificationModel]()
+    let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class NotificationViewController: UIViewController {
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
-            contrastColor = UIColor.white.withAlphaComponent(0.8)
+            contrastColor = .white
         }
     }
     
@@ -83,10 +84,19 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
         let id = notiModel[indexPath.row].id
-//        vc.currentModel = (realm?.objects(User.self).filter({$0.id == id}).first?.convertToDetailModel()) ?? DetailModel()
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        repo.getOneUser(idUser: id) { [weak self] response in
+            switch response {
+            case .success(let data):
+                if let data = data {
+                    let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+                    vc.currentModel = data.convertToDetailModel()
+                    vc.hidesBottomBarWhenPushed = true
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
     }
 }

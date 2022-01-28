@@ -88,7 +88,7 @@ class AdminViewController: DetailUserViewController {
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
-            contrastColor = UIColor.white.withAlphaComponent(0.8)
+            contrastColor = .white
         }
         self.title = "Thông tin cá nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

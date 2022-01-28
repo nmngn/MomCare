@@ -52,7 +52,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         if self.traitCollection.userInterfaceStyle == .light {
             contrastColor = .black
         } else {
-            contrastColor = UIColor.white.withAlphaComponent(0.8)
+            contrastColor = .white
         }
         self.requestNotificationAuthorization()
         
