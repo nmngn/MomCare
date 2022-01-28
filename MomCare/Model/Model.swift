@@ -106,6 +106,7 @@ struct User : Mappable {
     func convertToUserModel() -> UserInfo {
         var model = UserInfo()
         model.name = name
+        model.idAdmin = idAdmin
         model.address = address
         model.numberPhone = numberPhone
         model.height = height

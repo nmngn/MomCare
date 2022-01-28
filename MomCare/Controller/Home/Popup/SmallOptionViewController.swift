@@ -46,14 +46,24 @@ class SmallOptionViewController: UIViewController {
     }
     
     func logOut() {
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất không?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            self.signOut()
+        }
+        let noAction = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func signOut() {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
             let storyboard = UIStoryboard(name: "LogInView", bundle: nil)
-            if let logInView = storyboard.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
-                dismissVC()
-                navigation.pushViewController(logInView, animated: true)
-            }
+            let vc = storyboard.instantiateInitialViewController()
+            UIApplication.shared.windows.first?.rootViewController = vc
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         } catch let signOutError as NSError {
             print(signOutError)
             popupErrorSignout()

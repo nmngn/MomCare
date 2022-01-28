@@ -14,7 +14,8 @@ class UserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var theme: UIImageView!
     
-    var currentModel = UserInfo() {
+    var currentModel = UserInfo()
+    var adminData: Admin? {
         didSet {
             tableView.reloadData()
         }
@@ -54,16 +55,38 @@ class UserViewController: UIViewController {
     }
     
     @objc func logOut() {
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất không?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            self.signOut()
+        }
+        let noAction = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func getAdminData(idAdmin: String) {
+        repo.getOneAdmin(idAdmin: idAdmin) { [weak self] response in
+            switch response {
+            case .success(let data):
+                self?.adminData = data
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
+    }
+    
+    func signOut() {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
             let storyboard = UIStoryboard(name: "LogInView", bundle: nil)
-            if let logInView = storyboard.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
-                navigationController?.pushViewController(logInView, animated: true)
-            }
+            let vc = storyboard.instantiateInitialViewController()
+            UIApplication.shared.windows.first?.rootViewController = vc
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         } catch let signOutError as NSError {
             print(signOutError)
-            popupErrorSignout()
+            self.popupErrorSignout()
         }
     }
     
@@ -89,6 +112,7 @@ class UserViewController: UIViewController {
                     self?.currentModel = data.convertToUserModel()
                     self?.detailData = data.convertToDetailModel()
                     self?.getData(week: data.updateTime())
+                    self?.getAdminData(idAdmin: data.idAdmin)
                 }
             case .failure(let error):
                 print(error as Any)
@@ -97,16 +121,22 @@ class UserViewController: UIViewController {
     }
     
     func setupData() {
+        var cell0 = UserInfo()
+        cell0.type = .admin
         var cell1 = UserInfo()
         cell1.type = .general
         var cell2 = UserInfo()
         cell2.type = .data
         var cell3 = UserInfo()
         cell3.type = .more
+        var cell4 = UserInfo()
+        cell4.type = .bonus
         
+        model.append(cell0)
         model.append(cell1)
         model.append(cell2)
         model.append(cell3)
+        model.append(cell4)
     }
     
     func configView() {
@@ -118,6 +148,8 @@ class UserViewController: UIViewController {
             $0.registerNibCellFor(type: UserInfoTableViewCell.self)
             $0.registerNibCellFor(type: DataInfoTableViewCell.self)
             $0.registerNibCellFor(type: MoreInfoTableViewCell.self)
+            $0.registerNibCellFor(type: AdminInfoTableViewCell.self)
+            $0.registerNibCellFor(type: BonusDataTableViewCell.self)
         }
     }
 
@@ -198,6 +230,14 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(indexPath: indexPath)
         
         switch model.type {
+        case .admin:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AdminInfoTableViewCell", for: indexPath) as?
+                    AdminInfoTableViewCell else { return UITableViewCell()}
+            cell.selectionStyle = .none
+            if let admin = adminData {
+                cell.setupData(data: admin)
+            }
+            return cell
         case .general:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserInfoTableViewCell", for: indexPath) as?
                     UserInfoTableViewCell else { return UITableViewCell()}
@@ -214,7 +254,13 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MoreInfoTableViewCell", for: indexPath) as?
                     MoreInfoTableViewCell else { return UITableViewCell()}
             cell.selectionStyle = .none
-            cell.setupData(text: moreData + bonusData)
+            cell.setupData(text: moreData)
+            return cell
+        case .bonus:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "BonusDataTableViewCell", for: indexPath) as?
+                    BonusDataTableViewCell else { return UITableViewCell()}
+            cell.selectionStyle = .none
+            cell.setupData(text: bonusData)
             return cell
         default:
             return UITableViewCell()
