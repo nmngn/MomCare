@@ -40,6 +40,7 @@ class InfoUserTableViewCell: UITableViewCell {
         valueTextField.text = model.value
         titleLabel.textColor = model.contrastColor
         valueTextField.textColor = model.contrastColor
+        textInput = model.numberPhone
         if !model.isCall {
             widthCallButtonConstraint.constant = 0
             callButton.isEnabled = false
