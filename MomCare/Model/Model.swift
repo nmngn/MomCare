@@ -39,6 +39,10 @@ struct Admin: Mappable {
         model.address = address
         return model
     }
+    
+    func emailChat() -> String {
+        return numberPhone + "@admin.com"
+    }
 }
 
 struct User : Mappable {

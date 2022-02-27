@@ -93,6 +93,8 @@ class UserViewController: UIViewController {
     @objc func letChat() {
         let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
         vc.detailUser = detailData
+        vc.adminData = self.adminData
+        vc.isUserChat = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

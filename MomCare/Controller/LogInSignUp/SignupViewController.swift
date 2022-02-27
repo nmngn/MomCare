@@ -57,25 +57,25 @@ class SignupViewController: UIViewController {
         if let email = emailTextField.text, let password = passwordTextField.text,
            let confirmPw = confirmPwLabel.text {
             if confirmPw == password {
-                Auth.auth().createUser(withEmail: email + "@admin.com", password: password) { (authDataResult, error) in
+                Auth.auth().createUser(withEmail: email + "@admin.com", password: password) { [weak self] (authDataResult, error) in
                     if let error = error {
-                        self.dismissLoading()
+                        self?.dismissLoading()
                         print("Create error: \(error.localizedDescription)")
                         if let error = error as NSError? {
                             print("Error code: \(error.code)")
                             switch error.code {
                             case 17007:
-                                self.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
+                                self?.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
                             case 17026:
-                                self.openAlert("Mật khẩu phải dài hơn 6 kí tự")
+                                self?.openAlert("Mật khẩu phải dài hơn 6 kí tự")
                             default:
                                 break
                             }
                         }
                     } else {
                         print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
-                        self.dismissLoading()
-                        self.repo.createAdmin(numberPhone: email) { [weak self] response in
+                        self?.dismissLoading()
+                        self?.repo.createAdmin(numberPhone: email) { [weak self] response in
                             switch response {
                                 case .success(let data):
                                 if let data = data {
@@ -90,7 +90,7 @@ class SignupViewController: UIViewController {
                                 print(error as Any)
                             }
                         }
-                        self.animateAfterSignUp()
+                        self?.animateAfterSignUp()
                     }
                 }
             } else {

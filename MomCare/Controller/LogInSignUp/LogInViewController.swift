@@ -83,15 +83,15 @@ class LogInViewController: UIViewController {
     
     func tryingLoginAgain() { //login admin
         if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().signIn(withEmail: email + endText, password: password) { _, error in
+            Auth.auth().signIn(withEmail: email + endText, password: password) { [weak self] _, error in
                 if let error = error {
-                    self.openAlert()
+                    self?.openAlert()
                     print(error)
                 } else {
-                    self.getDataAdmin(numberPhone: email)
+                    self?.getDataAdmin(numberPhone: email)
                     Session.shared.userProfile.userNumberPhone = email
                     UserDefaults.standard.set(email, forKey: "sdt")
-                    self.animateAfterLogin()
+                    self?.animateAfterLogin()
                 }
             }
         }

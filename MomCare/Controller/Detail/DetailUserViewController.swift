@@ -579,7 +579,7 @@ extension DetailUserViewController {
     }
     
     func createFirebaseUser(isShowAlert: Bool = false) {
-        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { (authDataResult, error) in
+        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { [weak self] (authDataResult, error) in
             if let error = error {
                 print("Create error: \(error.localizedDescription)")
                 if isShowAlert {
@@ -587,9 +587,9 @@ extension DetailUserViewController {
                         print("Error code: \(error.code)")
                         switch error.code {
                         case 17007:
-                            self.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
+                            self?.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
                         case 17026:
-                            self.openAlert("Mật khẩu phải dài hơn 6 kí tự")
+                            self?.openAlert("Mật khẩu phải dài hơn 6 kí tự")
                         default:
                             break
                         }

@@ -18,6 +18,8 @@
 		3619E46627A46AFC00530953 /* AdminInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3619E46427A46AFC00530953 /* AdminInfoTableViewCell.xib */; };
 		3619E46927A472DB00530953 /* BonusDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3619E46727A472DB00530953 /* BonusDataTableViewCell.swift */; };
 		3619E46A27A472DB00530953 /* BonusDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3619E46827A472DB00530953 /* BonusDataTableViewCell.xib */; };
+		361DECDD27CB6F4C0021A343 /* CurrentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DECDB27CB6F4C0021A343 /* CurrentTableViewCell.swift */; };
+		361DECDE27CB6F4C0021A343 /* CurrentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 361DECDC27CB6F4C0021A343 /* CurrentTableViewCell.xib */; };
 		3626C3FA277C3DDC00434B63 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3626C3F8277C3DDC00434B63 /* NotificationViewController.swift */; };
 		3626C3FB277C3DDC00434B63 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3626C3F9277C3DDC00434B63 /* NotificationViewController.xib */; };
 		365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */; };
@@ -66,8 +68,8 @@
 		3680782627996A58008ACD0B /* AdminViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3680782427996A57008ACD0B /* AdminViewController.xib */; };
 		36807834279A8D25008ACD0B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36807832279A8D25008ACD0B /* ChatViewController.swift */; };
 		36807835279A8D25008ACD0B /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36807833279A8D25008ACD0B /* ChatViewController.xib */; };
-		36807839279A8F21008ACD0B /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36807837279A8F21008ACD0B /* ChatTableViewCell.swift */; };
-		3680783A279A8F21008ACD0B /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36807838279A8F21008ACD0B /* ChatTableViewCell.xib */; };
+		36807839279A8F21008ACD0B /* OtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36807837279A8F21008ACD0B /* OtherTableViewCell.swift */; };
+		3680783A279A8F21008ACD0B /* OtherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36807838279A8F21008ACD0B /* OtherTableViewCell.xib */; };
 		3680783C279A9011008ACD0B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3680783B279A9011008ACD0B /* Message.swift */; };
 		3680783E279A913F008ACD0B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3680783D279A913F008ACD0B /* Constant.swift */; };
 		368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */; };
@@ -132,6 +134,8 @@
 		3619E46427A46AFC00530953 /* AdminInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminInfoTableViewCell.xib; sourceTree = "<group>"; };
 		3619E46727A472DB00530953 /* BonusDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusDataTableViewCell.swift; sourceTree = "<group>"; };
 		3619E46827A472DB00530953 /* BonusDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BonusDataTableViewCell.xib; sourceTree = "<group>"; };
+		361DECDB27CB6F4C0021A343 /* CurrentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTableViewCell.swift; sourceTree = "<group>"; };
+		361DECDC27CB6F4C0021A343 /* CurrentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentTableViewCell.xib; sourceTree = "<group>"; };
 		3626C3F8277C3DDC00434B63 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		3626C3F9277C3DDC00434B63 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOptionViewController.swift; sourceTree = "<group>"; };
@@ -180,8 +184,8 @@
 		3680782427996A57008ACD0B /* AdminViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminViewController.xib; sourceTree = "<group>"; };
 		36807832279A8D25008ACD0B /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		36807833279A8D25008ACD0B /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
-		36807837279A8F21008ACD0B /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		36807838279A8F21008ACD0B /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
+		36807837279A8F21008ACD0B /* OtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherTableViewCell.swift; sourceTree = "<group>"; };
+		36807838279A8F21008ACD0B /* OtherTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherTableViewCell.xib; sourceTree = "<group>"; };
 		3680783B279A9011008ACD0B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3680783D279A913F008ACD0B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -503,8 +507,10 @@
 		36807836279A8EFC008ACD0B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				36807837279A8F21008ACD0B /* ChatTableViewCell.swift */,
-				36807838279A8F21008ACD0B /* ChatTableViewCell.xib */,
+				36807837279A8F21008ACD0B /* OtherTableViewCell.swift */,
+				36807838279A8F21008ACD0B /* OtherTableViewCell.xib */,
+				361DECDB27CB6F4C0021A343 /* CurrentTableViewCell.swift */,
+				361DECDC27CB6F4C0021A343 /* CurrentTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */,
+				361DECDE27CB6F4C0021A343 /* CurrentTableViewCell.xib in Resources */,
 				367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */,
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
@@ -785,7 +792,7 @@
 				3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */,
 				3619E46A27A472DB00530953 /* BonusDataTableViewCell.xib in Resources */,
 				36940557279D511600F1E3C6 /* UserInfoTableViewCell.xib in Resources */,
-				3680783A279A8F21008ACD0B /* ChatTableViewCell.xib in Resources */,
+				3680783A279A8F21008ACD0B /* OtherTableViewCell.xib in Resources */,
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36807835279A8D25008ACD0B /* ChatViewController.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
@@ -899,6 +906,7 @@
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
 				36807834279A8D25008ACD0B /* ChatViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
+				361DECDD27CB6F4C0021A343 /* CurrentTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3619E46527A46AFC00530953 /* AdminInfoTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
@@ -913,7 +921,7 @@
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,
 				36940562279D95A700F1E3C6 /* MoreInfoTableViewCell.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
-				36807839279A8F21008ACD0B /* ChatTableViewCell.swift in Sources */,
+				36807839279A8F21008ACD0B /* OtherTableViewCell.swift in Sources */,
 				36607EFD279E9DC100F34640 /* ErrorResponse.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
 				3600357227841F270067ECEA /* PopupInfoViewController.swift in Sources */,

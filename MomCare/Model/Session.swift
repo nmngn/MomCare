@@ -22,17 +22,17 @@ final class UserLogIn {
 }
 
 struct URLs {
-    private static var baseUrl = "https://mcv1.herokuapp.com/"
+    private static var baseUrl = "http://localhost:3001/"
     
     static var adminUrl = baseUrl + "admin/"
     
-    static var adminDatabByNumberPhone = adminUrl + "/phone/"
+    static var adminDatabByNumberPhone = adminUrl + "phone/"
     
     static var userUrl = baseUrl + "user/"
     
     static var getAllUser = userUrl + "all/"
     
-    static var userDatabByNumberPhone = userUrl + "/phone/"
+    static var userDatabByNumberPhone = userUrl + "phone/"
     
     static var noteUrl = baseUrl + "note/"
     

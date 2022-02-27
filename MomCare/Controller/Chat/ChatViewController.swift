@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class ChatViewController: UIViewController {
 
@@ -17,6 +18,8 @@ class ChatViewController: UIViewController {
     
     var messages : [Message] = []
     var detailUser = DetailModel()
+    var adminData: Admin?
+    var isUserChat = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +30,12 @@ class ChatViewController: UIViewController {
         setupNavigationButton()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = detailUser.name
+        self.title = "Trò chuyện"
     }
     
     func setupNavigationButton() {
@@ -65,7 +69,7 @@ class ChatViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.bottomHeightConstraint.constant = keyboardHeight - 18
+            self.bottomHeightConstraint.constant = keyboardHeight + 8
             scrollToBottom()
             self.view.layoutIfNeeded()
         }
@@ -85,8 +89,10 @@ class ChatViewController: UIViewController {
             $0.dataSource = self
             $0.separatorStyle = .none
             $0.tableFooterView = UIView()
-            $0.registerNibCellFor(type: ChatTableViewCell.self)
+            $0.registerNibCellFor(type: OtherTableViewCell.self)
+            $0.registerNibCellFor(type: CurrentTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
+            $0.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         }
     }
     
@@ -101,48 +107,96 @@ class ChatViewController: UIViewController {
         }
     }
     
-    func loadMessage(){
+    func loadMessage() {
         let messageDB = Database.database().reference().child("messages")
 
-        messageDB.observe(.childAdded) { (snapshot) in
+        messageDB.observe(.childAdded) { [weak self] (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String, String>
             let received = snapshotValue["received"] ?? ""
             let text = snapshotValue["body"] ?? ""
             let sender = snapshotValue["sender"] ?? ""
+            let time = snapshotValue["time"] ?? ""
             
-            print(text, sender, received)
-            if received == self.detailUser.email() {
-                var message = Message()
-                message.body = text
-                message.sender = sender
-                message.received = received
-                self.messages.append(message)
+            print(text, "sender : \(sender)","receiver: \(received)")
+            if self?.isUserChat == true {
+                if sender == Auth.auth().currentUser?.email || received == Auth.auth().currentUser?.email {
+                    var message = Message()
+                    message.body = text
+                    message.sender = sender
+                    message.received = received
+                    message.time = time
+                    if message.sender == Auth.auth().currentUser?.email {
+                        message.type = .current
+                        message.textAlignment = .right
+                        message.color = UIColor(named: Constant.BrandColors.blue)
+                    } else {
+                        message.type = .other
+                        message.textAlignment = .left
+                        message.color = UIColor(named: Constant.BrandColors.purple)
+                    }
+                    self?.messages.append(message)
+                }
+            } else {
+                if received == self?.detailUser.email() || sender == self?.detailUser.email() {
+                    var message = Message()
+                    message.body = text
+                    message.sender = sender
+                    message.received = received
+                    message.time = time
+                    if message.sender == Auth.auth().currentUser?.email {
+                        message.type = .current
+                        message.textAlignment = .right
+                        message.color = UIColor(named: Constant.BrandColors.blue)
+                    } else {
+                        message.type = .other
+                        message.textAlignment = .left
+                        message.color = UIColor(named: Constant.BrandColors.purple)
+                    }
+                    self?.messages.append(message)
+                }
             }
-            self.tableView.reloadData()
-            self.scrollToBottom()
+            self?.tableView.reloadData()
+            self?.scrollToBottom()
         }
     }
     
     @IBAction func send(_ sender: UIButton) {
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        var receiver = ""
+        if isUserChat {
+            if let admin = adminData {
+                receiver = admin.emailChat()
+            }
+        } else {
+            receiver = detailUser.email()
+        }
         if let text = messageTextField.text {
             if !text.isEmpty {
                 let messagesDB = Database.database().reference().child("messages")
                 let messageDictionary = ["sender": Auth.auth().currentUser?.email,
                                          "body": text,
-                                         "received": detailUser.email()]
-                messagesDB.childByAutoId().setValue(messageDictionary) {
+                                         "received": receiver,
+                                         "time": dateString]
+                messagesDB.childByAutoId().setValue(messageDictionary) { [weak self]
                     (error, reference) in
                     if error != nil {
                         print(error as Any)
-                        self.view.makeToast("Gửi không thành công")
+                        self?.view.makeToast("Gửi không thành công")
                     } else {
                         print("Message save successfuly")
-                        self.scrollToBottom()
-                        self.messageTextField.text = ""
+                        self?.scrollToBottom()
+                        self?.messageTextField.text = ""
                     }
                 }
             }
         }
+    }
+    
+    func modelIndexPath(_ index: IndexPath) -> Message {
+        return messages[index.row]
     }
 }
 
@@ -152,13 +206,26 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = messages[indexPath.row]
+        var message: Message
+        message = modelIndexPath(indexPath)
+        switch message.type {
+        case .current:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentTableViewCell", for: indexPath) as?
+                    CurrentTableViewCell else { return UITableViewCell() }
+            cell.setupData(message: message)
+            cell.selectionStyle = .none
+            return cell
+        case .other:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "OtherTableViewCell", for: indexPath) as?
+                    OtherTableViewCell else { return UITableViewCell() }
+            cell.setupData(message: message)
+            cell.selectionStyle = .none
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as?
-                ChatTableViewCell else { return UITableViewCell() }
-        cell.setupData(message: message)
-        cell.selectionStyle = .none
-        return cell
     }
 }
 
