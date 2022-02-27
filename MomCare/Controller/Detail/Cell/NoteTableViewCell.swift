@@ -19,7 +19,6 @@ class NoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         noteTextView.makeShadow()
         noteTextView.backgroundColor = .white
-        noteTextView.textColor = .black
         noteTextView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         noteTextView.delegate = self
         noteTextView.autocorrectionType = .no
@@ -28,9 +27,7 @@ class NoteTableViewCell: UITableViewCell {
     
     func setupData(model: DetailModel) {
         noteTextView.text = model.note
-        noteLabel.textColor = model.contrastColor
-        noteTextView.textColor = model.contrastColor
-        if model.contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             noteTextView.backgroundColor = .white
         } else {
             noteTextView.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)

@@ -18,8 +18,7 @@ class AddPictureTableViewCell: UITableViewCell {
     }
     
     func setupData(model: HistoryModel) {
-        title.textColor = model.contrastColor
-        if model.contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = .white
         } else {
             subView.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)

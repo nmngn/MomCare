@@ -33,7 +33,7 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     
     func setupData(model: HomeModel) {
         self.model = model
-        if model.contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
         } else {
             subView.backgroundColor = UIColor(red: 0.36, green: 0.30, blue: 0.59, alpha: 1.00)
@@ -48,10 +48,8 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         }
         starImage.image = model.isStar ? UIImage(named: "star") : UIImage(named: "unstar")
         userNameLabel.text = model.name
-        userNameLabel.textColor = model.contrastColor
         
         dayCreateLabel.text = model.dateSave
-        dayCreateLabel.textColor = model.contrastColor
         
         if model.dateCalculate.isEmpty {
             babyAgeLabel.text = "Chưa cập nhật"
@@ -60,8 +58,6 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
             babyAgeLabel.text = model.dateCalculate
             dateBornLabel.text = model.babyAge
         }
-        babyAgeLabel.textColor = model.contrastColor
-        dateBornLabel.textColor = model.contrastColor
     }
     
     @IBAction func makeHightlight(_ sender: UIButton) {

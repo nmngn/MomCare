@@ -30,7 +30,6 @@ class InfoUserTableViewCell: UITableViewCell {
         valueTextField.autocorrectionType = .no
         valueTextField.setLeftPaddingPoints(16)
         valueTextField.setRightPaddingPoints(16)
-        valueTextField.textColor = .black
     }
     
     func setupData(model: DetailModel) {
@@ -38,8 +37,6 @@ class InfoUserTableViewCell: UITableViewCell {
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value
-        titleLabel.textColor = model.contrastColor
-        valueTextField.textColor = model.contrastColor
         textInput = model.numberPhone
         if !model.isCall {
             widthCallButtonConstraint.constant = 0
@@ -50,7 +47,7 @@ class InfoUserTableViewCell: UITableViewCell {
             messageButton.isEnabled = false
             spacingButton.constant = 4
         }
-        if model.contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             valueTextField.backgroundColor = .white
             callButton.backgroundColor = .white
             messageButton.backgroundColor = .white

@@ -55,7 +55,13 @@ class ChatViewController: UIViewController {
     }
     
     @objc func call() {
-        if let url = URL(string: "telprompt://\(self.detailUser.numberPhone)"),
+        var numberPhone = ""
+        if isUserChat {
+            numberPhone = self.adminData?.numberPhone ?? ""
+        } else {
+            numberPhone = self.detailUser.numberPhone
+        }
+        if let url = URL(string: "telprompt://\(numberPhone)"),
            UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler:nil)
@@ -208,6 +214,8 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var message: Message
         message = modelIndexPath(indexPath)
+        let index = IndexPath(row: indexPath.row, section: 0)
+        
         switch message.type {
         case .current:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentTableViewCell", for: indexPath) as?
@@ -224,9 +232,48 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .none {
+            
+        }
+    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var message: Message
+        message = modelIndexPath(indexPath)
+        
+        switch message.type {
+        case .current:
+            let showTimeAction = UIContextualAction(style: .normal, title: message.time) { [weak self] (action, view, completion) in
+                completion(true)
+            }
+            showTimeAction.backgroundColor =  UIColor(named: Constant.BrandColors.lighBlue)
+            return UISwipeActionsConfiguration(actions: [showTimeAction])
+        default:
+            return UISwipeActionsConfiguration()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var message: Message
+        message = modelIndexPath(indexPath)
+        
+        switch message.type {
+        case .other:
+            let showTimeAction = UIContextualAction(style: .normal, title: message.time) { [weak self] (action, view, completion) in
+                completion(true)
+            }
+            showTimeAction.backgroundColor =  UIColor(named: Constant.BrandColors.lightPurple)
+            return UISwipeActionsConfiguration(actions: [showTimeAction])
+        default:
+            return UISwipeActionsConfiguration()
+        }
+
+    }
+
 }
 
 extension ChatViewController: UITextFieldDelegate {

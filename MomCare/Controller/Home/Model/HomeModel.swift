@@ -35,7 +35,6 @@ struct HomeModel {
     var imagePregnant = ""
     var dateSave = ""
     var isStar = false
-    var contrastColor = UIColor()
     
     init(type: HomeType) {
         self.type = type

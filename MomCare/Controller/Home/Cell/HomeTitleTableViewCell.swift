@@ -13,12 +13,10 @@ class HomeTitleTableViewCell: UITableViewCell {
 
     func setupData(model: HomeModel) {
         titleLabel.text = model.title
-        titleLabel.textColor = model.contrastColor
     }
     
     func setupData(model: HistoryModel) {
         titleLabel.text = model.title
-        titleLabel.textColor = model.contrastColor
     }
     
 }

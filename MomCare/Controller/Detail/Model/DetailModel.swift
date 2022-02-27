@@ -49,7 +49,6 @@ struct DetailModel {
     var dateSave = ""
     var placeHolder = ""
     var dataType: DataType?
-    var contrastColor = UIColor()
     var isCall = false
     var isActive = true
     

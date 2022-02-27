@@ -46,28 +46,24 @@ class AdminViewController: DetailUserViewController {
         avatar.type = .avatar
         avatar.dataType = .momImage
         avatar.avatarImage = loadImageFromDiskWith(fileName: "adminImage_\(idAdmin)") ?? UIImage(named: "avatar_placeholder")
-        avatar.contrastColor = contrastColor
         
         var name = currentModel
         name.type = .info
         name.dataType = .name
         name.title = "Họ và tên"
         name.value = currentModel.name
-        name.contrastColor = contrastColor
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
         address.title = "Địa chỉ"
         address.value = currentModel.address
-        address.contrastColor = contrastColor
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
         number.title = "Số điện thoại( Không thay đổi)"
         number.value = currentModel.numberPhone
-        number.contrastColor = contrastColor
         number.isActive = false
         
         var email = currentModel
@@ -75,7 +71,6 @@ class AdminViewController: DetailUserViewController {
         email.dataType = .height // height luu cho email
         email.title = "Email"
         email.value = currentModel.height
-        email.contrastColor = contrastColor
         
         model.append(avatar)
         model.append(name)
@@ -85,11 +80,6 @@ class AdminViewController: DetailUserViewController {
     }
     
     override func setupView() {
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
         self.title = "Thông tin cá nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)

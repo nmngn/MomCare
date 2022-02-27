@@ -8,9 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Italic.ttf">
-            <string>Roboto-Italic</string>
-        </array>
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
@@ -26,10 +23,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AbZ-cr-Hkp">
-                        <rect key="frame" x="8" y="4" width="24" height="16"/>
+                        <rect key="frame" x="8" y="4" width="24" height="33"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDV-Da-eQ8">
-                                <rect key="frame" x="12" y="8" width="0.0" height="0.0"/>
+                                <rect key="frame" x="12" y="8" width="0.0" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="aDV-Q6-aGd"/>
                                 </constraints>
@@ -51,21 +48,10 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYB-4M-GqE">
-                        <rect key="frame" x="8" y="22" width="8" height="11"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="11" id="bv1-V6-Lma"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="10"/>
-                        <color key="textColor" white="0.20352087490000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="fYB-4M-GqE" secondAttribute="bottom" constant="8" id="BJQ-OB-GUQ"/>
-                    <constraint firstItem="fYB-4M-GqE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AbZ-cr-Hkp" secondAttribute="bottom" constant="2" id="NAd-64-pND"/>
-                    <constraint firstItem="fYB-4M-GqE" firstAttribute="leading" secondItem="AbZ-cr-Hkp" secondAttribute="leading" id="Y0X-du-GaE"/>
+                    <constraint firstAttribute="bottom" secondItem="AbZ-cr-Hkp" secondAttribute="bottom" constant="4" id="UK4-PT-83O"/>
                     <constraint firstItem="AbZ-cr-Hkp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Ydr-e9-wfd"/>
                     <constraint firstItem="AbZ-cr-Hkp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="lzE-Ll-6hI"/>
                 </constraints>
@@ -73,11 +59,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="bottomHeight" destination="BJQ-OB-GUQ" id="9GV-vv-rcd"/>
                 <outlet property="messLabel" destination="pDV-Da-eQ8" id="fpT-vU-Mn9"/>
                 <outlet property="messView" destination="AbZ-cr-Hkp" id="AGY-Im-TtI"/>
-                <outlet property="timeHeight" destination="bv1-V6-Lma" id="5hb-tD-RK1"/>
-                <outlet property="timeLabel" destination="fYB-4M-GqE" id="aib-rA-rqZ"/>
             </connections>
             <point key="canvasLocation" x="171.73913043478262" y="69.308035714285708"/>
         </tableViewCell>

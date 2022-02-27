@@ -23,14 +23,12 @@ class BaybyAgeTableViewCell: UITableViewCell {
         dobLabel.autocorrectionType = .no
         dobLabel.setLeftPaddingPoints(16)
         dobLabel.setRightPaddingPoints(16)
-        dobLabel.textColor = .black
         dobLabel.isEnabled = false
         
         ageLabel.makeShadow()
         ageLabel.autocorrectionType = .no
         ageLabel.setLeftPaddingPoints(16)
         ageLabel.setRightPaddingPoints(16)
-        ageLabel.textColor = .black
         ageLabel.isEnabled = false
     }
     
@@ -39,11 +37,7 @@ class BaybyAgeTableViewCell: UITableViewCell {
         dobLabel.text = model.babyAge
         ageLabel.text = model.dateCalculate
         
-        dobTitle.textColor = model.contrastColor
-        dobLabel.textColor = model.contrastColor
-        ageLabel.textColor = model.contrastColor
-        ageTitle.textColor = model.contrastColor
-        if model.contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             dobLabel.backgroundColor = .white
             ageLabel.backgroundColor = .white
         } else {

@@ -22,7 +22,7 @@ final class UserLogIn {
 }
 
 struct URLs {
-    private static var baseUrl = "http://localhost:3001/"
+    private static var baseUrl = "https://2765-14-170-124-249.ngrok.io/"
     
     static var adminUrl = baseUrl + "admin/"
     

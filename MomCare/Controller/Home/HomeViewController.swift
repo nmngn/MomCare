@@ -26,7 +26,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     var sortType = ""
-    var contrastColor = UIColor()
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
     let repo = Repositories(api: .share)
@@ -49,11 +48,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
         self.requestNotificationAuthorization()
         
     }
@@ -213,25 +207,17 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             return false
         })
         
-        var badge = HomeModel(type: .badge)
-        badge.contrastColor = contrastColor
-        
-        var addUser = HomeModel(type: .addUser)
-        addUser.contrastColor = contrastColor
+        let badge = HomeModel(type: .badge)
+        let addUser = HomeModel(type: .addUser)
         
         var header1 = HomeModel(type: .title)
         header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
-        header1.contrastColor = contrastColor
         
         var infoCell = HomeModel(type: .infoUser)
-        infoCell.contrastColor = contrastColor
-        
-        var sort = HomeModel(type: .sort)
-        sort.contrastColor = contrastColor
+        let sort = HomeModel(type: .sort)
         
         var header2 = HomeModel(type: .title)
         header2.title = "Tất cả bệnh nhân(\(listUser.count))"
-        header2.contrastColor = contrastColor
         
         model.append(badge)
         model.append(addUser)
@@ -324,7 +310,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     BadgeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             if let list = self.listUser {
-                cell.getNumberPatient(list: list, contrastColor: self.contrastColor)
+                cell.getNumberPatient(list: list)
             }
             return cell
         case .addUser:
@@ -351,7 +337,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
                     SortListTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            self.sortType == "" ? cell.setupTitle(title: "Sắp xếp", contrastColor: self.contrastColor) : cell.setupTitle(title: self.sortType, contrastColor: self.contrastColor)
+            self.sortType == "" ? cell.setupTitle(title: "Sắp xếp") : cell.setupTitle(title: self.sortType)
             cell.selectSoft = { [weak self] in
                 self?.sortListUser()
             }
@@ -423,7 +409,6 @@ extension HomeViewController {
                     let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
                     vc.age = age
                     vc.text = data
-                    vc.contrastColor = self.contrastColor
                     let popup = PopupDialog(viewController: vc,
                                             buttonAlignment: .horizontal,
                                             transitionStyle: .fadeIn,

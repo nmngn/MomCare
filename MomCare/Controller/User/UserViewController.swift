@@ -25,19 +25,15 @@ class UserViewController: UIViewController {
     let repo = Repositories(api: .share)
     var data = ""
     var moreData = ""
-    var bonusData = "" {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var bonusData = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeTheme(theme)
         getDataUser()
         setupData()
         setupNavigationButton()
         configView()
-        changeTheme(theme)
         self.title = "Màn hình chính"
     }
     

@@ -24,7 +24,6 @@ class DetailUserViewController: UIViewController {
     var model = [DetailModel]()
     var userChoice: UserChoice?
     var currentModel = DetailModel()
-    var contrastColor = UIColor()
     var saveAdminImage = false
     let repo = Repositories(api: .share)
     let idAdmin = Session.shared.userProfile.idAdmin
@@ -39,11 +38,6 @@ class DetailUserViewController: UIViewController {
     }
     
     func setupView() {
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -145,39 +139,33 @@ class DetailUserViewController: UIViewController {
         avatar.type = .avatar
         avatar.dataType = .momImage
         avatar.avatarImage = currentModel.avatarImage
-        avatar.contrastColor = contrastColor
         
         var general = currentModel
         general.type = .general
-        general.contrastColor = contrastColor
         
         var name = currentModel
         name.type = .info
         name.dataType = .name
         name.title = "Họ và tên ⃰"
         name.value = currentModel.name
-        name.contrastColor = contrastColor
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
         address.title = "Địa chỉ ⃰"
         address.value = currentModel.address
-        address.contrastColor = contrastColor
         
         var momBirth = currentModel
         momBirth.type = .info
         momBirth.dataType = .dob
         momBirth.title = "Năm sinh ⃰"
         momBirth.value = currentModel.momBirth
-        momBirth.contrastColor = contrastColor
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
         number.title = "Số điện thoại ⃰"
         number.value = currentModel.numberPhone
-        number.contrastColor = contrastColor
         number.isCall = true
         
         var height = currentModel
@@ -185,29 +173,24 @@ class DetailUserViewController: UIViewController {
         height.dataType = .height
         height.title = "Chiều cao ⃰"
         height.value = currentModel.height
-        height.contrastColor = contrastColor
         
         var age = currentModel
         age.type = .age
         age.dataType = .babyAge
         age.babyAge = currentModel.babyAge
-        age.contrastColor = contrastColor
         
         var note = currentModel
         note.type = .note
         note.dataType = .note
-        note.contrastColor = contrastColor
         
         var photo = currentModel
         photo.type = .photo
         photo.dataType = .imagePregnant
-        photo.contrastColor = contrastColor
         
         var imagePregnant = currentModel
         imagePregnant.type = .imagePregnant
         imagePregnant.dataType = .imagePregnant
         imagePregnant.imagePregnant = currentModel.imagePregnant
-        imagePregnant.contrastColor = contrastColor
         
         model.append(avatar)
         model.append(general)

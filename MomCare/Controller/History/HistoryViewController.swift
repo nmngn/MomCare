@@ -20,7 +20,6 @@ class HistoryViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    var contrastColor = UIColor()
     let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
@@ -28,11 +27,6 @@ class HistoryViewController: UIViewController {
         configView()
         setupBackButton()
         getListHistory()
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
         self.title = "Lịch sử ghi chú"
     }
     
@@ -80,15 +74,12 @@ class HistoryViewController: UIViewController {
     
     func setupData() {
         model.removeAll()
-        var add = HistoryModel(type: .add)
-        add.contrastColor = contrastColor
+        let add = HistoryModel(type: .add)
         
         var title = HistoryModel(type: .title)
         title.title = "Các ghi chú đã ghi (\(self.listHistory?.count ?? 0))"
-        title.contrastColor = contrastColor
         
         var cell = HistoryModel(type: .cell)
-        cell.contrastColor = contrastColor
         
         model.append(add)
         model.append(title)

@@ -23,12 +23,6 @@ class PopupInfoViewController: UIViewController {
             setupData()
         }
     }
-    
-    var contrastColor: UIColor? {
-        didSet {
-            setupData()
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +35,5 @@ class PopupInfoViewController: UIViewController {
         }
         weekLabel?.text = "Tuần thai thứ \(age)"
         descriptionLabel?.text = text
-        view.backgroundColor = contrastColor == .black ? .white : .black
-        weekLabel?.textColor = contrastColor
-        descriptionLabel?.textColor = contrastColor
     }
 }

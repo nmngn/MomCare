@@ -28,7 +28,11 @@ class AdminInfoTableViewCell: UITableViewCell {
         nameLabel.text = data.name
         addressLabel.text = data.address
         numberPhoneLabel.text = data.numberPhone
-        avatarImage.image = loadImageFromDiskWith(fileName: data.image)
+        if data.image.isEmpty {
+            avatarImage.image = UIImage(named: "avatar_placeholder")
+        } else {
+            avatarImage.image = loadImageFromDiskWith(fileName: data.image)
+        }
         heightLabel.text = data.email
     }
     

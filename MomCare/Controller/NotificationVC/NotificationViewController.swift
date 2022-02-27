@@ -14,7 +14,6 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var bellView: UIView!
     @IBOutlet weak var titleBell: UILabel!
     
-    var contrastColor = UIColor()
     var notiModel = [NotificationModel]()
     let repo = Repositories(api: .share)
     
@@ -24,11 +23,6 @@ class NotificationViewController: UIViewController {
         setupNavigationButton()
         changeTheme(self.theme)
         configView()
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +48,6 @@ class NotificationViewController: UIViewController {
     func setupStatus(isHidden: Bool, title: String) {
         bellView.isHidden = isHidden
         titleBell.text = title
-        titleBell.textColor = contrastColor
     }
     
     func setupNavigationButton() {
@@ -79,7 +72,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as?
                 NotificationTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        cell.setupData(model: self.notiModel[indexPath.row], contrastColor: self.contrastColor)
+        cell.setupData(model: self.notiModel[indexPath.row])
         return cell
     }
     

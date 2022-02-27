@@ -20,33 +20,27 @@ class BadgeUserTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func getNumberPatient(list: [User], contrastColor: UIColor) {
+    func getNumberPatient(list: [User]) {
         let adminInfo = Session.shared.userProfile
         let text = NSMutableAttributedString(string: "Xin chào ", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 18, weight: .medium)])
         
         let user = NSMutableAttributedString(string: "\(adminInfo.userNumberPhone)", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 18, weight: .bold)])
         text.append(user)
         helloTitle.attributedText = text
         
-        helloTitle.textColor = contrastColor
-        goodDayTitle.textColor = contrastColor
-        
-        if contrastColor == .black {
+        if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
+            
         } else {
-            subView.backgroundColor = UIColor(red: 0.34, green: 0.35, blue: 0.73, alpha: 1.00)
+                subView.backgroundColor = UIColor(red: 0.34, green: 0.35, blue: 0.73, alpha: 1.00)
         }
         
         let allPatient = NSMutableAttributedString(string: "\(list.count)", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 16, weight: .bold)
         ])
         let textAll = NSMutableAttributedString(string: "Tổng số bệnh nhân hiện có: ", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 16, weight: .regular)
         ])
         
@@ -66,11 +60,9 @@ class BadgeUserTableViewCell: UITableViewCell {
         })
         
         let inMonthPatient = NSMutableAttributedString(string: "\(newList.count)", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 16, weight: .bold)
         ])
         let textMonth = NSMutableAttributedString(string: "Số bệnh nhân dự kiến sinh trong tháng này: ", attributes: [
-            .foregroundColor : contrastColor,
             .font : UIFont.systemFont(ofSize: 16, weight: .regular)
         ])
         

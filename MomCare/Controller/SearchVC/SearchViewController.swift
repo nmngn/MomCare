@@ -22,7 +22,6 @@ class SearchViewController: UIViewController {
         }
     }
     var userSearch = ""
-    var contrastColor = UIColor()
     let repo = Repositories(api: .share)
     var listUser = [User]()
     
@@ -33,11 +32,6 @@ class SearchViewController: UIViewController {
         configView()
         setupBackButton()
         changeTheme(self.theme)
-        if self.traitCollection.userInterfaceStyle == .light {
-            contrastColor = .black
-        } else {
-            contrastColor = .white
-        }
         setupStatus(isHidden: false, title: "Hãy bắt đầu tìm kiếm")
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -74,7 +68,6 @@ class SearchViewController: UIViewController {
     func setupStatus(isHidden: Bool, title: String) {
         resultView.isHidden = isHidden
         statusLabel.text = title
-        statusLabel.textColor = contrastColor
     }
     
     func setupBackButton() {
@@ -114,7 +107,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                 SearchItemTableViewCell else { return UITableViewCell()}
         cell.selectionStyle = .none
         if let listResult = self.listResult {
-            cell.setupData(model: listResult[indexPath.row], contrastColor: self.contrastColor)
+            cell.setupData(model: listResult[indexPath.row])
         }
         return cell
     }

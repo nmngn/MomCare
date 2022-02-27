@@ -20,7 +20,6 @@ struct HistoryModel {
     var idUser = ""
     var title = ""
     var dataImage = ""
-    var contrastColor = UIColor()
     
     init(type: HistoryType) {
         self.type = type

@@ -18,14 +18,6 @@ class GeneralInfoTableViewCell: UITableViewCell {
     }
             
     func setupData(_ model: DetailModel?) {
-        var contrastColor = UIColor()
-        if self.traitCollection.userInterfaceStyle == .light {
-            generalTitle.textColor = .black
-            contrastColor = .black
-        } else {
-            generalTitle.textColor = .white
-            contrastColor = .white
-        }
         if model?.dateSave == "" {
             let dateFormatter : DateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
@@ -33,20 +25,16 @@ class GeneralInfoTableViewCell: UITableViewCell {
             let dateString = dateFormatter.string(from: date)
             
             let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
-                                                 attributes: [.foregroundColor: contrastColor,
-                                                              .font: UIFont.systemFont(ofSize: 14, weight: .regular)])
+                                                 attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)])
             let day = NSMutableAttributedString(string: "\(dateString)",
-                                                attributes: [.foregroundColor: contrastColor,
-                                                             .font: UIFont.systemFont(ofSize: 14, weight: .medium)])
+                                                attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .medium)])
             text.append(day)
             dayCreate.attributedText = text
         } else {
             let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
-                                                 attributes: [.foregroundColor: contrastColor,
-                                                              .font: UIFont.systemFont(ofSize: 14, weight: .regular)])
+                                                 attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)])
             let day = NSMutableAttributedString(string: "\(model?.dateSave ?? "Chưa cập nhật")",
-                                                attributes: [.foregroundColor: contrastColor,
-                                                             .font: UIFont.systemFont(ofSize: 14, weight: .medium)])
+                                                attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .medium)])
             text.append(day)
             dayCreate.attributedText = text
         }
