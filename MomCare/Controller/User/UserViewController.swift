@@ -25,7 +25,11 @@ class UserViewController: UIViewController {
     let repo = Repositories(api: .share)
     var data = ""
     var moreData = ""
-    var bonusData = ""
+    var bonusData = "" {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,13 @@ class UserViewController: UIViewController {
         setupNavigationButton()
         configView()
         self.title = "Màn hình chính"
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        setupNavigationButton()
+        tableView.reloadData()
     }
     
     func setupNavigationButton() {

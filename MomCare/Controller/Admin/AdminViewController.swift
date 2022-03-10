@@ -101,6 +101,7 @@ class AdminViewController: DetailUserViewController {
                 self?.view.makeToast("Cập nhật thành công")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.navigationController?.popToRootViewController(animated: true)
+                    Session.shared.isPopToRoot = true
                 }
             case .failure(let error):
                 print(error as Any)

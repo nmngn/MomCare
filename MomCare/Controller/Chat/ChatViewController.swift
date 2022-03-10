@@ -23,6 +23,7 @@ class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Trò chuyện"
         configView()
         loadMessage()
         changeTheme(theme)
@@ -33,10 +34,14 @@ class ChatViewController: UIViewController {
   
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.title = "Trò chuyện"
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        theme.applyBlurEffect()
+        setupNavigationButton()
+        tableView.reloadData()
     }
+
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -75,7 +80,12 @@ class ChatViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.bottomHeightConstraint.constant = keyboardHeight + 8
+            switch UIDevice.current.screenType {
+            case .iPhones_4_4S, .iPhones_5_5s_5c_SE, .iPhones_6Plus_6sPlus_7Plus_8Plus, .iPhones_6_6s_7_8_SE2:
+                self.bottomHeightConstraint.constant = keyboardHeight + 8
+            default :
+                self.bottomHeightConstraint.constant = keyboardHeight - 16
+            }
             scrollToBottom()
             self.view.layoutIfNeeded()
         }

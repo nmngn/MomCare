@@ -24,16 +24,23 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeTheme(self.theme)
         configView()
         setupBackButton()
         getListHistory()
         self.title = "Lịch sử ghi chú"
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        setupBackButton()
+        tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupData()
-        changeTheme(self.theme)
     }
     
     func setupBackButton() {

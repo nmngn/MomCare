@@ -37,6 +37,13 @@ class DetailUserViewController: UIViewController {
         setupNavigationButton()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        setupNavigationButton()
+        tableView.reloadData()
+    }
+    
     func setupView() {
         self.title = "Thông tin bệnh nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -102,6 +109,7 @@ class DetailUserViewController: UIViewController {
             switch response {
             case .success(_):
                 self?.navigationController?.popToRootViewController(animated: true)
+                Session.shared.isPopToRoot = true
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
                 print(error as Any)
@@ -514,6 +522,7 @@ extension DetailUserViewController {
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
                     self?.navigationController?.popToRootViewController(animated: true)
+                    Session.shared.isPopToRoot = true
                 }
                 alert.addAction(action)
                 self?.present(alert, animated: true, completion: nil)
@@ -548,9 +557,10 @@ extension DetailUserViewController {
             switch response {
             case .success(let data):
                 print(data as Any)
-                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+                let alert = UIAlertController(title: "Thông báo", message: "Cập nhật thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
                     self?.navigationController?.popToRootViewController(animated: true)
+                    Session.shared.isPopToRoot = true
                 }
                 alert.addAction(action)
                 self?.present(alert, animated: true, completion: nil)

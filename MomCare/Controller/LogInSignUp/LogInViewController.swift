@@ -25,12 +25,6 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var theme: UIImageView!
     
-    @IBOutlet weak var cloud1: UIImageView!
-    @IBOutlet weak var cloud2: UIImageView!
-    @IBOutlet weak var cloud3: UIImageView!
-    @IBOutlet weak var cloud4: UIImageView!
-
-    
     var autoEmail = UserDefaults.standard.string(forKey: "sdt")
     var endText = "@user.com"
     let repo = Repositories(api: .share)
@@ -44,6 +38,11 @@ class LogInViewController: UIViewController {
         changeTheme(theme)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,15 +178,6 @@ extension LogInViewController {
         loginButton.frame.size.width = view.bounds.width - 78*2
         emailTextField.center.x -= view.bounds.width
         passwordTextField.center.x -= view.bounds.width
-        cloud1.center.x -= view.bounds.width
-        cloud2.center.x -= view.bounds.width
-        cloud3.center.x -= view.bounds.width
-        cloud4.center.x -= view.bounds.width
-        
-        cloud1.alpha = 0.0
-        cloud2.alpha = 0.0
-        cloud3.alpha = 0.0
-        cloud4.alpha = 0.0
         
         loginButton.center.y += 100
         loginButton.alpha = 0
@@ -212,22 +202,6 @@ extension LogInViewController {
         UIView.animate(withDuration: 1.5, delay: 1, options: []) {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in }
-        UIView.animate(withDuration: 1, delay: 0.25, options: []) {
-            self.cloud1.center.x += self.view.bounds.width
-            self.cloud1.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.5, options: []) {
-            self.cloud2.center.x += self.view.bounds.width
-            self.cloud2.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.75, options: []) {
-            self.cloud3.center.x += self.view.bounds.width
-            self.cloud3.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.1, options: []) {
-            self.cloud4.center.x += self.view.bounds.width
-            self.cloud4.alpha = 1
-        } completion: { _ in}
         UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.loginButton.center.y -= 100
             self.loginButton.alpha = 1
@@ -257,22 +231,6 @@ extension LogInViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        UIView.animate(withDuration: 1, delay: 0.25, options: []) {
-            self.cloud1.center.x += self.view.bounds.width
-            self.cloud1.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.5, options: []) {
-            self.cloud2.center.x += self.view.bounds.width
-            self.cloud2.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.75, options: []) {
-            self.cloud3.center.x += self.view.bounds.width
-            self.cloud3.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.1, options: []) {
-            self.cloud4.center.x += self.view.bounds.width
-            self.cloud4.alpha = 0
-        } completion: { _ in}
         UIView.animate(withDuration: 1, delay: 0.05, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.loginButton.center.y += self.view.bounds.height
         } completion: { _ in}

@@ -28,22 +28,6 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T69-3b-b9i">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-1" translatesAutoresizingMaskIntoConstraints="NO" id="WtF-1X-TTY">
-                                                <rect key="frame" x="-120" y="179" width="159" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-2" translatesAutoresizingMaskIntoConstraints="NO" id="w7w-JS-lim">
-                                                <rect key="frame" x="256" y="213" width="158" height="49"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-3" translatesAutoresizingMaskIntoConstraints="NO" id="5kS-rw-GP3">
-                                                <rect key="frame" x="284" y="503" width="74" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-4" translatesAutoresizingMaskIntoConstraints="NO" id="ETc-LE-bKD">
-                                                <rect key="frame" x="22" y="545" width="115" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Đăng kí" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-66-hbi">
                                                 <rect key="frame" x="88" y="119" width="237" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -111,10 +95,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="cloud1" destination="WtF-1X-TTY" id="zpz-7m-voY"/>
-                        <outlet property="cloud2" destination="w7w-JS-lim" id="EhF-QH-2nJ"/>
-                        <outlet property="cloud3" destination="ETc-LE-bKD" id="kot-Yd-tv5"/>
-                        <outlet property="cloud4" destination="5kS-rw-GP3" id="kjA-yd-KTR"/>
                         <outlet property="confirmPwLabel" destination="Qic-3Z-Rhf" id="wCv-zk-Lwl"/>
                         <outlet property="emailTextField" destination="kz5-hN-ph8" id="mmO-re-6st"/>
                         <outlet property="heading" destination="bh4-66-hbi" id="cV4-DM-Xt6"/>
@@ -130,10 +110,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg-sunny-cloud-1" width="159" height="50"/>
-        <image name="bg-sunny-cloud-2" width="138" height="49"/>
-        <image name="bg-sunny-cloud-3" width="74" height="35"/>
-        <image name="bg-sunny-cloud-4" width="115" height="50"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

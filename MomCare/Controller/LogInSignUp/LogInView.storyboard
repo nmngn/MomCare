@@ -24,22 +24,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6sV-xJ-p7c">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-1" translatesAutoresizingMaskIntoConstraints="NO" id="mL6-Bz-131">
-                                        <rect key="frame" x="-120" y="179" width="159" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-2" translatesAutoresizingMaskIntoConstraints="NO" id="HMM-5o-SG4">
-                                        <rect key="frame" x="256" y="213" width="158" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-3" translatesAutoresizingMaskIntoConstraints="NO" id="4Z9-LM-WU4">
-                                        <rect key="frame" x="284" y="503" width="74" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-sunny-cloud-4" translatesAutoresizingMaskIntoConstraints="NO" id="e7R-0D-6WV">
-                                        <rect key="frame" x="22" y="545" width="115" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Đăng nhập" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGD-BG-ekA">
                                         <rect key="frame" x="88" y="119" width="237" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -103,10 +87,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="IA4-pq-pgz"/>
                     <connections>
-                        <outlet property="cloud1" destination="mL6-Bz-131" id="lIw-XY-rpA"/>
-                        <outlet property="cloud2" destination="HMM-5o-SG4" id="VuP-5E-SV8"/>
-                        <outlet property="cloud3" destination="4Z9-LM-WU4" id="fiB-Fw-xkj"/>
-                        <outlet property="cloud4" destination="e7R-0D-6WV" id="Qiz-DZ-Xgq"/>
                         <outlet property="emailTextField" destination="1mU-gE-aGG" id="GFj-7u-g0t"/>
                         <outlet property="heading" destination="OGD-BG-ekA" id="YmX-JS-Mx6"/>
                         <outlet property="loginButton" destination="dTo-qP-mCg" id="04Y-94-CcV"/>
@@ -139,10 +119,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg-sunny-cloud-1" width="159" height="50"/>
-        <image name="bg-sunny-cloud-2" width="138" height="49"/>
-        <image name="bg-sunny-cloud-3" width="74" height="35"/>
-        <image name="bg-sunny-cloud-4" width="115" height="50"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

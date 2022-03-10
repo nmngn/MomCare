@@ -34,6 +34,13 @@ class NotificationViewController: UIViewController {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        setupNavigationButton()
+        tableView.reloadData()
+    }
+    
     func configView() {
         tableView.do {
             $0.delegate = self

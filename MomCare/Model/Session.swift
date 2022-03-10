@@ -13,6 +13,7 @@ class Session {
     static var shared = Session()
     var userProfile = UserLogIn()
     var validPhone = "086|096|097|098|032|033|034|035|036|037|038|039|056|058|092|059|099|070|076|077|078|079|090|093|089|081|082|083|084|085|088|091|094"
+    var isPopToRoot = false
 }
 
 final class UserLogIn {
@@ -22,7 +23,7 @@ final class UserLogIn {
 }
 
 struct URLs {
-    private static var baseUrl = "https://2765-14-170-124-249.ngrok.io/"
+    private static var baseUrl = "https://mcv1.herokuapp.com/"
     
     static var adminUrl = baseUrl + "admin/"
     

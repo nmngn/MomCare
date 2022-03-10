@@ -20,11 +20,6 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var logInButton: UIButton!
     
-    @IBOutlet weak var cloud1: UIImageView!
-    @IBOutlet weak var cloud2: UIImageView!
-    @IBOutlet weak var cloud3: UIImageView!
-    @IBOutlet weak var cloud4: UIImageView!
-    
     let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
@@ -33,6 +28,8 @@ class SignupViewController: UIViewController {
         passwordTextField.delegate = self
         confirmPwLabel.delegate = self
         signUpButton.isEnabled = false
+        passwordTextField.textContentType = .oneTimeCode
+        confirmPwLabel.textContentType = .oneTimeCode
         configView()
         changeTheme(theme)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -46,6 +43,11 @@ class SignupViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setUpAnimation()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
     }
     
     @objc func dismissKeyboard() {
@@ -162,16 +164,6 @@ extension SignupViewController {
         emailTextField.frame.size.height = 36
         passwordTextField.frame.size.height = 36
         
-        cloud1.center.x -= view.bounds.width
-        cloud2.center.x -= view.bounds.width
-        cloud3.center.x -= view.bounds.width
-        cloud4.center.x -= view.bounds.width
-        
-        cloud1.alpha = 0.0
-        cloud2.alpha = 0.0
-        cloud3.alpha = 0.0
-        cloud4.alpha = 0.0
-        
         signUpButton.center.y += 100
         signUpButton.alpha = 0
         logInButton.frame.size.width = view.bounds.width - 100*2
@@ -198,22 +190,6 @@ extension SignupViewController {
         UIView.animate(withDuration: 1.25, delay: 0.75, options: []) {
             self.confirmPwLabel.center.x += self.view.bounds.width
         }
-        UIView.animate(withDuration: 1, delay: 0.25, options: []) {
-            self.cloud1.center.x += self.view.bounds.width
-            self.cloud1.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.5, options: []) {
-            self.cloud2.center.x += self.view.bounds.width
-            self.cloud2.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.75, options: []) {
-            self.cloud3.center.x += self.view.bounds.width
-            self.cloud3.alpha = 1
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.1, options: []) {
-            self.cloud4.center.x += self.view.bounds.width
-            self.cloud4.alpha = 1
-        } completion: { _ in}
         UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.signUpButton.center.y -= 100
             self.signUpButton.alpha = 1
@@ -243,22 +219,6 @@ extension SignupViewController {
         UIView.animate(withDuration: 1.5, delay: 0.5, options: [], animations: {
             self.confirmPwLabel.center.x += self.view.bounds.width
         }, completion: nil)
-        UIView.animate(withDuration: 1, delay: 0.25, options: []) {
-            self.cloud1.center.x += self.view.bounds.width
-            self.cloud1.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.5, options: []) {
-            self.cloud2.center.x += self.view.bounds.width
-            self.cloud2.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.75, options: []) {
-            self.cloud3.center.x += self.view.bounds.width
-            self.cloud3.alpha = 0
-        } completion: { _ in}
-        UIView.animate(withDuration: 1, delay: 0.1, options: []) {
-            self.cloud4.center.x += self.view.bounds.width
-            self.cloud4.alpha = 0
-        } completion: { _ in}
         UIView.animate(withDuration: 1, delay: 0.05, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.signUpButton.center.y += self.view.bounds.height
         } completion: { _ in}

@@ -44,6 +44,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
+        changeTheme(theme)
+        getListUser()
         configView()
         setupNavigationButton()
         userNotificationCenter.delegate = self
@@ -54,10 +56,20 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        changeTheme(theme)
+        setupNavigationButton()
+        tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getListUser()
-        changeTheme(self.theme)
+        if Session.shared.isPopToRoot {
+            getListUser()
+            Session.shared.isPopToRoot = false
+        }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -113,7 +125,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         date.hour = 7
         date.minute = 30
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "Notification",
                                             content: notificationContent,
                                             trigger: trigger)
@@ -132,7 +144,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         vc.notiModel = self.notiModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .badge, .sound])
     }
@@ -146,7 +158,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
                     let wStartIndex = text.index(text.startIndex, offsetBy: 0)
                     let wEndIndex = text.index(text.startIndex, offsetBy: 1)
                     let weekData = String(text[wStartIndex...wEndIndex])
-                
+                    
                     let wResult = Int(weekData) ?? 0 >= 38
                     return wResult
                 }
@@ -158,7 +170,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             self.sendNotification(noti: self.notiModel)
         }
     }
-        
+    
     func getListUser(reverse: Bool = false) {
         repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
             switch value {
@@ -250,7 +262,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             model.append(infoCell)
         }
     }
-
+    
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
         let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -373,7 +385,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     print(error as Any)
                 }
             }
-
+            
         default:
             break
         }
@@ -399,7 +411,7 @@ extension HomeViewController {
 extension HomeViewController {
     func getAgeData(_ age: Int) {
         let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
-
+        
         do {
             let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
             let rows = csv.namedRows
