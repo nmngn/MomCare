@@ -18,6 +18,7 @@ class Session {
 
 final class UserLogIn {
     var userNumberPhone = ""
+    var adminNumber = ""
     var idAdmin = ""
     var idUser = ""
 }

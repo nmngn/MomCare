@@ -15,7 +15,6 @@ class PopupUserViewController: UIViewController {
     
     var navigation = UINavigationController()
     var detailUser = DetailModel()
-    var adminData : Admin?
     var isUserChat = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,6 @@ class PopupUserViewController: UIViewController {
     @IBAction func openChat(_ sender: UIButton) {
         let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
         vc.detailUser = detailUser
-        vc.adminData = adminData
         vc.isUserChat = true
         dismissVC()
         self.navigation.pushViewController(vc, animated: true)

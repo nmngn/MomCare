@@ -88,7 +88,7 @@ class LogInViewController: UIViewController {
                     print(error)
                 } else {
                     self?.getDataAdmin(numberPhone: email)
-                    Session.shared.userProfile.userNumberPhone = email
+                    Session.shared.userProfile.adminNumber = email
                     UserDefaults.standard.set(email, forKey: "sdt")
                     self?.animateAfterLogin()
                 }

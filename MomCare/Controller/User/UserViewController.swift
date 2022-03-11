@@ -70,6 +70,7 @@ class UserViewController: UIViewController {
             switch response {
             case .success(let data):
                 self?.adminData = data
+                Session.shared.userProfile.adminNumber = data?.numberPhone ?? ""
             case .failure(let error):
                 print(error as Any)
             }
@@ -79,7 +80,6 @@ class UserViewController: UIViewController {
     @objc func openPopupUser() {
         let vc = PopupUserViewController.init(nibName: "PopupUserViewController", bundle: nil)
         vc.detailUser = detailData
-        vc.adminData = self.adminData
         vc.isUserChat = true
         vc.navigation = self.navigationController ?? UINavigationController()
         customPresentViewController(presenter, viewController: vc, animated: true)

@@ -578,14 +578,14 @@ extension DetailUserViewController {
                 if isShowAlert {
                     if let error = error as NSError? {
                         print("Error code: \(error.code)")
-                        switch error.code {
-                        case 17007:
-                            self?.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
-                        case 17026:
-                            self?.openAlert("Mật khẩu phải dài hơn 6 kí tự")
-                        default:
-                            break
-                        }
+//                        switch error.code {
+//                        case 17007:
+//                            self?.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
+//                        case 17026:
+//                            self?.openAlert("Mật khẩu phải dài hơn 6 kí tự")
+//                        default:
+//                            break
+//                        }
                     }
                 }
             } else {

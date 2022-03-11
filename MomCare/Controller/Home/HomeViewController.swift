@@ -20,11 +20,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var listUser: [User]? {
         didSet {
             setupData()
-            getUserToPushNoti()
-            self.tableView?.reloadData()
         }
     }
-    
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
@@ -45,8 +42,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         changeTheme(theme)
-        getListUser()
         configView()
+        getListUser()
         setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
@@ -149,9 +146,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         completionHandler([.banner, .badge, .sound])
     }
     
-    func getUserToPushNoti() {
+    func getUserToPushNoti(listUser: [User]?) {
         self.notiModel.removeAll()
-        if let listUser = self.listUser {
+        if let listUser = listUser {
             let newList = listUser.filter ({ user in
                 let text = updateTime(dateString: user.babyDateBorn)
                 if !text.isEmpty {
@@ -177,6 +174,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             case .success(let data):
                 if let data = data {
                     let list = data.users?.filter({$0.idAdmin == self?.idAdmin})
+                    self?.getUserToPushNoti(listUser: list)
                     if !reverse {
                         self?.listUser = list
                     } else {
@@ -261,6 +259,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             infoCell.isStar = listUser[i].isStar
             model.append(infoCell)
         }
+        tableView.reloadData()
     }
     
     @IBAction func searchUser(_ sender: UIBarButtonItem) {

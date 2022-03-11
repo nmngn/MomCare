@@ -18,7 +18,7 @@ class ChatViewController: UIViewController {
     
     var messages : [Message] = []
     var detailUser = DetailModel()
-    var adminData: Admin?
+    var adminNumber = Session.shared.userProfile.adminNumber
     var isUserChat = false
 
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class ChatViewController: UIViewController {
     @objc func call() {
         var numberPhone = ""
         if isUserChat {
-            numberPhone = self.adminData?.numberPhone ?? ""
+            numberPhone = self.adminNumber
         } else {
             numberPhone = self.detailUser.numberPhone
         }
@@ -131,6 +131,7 @@ class ChatViewController: UIViewController {
             let text = snapshotValue["body"] ?? ""
             let sender = snapshotValue["sender"] ?? ""
             let time = snapshotValue["time"] ?? ""
+            let adminEmail = self!.adminNumber + "@admin.com"
             
             print(text, "sender : \(sender)","receiver: \(received)")
             if self?.isUserChat == true {
@@ -158,7 +159,7 @@ class ChatViewController: UIViewController {
                     message.sender = sender
                     message.received = received
                     message.time = time
-                    if message.sender == Auth.auth().currentUser?.email {
+                    if message.sender == adminEmail {
                         message.type = .current
                         message.textAlignment = .right
                         message.color = UIColor(named: Constant.BrandColors.blue)
@@ -181,17 +182,20 @@ class ChatViewController: UIViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         var receiver = ""
+        let adminEmail = adminNumber + "@admin.com"
+        var sender = Auth.auth().currentUser?.email
         if isUserChat {
-            if let admin = adminData {
-                receiver = admin.emailChat()
-            }
+            receiver = adminEmail
         } else {
             receiver = detailUser.email()
+            if sender != adminEmail {
+                sender = adminEmail
+            }
         }
         if let text = messageTextField.text {
             if !text.isEmpty {
                 let messagesDB = Database.database().reference().child("messages")
-                let messageDictionary = ["sender": Auth.auth().currentUser?.email,
+                let messageDictionary = ["sender": sender,
                                          "body": text,
                                          "received": receiver,
                                          "time": dateString]
