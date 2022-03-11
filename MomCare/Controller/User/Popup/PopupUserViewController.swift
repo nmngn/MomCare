@@ -1,46 +1,38 @@
 //
-//  SmallOptionViewController.swift
+//  PopupUserViewController.swift
 //  MomCare
 //
-//  Created by Nam Ngây on 19/01/2022.
+//  Created by Nam Ngây on 11/03/2022.
 //
 
 import UIKit
 import FirebaseAuth
 
-class SmallOptionViewController: UIViewController {
-    
-    @IBOutlet weak var notiImage: UIImageView!
+class PopupUserViewController: UIViewController {
+
     @IBOutlet weak var dismissView: UIView!
     @IBOutlet weak var theme: UIImageView!
     
-    var notiModel = [NotificationModel]()
     var navigation = UINavigationController()
-    
+    var detailUser = DetailModel()
+    var adminData : Admin?
+    var isUserChat = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        notiImage.image = UIImage(systemName: "bell")?.toHierachicalImage()
         theme.applyBlurEffect()
         let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
         dismissView.addGestureRecognizer(tapGestureReconizer)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !notiModel.isEmpty {
-            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                self.notiImage.image = UIImage(systemName: "bell.badge")?.toHierachicalImage()
-            }, completion: nil)
-        }
-    }
-    
+        
     @objc func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func openNoti(_ sender: UIButton) {
-        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
-        vc.notiModel = self.notiModel
+    @IBAction func openChat(_ sender: UIButton) {
+        let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
+        vc.detailUser = detailUser
+        vc.adminData = adminData
+        vc.isUserChat = true
         dismissVC()
         self.navigation.pushViewController(vc, animated: true)
     }
@@ -77,8 +69,8 @@ class SmallOptionViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func openProfile(_ sender: UIButton) {
-        let vc = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
+    @IBAction func openMore(_ sender: UIButton) {
+        let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
         dismissVC()
         navigation.pushViewController(vc, animated: true)
     }

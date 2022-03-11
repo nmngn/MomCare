@@ -13,6 +13,7 @@ enum UserType {
     case data
     case more
     case bonus
+    case image
 }
 
 struct UserInfo {
@@ -31,4 +32,5 @@ struct UserInfo {
     var note = ""
     var imagePregnant: UIImage?
     var dateSave = ""
+    var illuImage: UIImage?
 }

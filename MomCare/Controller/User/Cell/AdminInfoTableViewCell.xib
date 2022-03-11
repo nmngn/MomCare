@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzy-eI-UOm">
-                        <rect key="frame" x="16" y="8" width="403" height="171"/>
+                        <rect key="frame" x="16" y="12" width="403" height="175"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tif-b0-Wza">
-                                <rect key="frame" x="0.0" y="0.0" width="403" height="171"/>
+                                <rect key="frame" x="0.0" y="0.0" width="403" height="175"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -166,8 +166,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="yzy-eI-UOm" secondAttribute="trailing" constant="16" id="Aqm-i7-Qg9"/>
                     <constraint firstItem="yzy-eI-UOm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fef-Nw-njX"/>
-                    <constraint firstAttribute="bottom" secondItem="yzy-eI-UOm" secondAttribute="bottom" constant="12" id="xUg-qp-I4p"/>
-                    <constraint firstItem="yzy-eI-UOm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zNY-AW-N4p"/>
+                    <constraint firstAttribute="bottom" secondItem="yzy-eI-UOm" secondAttribute="bottom" constant="4" id="xUg-qp-I4p"/>
+                    <constraint firstItem="yzy-eI-UOm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="zNY-AW-N4p"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

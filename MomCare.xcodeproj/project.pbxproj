@@ -10,6 +10,8 @@
 		3600356E278415C30067ECEA /* Book1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3600356D278415C30067ECEA /* Book1.csv */; };
 		3600357227841F270067ECEA /* PopupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600357027841F270067ECEA /* PopupInfoViewController.swift */; };
 		3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3600357127841F270067ECEA /* PopupInfoViewController.xib */; };
+		360BBB5427DAF7A500A4A67D /* PopupUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360BBB5227DAF7A500A4A67D /* PopupUserViewController.swift */; };
+		360BBB5527DAF7A500A4A67D /* PopupUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360BBB5327DAF7A500A4A67D /* PopupUserViewController.xib */; };
 		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
 		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
 		3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */; };
@@ -116,6 +118,8 @@
 		36EC54642691F37D00809FF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54622691F37D00809FF3 /* Main.storyboard */; };
 		36EC54662691F38000809FF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54652691F38000809FF3 /* Assets.xcassets */; };
 		36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54672691F38000809FF3 /* LaunchScreen.storyboard */; };
+		36EE825827DA5D7C00265EC1 /* IlluImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EE825627DA5D7C00265EC1 /* IlluImageTableViewCell.swift */; };
+		36EE825927DA5D7C00265EC1 /* IlluImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
@@ -126,6 +130,8 @@
 		3600356D278415C30067ECEA /* Book1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Book1.csv; sourceTree = "<group>"; };
 		3600357027841F270067ECEA /* PopupInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupInfoViewController.swift; sourceTree = "<group>"; };
 		3600357127841F270067ECEA /* PopupInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupInfoViewController.xib; sourceTree = "<group>"; };
+		360BBB5227DAF7A500A4A67D /* PopupUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupUserViewController.swift; sourceTree = "<group>"; };
+		360BBB5327DAF7A500A4A67D /* PopupUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupUserViewController.xib; sourceTree = "<group>"; };
 		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
 		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
 		3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +240,8 @@
 		36EC54652691F38000809FF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36EC54682691F38000809FF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36EC546A2691F38000809FF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36EE825627DA5D7C00265EC1 /* IlluImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IlluImageTableViewCell.swift; sourceTree = "<group>"; };
+		36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IlluImageTableViewCell.xib; sourceTree = "<group>"; };
 		36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePregnantTableViewCell.swift; sourceTree = "<group>"; };
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +267,15 @@
 				3600357127841F270067ECEA /* PopupInfoViewController.xib */,
 				365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */,
 				365F0B1D27982E6C001BE7D1 /* SmallOptionViewController.xib */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		360BBB5127DAF78800A4A67D /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				360BBB5227DAF7A500A4A67D /* PopupUserViewController.swift */,
+				360BBB5327DAF7A500A4A67D /* PopupUserViewController.xib */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -539,6 +556,8 @@
 				36940555279D511600F1E3C6 /* UserInfoTableViewCell.xib */,
 				3619E46727A472DB00530953 /* BonusDataTableViewCell.swift */,
 				3619E46827A472DB00530953 /* BonusDataTableViewCell.xib */,
+				36EE825627DA5D7C00265EC1 /* IlluImageTableViewCell.swift */,
+				36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -555,6 +574,7 @@
 		36B8A2EB279BEBB4009186FC /* User */ = {
 			isa = PBXGroup;
 			children = (
+				360BBB5127DAF78800A4A67D /* Popup */,
 				36607EEF279E7AE300F34640 /* Model */,
 				36940553279D128500F1E3C6 /* Cell */,
 				36B8A2EC279BEF81009186FC /* UserViewController.swift */,
@@ -775,6 +795,7 @@
 				36D4FFAD2694B5FA00985C25 /* NoteTableViewCell.xib in Resources */,
 				36940563279D95A700F1E3C6 /* MoreInfoTableViewCell.xib in Resources */,
 				36D4FFB22694B68200985C25 /* PhotoTableViewCell.xib in Resources */,
+				360BBB5527DAF7A500A4A67D /* PopupUserViewController.xib in Resources */,
 				366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */,
 				366AE8C52692BF3300B5262C /* BadgeUserTableViewCell.xib in Resources */,
 				365F0B1F27982E6C001BE7D1 /* SmallOptionViewController.xib in Resources */,
@@ -803,6 +824,7 @@
 				3619E46627A46AFC00530953 /* AdminInfoTableViewCell.xib in Resources */,
 				36BC4DC427991951006DFC30 /* WebViewController.xib in Resources */,
 				3694055B279D614C00F1E3C6 /* DataInfoTableViewCell.xib in Resources */,
+				36EE825927DA5D7C00265EC1 /* IlluImageTableViewCell.xib in Resources */,
 				366AE8C82692C0AA00B5262C /* Roboto in Resources */,
 				368BE02B27967BCC00ED457C /* LogInView.storyboard in Resources */,
 				368BE02C27967BCC00ED457C /* Signup.storyboard in Resources */,
@@ -888,6 +910,7 @@
 				36E9CBB2277C670900E1B319 /* NotificationModel.swift in Sources */,
 				365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
+				36EE825827DA5D7C00265EC1 /* IlluImageTableViewCell.swift in Sources */,
 				36607EF9279E9D7900F34640 /* APIService.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
 				36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */,
@@ -904,6 +927,7 @@
 				36940556279D511600F1E3C6 /* UserInfoTableViewCell.swift in Sources */,
 				36607F0F279EBBD900F34640 /* Repository.swift in Sources */,
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
+				360BBB5427DAF7A500A4A67D /* PopupUserViewController.swift in Sources */,
 				36807834279A8D25008ACD0B /* ChatViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				361DECDD27CB6F4C0021A343 /* CurrentTableViewCell.swift in Sources */,

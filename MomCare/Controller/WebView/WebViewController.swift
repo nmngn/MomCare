@@ -21,6 +21,11 @@ class WebViewController: UIViewController {
         webView.load(myRequest)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupNavigationButton()
+    }
+    
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
         let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()

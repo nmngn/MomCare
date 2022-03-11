@@ -41,7 +41,6 @@ class ChatViewController: UIViewController {
         setupNavigationButton()
         tableView.reloadData()
     }
-
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -224,7 +223,6 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var message: Message
         message = modelIndexPath(indexPath)
-        let index = IndexPath(row: indexPath.row, section: 0)
         
         switch message.type {
         case .current:
