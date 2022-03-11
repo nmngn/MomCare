@@ -96,6 +96,13 @@ class ChatViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    func getDate() -> String {
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let date = Date()
+        return dateFormatter.string(from: date)
+    }
+    
     func configView() {
         messageTextField.delegate = self
         messageTextField.autocorrectionType = .no
@@ -122,6 +129,11 @@ class ChatViewController: UIViewController {
         }
     }
     
+    
+    func adminEmail() -> String {
+        return adminNumber + "@admin.com"
+    }
+    
     func loadMessage() {
         let messageDB = Database.database().reference().child("messages")
 
@@ -131,7 +143,6 @@ class ChatViewController: UIViewController {
             let text = snapshotValue["body"] ?? ""
             let sender = snapshotValue["sender"] ?? ""
             let time = snapshotValue["time"] ?? ""
-            let adminEmail = self!.adminNumber + "@admin.com"
             
             print(text, "sender : \(sender)","receiver: \(received)")
             if self?.isUserChat == true {
@@ -159,7 +170,7 @@ class ChatViewController: UIViewController {
                     message.sender = sender
                     message.received = received
                     message.time = time
-                    if message.sender == adminEmail {
+                    if message.sender == self?.adminEmail() {
                         message.type = .current
                         message.textAlignment = .right
                         message.color = UIColor(named: Constant.BrandColors.blue)
@@ -177,19 +188,14 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func send(_ sender: UIButton) {
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
         var receiver = ""
-        let adminEmail = adminNumber + "@admin.com"
         var sender = Auth.auth().currentUser?.email
         if isUserChat {
-            receiver = adminEmail
+            receiver = adminEmail()
         } else {
             receiver = detailUser.email()
-            if sender != adminEmail {
-                sender = adminEmail
+            if sender != adminEmail() {
+                sender = adminEmail()
             }
         }
         if let text = messageTextField.text {
@@ -198,16 +204,16 @@ class ChatViewController: UIViewController {
                 let messageDictionary = ["sender": sender,
                                          "body": text,
                                          "received": receiver,
-                                         "time": dateString]
+                                         "time": getDate()]
                 messagesDB.childByAutoId().setValue(messageDictionary) { [weak self]
                     (error, reference) in
                     if error != nil {
                         print(error as Any)
                         self?.view.makeToast("Gửi không thành công")
                     } else {
-                        print("Message save successfuly")
-                        self?.scrollToBottom()
                         self?.messageTextField.text = ""
+                        self?.scrollToBottom()
+                        print("Message save successfuly")
                     }
                 }
             }

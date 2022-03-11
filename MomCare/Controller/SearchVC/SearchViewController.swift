@@ -99,7 +99,6 @@ class SearchViewController: UIViewController {
             $0.keyboardDismissMode = .onDrag
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         }
-        
     }
 
 }

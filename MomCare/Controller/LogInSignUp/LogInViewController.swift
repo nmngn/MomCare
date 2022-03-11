@@ -85,6 +85,7 @@ class LogInViewController: UIViewController {
             Auth.auth().signIn(withEmail: email + endText, password: password) { [weak self] _, error in
                 if let error = error {
                     self?.openAlert()
+                    self?.endText = "@user.com"
                     print(error)
                 } else {
                     self?.getDataAdmin(numberPhone: email)

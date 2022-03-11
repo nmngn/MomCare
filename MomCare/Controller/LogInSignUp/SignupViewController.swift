@@ -81,18 +81,18 @@ class SignupViewController: UIViewController {
                             switch response {
                                 case .success(let data):
                                 if let data = data {
-                                    Session.shared.userProfile.userNumberPhone = email
+                                    Session.shared.userProfile.adminNumber = email
                                     Session.shared.userProfile.idAdmin = data.idAdmin
                                     UserDefaults.standard.set(email, forKey: "sdt")
                                     UserDefaults.standard.set(data.idAdmin, forKey: "idAdmin")
                                     print(data)
                                 }
+                                self?.animateAfterSignUp()
                             case .failure(let error):
                                 self?.openAlert(error?.errorMessage ?? "")
                                 print(error as Any)
                             }
                         }
-                        self?.animateAfterSignUp()
                     }
                 }
             } else {
