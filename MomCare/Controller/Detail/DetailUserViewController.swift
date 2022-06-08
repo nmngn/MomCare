@@ -379,6 +379,12 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.delegate = self
             cell.isAdmin = saveAdminImage
             cell.setupData(model: currentModel)
+            cell.invalidPhone = { [weak self] in
+                let alert = UIAlertController(title: "Thông báo", message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self?.present(alert, animated: true, completion: nil)
+            }
             return cell
         case .age:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?

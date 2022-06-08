@@ -20,8 +20,9 @@ class InfoUserTableViewCell: UITableViewCell {
     @IBOutlet weak var spacingButton: NSLayoutConstraint!
     
     var cellType: DataType?
-    var textInput = ""
+    var userPhone = ""
     var isAdmin = false
+    var invalidPhone: (() -> ())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +38,7 @@ class InfoUserTableViewCell: UITableViewCell {
         self.cellType = model.dataType
         titleLabel.text = model.title
         valueTextField.text = model.value
-        textInput = model.numberPhone
+        userPhone = model.numberPhone
         if !model.isCall {
             widthCallButtonConstraint.constant = 0
             callButton.isEnabled = false
@@ -58,14 +59,14 @@ class InfoUserTableViewCell: UITableViewCell {
         }
     }
     
-    func saveInModel() {
+    func saveInModel(_ text: String) {
         if let cellType = cellType {
-            delegate?.sendString(dataType: cellType, text: textInput)
+            delegate?.sendString(dataType: cellType, text: text)
         }
     }
     
     @IBAction func callNumber(_ sender: UIButton) {
-        if let url = URL(string: "telprompt://\(self.textInput)"),
+        if let url = URL(string: "telprompt://\(self.userPhone)"),
            UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler:nil)
@@ -84,8 +85,14 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
             if text.count > 0 {
-                self.textInput = text
-                self.saveInModel()
+                if cellType == .numberPhone {
+                    if text.isValidPhone() {
+                        self.saveInModel(text)
+                    } else {
+                        invalidPhone?()
+                    }
+                }
+                self.saveInModel(text)
             } else {
                 if !isAdmin {
                     if let cellType = cellType {

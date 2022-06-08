@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var notiModel = [NotificationModel]()
     let repo = Repositories(api: .share)
     let idAdmin = Session.shared.userProfile.idAdmin
+    let utilityThread = DispatchQueue.global(qos: .utility)
     
     let presenter: Presentr = {
         let customPresenter = Presentr(presentationType: .fullScreen)
@@ -43,7 +44,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.title = "Màn hình chính"
         changeTheme(theme)
         configView()
-        getListUser()
+        utilityThread.async {
+            self.getListUser()
+        }
         setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
@@ -328,7 +331,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddUserTableViewCell", for: indexPath) as?
                     AddUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(model: model)
+            cell.setupData()
             return cell
         case .infoUser:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "BiggerHomeUserTableViewCell", for: indexPath) as?
@@ -398,7 +401,7 @@ extension HomeViewController {
             switch response {
             case .success(_):
                 self?.getListUser()
-                self?.tableView.reloadData()
+//                self?.tableView.reloadData()
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
             }
