@@ -400,7 +400,9 @@ extension HomeViewController {
         repo.makeStar(idUser: id, isStar: isStar) { [weak self] response in
             switch response {
             case .success(_):
-                self?.getListUser()
+                self?.utilityThread.async {
+                    self?.getListUser()
+                }
 //                self?.tableView.reloadData()
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
