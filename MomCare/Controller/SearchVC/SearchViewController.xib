@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="MomCare" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomHeightConstraint" destination="y5o-py-vOI" id="j6T-Gy-EPS"/>
+                <outlet property="resultView" destination="dux-5d-g7E" id="VXL-He-7LZ"/>
+                <outlet property="searchBar" destination="NJg-fv-WCy" id="sq3-Nt-Qwh"/>
+                <outlet property="statusLabel" destination="g8o-Nd-dhv" id="6tL-C4-YD9"/>
+                <outlet property="tableView" destination="g16-j4-Rtq" id="NJs-VL-TtI"/>
+                <outlet property="theme" destination="CX3-1B-bSt" id="KLN-6U-zJS"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CX3-1B-bSt">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dux-5d-g7E">
+                    <rect key="frame" x="87" y="305" width="240" height="286"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g4e-xT-CZV">
+                            <rect key="frame" x="0.0" y="-2.5" width="240" height="245"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="240" id="ivG-Oq-fyg"/>
+                            </constraints>
+                            <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
+                                <hierarchicalColors>
+                                    <color systemColor="labelColor"/>
+                                    <color systemColor="secondaryLabelColor"/>
+                                    <color systemColor="tertiaryLabelColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8o-Nd-dhv">
+                            <rect key="frame" x="0.0" y="252" width="240" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="TaI-D3-NWq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="g8o-Nd-dhv" secondAttribute="bottom" constant="12" id="1pB-f5-n43"/>
+                        <constraint firstAttribute="trailing" secondItem="g8o-Nd-dhv" secondAttribute="trailing" id="9sT-Ug-jWU"/>
+                        <constraint firstItem="g4e-xT-CZV" firstAttribute="top" secondItem="dux-5d-g7E" secondAttribute="top" id="BM3-SQ-Ccz"/>
+                        <constraint firstItem="g4e-xT-CZV" firstAttribute="leading" secondItem="dux-5d-g7E" secondAttribute="leading" id="Lp7-hr-T4e"/>
+                        <constraint firstItem="g8o-Nd-dhv" firstAttribute="top" secondItem="g4e-xT-CZV" secondAttribute="bottom" constant="12" id="R4O-w7-41d"/>
+                        <constraint firstAttribute="trailing" secondItem="g4e-xT-CZV" secondAttribute="trailing" id="Sdj-P8-yEl"/>
+                        <constraint firstAttribute="width" constant="240" id="lJQ-KE-9Ju"/>
+                        <constraint firstItem="g8o-Nd-dhv" firstAttribute="leading" secondItem="dux-5d-g7E" secondAttribute="leading" id="uDv-2A-qN4"/>
+                    </constraints>
+                </view>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="NJg-fv-WCy">
+                    <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g16-j4-Rtq">
+                    <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="g16-j4-Rtq" secondAttribute="trailing" id="2VL-9d-8Cd"/>
+                <constraint firstItem="NJg-fv-WCy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7nA-nm-Xwq"/>
+                <constraint firstItem="g16-j4-Rtq" firstAttribute="top" secondItem="NJg-fv-WCy" secondAttribute="bottom" id="AwU-wj-rby"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CX3-1B-bSt" secondAttribute="trailing" id="Jew-05-Fyn"/>
+                <constraint firstItem="CX3-1B-bSt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ucx-jg-JxO"/>
+                <constraint firstItem="NJg-fv-WCy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="V4t-Ne-YP3"/>
+                <constraint firstItem="dux-5d-g7E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bLZ-xU-O3O"/>
+                <constraint firstAttribute="bottom" secondItem="CX3-1B-bSt" secondAttribute="bottom" id="bVd-p9-3eG"/>
+                <constraint firstItem="NJg-fv-WCy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ceg-A0-zvW"/>
+                <constraint firstItem="g16-j4-Rtq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gr2-y9-l1k"/>
+                <constraint firstItem="CX3-1B-bSt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="j1i-g7-V4p"/>
+                <constraint firstItem="dux-5d-g7E" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="laX-Qh-WDh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="g16-j4-Rtq" secondAttribute="bottom" id="y5o-py-vOI"/>
+            </constraints>
+            <point key="canvasLocation" x="60.869565217391312" y="63.616071428571423"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

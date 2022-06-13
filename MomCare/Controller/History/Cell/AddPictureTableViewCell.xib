@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPictureTableViewCell" rowHeight="117" id="KGk-i7-Jjw" customClass="AddPictureTableViewCell" customModule="MomCare" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4W-Vd-VbT">
+                        <rect key="frame" x="16" y="24" width="343" height="56"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add_pic" translatesAutoresizingMaskIntoConstraints="NO" id="ReG-9G-gVI">
+                                <rect key="frame" x="12" y="8" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="j1P-Lw-ZXL"/>
+                                    <constraint firstAttribute="height" constant="40" id="ydn-MU-3oA"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tạo ghi chú mới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMS-Wc-1Jl">
+                                <rect key="frame" x="64" y="18.5" width="267" height="19"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="56" id="6CE-f7-QX4"/>
+                            <constraint firstItem="ReG-9G-gVI" firstAttribute="leading" secondItem="X4W-Vd-VbT" secondAttribute="leading" constant="12" id="RBN-AB-H5A"/>
+                            <constraint firstAttribute="trailing" secondItem="yMS-Wc-1Jl" secondAttribute="trailing" constant="12" id="SqH-54-fWv"/>
+                            <constraint firstItem="ReG-9G-gVI" firstAttribute="centerY" secondItem="X4W-Vd-VbT" secondAttribute="centerY" id="aAl-SL-lja"/>
+                            <constraint firstItem="yMS-Wc-1Jl" firstAttribute="leading" secondItem="ReG-9G-gVI" secondAttribute="trailing" constant="12" id="krn-ph-Rl5"/>
+                            <constraint firstItem="yMS-Wc-1Jl" firstAttribute="centerY" secondItem="ReG-9G-gVI" secondAttribute="centerY" id="zNc-wF-KKS"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="X4W-Vd-VbT" secondAttribute="trailing" constant="16" id="1KB-hg-Kga"/>
+                    <constraint firstItem="X4W-Vd-VbT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="F5z-Zi-2yN"/>
+                    <constraint firstAttribute="bottom" secondItem="X4W-Vd-VbT" secondAttribute="bottom" constant="4" id="Snf-75-iHh"/>
+                    <constraint firstItem="X4W-Vd-VbT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="hHl-Mn-z6t"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="subView" destination="X4W-Vd-VbT" id="d56-cq-Nkn"/>
+                <outlet property="title" destination="yMS-Wc-1Jl" id="Zpx-ak-pyb"/>
+            </connections>
+            <point key="canvasLocation" x="68.840579710144937" y="83.370535714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_add_pic" width="40" height="40"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
