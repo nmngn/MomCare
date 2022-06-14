@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HistoryViewController: UIViewController {
 
@@ -13,14 +14,13 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
-    var identifyUser = ""
+    var idUser = ""
     var listHistory: [HistoryNote]? {
         didSet {
             setupData()
-            self.tableView.reloadData()
         }
     }
-    let repo = Repositories(api: .share)
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,16 +55,8 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-        repo.getAllNote(idUser: identifyUser) { [weak self] response in
-            switch response {
-            case .success(let data):
-                if let data = data?.notes {
-                    self?.listHistory = data.filter({$0.idUser == self?.identifyUser})
-                }
-            case .failure(let error):
-                print(error as Any)
-            }
-        }
+        listHistory = realm.objects(HistoryNote.self).filter("idUser == \(idUser)").toArray()
+        self.tableView.reloadData()
     }
     
     func configView() {
@@ -93,11 +85,11 @@ class HistoryViewController: UIViewController {
         
         guard let list = self.listHistory else { return }
         for item in list {
-            cell.idNote = item.idNote
             cell.title = item.time
             cell.dataImage = item.image
             model.append(cell)
         }
+        self.tableView.reloadData()
     }
 
     func modelIndexPath(indexPath: IndexPath) -> HistoryModel {
@@ -105,14 +97,11 @@ class HistoryViewController: UIViewController {
     }
     
     func removeNote(id: String) {
-        repo.deleteNote(idNote: id) { [weak self] response in
-            switch response {
-            case .success(let value):
-                print(value as Any)
-            case .failure(let error):
-                print(error as Any)
-            }
-        }
+        guard let currentNote = realm.objects(HistoryNote.self).filter("idNote == \(id)").toArray().first else { return  }
+        
+        try! realm.write({
+            realm.delete(currentNote)
+        })
     }
 }
 
@@ -235,18 +224,14 @@ extension HistoryViewController {
         let imageAddress = saveImage(imageName:
         "note_\(dateString.replacingOccurrences(of: "/", with: "."))",
                                      image: imageData, type: .baby)
-        repo.createNote(idUser: self.identifyUser,
-                        time: dateString,
-                        image: imageAddress)
-        { [weak self] response in
-            switch response {
-            case .success(_):
-                self?.getListHistory()
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error as Any)
-            }
-        }
+        let currentNote = HistoryNote()
         
+        try! realm.write {
+            currentNote.idUser = self.idUser
+            currentNote.time = dateString
+            currentNote.image = imageAddress
+            currentNote.idNote = NSUUID().uuidString.lowercased()
+        }
+        self.getListHistory()
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SearchViewController: UIViewController {
 
@@ -21,8 +22,8 @@ class SearchViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    let realm = try! Realm()
     var userSearch = ""
-    let repo = Repositories(api: .share)
     var listUser = [User]()
     
     override func viewDidLoad() {
@@ -59,16 +60,8 @@ class SearchViewController: UIViewController {
     }
     
     func getListUser() {
-        let idAdmin = Session.shared.userProfile.idAdmin
-        repo.getAllUser(idAdmin: idAdmin) { [weak self] response in
-            switch response {
-            case .success(let data):
-                if let data = data?.users {
-                    self?.listUser = data
-                }
-            case .failure(let error):
-                print(error as Any)
-            }
+        do {
+            self.listUser = realm.objects(User.self).toArray()
         }
     }
     

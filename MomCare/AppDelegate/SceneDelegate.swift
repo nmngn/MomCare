@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.window?.rootViewController = UIStoryboard(name: "LogInView", bundle: nil).instantiateInitialViewController()
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+            self.window?.makeKeyAndVisible()
         }
         guard let _ = (scene as? UIWindowScene) else { return }
     }

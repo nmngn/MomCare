@@ -14,10 +14,7 @@ class InfoUserTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     @IBOutlet weak var callButton: UIButton!
-    @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var widthCallButtonConstraint: NSLayoutConstraint!
-    @IBOutlet weak var widthMessageButtonConstraint: NSLayoutConstraint!
-    @IBOutlet weak var spacingButton: NSLayoutConstraint!
     
     var cellType: DataType?
     var userPhone = ""
@@ -43,19 +40,13 @@ class InfoUserTableViewCell: UITableViewCell {
             widthCallButtonConstraint.constant = 0
             callButton.isEnabled = false
             callButton.isHidden = true
-            widthMessageButtonConstraint.constant = 0
-            messageButton.isHidden = true
-            messageButton.isEnabled = false
-            spacingButton.constant = 4
         }
         if self.traitCollection.userInterfaceStyle == .light {
             valueTextField.backgroundColor = .white
             callButton.backgroundColor = .white
-            messageButton.backgroundColor = .white
         } else {
             valueTextField.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
             callButton.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
-            messageButton.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
         }
     }
     
@@ -74,10 +65,6 @@ class InfoUserTableViewCell: UITableViewCell {
                 UIApplication.shared.openURL(url)
             }
         }
-    }
-    
-    @IBAction func letChat(_ sender: UIButton) {
-        delegate?.letChat()
     }
 }
 

@@ -8,11 +8,10 @@ target 'MomCare' do
   pod 'PopupDialog'
   pod 'IQKeyboardManagerSwift'
   pod "SwiftCSV"
-  pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Database'
+  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'RealmSwift', '~> 10.28'
   pod 'Presentr'
-  pod 'AlamofireObjectMapper', '~> 5.2'
+  pod "ESPullToRefresh"
   # Pods for MomCare
 
 end

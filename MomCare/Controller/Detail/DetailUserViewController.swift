@@ -8,7 +8,7 @@
 import UIKit
 import Then
 import PhotosUI
-import Firebase
+import RealmSwift
 
 enum UserChoice {
     case mom
@@ -25,8 +25,7 @@ class DetailUserViewController: UIViewController {
     var userChoice: UserChoice?
     var currentModel = DetailModel()
     var saveAdminImage = false
-    let repo = Repositories(api: .share)
-    let idAdmin = Session.shared.userProfile.idAdmin
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +44,7 @@ class DetailUserViewController: UIViewController {
     }
     
     func setupView() {
-        self.title = "Thông tin bệnh nhân"
+        self.title = "Thông tin sản phụ"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -105,26 +104,17 @@ class DetailUserViewController: UIViewController {
     }
     
     func deleteUser() {
-        self.repo.deleteUser(idUser: self.currentModel.id) { [weak self] response in
-            switch response {
-            case .success(_):
-                self?.navigationController?.popToRootViewController(animated: true)
-                Session.shared.isPopToRoot = true
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
-                print(error as Any)
-            }
+        let currentUser = realm.objects(User.self).filter("idUser == \(currentModel.id)").toArray()
+        let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == \(currentModel.id)").toArray()
+        try! realm.write{
+            realm.delete(currentUser)
+            realm.delete(noteOfUser)
         }
-        self.repo.deleteNotes(idUser: self.currentModel.id) { [weak self] response in
-            switch response {
-            case .success(_):
-                print("Delete notes success")
-            case .failure(_):
-                print("Delete notes failed")
-            }
-        }
+        
+        self.navigationController?.popToRootViewController(animated: true)
+        Session.shared.isPopToRoot = true
     }
-    
+        
     func configView() {
         tableView.do {
             $0.delegate = self
@@ -256,9 +246,6 @@ class DetailUserViewController: UIViewController {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if userChoice == .mom {
                 self.currentModel.avatarImage = image
-                if saveAdminImage {
-                    var _ = saveImage(imageName: "adminImage_\(idAdmin)", image: image, type: .mom)
-                }
                 self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView?.reloadRows(at: [indexPath], with: .none)
@@ -284,7 +271,7 @@ class DetailUserViewController: UIViewController {
         } else {
             let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
             vc.hidesBottomBarWhenPushed = true
-            vc.identifyUser = currentModel.id
+            vc.idUser = currentModel.id
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -428,14 +415,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
 }
 
 extension DetailUserViewController: DetailUserInfo {
-    func letChat() {
-        if !currentModel.numberPhone.isEmpty {
-            let vc = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
-            vc.detailUser = currentModel
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
     func showAlert(dataType: DataType) {
         var typeCellName = ""
         switch dataType {
@@ -505,38 +484,33 @@ extension DetailUserViewController {
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-        let idAdmin = Session.shared.userProfile.idAdmin
         
-        repo.createUser(idAdmin: idAdmin,
-                        name: currentModel.name,
-                        address: currentModel.address,
-                        momBirth: currentModel.momBirth,
-                        numberPhone: currentModel.numberPhone,
-                        height: currentModel.height,
-                        babyDateBorn: currentModel.babyAge,
-                        dateSave: dateString,
-                        note: currentModel.note,
-                        avatar: saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
-                                          type: .mom),
-                        imagePregnant: saveImage(imageName: "imagePregnant_\(currentModel.numberPhone)",
-                                                 image: currentModel.imagePregnant ?? nil,
-                                                 type: .baby)) { [weak self] value in
-            switch value {
-            case .success(let data):
-                print(data as Any)
-                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    Session.shared.isPopToRoot = true
-                }
-                alert.addAction(action)
-                self?.present(alert, animated: true, completion: nil)
-                self?.createFirebaseUser(isShowAlert: true)
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
+        let currentUser = User()
+        try! realm.write({
+            currentUser.idUser = NSUUID().uuidString.lowercased()
+            currentUser.name = currentModel.name
+            currentUser.address = currentModel.address
+            currentUser.momBirth = currentModel.momBirth
+            currentUser.numberPhone = currentModel.numberPhone
+            currentUser.height = currentModel.height
+            currentUser.babyDateBorn = currentModel.babyAge
+            currentUser.dateSave = dateString
+            currentUser.note = currentModel.note
+            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
+                                           image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                           type: .mom)
+            currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
+                                                  image: currentModel.imagePregnant ?? nil,
+                                                  type: .baby)
+            
+            let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+                Session.shared.isPopToRoot = true
             }
-        }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        })
     }
     
     func updateUser(id: String) {
@@ -545,58 +519,32 @@ extension DetailUserViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        repo.updateUser(idUser: id,
-                        name: currentModel.name,
-                        address: currentModel.address,
-                        momBirth: currentModel.momBirth,
-                        numberPhone: currentModel.numberPhone,
-                        height: currentModel.height,
-                        babyDateBorn: currentModel.babyAge,
-                        dateSave: dateString,
-                        note: currentModel.note,
-                        avatar: saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                          image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
-                                          type: .mom),
-                        imagePregnant: saveImage(imageName: "imagePregnant_\(currentModel.numberPhone)",
-                                                 image: currentModel.imagePregnant ?? nil,
-                                                 type: .baby)) { [weak self] response in
-            switch response {
-            case .success(let data):
-                print(data as Any)
-                let alert = UIAlertController(title: "Thông báo", message: "Cập nhật thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self?.navigationController?.popToRootViewController(animated: true)
-                    Session.shared.isPopToRoot = true
-                }
-                alert.addAction(action)
-                self?.present(alert, animated: true, completion: nil)
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
+        guard let currentUser = realm.objects(User.self).filter("idUser == \(id)").toArray().first else { return }
+        
+        try! realm.write({
+            currentUser.idUser = NSUUID().uuidString.lowercased()
+            currentUser.name = currentModel.name
+            currentUser.address = currentModel.address
+            currentUser.momBirth = currentModel.momBirth
+            currentUser.numberPhone = currentModel.numberPhone
+            currentUser.height = currentModel.height
+            currentUser.babyDateBorn = currentModel.babyAge
+            currentUser.dateSave = dateString
+            currentUser.note = currentModel.note
+            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
+                                           image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                           type: .mom)
+            currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
+                                                  image: currentModel.imagePregnant ?? nil,
+                                                  type: .baby)
+            
+            let alert = UIAlertController(title: "Thông báo", message: "Cập nhật thành công", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+                Session.shared.isPopToRoot = true
             }
-        }
-        createFirebaseUser()
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        })
     }
-    
-    func createFirebaseUser(isShowAlert: Bool = false) {
-        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { [weak self] (authDataResult, error) in
-            if let error = error {
-                print("Create error: \(error.localizedDescription)")
-                if isShowAlert {
-                    if let error = error as NSError? {
-                        print("Error code: \(error.code)")
-//                        switch error.code {
-//                        case 17007:
-//                            self?.openAlert("Số điện thoại đã bị trùng bởi người dùng khác")
-//                        case 17026:
-//                            self?.openAlert("Mật khẩu phải dài hơn 6 kí tự")
-//                        default:
-//                            break
-//                        }
-                    }
-                }
-            } else {
-                print("Profile \(authDataResult?.additionalUserInfo?.profile ?? [:])")
-            }
-        }
-    }    
 }

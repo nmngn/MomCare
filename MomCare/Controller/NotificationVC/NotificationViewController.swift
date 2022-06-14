@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NotificationViewController: UIViewController {
 
@@ -15,7 +16,7 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var titleBell: UILabel!
     
     var notiModel = [NotificationModel]()
-    let repo = Repositories(api: .share)
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,18 +86,12 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let id = notiModel[indexPath.row].id
-        repo.getOneUser(idUser: id) { [weak self] response in
-            switch response {
-            case .success(let data):
-                if let data = data {
-                    let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-                    vc.currentModel = data.convertToDetailModel()
-                    vc.hidesBottomBarWhenPushed = true
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }
-            case .failure(let error):
-                print(error as Any)
-            }
+        do {
+            guard let infoUser = realm.objects(User.self).filter("idUser == \(id)").toArray().first else { return }
+            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            vc.currentModel = infoUser.convertToDetailModel()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

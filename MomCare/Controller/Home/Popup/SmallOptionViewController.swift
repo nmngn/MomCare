@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class SmallOptionViewController: UIViewController {
     
@@ -57,17 +56,7 @@ class SmallOptionViewController: UIViewController {
     }
     
     func signOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            let storyboard = UIStoryboard(name: "LogInView", bundle: nil)
-            let vc = storyboard.instantiateInitialViewController()
-            UIApplication.shared.windows.first?.rootViewController = vc
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
-        } catch let signOutError as NSError {
-            print(signOutError)
-            popupErrorSignout()
-        }
+
     }
     
     func popupErrorSignout() {
@@ -78,9 +67,6 @@ class SmallOptionViewController: UIViewController {
     }
     
     @IBAction func openProfile(_ sender: UIButton) {
-        let vc = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
-        dismissVC()
-        navigation.pushViewController(vc, animated: true)
     }
         
     @IBAction func logOut(_ sender: UIButton) {

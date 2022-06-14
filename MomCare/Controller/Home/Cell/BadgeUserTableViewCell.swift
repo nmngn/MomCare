@@ -21,13 +21,9 @@ class BadgeUserTableViewCell: UITableViewCell {
     }
     
     func getNumberPatient(list: [User]) {
-        let adminInfo = Session.shared.userProfile
         let text = NSMutableAttributedString(string: "Xin chào ", attributes: [
             .font : UIFont.systemFont(ofSize: 18, weight: .medium)])
-        
-        let user = NSMutableAttributedString(string: "\(adminInfo.adminNumber)", attributes: [
-            .font : UIFont.systemFont(ofSize: 18, weight: .bold)])
-        text.append(user)
+
         helloTitle.attributedText = text
         
         if self.traitCollection.userInterfaceStyle == .light {

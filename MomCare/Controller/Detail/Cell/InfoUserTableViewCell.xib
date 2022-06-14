@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ox5-zW-CM4">
-                        <rect key="frame" x="28" y="48" width="231" height="40"/>
+                        <rect key="frame" x="28" y="48" width="279" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="dgj-E2-1qg"/>
@@ -48,7 +48,7 @@
                         </userDefinedRuntimeAttributes>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WM-Zh-RvS">
-                        <rect key="frame" x="271" y="48" width="40" height="40"/>
+                        <rect key="frame" x="319" y="48" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="BAE-xi-z3D"/>
@@ -73,43 +73,15 @@
                             <action selector="callNumber:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rX4-DX-afj"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUj-Bp-G4I">
-                        <rect key="frame" x="323" y="48" width="40" height="40"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="rva-ob-7Kg"/>
-                            <constraint firstAttribute="width" constant="40" id="tOi-of-nLc"/>
-                        </constraints>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal">
-                            <imageReference key="image" image="message" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
-                                <hierarchicalColors>
-                                    <color systemColor="systemBlueColor"/>
-                                    <color systemColor="systemGreenColor"/>
-                                    <color systemColor="systemGreenColor"/>
-                                </hierarchicalColors>
-                            </imageReference>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="8"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="letChat:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sOo-23-Grd"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dUj-Bp-G4I" firstAttribute="centerY" secondItem="0WM-Zh-RvS" secondAttribute="centerY" id="4cH-LS-jBb"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="top" secondItem="XBR-fo-8jh" secondAttribute="bottom" constant="12" id="5Co-Kk-tea"/>
                     <constraint firstItem="0WM-Zh-RvS" firstAttribute="centerY" secondItem="Ox5-zW-CM4" secondAttribute="centerY" id="8HV-xV-TAU"/>
-                    <constraint firstItem="dUj-Bp-G4I" firstAttribute="leading" secondItem="0WM-Zh-RvS" secondAttribute="trailing" constant="12" id="920-kq-i6w"/>
                     <constraint firstAttribute="bottom" secondItem="Ox5-zW-CM4" secondAttribute="bottom" constant="4" id="AQv-ZI-ttj"/>
                     <constraint firstItem="Ox5-zW-CM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Laq-3d-Bl3"/>
                     <constraint firstItem="0WM-Zh-RvS" firstAttribute="leading" secondItem="Ox5-zW-CM4" secondAttribute="trailing" constant="12" id="Vye-OO-hN9"/>
                     <constraint firstAttribute="trailing" secondItem="XBR-fo-8jh" secondAttribute="trailing" constant="28" id="Z7G-Fm-0xb"/>
-                    <constraint firstAttribute="trailing" secondItem="dUj-Bp-G4I" secondAttribute="trailing" constant="12" id="bvP-E7-EFv"/>
+                    <constraint firstAttribute="trailing" secondItem="0WM-Zh-RvS" secondAttribute="trailing" constant="16" id="ghf-a9-PDK"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="mHC-k4-WX5"/>
                     <constraint firstItem="XBR-fo-8jh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="uyU-dw-dz5"/>
                 </constraints>
@@ -118,22 +90,15 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="callButton" destination="0WM-Zh-RvS" id="lNW-ce-igk"/>
-                <outlet property="messageButton" destination="dUj-Bp-G4I" id="y8C-sL-d2Y"/>
-                <outlet property="spacingButton" destination="920-kq-i6w" id="Eie-c2-Ndb"/>
                 <outlet property="titleLabel" destination="XBR-fo-8jh" id="DWz-Vj-MnR"/>
                 <outlet property="valueTextField" destination="Ox5-zW-CM4" id="7Y0-bz-sCs"/>
                 <outlet property="widthCallButtonConstraint" destination="BAE-xi-z3D" id="0eS-mK-qG4"/>
-                <outlet property="widthMessageButtonConstraint" destination="tOi-of-nLc" id="PMF-Ro-No1"/>
             </connections>
             <point key="canvasLocation" x="-21.014492753623191" y="121.875"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="message" catalog="system" width="128" height="113"/>
         <image name="phone.arrow.up.right" catalog="system" width="128" height="115"/>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

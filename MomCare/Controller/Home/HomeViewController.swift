@@ -10,6 +10,7 @@ import NotificationCenter
 import SwiftCSV
 import PopupDialog
 import Presentr
+import RealmSwift
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -22,12 +23,10 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             setupData()
         }
     }
+    let realm = try! Realm()
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
-    let repo = Repositories(api: .share)
-    let idAdmin = Session.shared.userProfile.idAdmin
-    let utilityThread = DispatchQueue.global(qos: .utility)
     
     let presenter: Presentr = {
         let customPresenter = Presentr(presentationType: .fullScreen)
@@ -44,9 +43,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.title = "Màn hình chính"
         changeTheme(theme)
         configView()
-        utilityThread.async {
-            self.getListUser()
-        }
+        getListUser()
         setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
@@ -172,20 +169,13 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func getListUser(reverse: Bool = false) {
-        repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
-            switch value {
-            case .success(let data):
-                if let data = data {
-                    let list = data.users?.filter({$0.idAdmin == self?.idAdmin})
-                    self?.getUserToPushNoti(listUser: list)
-                    if !reverse {
-                        self?.listUser = list
-                    } else {
-                        self?.listUser = list?.reversed()
-                    }
-                }
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
+        do {
+            let list = realm.objects(User.self).toArray()
+            self.getUserToPushNoti(listUser: list)
+            if !reverse {
+                self.listUser = list
+            } else {
+                self.listUser = list.reversed()
             }
         }
     }
@@ -374,20 +364,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
-            repo.getOneUser(idUser: model.id) { [weak self] response in
-                switch response {
-                case .success(let data):
-                    if let data = data {
-                        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-                        vc.currentModel = data.convertToDetailModel()
-                        vc.hidesBottomBarWhenPushed = true
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                case .failure(let error):
-                    print(error as Any)
-                }
+            do {
+                guard let data = realm.objects(User.self).filter("idUser == \(model.id)").toArray().first else { return }
+                let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+                vc.currentModel = data.convertToDetailModel()
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            
         default:
             break
         }
@@ -397,19 +380,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     func saveStarStatus(id: String,_ isStar: Bool) {
-        repo.makeStar(idUser: id, isStar: isStar) { [weak self] response in
-            switch response {
-            case .success(_):
-                self?.utilityThread.async {
-                    self?.getListUser()
-                }
-//                self?.tableView.reloadData()
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
-            }
+        let selectedUser = realm.objects(User.self).filter("idUser == \(id)").toArray()
+        try! realm.write {
+            selectedUser.first?.isStar = isStar
         }
     }
-    
 }
 
 extension HomeViewController {
