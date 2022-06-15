@@ -27,6 +27,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
+    let userInteractiveThread = DispatchQueue.global(qos: .userInteractive)
+    let backgroundThread = DispatchQueue.global(qos: .background)
     
     let presenter: Presentr = {
         let customPresenter = Presentr(presentationType: .fullScreen)
@@ -41,14 +43,14 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
-        changeTheme(theme)
-        configView()
         getListUser()
-        setupNavigationButton()
-        userNotificationCenter.delegate = self
-        navigationController?.isNavigationBarHidden = false
+        self.configView()
+        self.changeTheme(self.theme)
+        self.userNotificationCenter.delegate = self
         self.requestNotificationAuthorization()
-        
+        self.navigationController?.isNavigationBarHidden = false
+        self.setupNavigationButton()
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")        
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -56,9 +58,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        changeTheme(theme)
-        setupNavigationButton()
-        tableView.reloadData()
+        self.changeTheme(self.theme)
+        self.setupNavigationButton()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -365,9 +367,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
             do {
-                guard let data = realm.objects(User.self).filter("idUser == \(model.id)").toArray().first else { return }
                 let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-                vc.currentModel = data.convertToDetailModel()
+                vc.currentModel.id = model.id
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -380,36 +381,39 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     func saveStarStatus(id: String,_ isStar: Bool) {
-        let selectedUser = realm.objects(User.self).filter("idUser == \(id)").toArray()
-        try! realm.write {
-            selectedUser.first?.isStar = isStar
+        guard let selectedUser = self.realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
+        try! self.realm.write {
+            selectedUser.isStar = isStar
         }
+        getListUser()
     }
 }
 
 extension HomeViewController {
     func getAgeData(_ age: Int) {
-        let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
-        
-        do {
-            let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
-            let rows = csv.namedRows
+        backgroundThread.async {
+            let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
             
-            for row in rows {
-                if let data = row["\(age)"] {
-                    let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
-                    vc.age = age
-                    vc.text = data
-                    let popup = PopupDialog(viewController: vc,
-                                            buttonAlignment: .horizontal,
-                                            transitionStyle: .fadeIn,
-                                            tapGestureDismissal: true,
-                                            panGestureDismissal: false)
-                    self.present(popup, animated: true, completion: nil)
+            do {
+                let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
+                let rows = csv.namedRows
+                
+                for row in rows {
+                    if let data = row["\(age)"] {
+                        let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
+                        vc.age = age
+                        vc.text = data
+                        let popup = PopupDialog(viewController: vc,
+                                                buttonAlignment: .horizontal,
+                                                transitionStyle: .fadeIn,
+                                                tapGestureDismissal: true,
+                                                panGestureDismissal: false)
+                        self.present(popup, animated: true, completion: nil)
+                    }
                 }
+            } catch {
+                print("Parsing CSV file has error \(error)")
             }
-        } catch {
-            print("Parsing CSV file has error \(error)")
         }
     }
 }

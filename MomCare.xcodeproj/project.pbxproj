@@ -257,6 +257,7 @@
 		366AE8BB2692BD2A00B5262C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				36B90BA228598BEF002C990C /* SettingVC */,
 				36BC4DC02799178C006DFC30 /* WebView */,
 				366AE8B92692BD0800B5262C /* Home */,
 				366AE8E92692D84600B5262C /* Detail */,
@@ -361,6 +362,13 @@
 				3666F19D269982A300D80E06 /* NoteHistoryTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		36B90BA228598BEF002C990C /* SettingVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingVC;
 			sourceTree = "<group>";
 		};
 		36BC4DC02799178C006DFC30 /* WebView */ = {

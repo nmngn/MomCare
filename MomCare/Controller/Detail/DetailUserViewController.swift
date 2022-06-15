@@ -24,11 +24,13 @@ class DetailUserViewController: UIViewController {
     var model = [DetailModel]()
     var userChoice: UserChoice?
     var currentModel = DetailModel()
+    let currentUser = User()
     var saveAdminImage = false
     let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getInfoUser()
         configView()
         setupView()
         setupData()
@@ -104,8 +106,8 @@ class DetailUserViewController: UIViewController {
     }
     
     func deleteUser() {
-        let currentUser = realm.objects(User.self).filter("idUser == \(currentModel.id)").toArray()
-        let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == \(currentModel.id)").toArray()
+        let currentUser = realm.objects(User.self).filter("idUser == %@",currentModel.id).toArray()
+        let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == %@", currentModel.id).toArray()
         try! realm.write{
             realm.delete(currentUser)
             realm.delete(noteOfUser)
@@ -113,6 +115,11 @@ class DetailUserViewController: UIViewController {
         
         self.navigationController?.popToRootViewController(animated: true)
         Session.shared.isPopToRoot = true
+    }
+    
+    func getInfoUser() {
+        guard let data = realm.objects(User.self).filter("idUser == %@", currentModel.id).toArray().first else { return }
+        self.currentModel = data.convertToDetailModel()
     }
         
     func configView() {
@@ -245,14 +252,14 @@ class DetailUserViewController: UIViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if userChoice == .mom {
-                self.currentModel.avatarImage = image
-                self.setupData()
+                currentModel.avatarImage = image
+                setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
-                self.tableView?.reloadRows(at: [indexPath], with: .none)
+                tableView?.reloadRows(at: [indexPath], with: .none)
             } else {
-                self.currentModel.imagePregnant = image
-                self.setupData()
-                self.tableView?.reloadData()
+                currentModel.imagePregnant = image
+                setupData()
+                tableView?.reloadData()
             }
         }
         picker.dismiss(animated: true, completion: nil)
@@ -485,8 +492,8 @@ extension DetailUserViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        let currentUser = User()
-        try! realm.write({
+        do {
+            realm.beginWrite()
             currentUser.idUser = NSUUID().uuidString.lowercased()
             currentUser.name = currentModel.name
             currentUser.address = currentModel.address
@@ -497,20 +504,24 @@ extension DetailUserViewController {
             currentUser.dateSave = dateString
             currentUser.note = currentModel.note
             currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                           image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
-                                           type: .mom)
+                                                image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                                type: .mom)
             currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
-                                                  image: currentModel.imagePregnant ?? nil,
-                                                  type: .baby)
-            
-            let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                self.navigationController?.popToRootViewController(animated: true)
-                Session.shared.isPopToRoot = true
-            }
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-        })
+                                                       image: currentModel.imagePregnant ?? nil,
+                                                       type: .baby)
+            try? realm.commitWrite()
+            try? realm.safeWrite({
+                realm.add(currentUser)
+                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                    Session.shared.isPopToRoot = true
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            })
+        }
+        
     }
     
     func updateUser(id: String) {
@@ -519,10 +530,9 @@ extension DetailUserViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        guard let currentUser = realm.objects(User.self).filter("idUser == \(id)").toArray().first else { return }
+        guard let currentUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
         
         try! realm.write({
-            currentUser.idUser = NSUUID().uuidString.lowercased()
             currentUser.name = currentModel.name
             currentUser.address = currentModel.address
             currentUser.momBirth = currentModel.momBirth
@@ -546,5 +556,7 @@ extension DetailUserViewController {
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
         })
+        
     }
+    
 }

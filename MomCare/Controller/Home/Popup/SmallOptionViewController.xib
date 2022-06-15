@@ -85,11 +85,11 @@
                     <rect key="frame" x="116" y="120" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yyl-oN-mbz">
-                            <rect key="frame" x="8" y="9.5" width="28" height="25.5"/>
+                            <rect key="frame" x="8" y="8.5" width="28" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="mU5-fv-iHY"/>
                             </constraints>
-                            <imageReference key="image" image="person" catalog="system" renderingMode="hierarchical-single">
+                            <imageReference key="image" image="network" catalog="system" renderingMode="hierarchical-single">
                                 <hierarchicalColors>
                                     <color systemColor="labelColor"/>
                                     <color systemColor="secondaryLabelColor"/>
@@ -97,7 +97,7 @@
                                 </hierarchicalColors>
                             </imageReference>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cá nhân" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7t-j0-tLV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thông tin thêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7t-j0-tLV">
                             <rect key="frame" x="44" y="13" width="230" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <nil key="textColor"/>
@@ -135,11 +135,11 @@
                     <rect key="frame" x="116" y="172" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUD-MA-4Ip">
-                            <rect key="frame" x="8" y="8" width="28" height="28"/>
+                            <rect key="frame" x="8" y="8" width="28" height="28.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="WHS-nI-Oz2"/>
                             </constraints>
-                            <imageReference key="image" image="rectangle.portrait.and.arrow.right" catalog="system" renderingMode="hierarchical-single">
+                            <imageReference key="image" image="gear" catalog="system" renderingMode="hierarchical-single">
                                 <hierarchicalColors>
                                     <color systemColor="labelColor"/>
                                     <color systemColor="secondaryLabelColor"/>
@@ -147,7 +147,7 @@
                                 </hierarchicalColors>
                             </imageReference>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng xuất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2A-LW-D2a">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cài đặt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2A-LW-D2a">
                             <rect key="frame" x="44" y="13" width="230" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <nil key="textColor"/>
@@ -222,8 +222,8 @@
     </objects>
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
-        <image name="person" catalog="system" width="128" height="117"/>
-        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="network" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

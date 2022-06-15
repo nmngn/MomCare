@@ -55,7 +55,7 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-        listHistory = realm.objects(HistoryNote.self).filter("idUser == \(idUser)").toArray()
+        listHistory = realm.objects(HistoryNote.self).filter("idUser == %@", idUser).toArray()
         self.tableView.reloadData()
     }
     
@@ -87,6 +87,8 @@ class HistoryViewController: UIViewController {
         for item in list {
             cell.title = item.time
             cell.dataImage = item.image
+            cell.idNote = item.idNote
+            cell.idUser = item.idUser
             model.append(cell)
         }
         self.tableView.reloadData()
@@ -97,7 +99,7 @@ class HistoryViewController: UIViewController {
     }
     
     func removeNote(id: String) {
-        guard let currentNote = realm.objects(HistoryNote.self).filter("idNote == \(id)").toArray().first else { return  }
+        guard let currentNote = realm.objects(HistoryNote.self).filter("idNote == %@", id).toArray().first else { return  }
         
         try! realm.write({
             realm.delete(currentNote)
@@ -219,18 +221,23 @@ extension HistoryViewController {
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
-        let dateString = dateFormatter.string(from: date)
+        let dateString = dateFormatter.string(from: date).replacingOccurrences(of: "/", with: ".")
         
         let imageAddress = saveImage(imageName:
-        "note_\(dateString.replacingOccurrences(of: "/", with: "."))",
-                                     image: imageData, type: .baby)
-        let currentNote = HistoryNote()
+        "note_\(dateString)", image: imageData, type: .baby)
         
-        try! realm.write {
+        do {
+            realm.beginWrite()
+            let currentNote = HistoryNote()
             currentNote.idUser = self.idUser
             currentNote.time = dateString
             currentNote.image = imageAddress
             currentNote.idNote = NSUUID().uuidString.lowercased()
+            
+            try? realm.commitWrite()
+            try? realm.safeWrite {
+                realm.add(currentNote)
+            }
         }
         self.getListHistory()
     }

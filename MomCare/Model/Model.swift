@@ -9,18 +9,18 @@ import UIKit
 import RealmSwift
 
 class User: Object {
-    @Persisted var idUser = ""
-    @Persisted var name = ""
-    @Persisted var address = ""
-    @Persisted var momBirth = ""
-    @Persisted var numberPhone = ""
-    @Persisted var height = ""
-    @Persisted var babyDateBorn = ""
-    @Persisted var dateSave = ""
-    @Persisted var note = ""
-    @Persisted var avatar = ""
-    @Persisted var imagePregnant = ""
-    @Persisted var isStar = false
+    @objc dynamic var idUser = ""
+    @objc dynamic var name = ""
+    @objc dynamic var address = ""
+    @objc dynamic var momBirth = ""
+    @objc dynamic var numberPhone = ""
+    @objc dynamic var height = ""
+    @objc dynamic var babyDateBorn = ""
+    @objc dynamic var dateSave = ""
+    @objc dynamic var note = ""
+    @objc dynamic var avatar = ""
+    @objc dynamic var imagePregnant = ""
+    @objc dynamic var isStar = false
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
@@ -67,8 +67,8 @@ class User: Object {
 }
 
 class HistoryNote: Object{
-    @Persisted var idNote = ""
-    @Persisted var idUser = ""
-    @Persisted var time = ""
-    @Persisted var image = ""
+    @objc dynamic var idNote = ""
+    @objc dynamic var idUser = ""
+    @objc dynamic var time = ""
+    @objc dynamic var image = ""
 }

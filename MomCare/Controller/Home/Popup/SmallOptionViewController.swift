@@ -44,32 +44,12 @@ class SmallOptionViewController: UIViewController {
         self.navigation.pushViewController(vc, animated: true)
     }
     
-    func logOut() {
-        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất không?", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "Ok", style: .default) { _ in
-            self.signOut()
-        }
-        let noAction = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func signOut() {
-
-    }
-    
-    func popupErrorSignout() {
-        let alert = UIAlertController(title: "Lỗi", message: "Đăng xuất lỗi", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-    
     @IBAction func openProfile(_ sender: UIButton) {
+        let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
+        dismissVC()
+        self.navigation.pushViewController(vc, animated: true)
     }
         
     @IBAction func logOut(_ sender: UIButton) {
-        logOut()
     }
 }
