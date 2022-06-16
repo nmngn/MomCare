@@ -122,6 +122,8 @@
 		36EE825927DA5D7C00265EC1 /* IlluImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
+		D8067CF9285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8067CF7285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift */; };
+		D8067CFA285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8067CF8285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib */; };
 		D856E716285B18AD0016DEF7 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */; };
 		D856E717285B18AD0016DEF7 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
@@ -248,6 +250,8 @@
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
 		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
+		D8067CF7285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryNoteTableViewCell.swift; sourceTree = "<group>"; };
+		D8067CF8285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyHistoryNoteTableViewCell.xib; sourceTree = "<group>"; };
 		D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -564,6 +568,8 @@
 				3619E46827A472DB00530953 /* BonusDataTableViewCell.xib */,
 				36EE825627DA5D7C00265EC1 /* IlluImageTableViewCell.swift */,
 				36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */,
+				D8067CF7285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift */,
+				D8067CF8285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
 				3680782627996A58008ACD0B /* AdminViewController.xib in Resources */,
+				D8067CFA285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib in Resources */,
 				366AE8D12692C2DE00B5262C /* HomeTitleTableViewCell.xib in Resources */,
 				3666F19F269982A300D80E06 /* NoteHistoryTableViewCell.xib in Resources */,
 				36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */,
@@ -920,6 +927,7 @@
 				36EE825827DA5D7C00265EC1 /* IlluImageTableViewCell.swift in Sources */,
 				36607EF9279E9D7900F34640 /* APIService.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
+				D8067CF9285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift in Sources */,
 				36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */,
 				36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */,
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,

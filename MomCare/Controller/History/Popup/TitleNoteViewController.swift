@@ -17,6 +17,7 @@ class TitleNoteViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
+        textView.autocorrectionType = .no
     }
 
     func textViewDidChange(_ textView: UITextView) {

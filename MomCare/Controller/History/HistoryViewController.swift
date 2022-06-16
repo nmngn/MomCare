@@ -14,13 +14,14 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
-    var identifyUser = ""
+    var idUser = ""
     var listHistory: [HistoryNote]? {
         didSet {
             setupData()
             self.tableView.reloadData()
         }
     }
+    let utilityThread = DispatchQueue.global(qos: .utility)
     let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
@@ -28,7 +29,9 @@ class HistoryViewController: UIViewController {
         changeTheme(self.theme)
         configView()
         setupBackButton()
-        getListHistory()
+        utilityThread.async {
+            self.getListHistory()
+        }
         self.title = "Lịch sử ghi chú"
     }
     
@@ -56,11 +59,11 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-        repo.getAllNote(idUser: identifyUser) { [weak self] response in
+        repo.getAllNote(idUser: idUser) { [weak self] response in
             switch response {
             case .success(let data):
                 if let data = data?.notes {
-                    self?.listHistory = data.filter({$0.idUser == self?.identifyUser})
+                    self?.listHistory = data.filter({$0.idUser == self?.idUser})
                 }
             case .failure(let error):
                 print(error as Any)
@@ -249,7 +252,7 @@ extension HistoryViewController {
         let imageAddress = saveImage(imageName:
         "note_\(dateString.replacingOccurrences(of: "/", with: "."))",
                                      image: imageData, type: .baby)
-        repo.createNote(idUser: self.identifyUser,
+        repo.createNote(idUser: self.idUser,
                         time: dateString,
                         image: imageAddress,
                         title: title)

@@ -11,6 +11,7 @@ enum UserType {
     case admin
     case general
     case data
+    case noteOfDoctor
     case more
     case bonus
     case image
@@ -20,6 +21,7 @@ struct UserInfo {
     var type: UserType?
     var title = ""
     var idAdmin = ""
+    var idUser = ""
     var value = ""
     var avatarImage: UIImage?
     var name = ""
@@ -33,4 +35,8 @@ struct UserInfo {
     var imagePregnant: UIImage?
     var dateSave = ""
     var illuImage: UIImage?
+    
+    var titleHisNote = ""
+    var timeHisNote = ""
+    var imageHisNote : UIImage?
 }

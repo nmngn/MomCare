@@ -284,7 +284,7 @@ class DetailUserViewController: UIViewController {
         } else {
             let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
             vc.hidesBottomBarWhenPushed = true
-            vc.identifyUser = currentModel.id
+            vc.idUser = currentModel.id
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

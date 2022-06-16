@@ -24,11 +24,14 @@ class SearchViewController: UIViewController {
     var userSearch = ""
     let repo = Repositories(api: .share)
     var listUser = [User]()
+    let utilityThread = DispatchQueue.global(qos: .utility)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tìm kiếm"
-        getListUser()
+        utilityThread.async {
+            self.getListUser()
+        }
         configView()
         setupBackButton()
         changeTheme(self.theme)

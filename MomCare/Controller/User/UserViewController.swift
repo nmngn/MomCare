@@ -21,6 +21,12 @@ class UserViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    var listHistory = [HistoryNote]() {
+        didSet {
+            self.setupData()
+            self.tableView.reloadData()
+        }
+    }
     var model = [UserInfo]()
     var detailData = DetailModel()
     let repo = Repositories(api: .share)
@@ -28,13 +34,16 @@ class UserViewController: UIViewController {
     var moreData = ""
     var bonusData = ""
     var illuImage = UIImage()
+    let utilityThread = DispatchQueue.global(qos: .utility)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
         changeTheme(theme)
-        getDataUser()
-        setupData()
+        utilityThread.async {
+            self.getDataUser()
+            self.setupData()
+        }
         setupNavigationButton()
         configView()
     }
@@ -92,6 +101,19 @@ class UserViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func getListHistory(idUser: String) {
+        repo.getAllNote(idUser: idUser) { [weak self] response in
+            switch response {
+            case .success(let data):
+                if let data = data?.notes {
+                    self?.listHistory = data.filter({$0.idUser == idUser})
+                }
+            case .failure(let error):
+                print(error as Any)
+            }
+        }
+    }
+    
     func getDataUser() {
         let number = Session.shared.userProfile.userNumberPhone
         repo.getDataUserByNumber(numberPhone: number) { [weak self] response in
@@ -100,6 +122,7 @@ class UserViewController: UIViewController {
                 if let data = data {
                     self?.currentModel = data.convertToUserModel()
                     self?.detailData = data.convertToDetailModel()
+                    self?.getListHistory(idUser: data.idUser)
                     self?.getData(week: data.updateTime())
                     self?.getAdminData(idAdmin: data.idAdmin)
                 }
@@ -110,25 +133,36 @@ class UserViewController: UIViewController {
     }
     
     func setupData() {
+        model.removeAll()
         var cell0 = UserInfo()
         cell0.type = .admin
         var cell1 = UserInfo()
         cell1.type = .general
         var cell2 = UserInfo()
-        cell2.type = .data
+        cell2.type = .noteOfDoctor
         var cell3 = UserInfo()
-        cell3.type = .more
+        cell3.type = .data
         var cell4 = UserInfo()
-        cell4.type = .image
+        cell4.type = .more
         var cell5 = UserInfo()
-        cell5.type = .bonus
+        cell5.type = .image
+        var cell6 = UserInfo()
+        cell6.type = .bonus
         
         model.append(cell0)
         model.append(cell1)
-        model.append(cell2)
+        if !listHistory.isEmpty {
+            for item in self.listHistory {
+                cell2.titleHisNote = item.title
+                cell2.timeHisNote = item.time
+                cell2.imageHisNote = loadImageFromDiskWith(fileName: item.image)
+                self.model.append(cell2)
+            }
+        }
         model.append(cell3)
         model.append(cell4)
         model.append(cell5)
+        model.append(cell6)
     }
     
     func configView() {
@@ -143,6 +177,7 @@ class UserViewController: UIViewController {
             $0.registerNibCellFor(type: AdminInfoTableViewCell.self)
             $0.registerNibCellFor(type: BonusDataTableViewCell.self)
             $0.registerNibCellFor(type: IlluImageTableViewCell.self)
+            $0.registerNibCellFor(type: MyHistoryNoteTableViewCell.self)
         }
     }
 
@@ -252,6 +287,12 @@ extension UserViewController: UITableViewDelegate, UITableViewDataSource {
                     UserInfoTableViewCell else { return UITableViewCell()}
             cell.selectionStyle = .none
             cell.setupData(model: currentModel)
+            return cell
+        case .noteOfDoctor:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyHistoryNoteTableViewCell", for: indexPath) as?
+                    MyHistoryNoteTableViewCell else { return UITableViewCell()}
+            cell.selectionStyle = .none
+            cell.setupData(data: model)
             return cell
         case .data:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DataInfoTableViewCell", for: indexPath) as?
