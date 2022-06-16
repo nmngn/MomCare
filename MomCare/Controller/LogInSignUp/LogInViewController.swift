@@ -33,7 +33,9 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         loginButton.isEnabled = false
         emailTextField.delegate = self
+        emailTextField.addTarget(self, action: #selector(accountDidChange), for: .editingChanged)
         passwordTextField.delegate = self
+        passwordTextField.addTarget(self, action: #selector(passwordDidChange), for: .editingChanged)
         configView()
         changeTheme(theme)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -57,6 +59,13 @@ class LogInViewController: UIViewController {
             emailTextField.text = autoEmail
         }
         setUpAnimation()
+    }
+    
+    @objc func accountDidChange(textField: UITextField) {
+    }
+    
+    @objc func passwordDidChange(textField: UITextField) {
+        checkTextField()
     }
     
     @objc func dismissKeyboard() {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowImageDetailViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
+                <outlet property="titleLabel" destination="RG8-If-nwh" id="GSX-lj-Afc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewImage" destination="VAP-06-p5I" id="mNH-BL-qN5"/>
             </connections>
@@ -29,12 +31,21 @@
                                 <constraint firstAttribute="height" constant="722" id="NJM-SA-MMx"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RG8-If-nwh">
+                            <rect key="frame" x="16" y="706" width="382" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="RG8-If-nwh" secondAttribute="bottom" constant="16" id="7aB-bj-R1h"/>
+                        <constraint firstAttribute="trailing" secondItem="RG8-If-nwh" secondAttribute="trailing" constant="16" id="A7o-IN-H7g"/>
                         <constraint firstItem="VAP-06-p5I" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" id="NP5-hv-UU5"/>
                         <constraint firstItem="VAP-06-p5I" firstAttribute="top" secondItem="h4C-cg-itK" secondAttribute="top" id="NcN-Qm-Kuf"/>
                         <constraint firstAttribute="bottom" secondItem="VAP-06-p5I" secondAttribute="bottom" id="Ta9-iz-Kwr"/>
+                        <constraint firstItem="RG8-If-nwh" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" constant="16" id="aEc-kA-a15"/>
                         <constraint firstAttribute="trailing" secondItem="VAP-06-p5I" secondAttribute="trailing" id="jYa-NQ-6AP"/>
                     </constraints>
                 </view>

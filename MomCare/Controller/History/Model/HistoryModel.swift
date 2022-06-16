@@ -18,8 +18,9 @@ struct HistoryModel {
     var type: HistoryType
     var idNote = ""
     var idUser = ""
-    var title = ""
+    var time = ""
     var dataImage = ""
+    var title = ""
     
     init(type: HistoryType) {
         self.type = type

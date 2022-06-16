@@ -160,8 +160,8 @@ struct Repositories {
         }
     }
     
-    func createNote(idUser: String, time: String, image: String, completion: @escaping (BaseResult<HistoryNote>) -> Void) {
-        let input = NoteRequest(idUser: idUser, time: time, image: image)
+    func createNote(idUser: String, time: String, image: String, title: String, completion: @escaping (BaseResult<HistoryNote>) -> Void) {
+        let input = NoteRequest(idUser: idUser, time: time, image: image, title: title)
         api.request(input: input) { (object : HistoryNote?, error) in
             if let object = object {
                 completion(.success(object))

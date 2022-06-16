@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6i7-40-FzT">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="SignupViewController" id="6i7-40-FzT" customClass="SignupViewController" customModule="MomCare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TcD-W1-A7T">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="Y7e-6f-Eme">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="f3g-gg-rE3">
@@ -95,7 +93,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="confirmPwLabel" destination="Qic-3Z-Rhf" id="wCv-zk-Lwl"/>
+                        <outlet property="confirmPwTextField" destination="Qic-3Z-Rhf" id="wCv-zk-Lwl"/>
                         <outlet property="emailTextField" destination="kz5-hN-ph8" id="mmO-re-6st"/>
                         <outlet property="heading" destination="bh4-66-hbi" id="cV4-DM-Xt6"/>
                         <outlet property="logInButton" destination="1FJ-eo-1i4" id="v1V-gb-gTv"/>

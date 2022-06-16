@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PopupDialog
 
 class HistoryViewController: UIViewController {
 
@@ -94,7 +95,8 @@ class HistoryViewController: UIViewController {
         guard let list = self.listHistory else { return }
         for item in list {
             cell.idNote = item.idNote
-            cell.title = item.time
+            cell.time = item.time
+            cell.title = item.title
             cell.dataImage = item.image
             model.append(cell)
         }
@@ -105,7 +107,7 @@ class HistoryViewController: UIViewController {
     }
     
     func removeNote(id: String) {
-        repo.deleteNote(idNote: id) { [weak self] response in
+        repo.deleteNote(idNote: id) { response in
             switch response {
             case .success(let value):
                 print(value as Any)
@@ -157,6 +159,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         case .cell:
             let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
             vc.imageData = model.dataImage
+            vc.titleData = model.title
+            vc.time = model.time
             present(vc, animated: true, completion: nil)
         default:
             break
@@ -219,14 +223,24 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.saveData(imageData: image)
+            picker.dismiss(animated: true) {
+                let vc = TitleNoteViewController.init(nibName: "TitleNoteViewController", bundle: nil)
+                vc.saveNote = { [weak self] title in
+                    self?.saveData(imageData: image, title: title)
+                }
+                let popup = PopupDialog(viewController: vc,
+                                        buttonAlignment: .horizontal,
+                                        transitionStyle: .fadeIn,
+                                        tapGestureDismissal: true,
+                                        panGestureDismissal: false)
+                self.present(popup, animated: true, completion: nil)
+            }
         }
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 
 extension HistoryViewController {
-    func saveData(imageData: UIImage) {
+    func saveData(imageData: UIImage, title: String) {
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
@@ -237,7 +251,8 @@ extension HistoryViewController {
                                      image: imageData, type: .baby)
         repo.createNote(idUser: self.identifyUser,
                         time: dateString,
-                        image: imageAddress)
+                        image: imageAddress,
+                        title: title)
         { [weak self] response in
             switch response {
             case .success(_):

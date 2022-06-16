@@ -27,6 +27,7 @@ class InfoUserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         valueTextField.delegate = self
+        valueTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         valueTextField.makeShadow()
         valueTextField.autocorrectionType = .no
         valueTextField.setLeftPaddingPoints(16)
@@ -65,24 +66,7 @@ class InfoUserTableViewCell: UITableViewCell {
         }
     }
     
-    @IBAction func callNumber(_ sender: UIButton) {
-        if let url = URL(string: "telprompt://\(self.userPhone)"),
-           UIApplication.shared.canOpenURL(url) {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler:nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
-    }
-    
-    @IBAction func letChat(_ sender: UIButton) {
-        delegate?.letChat()
-    }
-}
-
-extension InfoUserTableViewCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    @objc func textFieldDidChange(textField: UITextField) {
         if let text = textField.text {
             if text.count > 0 {
                 if cellType == .numberPhone {
@@ -103,6 +87,23 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
         }
     }
     
+    @IBAction func callNumber(_ sender: UIButton) {
+        if let url = URL(string: "telprompt://\(self.userPhone)"),
+           UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    @IBAction func letChat(_ sender: UIButton) {
+        delegate?.letChat()
+    }
+}
+
+extension InfoUserTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

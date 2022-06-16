@@ -9,12 +9,13 @@ import Foundation
 import Alamofire
 
 class NoteRequest: BaseRequest {
-    required init(idUser: String, time: String, image: String) { //create
+    required init(idUser: String, time: String, image: String, title: String) { //create
         let url = URLs.noteUrl
         let body: [String: Any] = [
             "idUser": idUser,
             "time": time,
-            "image": image
+            "image": image,
+            "title": title
         ]
         super.init(url: url, requestType: .post, body: body)
     }

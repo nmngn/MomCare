@@ -122,6 +122,8 @@
 		36EE825927DA5D7C00265EC1 /* IlluImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36EE825727DA5D7C00265EC1 /* IlluImageTableViewCell.xib */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
+		D856E716285B18AD0016DEF7 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */; };
+		D856E717285B18AD0016DEF7 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -246,6 +248,8 @@
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
 		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
+		D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
+		D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +289,8 @@
 			children = (
 				3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */,
 				3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */,
+				D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */,
+				D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -817,6 +823,7 @@
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36807835279A8D25008ACD0B /* ChatViewController.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
+				D856E717285B18AD0016DEF7 /* TitleNoteViewController.xib in Resources */,
 				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
 				367424132770C1090016477E /* SearchViewController.xib in Resources */,
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
@@ -931,6 +938,7 @@
 				36807834279A8D25008ACD0B /* ChatViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				361DECDD27CB6F4C0021A343 /* CurrentTableViewCell.swift in Sources */,
+				D856E716285B18AD0016DEF7 /* TitleNoteViewController.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3619E46527A46AFC00530953 /* AdminInfoTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,

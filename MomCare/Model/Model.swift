@@ -144,6 +144,7 @@ struct HistoryNote: Mappable {
     var idUser = ""
     var time = ""
     var image = ""
+    var title = ""
     
     init?(map: Map) {
         mapping(map: map)
@@ -154,5 +155,6 @@ struct HistoryNote: Mappable {
         idUser <- map["idUser"]
         time <- map["time"]
         image <- map["image"]
+        title <- map["title"]
     }
 }

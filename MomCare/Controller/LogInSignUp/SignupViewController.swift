@@ -15,7 +15,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var heading: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPwLabel: UITextField!
+    @IBOutlet weak var confirmPwTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var logInButton: UIButton!
@@ -25,11 +25,14 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
+        emailTextField.addTarget(self, action: #selector(accountDidChange), for: .editingChanged)
         passwordTextField.delegate = self
-        confirmPwLabel.delegate = self
+        passwordTextField.addTarget(self, action: #selector(passwwordDidChange), for: .editingChanged)
+        confirmPwTextField.delegate = self
+        confirmPwTextField.addTarget(self, action: #selector(confirmDidChange), for: .editingChanged)
         signUpButton.isEnabled = false
         passwordTextField.textContentType = .oneTimeCode
-        confirmPwLabel.textContentType = .oneTimeCode
+        confirmPwTextField.textContentType = .oneTimeCode
         configView()
         changeTheme(theme)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -54,10 +57,21 @@ class SignupViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @objc func accountDidChange(textField: UITextField) {
+    }
+    
+    @objc func passwwordDidChange(textField: UITextField) {
+        checkTextField()
+    }
+    
+    @objc func confirmDidChange(textField: UITextField) {
+        checkTextField()
+    }
+    
     @IBAction func signup() {
         self.loading()
         if let email = emailTextField.text, let password = passwordTextField.text,
-           let confirmPw = confirmPwLabel.text {
+           let confirmPw = confirmPwTextField.text {
             if confirmPw == password {
                 Auth.auth().createUser(withEmail: email + "@admin.com", password: password) { [weak self] (authDataResult, error) in
                     if let error = error {
@@ -111,7 +125,7 @@ class SignupViewController: UIViewController {
     }
     
     func checkTextField() {
-        if let email = emailTextField.text, let password = passwordTextField.text, let confirm = confirmPwLabel.text {
+        if let email = emailTextField.text, let password = passwordTextField.text, let confirm = confirmPwTextField.text {
             if email.isValidPhone() == true && !password.isEmpty && !confirm.isEmpty {
                 signUpButton.isEnabled = true
             } else {
@@ -154,13 +168,13 @@ extension SignupViewController {
         heading.center.x -= view.bounds.width
         emailTextField.center.x -= view.bounds.width
         passwordTextField.center.x -= view.bounds.width
-        confirmPwLabel.center.x -= view.bounds.width
+        confirmPwTextField.center.x -= view.bounds.width
         heading.frame.size.width = view.bounds.width - 88*2
         emailTextField.frame.size.width = view.bounds.width - 50*2
         passwordTextField.frame.size.width = view.bounds.width - 50*2
-        confirmPwLabel.frame.size.width = view.bounds.width - 50*2
+        confirmPwTextField.frame.size.width = view.bounds.width - 50*2
         signUpButton.frame.size.width = view.bounds.width - 78*2
-        confirmPwLabel.frame.size.height = 36
+        confirmPwTextField.frame.size.height = 36
         emailTextField.frame.size.height = 36
         passwordTextField.frame.size.height = 36
         
@@ -188,7 +202,7 @@ extension SignupViewController {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in }
         UIView.animate(withDuration: 1.25, delay: 0.75, options: []) {
-            self.confirmPwLabel.center.x += self.view.bounds.width
+            self.confirmPwTextField.center.x += self.view.bounds.width
         }
         UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.signUpButton.center.y -= 100
@@ -217,7 +231,7 @@ extension SignupViewController {
         }
     
         UIView.animate(withDuration: 1.5, delay: 0.5, options: [], animations: {
-            self.confirmPwLabel.center.x += self.view.bounds.width
+            self.confirmPwTextField.center.x += self.view.bounds.width
         }, completion: nil)
         UIView.animate(withDuration: 1, delay: 0.05, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.0, options: []) {
             self.signUpButton.center.y += self.view.bounds.height

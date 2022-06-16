@@ -9,10 +9,13 @@ import UIKit
 
 class ShowImageDetailViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var viewImage: UIImageView!
     var imageData = ""
     var imageInDetail: UIImage?
     var inDetail = false
+    var titleData = ""
+    var time = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,7 @@ class ShowImageDetailViewController: UIViewController {
         } else {
             showImageInDetail()
         }
+        titleLabel.text = "\(titleData) \n\(time)"
     }
     
     func showImage() {
