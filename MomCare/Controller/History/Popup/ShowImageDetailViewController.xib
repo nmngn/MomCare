@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowImageDetailViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
+                <outlet property="titleLabel" destination="as6-MN-Pz0" id="1mC-Bn-jCZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewImage" destination="VAP-06-p5I" id="mNH-BL-qN5"/>
             </connections>
@@ -29,12 +31,21 @@
                                 <constraint firstAttribute="height" constant="722" id="NJM-SA-MMx"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as6-MN-Pz0">
+                            <rect key="frame" x="16" y="698" width="382" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="as6-MN-Pz0" secondAttribute="trailing" constant="16" id="C05-tS-NAF"/>
+                        <constraint firstAttribute="bottom" secondItem="as6-MN-Pz0" secondAttribute="bottom" constant="24" id="ERt-uJ-QH5"/>
                         <constraint firstItem="VAP-06-p5I" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" id="NP5-hv-UU5"/>
                         <constraint firstItem="VAP-06-p5I" firstAttribute="top" secondItem="h4C-cg-itK" secondAttribute="top" id="NcN-Qm-Kuf"/>
                         <constraint firstAttribute="bottom" secondItem="VAP-06-p5I" secondAttribute="bottom" id="Ta9-iz-Kwr"/>
+                        <constraint firstItem="as6-MN-Pz0" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" constant="16" id="X2A-1d-U2B"/>
                         <constraint firstAttribute="trailing" secondItem="VAP-06-p5I" secondAttribute="trailing" id="jYa-NQ-6AP"/>
                     </constraints>
                 </view>
@@ -45,7 +56,7 @@
                 <constraint firstItem="h4C-cg-itK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7hS-C4-12G"/>
                 <constraint firstItem="h4C-cg-itK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ex6-jJ-ufl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h4C-cg-itK" secondAttribute="trailing" id="rSR-PG-RbO"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="h4C-cg-itK" secondAttribute="bottom" id="wUx-5k-hA0"/>
+                <constraint firstAttribute="bottom" secondItem="h4C-cg-itK" secondAttribute="bottom" id="wpC-ub-1ru"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="60.869565217391312" y="121.875"/>

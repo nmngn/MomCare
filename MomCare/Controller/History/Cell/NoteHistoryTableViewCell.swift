@@ -18,7 +18,7 @@ class NoteHistoryTableViewCell: UITableViewCell {
     }
     
     func setupData(model: HistoryModel) {
-        titleLabel.text = "Thời gian: \(model.title)"
+        titleLabel.text = "Thời gian: \(model.time)"
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = .white
         } else {

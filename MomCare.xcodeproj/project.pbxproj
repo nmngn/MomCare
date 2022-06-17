@@ -10,6 +10,8 @@
 		3600356E278415C30067ECEA /* Book1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3600356D278415C30067ECEA /* Book1.csv */; };
 		3600357227841F270067ECEA /* PopupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600357027841F270067ECEA /* PopupInfoViewController.swift */; };
 		3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3600357127841F270067ECEA /* PopupInfoViewController.xib */; };
+		36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090155285C802A0068A8C4 /* TitleNoteViewController.swift */; };
+		36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36090156285C802B0068A8C4 /* TitleNoteViewController.xib */; };
 		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
 		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
 		3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */; };
@@ -90,6 +92,8 @@
 		3600356D278415C30067ECEA /* Book1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Book1.csv; sourceTree = "<group>"; };
 		3600357027841F270067ECEA /* PopupInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupInfoViewController.swift; sourceTree = "<group>"; };
 		3600357127841F270067ECEA /* PopupInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupInfoViewController.xib; sourceTree = "<group>"; };
+		36090155285C802A0068A8C4 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
+		36090156285C802B0068A8C4 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
 		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
 		3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 		3614AA3527758F24005FC96D /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				36090155285C802A0068A8C4 /* TitleNoteViewController.swift */,
+				36090156285C802B0068A8C4 /* TitleNoteViewController.xib */,
 				3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */,
 				3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */,
 			);
@@ -567,6 +573,7 @@
 				3694055F279D958400F1E3C6 /* Book2.csv in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
+				36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */,
 				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
@@ -665,6 +672,7 @@
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
 				36E9CBAE277C5B9600E1B319 /* NotificationTableViewCell.swift in Sources */,
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
+				36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,

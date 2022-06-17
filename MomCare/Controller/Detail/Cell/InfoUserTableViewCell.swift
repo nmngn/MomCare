@@ -18,12 +18,12 @@ class InfoUserTableViewCell: UITableViewCell {
     
     var cellType: DataType?
     var userPhone = ""
-    var isAdmin = false
     var invalidPhone: (() -> ())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         valueTextField.delegate = self
+        valueTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         valueTextField.makeShadow()
         valueTextField.autocorrectionType = .no
         valueTextField.setLeftPaddingPoints(16)
@@ -56,6 +56,14 @@ class InfoUserTableViewCell: UITableViewCell {
         }
     }
     
+    @objc func textFieldDidChange(textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 0 {
+                self.saveInModel(text)
+            }
+        }
+    }
+    
     @IBAction func callNumber(_ sender: UIButton) {
         if let url = URL(string: "telprompt://\(self.userPhone)"),
            UIApplication.shared.canOpenURL(url) {
@@ -71,20 +79,11 @@ class InfoUserTableViewCell: UITableViewCell {
 extension InfoUserTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
-            if text.count > 0 {
-                if cellType == .numberPhone {
-                    if text.isValidPhone() {
-                        self.saveInModel(text)
-                    } else {
-                        invalidPhone?()
-                    }
-                }
-                self.saveInModel(text)
-            } else {
-                if !isAdmin {
-                    if let cellType = cellType {
-                        delegate?.showAlert(dataType: cellType)
-                    }
+            if cellType == .numberPhone {
+                if text.isValidPhone() {
+                    self.saveInModel(text)
+                } else {
+                    invalidPhone?()
                 }
             }
         }

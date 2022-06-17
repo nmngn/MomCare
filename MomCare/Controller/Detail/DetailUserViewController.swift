@@ -25,17 +25,20 @@ class DetailUserViewController: UIViewController {
     var userChoice: UserChoice?
     var currentModel = DetailModel()
     let currentUser = User()
-    var saveAdminImage = false
     let realm = try! Realm()
+    let asyncMainThread = DispatchQueue.main
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getInfoUser()
+        self.title = "Thông tin sản phụ"
+        self.getInfoUser()
+        asyncMainThread.async {
+            self.changeTheme(self.theme)
+            self.setupView()
+        }
         configView()
-        setupView()
         setupData()
-        changeTheme(self.theme)
-        setupNavigationButton()
+        self.setupNavigationButton()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -46,7 +49,6 @@ class DetailUserViewController: UIViewController {
     }
     
     func setupView() {
-        self.title = "Thông tin sản phụ"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -371,7 +373,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
                     InfoUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.delegate = self
-            cell.isAdmin = saveAdminImage
             cell.setupData(model: currentModel)
             cell.invalidPhone = { [weak self] in
                 let alert = UIAlertController(title: "Thông báo", message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)

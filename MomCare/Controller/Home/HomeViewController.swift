@@ -27,7 +27,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
-    let userInteractiveThread = DispatchQueue.global(qos: .userInteractive)
+    let asyncMainThread = DispatchQueue.main
+    let userInitiatedhread = DispatchQueue.global(qos: .userInitiated)
     let backgroundThread = DispatchQueue.global(qos: .background)
     
     let presenter: Presentr = {
@@ -43,13 +44,17 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
-        getListUser()
+        userInitiatedhread.async {
+            self.changeTheme(self.theme)
+        }
+        asyncMainThread.async {
+            self.getListUser()
+            self.userNotificationCenter.delegate = self
+            self.requestNotificationAuthorization()
+            self.setupNavigationButton()
+        }
         self.configView()
-        self.changeTheme(self.theme)
-        self.userNotificationCenter.delegate = self
-        self.requestNotificationAuthorization()
         self.navigationController?.isNavigationBarHidden = false
-        self.setupNavigationButton()
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")        
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {

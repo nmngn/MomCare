@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import PopupDialog
 
 class HistoryViewController: UIViewController {
 
@@ -85,7 +86,8 @@ class HistoryViewController: UIViewController {
         
         guard let list = self.listHistory else { return }
         for item in list {
-            cell.title = item.time
+            cell.title = item.title
+            cell.time = item.time
             cell.dataImage = item.image
             cell.idNote = item.idNote
             cell.idUser = item.idUser
@@ -148,6 +150,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         case .cell:
             let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
             vc.imageData = model.dataImage
+            vc.titleData = model.title
+            vc.time = model.time
             present(vc, animated: true, completion: nil)
         default:
             break
@@ -210,14 +214,25 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.saveData(imageData: image)
+            picker.dismiss(animated: true) {
+                let vc = TitleNoteViewController.init(nibName: "TitleNoteViewController", bundle: nil)
+                vc.saveNote = { [weak self] title in
+                    self?.saveData(imageData: image, title: title)
+                }
+                let popup = PopupDialog(viewController: vc,
+                                        buttonAlignment: .horizontal,
+                                        transitionStyle: .fadeIn,
+                                        tapGestureDismissal: true,
+                                        panGestureDismissal: false)
+                self.present(popup, animated: true, completion: nil)
+            }
         }
-        picker.dismiss(animated: true, completion: nil)
+        
     }
 }
 
 extension HistoryViewController {
-    func saveData(imageData: UIImage) {
+    func saveData(imageData: UIImage, title: String) {
         let dateFormatter : DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         let date = Date()
@@ -233,6 +248,7 @@ extension HistoryViewController {
             currentNote.time = dateString
             currentNote.image = imageAddress
             currentNote.idNote = NSUUID().uuidString.lowercased()
+            currentNote.title = title
             
             try? realm.commitWrite()
             try? realm.safeWrite {

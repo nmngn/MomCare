@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TitleNoteViewController" customModule="MomCare" customModuleProvider="target">
+            <connections>
+                <outlet property="textView" destination="KAm-OE-WRd" id="p9d-Y9-DY0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thêm nội dung" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFp-F7-JaR">
+                    <rect key="frame" x="12" y="15" width="390" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="9Iq-La-ZxZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KAm-OE-WRd">
+                    <rect key="frame" x="16" y="60" width="382" height="228"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="MCv-fR-EXD"/>
+                    </constraints>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axa-Xj-eZ3">
+                    <rect key="frame" x="313" y="10.5" width="89" height="33.5"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Hoàn tất">
+                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="aca-kF-N3D"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KAm-OE-WRd" secondAttribute="trailing" constant="16" id="0Kz-9p-0Cw"/>
+                <constraint firstItem="KAm-OE-WRd" firstAttribute="top" secondItem="Axa-Xj-eZ3" secondAttribute="bottom" constant="16" id="B29-bj-7gD"/>
+                <constraint firstItem="Axa-Xj-eZ3" firstAttribute="centerY" secondItem="MFp-F7-JaR" secondAttribute="centerY" id="IXG-Bl-Smw"/>
+                <constraint firstItem="KAm-OE-WRd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="MKV-ZZ-IV9"/>
+                <constraint firstAttribute="trailing" secondItem="MFp-F7-JaR" secondAttribute="trailing" constant="12" id="US5-qS-3Gb"/>
+                <constraint firstAttribute="trailing" secondItem="Axa-Xj-eZ3" secondAttribute="trailing" constant="12" id="Vi9-fz-R64"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KAm-OE-WRd" secondAttribute="bottom" constant="16" id="dfM-RW-6gL"/>
+                <constraint firstItem="MFp-F7-JaR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="ikb-RO-i7n"/>
+                <constraint firstItem="MFp-F7-JaR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="r0u-bh-V1i"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="12"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="108.69565217391305" y="87.053571428571431"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
