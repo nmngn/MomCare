@@ -12,6 +12,8 @@
 		3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3600357127841F270067ECEA /* PopupInfoViewController.xib */; };
 		36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090155285C802A0068A8C4 /* TitleNoteViewController.swift */; };
 		36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36090156285C802B0068A8C4 /* TitleNoteViewController.xib */; };
+		3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090159285C85BB0068A8C4 /* SettingViewController.swift */; };
+		3609015C285C85BB0068A8C4 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3609015A285C85BB0068A8C4 /* SettingViewController.xib */; };
 		3614AA3827758F47005FC96D /* ShowImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */; };
 		3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */; };
 		3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */; };
@@ -94,6 +96,8 @@
 		3600357127841F270067ECEA /* PopupInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupInfoViewController.xib; sourceTree = "<group>"; };
 		36090155285C802A0068A8C4 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		36090156285C802B0068A8C4 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
+		36090159285C85BB0068A8C4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		3609015A285C85BB0068A8C4 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		3614AA3627758F47005FC96D /* ShowImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageDetailViewController.swift; sourceTree = "<group>"; };
 		3614AA3727758F47005FC96D /* ShowImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowImageDetailViewController.xib; sourceTree = "<group>"; };
 		3615AA3B277B6E9B007F01C3 /* AddUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 		36B90BA228598BEF002C990C /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				36090159285C85BB0068A8C4 /* SettingViewController.swift */,
+				3609015A285C85BB0068A8C4 /* SettingViewController.xib */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
+				3609015C285C85BB0068A8C4 /* SettingViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
 				3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */,
 				3600356E278415C30067ECEA /* Book1.csv in Resources */,
@@ -665,6 +672,7 @@
 				365EC7E32857901200709B74 /* Realm +.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
+				3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */,
 				36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */,
 				36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */,
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,
