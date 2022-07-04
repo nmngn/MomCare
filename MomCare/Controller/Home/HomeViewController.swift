@@ -51,8 +51,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
         self.requestNotificationAuthorization()
-        
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -67,7 +67,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if Session.shared.isPopToRoot {
-            getListUser()
+            utilityThread.async {
+                self.getListUser()
+            }
             Session.shared.isPopToRoot = false
         }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -286,7 +288,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         })
         let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
             self.sortType = "Theo ngày lưu"
-            self.getListUser(reverse: true)
+            self.utilityThread.async {
+                self.getListUser(reverse: true)
+            }
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"

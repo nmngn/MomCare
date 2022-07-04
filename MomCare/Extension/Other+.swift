@@ -80,12 +80,18 @@ extension UIViewController {
     }
     
     func changeTheme(_ theme: UIImageView) {
+        
         DispatchQueue.main.async {
             if self.traitCollection.userInterfaceStyle == .light {
-                theme.image = UIImage(named: "baby_light")
+                self.view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             } else {
-                theme.image = UIImage(named: "bed")
+                self.view.backgroundColor = .darkGray
             }
+//            if self.traitCollection.userInterfaceStyle == .light {
+//                theme.image = UIImage(named: "baby_light")
+//            } else {
+//                theme.image = UIImage(named: "bed")
+//            }
         }
     }
     
