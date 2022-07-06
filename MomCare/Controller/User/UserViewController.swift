@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import SwiftCSV
 import Presentr
+import ESPullToRefresh
 
 class UserViewController: UIViewController {
 
@@ -178,6 +179,11 @@ class UserViewController: UIViewController {
             $0.registerNibCellFor(type: BonusDataTableViewCell.self)
             $0.registerNibCellFor(type: IlluImageTableViewCell.self)
             $0.registerNibCellFor(type: MyHistoryNoteTableViewCell.self)
+            $0.es.addPullToRefresh {
+                self.getDataUser()
+                self.setupData()
+            }
+            $0.es.stopPullToRefresh()
         }
     }
 

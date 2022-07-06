@@ -33,7 +33,7 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
         itemHome.image = UIImage(systemName: "house")
         
         let itemTrans = self.tabBar.items![1]
-        itemTrans.image = UIImage(systemName: "message")
+        itemTrans.image = UIImage(systemName: "magnifyingglass")
         
         let itemPerformance = self.tabBar.items![2]
         itemPerformance.image = UIImage(systemName: "bell")
@@ -47,8 +47,8 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
         let homeVC = UINavigationController(rootViewController: HomeViewController.init(nibName: "Home", bundle: nil)) 
         homeVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Màn hình chính", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill")?.toHierachicalImage())
         
-        let chatVC = ChatViewController.init(nibName: "ChatViewController", bundle: nil)
-        chatVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(),title: "Trò chuyện", image: UIImage(systemName: "message"), selectedImage: UIImage(systemName: "message.fill")?.toHierachicalImage())
+        let searchVC = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
+        searchVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(),title: "Tìm kiếm", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass.fill")?.toHierachicalImage())
         
         let notiVC = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
         notiVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông báo", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell.fill")?.toHierachicalImage())
@@ -56,7 +56,7 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
         let account = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
         account.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông tin cá nhân".localized, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill")?.toHierachicalImage())
 
-        viewController.append(contentsOf: [homeVC, chatVC, notiVC, account])
+        viewController.append(contentsOf: [homeVC, searchVC, notiVC, account])
         return viewController
     }
 }
@@ -66,7 +66,7 @@ class ESTabbarBasicContentView: ESTabBarItemContentView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         textColor = .black
-        highlightTextColor = .black
+        highlightTextColor = .systemBlue
         iconColor = .black
     }
     

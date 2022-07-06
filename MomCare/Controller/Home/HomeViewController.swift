@@ -10,6 +10,7 @@ import NotificationCenter
 import SwiftCSV
 import PopupDialog
 import Presentr
+import ESPullToRefresh
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -78,11 +79,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func setupNavigationButton() {
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "magnifying")?.toHierachicalImage()
-                                       , style: .plain, target: self, action: #selector(searchAction))
-        navigationItem.leftBarButtonItems = [backItem]
-        
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet")?.toHierachicalImage()
                                         , style: .plain, target: self, action: #selector(openMore))
         navigationItem.rightBarButtonItem = rightItem
@@ -94,12 +90,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         vc.navigation = self.navigationController ?? UINavigationController()
         customPresentViewController(presenter, viewController: vc, animated: true)
     }
-    
-    @objc func searchAction() {
-        let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
+
     func requestNotificationAuthorization() {
         let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
         
@@ -199,6 +190,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
             }
+            self?.tableView.es.stopPullToRefresh()
         }
     }
     
@@ -214,6 +206,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             $0.registerNibCellFor(type: AddUserTableViewCell.self)
             $0.registerNibCellFor(type: BiggerHomeUserTableViewCell.self)
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 48, right: 0)
+            $0.es.addPullToRefresh {
+                self.getListUser()
+            }
         }
     }
     
