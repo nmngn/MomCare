@@ -78,6 +78,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func setupNavigationButton() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        let backItem = UIBarButtonItem(image:  UIImage(named: "magnifying")?.toHierachicalImage()
+                                       , style: .plain, target: self, action: #selector(searchAction))
+        navigationItem.leftBarButtonItems = [backItem]
+        
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet")?.toHierachicalImage()
                                         , style: .plain, target: self, action: #selector(openMore))
         navigationItem.rightBarButtonItem = rightItem
@@ -88,6 +93,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         vc.notiModel = self.notiModel
         vc.navigation = self.navigationController ?? UINavigationController()
         customPresentViewController(presenter, viewController: vc, animated: true)
+    }
+    
+    @objc func searchAction() {
+        let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func requestNotificationAuthorization() {
@@ -265,11 +275,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             model.append(infoCell)
         }
         tableView.reloadData()
-    }
-    
-    @IBAction func searchUser(_ sender: UIBarButtonItem) {
-        let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func modelIndexPath(indexPath: IndexPath) -> HomeModel {

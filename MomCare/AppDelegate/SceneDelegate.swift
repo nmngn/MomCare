@@ -21,7 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         guard let _ = (scene as? UIWindowScene) else { return }
     }
-
+    
+    func switchViewController(animation: Bool) {
+        let mainVC = MainTabbarViewController.init(nibName: "MainTabbarViewController", bundle: nil)
+        self.window?.rootViewController = mainVC
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

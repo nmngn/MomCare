@@ -51,74 +51,6 @@ func loadImageFromDiskWith(fileName: String) -> UIImage? {
     return nil
 }
 
-extension UIViewController {
-    func updateTime(dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        let todayDate = Date()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let date = dateFormatter.date(from: dateString)
-        guard let timeLast = date?.millisecondsSince1970 else { return ""}
-        let timeToday = todayDate.millisecondsSince1970
-        let result = timeLast - timeToday
-        
-        let toDay = result / 86400000
-        let ageDay = 280 - Int(toDay)
-        let week = Int(ageDay / 7)
-        let day = Int(ageDay % 7)
-        return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
-    }
-    
-    func transitionVC(vc: UIViewController, duration: CFTimeInterval, type: CATransitionSubtype) {
-        let customVcTransition = vc
-        let transition = CATransition()
-        transition.duration = duration
-        transition.type = CATransitionType.push
-        transition.subtype = type
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        present(customVcTransition, animated: false, completion: nil)
-    }
-    
-    func changeTheme(_ theme: UIImageView) {
-        
-        DispatchQueue.main.async {
-            if self.traitCollection.userInterfaceStyle == .light {
-                self.view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
-            } else {
-                self.view.backgroundColor = .darkGray
-            }
-//            if self.traitCollection.userInterfaceStyle == .light {
-//                theme.image = UIImage(named: "baby_light")
-//            } else {
-//                theme.image = UIImage(named: "bed")
-//            }
-        }
-    }
-    
-    func loading() {
-        let alert = UIAlertController(title: nil, message: "Vui lòng đợi...", preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .medium
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func dismissLoading() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func openAlert(_ message: String) {
-        let alert = UIAlertController(title: "Lỗi", message: message, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-}
-
 extension UIDevice {
     var iPhoneX: Bool {
         return UIScreen.main.nativeBounds.height == 2436
@@ -155,5 +87,72 @@ extension UIDevice {
         default:
             return .unknown
         }
+    }
+}
+
+extension UIColor {
+    @nonobjc class var disabledGrey: UIColor {
+        
+        return UIColor(red: 194/255, green: 198/255, blue: 201/255, alpha:1.0)
+    }
+
+    @nonobjc class var darkblue: UIColor {
+        return UIColor(red: 2.0 / 255.0, green: 21.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var primary: UIColor {
+        return UIColor(hex: "#00B14F")!
+        //UIColor(red: 0 / 255.0, green: 20.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
+    }
+    
+    public convenience init?(hex: String, alpha: CGFloat = 1) {
+        let r, g, b: CGFloat
+
+        if hex.hasPrefix("#") {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+
+            if hexColor.count == 6 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                    g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                    b = CGFloat(hexNumber & 0x0000ff) / 255
+
+                    self.init(red: r, green: g, blue: b, alpha: alpha)
+                    return
+                }
+            }
+        } else {
+          let hexColor = hex
+          if hexColor.count == 6 {
+              let scanner = Scanner(string: hexColor)
+              var hexNumber: UInt64 = 0
+
+              if scanner.scanHexInt64(&hexNumber) {
+                  r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                  g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                  b = CGFloat(hexNumber & 0x0000ff) / 255
+
+                  self.init(red: r, green: g, blue: b, alpha: alpha)
+                  return
+              }
+          }
+        }
+
+        return nil
+    }
+}
+
+extension NSObject {
+    
+    var className: String {
+        return String(describing: type(of: self)).components(separatedBy: ".").last!
+    }
+    
+    class var className: String {
+        return String(describing: self).components(separatedBy: ".").last!
     }
 }

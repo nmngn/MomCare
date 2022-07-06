@@ -232,10 +232,7 @@ extension LogInViewController {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in
             if self.endText == "@admin.com" {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let homeVC = storyboard.instantiateInitialViewController()
-                UIApplication.shared.windows.first?.rootViewController = homeVC
-                UIApplication.shared.windows.first?.makeKeyAndVisible()
+                self.appDelegate.switchViewController(animation: true)
             } else {
                 let vc = UserViewController.init(nibName: "UserViewController", bundle: nil)
                 self.navigationController?.pushViewController(vc, animated: true)

@@ -126,10 +126,10 @@
 		D8067CFA285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8067CF8285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib */; };
 		D856E716285B18AD0016DEF7 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */; };
 		D856E717285B18AD0016DEF7 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */; };
-		D8D6CACE28704E0D00BEDE15 /* TabbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6CACD28704E0D00BEDE15 /* TabbarItem.swift */; };
-		D8D6CAD028704F3300BEDE15 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6CACF28704F3300BEDE15 /* BaseTabBarController.swift */; };
-		D8D6CAD228704F4900BEDE15 /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6CAD128704F4900BEDE15 /* CustomTabbar.swift */; };
-		D8D6CAD42870526A00BEDE15 /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D6CAD32870526A00BEDE15 /* Home.xib */; };
+		D88A40A7287523C400C50D49 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A40A5287523C400C50D49 /* MainTabbarViewController.swift */; };
+		D88A40A8287523C400C50D49 /* MainTabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D88A40A6287523C400C50D49 /* MainTabbar.storyboard */; };
+		D88A40AA287570F500C50D49 /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88A40A9287570F500C50D49 /* Home.xib */; };
+		D88A40AC2875767200C50D49 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A40AB2875767200C50D49 /* UIViewController+.swift */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -258,10 +258,10 @@
 		D8067CF8285B38D9000ABEAB /* MyHistoryNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyHistoryNoteTableViewCell.xib; sourceTree = "<group>"; };
 		D856E714285B18AD0016DEF7 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		D856E715285B18AD0016DEF7 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
-		D8D6CACD28704E0D00BEDE15 /* TabbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarItem.swift; sourceTree = "<group>"; };
-		D8D6CACF28704F3300BEDE15 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
-		D8D6CAD128704F4900BEDE15 /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
-		D8D6CAD32870526A00BEDE15 /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
+		D88A40A5287523C400C50D49 /* MainTabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
+		D88A40A6287523C400C50D49 /* MainTabbar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabbar.storyboard; sourceTree = "<group>"; };
+		D88A40A9287570F500C50D49 /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
+		D88A40AB2875767200C50D49 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,7 +422,7 @@
 				366AE8BD2692BD4400B5262C /* Model */,
 				366AE8BC2692BD3C00B5262C /* Cell */,
 				36EC54602691F37D00809FF3 /* HomeViewController.swift */,
-				D8D6CAD32870526A00BEDE15 /* Home.xib */,
+				D88A40A9287570F500C50D49 /* Home.xib */,
 				36EC54622691F37D00809FF3 /* Main.storyboard */,
 			);
 			path = Home;
@@ -723,6 +723,7 @@
 				36C012B22744AE220085A329 /* Date+.swift */,
 				3674240D27706EA10016477E /* Other+.swift */,
 				368BE027279679EA00ED457C /* UITextField+.swift */,
+				D88A40AB2875767200C50D49 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -747,9 +748,8 @@
 		D8D6CACC28704E0300BEDE15 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
-				D8D6CACD28704E0D00BEDE15 /* TabbarItem.swift */,
-				D8D6CACF28704F3300BEDE15 /* BaseTabBarController.swift */,
-				D8D6CAD128704F4900BEDE15 /* CustomTabbar.swift */,
+				D88A40A6287523C400C50D49 /* MainTabbar.storyboard */,
+				D88A40A5287523C400C50D49 /* MainTabbarViewController.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -817,6 +817,7 @@
 				3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */,
 				361DECDE27CB6F4C0021A343 /* CurrentTableViewCell.xib in Resources */,
 				367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */,
+				D88A40A8287523C400C50D49 /* MainTabbar.storyboard in Resources */,
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
 				3680782627996A58008ACD0B /* AdminViewController.xib in Resources */,
@@ -841,6 +842,7 @@
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
 				36B8A2EF279BEF81009186FC /* UserViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
+				D88A40AA287570F500C50D49 /* Home.xib in Resources */,
 				3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */,
 				3600356E278415C30067ECEA /* Book1.csv in Resources */,
 				3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */,
@@ -850,7 +852,6 @@
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36807835279A8D25008ACD0B /* ChatViewController.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
-				D8D6CAD42870526A00BEDE15 /* Home.xib in Resources */,
 				D856E717285B18AD0016DEF7 /* TitleNoteViewController.xib in Resources */,
 				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
 				367424132770C1090016477E /* SearchViewController.xib in Resources */,
@@ -933,6 +934,7 @@
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* Model.swift in Sources */,
+				D88A40AC2875767200C50D49 /* UIViewController+.swift in Sources */,
 				36607EF1279E7B3E00F34640 /* UserModel.swift in Sources */,
 				368BE0322796C34C00ED457C /* Session.swift in Sources */,
 				3626C3FA277C3DDC00434B63 /* NotificationViewController.swift in Sources */,
@@ -941,13 +943,11 @@
 				36607F0B279EB18C00F34640 /* UserRequest.swift in Sources */,
 				3674240E27706EA10016477E /* Other+.swift in Sources */,
 				3680782527996A57008ACD0B /* AdminViewController.swift in Sources */,
-				D8D6CAD028704F3300BEDE15 /* BaseTabBarController.swift in Sources */,
 				366AE8D02692C2DE00B5262C /* HomeTitleTableViewCell.swift in Sources */,
 				36E9CBB2277C670900E1B319 /* NotificationModel.swift in Sources */,
 				365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
 				36EE825827DA5D7C00265EC1 /* IlluImageTableViewCell.swift in Sources */,
-				D8D6CAD228704F4900BEDE15 /* CustomTabbar.swift in Sources */,
 				36607EF9279E9D7900F34640 /* APIService.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
 				D8067CF9285B38D9000ABEAB /* MyHistoryNoteTableViewCell.swift in Sources */,
@@ -979,7 +979,7 @@
 				36607EFB279E9DA700F34640 /* BaseResult.swift in Sources */,
 				368BE028279679EA00ED457C /* UITextField+.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,
-				D8D6CACE28704E0D00BEDE15 /* TabbarItem.swift in Sources */,
+				D88A40A7287523C400C50D49 /* MainTabbarViewController.swift in Sources */,
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,

@@ -224,10 +224,7 @@ extension SignupViewController {
         UIView.animate(withDuration: 1.5, delay: 0.75, options: []) {
             self.passwordTextField.center.x += self.view.bounds.width
         } completion: { _ in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeVC = storyboard.instantiateInitialViewController()
-            UIApplication.shared.windows.first?.rootViewController = homeVC
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            self.appDelegate.switchViewController(animation: true)
         }
     
         UIView.animate(withDuration: 1.5, delay: 0.5, options: [], animations: {

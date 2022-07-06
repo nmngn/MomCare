@@ -13,6 +13,8 @@ target 'MomCare' do
   pod 'Firebase/Database'
   pod 'Presentr'
   pod 'AlamofireObjectMapper', '~> 5.2'
+  pod "ESPullToRefresh"
+  pod "ESTabBarController-swift"
   # Pods for MomCare
 
 end
