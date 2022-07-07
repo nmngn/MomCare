@@ -13,6 +13,7 @@ class AdminViewController: DetailUserViewController {
         super.viewDidLoad()
         getDataAdmin()
         saveAdminImage = true
+        navigationController?.isNavigationBarHidden = false
     }
     
     override func setupNavigationButton() {
@@ -101,6 +102,7 @@ class AdminViewController: DetailUserViewController {
                 self?.view.makeToast("Cập nhật thành công")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.navigationController?.popToRootViewController(animated: true)
+                    self?.hidesBottomBarWhenPushed = false
                     Session.shared.isPopToRoot = true
                 }
             case .failure(let error):

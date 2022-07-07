@@ -376,6 +376,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .addUser:
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            self.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
             repo.getOneUser(idUser: model.id) { [weak self] response in
@@ -384,7 +385,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     if let data = data {
                         let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
                         vc.currentModel = data.convertToDetailModel()
-                        vc.hidesBottomBarWhenPushed = true
+                        self?.hidesBottomBarWhenPushed = true
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 case .failure(let error):

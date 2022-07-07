@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 class SearchViewController: UIViewController {
 
@@ -101,6 +102,9 @@ class SearchViewController: UIViewController {
             $0.registerNibCellFor(type: SearchItemTableViewCell.self)
             $0.keyboardDismissMode = .onDrag
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+            $0.es.addPullToRefresh {
+                self.search(text: self.searchBar.text ?? "")
+            }
         }
     }
 
@@ -128,24 +132,29 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func search(text: String) {
+        if !text.isEmpty {
+            let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
+            if result.count == 0 {
+                self.listResult?.removeAll()
+                setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
+            } else {
+                setupStatus(isHidden: true, title: "")
+                self.listResult = result
+            }
+        } else {
+            self.listResult?.removeAll()
+            setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")
+        }
+        tableView.es.stopPullToRefresh()
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
-            if !text.isEmpty {
-                let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
-                if result.count == 0 {
-                    self.listResult?.removeAll()
-                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
-                } else {
-                    setupStatus(isHidden: true, title: "")
-                    self.listResult = result
-                }
-            } else {
-                self.listResult?.removeAll()
-                setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")
-            }
+            search(text: text)
         }
     }
     

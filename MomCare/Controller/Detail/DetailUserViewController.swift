@@ -45,7 +45,7 @@ class DetailUserViewController: UIViewController {
     }
     
     func setupView() {
-        self.title = "Thông tin bệnh nhân"
+        self.title = "Thông tin sản phụ"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -109,13 +109,14 @@ class DetailUserViewController: UIViewController {
             switch response {
             case .success(_):
                 self?.navigationController?.popToRootViewController(animated: true)
+                self?.hidesBottomBarWhenPushed = false
                 Session.shared.isPopToRoot = true
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
                 print(error as Any)
             }
         }
-        self.repo.deleteNotes(idUser: self.currentModel.id) { [weak self] response in
+        self.repo.deleteNotes(idUser: self.currentModel.id) { response in
             switch response {
             case .success(_):
                 print("Delete notes success")
@@ -528,6 +529,7 @@ extension DetailUserViewController {
                 let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
                     self?.navigationController?.popToRootViewController(animated: true)
+                    self?.hidesBottomBarWhenPushed = false
                     Session.shared.isPopToRoot = true
                 }
                 alert.addAction(action)
@@ -566,6 +568,7 @@ extension DetailUserViewController {
                 let alert = UIAlertController(title: "Thông báo", message: "Cập nhật thành công", preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
                     self?.navigationController?.popToRootViewController(animated: true)
+                    self?.hidesBottomBarWhenPushed = false
                     Session.shared.isPopToRoot = true
                 }
                 alert.addAction(action)
@@ -578,7 +581,7 @@ extension DetailUserViewController {
     }
     
     func createFirebaseUser(isShowAlert: Bool = false) {
-        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { [weak self] (authDataResult, error) in
+        Auth.auth().createUser(withEmail: currentModel.email(), password: "123456") { (authDataResult, error) in
             if let error = error {
                 print("Create error: \(error.localizedDescription)")
                 if isShowAlert {

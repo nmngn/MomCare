@@ -69,13 +69,6 @@ class InfoUserTableViewCell: UITableViewCell {
     @objc func textFieldDidChange(textField: UITextField) {
         if let text = textField.text {
             if text.count > 0 {
-                if cellType == .numberPhone {
-                    if text.isValidPhone() {
-                        self.saveInModel(text)
-                    } else {
-                        invalidPhone?()
-                    }
-                }
                 self.saveInModel(text)
             } else {
                 if !isAdmin {
@@ -107,6 +100,20 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 0 {
+                if cellType == .numberPhone {
+                    if text.isValidPhone() {
+                        self.saveInModel(text)
+                    } else {
+                        invalidPhone?()
+                    }
+                }
+            }
+        }
     }
 }
 

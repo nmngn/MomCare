@@ -47,10 +47,10 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
         let homeVC = UINavigationController(rootViewController: HomeViewController.init(nibName: "Home", bundle: nil)) 
         homeVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Màn hình chính", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill")?.toHierachicalImage())
         
-        let searchVC = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
+        let searchVC = UINavigationController(rootViewController: SearchViewController.init(nibName: "SearchViewController", bundle: nil))
         searchVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(),title: "Tìm kiếm", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass.fill")?.toHierachicalImage())
         
-        let notiVC = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+        let notiVC = UINavigationController(rootViewController: NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)) 
         notiVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông báo", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell.fill")?.toHierachicalImage())
         
         let account = AdminViewController.init(nibName: "AdminViewController", bundle: nil)

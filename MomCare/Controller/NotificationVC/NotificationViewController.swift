@@ -23,6 +23,8 @@ class NotificationViewController: UIViewController {
         setupNavigationButton()
         changeTheme(self.theme)
         configView()
+        navigationController?.isNavigationBarHidden = false
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
