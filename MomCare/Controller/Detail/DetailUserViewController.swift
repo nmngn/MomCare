@@ -344,6 +344,13 @@ class DetailUserViewController: UIViewController {
         let day = Int(ageDay % 7)
         self.currentModel.dateCalculate = week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
+    
+    func isInValidPhone() {
+        let alert = UIAlertController(title: "Thông báo", message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -375,10 +382,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.delegate = self
             cell.setupData(model: currentModel)
             cell.invalidPhone = { [weak self] in
-                let alert = UIAlertController(title: "Thông báo", message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
-                alert.addAction(action)
-                self?.present(alert, animated: true, completion: nil)
+                self?.isInValidPhone()
             }
             return cell
         case .age:
@@ -493,36 +497,39 @@ extension DetailUserViewController {
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        do {
-            realm.beginWrite()
-            currentUser.idUser = NSUUID().uuidString.lowercased()
-            currentUser.name = currentModel.name
-            currentUser.address = currentModel.address
-            currentUser.momBirth = currentModel.momBirth
-            currentUser.numberPhone = currentModel.numberPhone
-            currentUser.height = currentModel.height
-            currentUser.babyDateBorn = currentModel.babyAge
-            currentUser.dateSave = dateString
-            currentUser.note = currentModel.note
-            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                                image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
-                                                type: .mom)
-            currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
-                                                       image: currentModel.imagePregnant ?? nil,
-                                                       type: .baby)
-            try? realm.commitWrite()
-            try? realm.safeWrite({
-                realm.add(currentUser)
-                let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
-                    self.navigationController?.popToRootViewController(animated: true)
-                    Session.shared.isPopToRoot = true
-                }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
-            })
+        if currentModel.numberPhone.isValidPhone() {
+            do {
+                realm.beginWrite()
+                currentUser.idUser = NSUUID().uuidString.lowercased()
+                currentUser.name = currentModel.name
+                currentUser.address = currentModel.address
+                currentUser.momBirth = currentModel.momBirth
+                currentUser.numberPhone = currentModel.numberPhone
+                currentUser.height = currentModel.height
+                currentUser.babyDateBorn = currentModel.babyAge
+                currentUser.dateSave = dateString
+                currentUser.note = currentModel.note
+                currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
+                                               image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                                               type: .mom)
+                currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
+                                                      image: currentModel.imagePregnant ?? nil,
+                                                      type: .baby)
+                try? realm.commitWrite()
+                try? realm.safeWrite({
+                    realm.add(currentUser)
+                    let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
+                    let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                        self.navigationController?.popToRootViewController(animated: true)
+                        Session.shared.isPopToRoot = true
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                })
+            }
+        } else {
+            isInValidPhone()
         }
-        
     }
     
     func updateUser(id: String) {

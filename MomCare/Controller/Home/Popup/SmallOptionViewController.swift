@@ -51,5 +51,8 @@ class SmallOptionViewController: UIViewController {
     }
         
     @IBAction func logOut(_ sender: UIButton) {
+        let vc = SettingViewController.init(nibName: "SettingViewController", bundle: nil)
+        dismissVC()
+        self.navigation.pushViewController(vc, animated: true)
     }
 }
