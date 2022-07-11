@@ -274,7 +274,7 @@ class DetailUserViewController: UIViewController {
     
     @IBAction func showMore(_ sender: UIButton) {
         if currentModel.id == "" {
-            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Thông báo", message: "Người dùng chưa được lưu lại", preferredStyle: .actionSheet)
             let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
                 self.saveData()
             }
