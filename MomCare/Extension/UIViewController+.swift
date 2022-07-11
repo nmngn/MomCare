@@ -57,6 +57,7 @@ extension UIViewController {
             } else {
                 theme.image = UIImage(named: "bed")
             }
+            theme.applyBlurEffect()
         }
     }
     

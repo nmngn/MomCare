@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func switchViewController(animation: Bool) {
         let mainVC = MainTabbarViewController.init(nibName: "MainTabbarViewController", bundle: nil)
         self.window?.rootViewController = mainVC
+        self.window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

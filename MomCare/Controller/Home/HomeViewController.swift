@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet weak var theme: UIImageView!
-    
+        
     var model = [HomeModel]()
     var listUser: [User]? {
         didSet {
@@ -106,8 +106,14 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let notificationContent = UNMutableNotificationContent()
         if noti.count == 1 {
             notificationContent.title = "Thông báo về: \(noti.first?.name ?? "")"
-            notificationContent.body =
-            "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
+            guard let date = noti.first?.dateCalculate else { return }
+            if date.contains("40W") {
+                notificationContent.body =
+                "Chú ý: \(noti.first?.name ?? "") đã đủ 40 tuần. Hãy chú ý !"
+            } else {
+                notificationContent.body =
+                "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
+            }
         } else {
             notificationContent.title = "Thông báo về \(self.notiModel.count) bệnh nhân tháng cuối"
             notificationContent.body =
@@ -376,7 +382,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .addUser:
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-            self.hidesBottomBarWhenPushed = true
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
             repo.getOneUser(idUser: model.id) { [weak self] response in
@@ -385,7 +391,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     if let data = data {
                         let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
                         vc.currentModel = data.convertToDetailModel()
-                        self?.hidesBottomBarWhenPushed = true
+                        vc.hidesBottomBarWhenPushed = true
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 case .failure(let error):

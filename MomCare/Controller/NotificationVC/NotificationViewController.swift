@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 class NotificationViewController: UIViewController {
 
@@ -14,13 +15,20 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var bellView: UIView!
     @IBOutlet weak var titleBell: UILabel!
     
-    var notiModel = [NotificationModel]()
+    var notiModel = [NotificationModel]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thông báo"
-        setupNavigationButton()
+        self.notiModel.removeAll()
+        DispatchQueue.global(qos: .background).async {
+            self.getListUser()
+        }
         changeTheme(self.theme)
         configView()
         navigationController?.isNavigationBarHidden = false
@@ -39,7 +47,7 @@ class NotificationViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         changeTheme(theme)
-        setupNavigationButton()
+//        setupNavigationButton()
         tableView.reloadData()
     }
     
@@ -51,6 +59,46 @@ class NotificationViewController: UIViewController {
             $0.tableFooterView = UIView()
             $0.registerNibCellFor(type: NotificationTableViewCell.self)
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+            $0.es.addPullToRefresh {
+                self.notiModel.removeAll()
+                self.getListUser()
+            }
+        }
+    }
+    
+    func getUserToPushNoti(listUser: [User]?) {
+        if let listUser = listUser {
+            let newList = listUser.filter ({ user in
+                let text = updateTime(dateString: user.babyDateBorn)
+                if !text.isEmpty {
+                    let wStartIndex = text.index(text.startIndex, offsetBy: 0)
+                    let wEndIndex = text.index(text.startIndex, offsetBy: 1)
+                    let weekData = String(text[wStartIndex...wEndIndex])
+                    
+                    let wResult = Int(weekData) ?? 0 >= 38
+                    return wResult
+                }
+                return false
+            })
+            for user in newList {
+                self.notiModel.append(user.convertToNotiModel())
+            }
+        }
+        tableView.es.stopPullToRefresh()
+    }
+    
+    func getListUser() {
+        let idAdmin = Session.shared.userProfile.idAdmin
+        repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
+            switch value {
+            case .success(let data):
+                if let data = data {
+                    let list = data.users?.filter({$0.idAdmin == idAdmin})
+                    self?.getUserToPushNoti(listUser: list)
+                }
+            case .failure(let error):
+                self?.openAlert(error?.errorMessage ?? "")
+            }
         }
     }
     

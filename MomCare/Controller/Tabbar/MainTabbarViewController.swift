@@ -13,6 +13,8 @@ import ESTabBarController_swift
 
 class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
     
+    var dataNoti: [NotificationModel]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -44,16 +46,16 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
     
     func getTabbarViewController() -> [UIViewController] {
         var viewController = [UIViewController]()
-        let homeVC = UINavigationController(rootViewController: HomeViewController.init(nibName: "Home", bundle: nil)) 
+        let homeVC = UINavigationController(rootViewController: HomeViewController.init(nibName: "Home", bundle: nil))
         homeVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Màn hình chính", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill")?.toHierachicalImage())
         
         let searchVC = UINavigationController(rootViewController: SearchViewController.init(nibName: "SearchViewController", bundle: nil))
         searchVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(),title: "Tìm kiếm", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass.fill")?.toHierachicalImage())
         
-        let notiVC = UINavigationController(rootViewController: NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)) 
+        let notiVC = UINavigationController(rootViewController: NotificationViewController.init(nibName: "NotificationViewController", bundle: nil))
         notiVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông báo", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell.fill")?.toHierachicalImage())
         
-        let account = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
+        let account = UINavigationController(rootViewController: AdminViewController.init(nibName: "AdminViewController", bundle: nil))
         account.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông tin cá nhân".localized, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill")?.toHierachicalImage())
 
         viewController.append(contentsOf: [homeVC, searchVC, notiVC, account])

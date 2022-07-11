@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
     var listResult: [User]? {
         didSet {
             self.tableView.reloadData()
+            tableView.es.stopPullToRefresh()
         }
     }
     var userSearch = ""
@@ -34,7 +35,7 @@ class SearchViewController: UIViewController {
             self.getListUser()
         }
         configView()
-        setupBackButton()
+//        setupBackButton()
         changeTheme(self.theme)
         setupStatus(isHidden: false, title: "Hãy bắt đầu tìm kiếm")
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -44,7 +45,7 @@ class SearchViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         changeTheme(theme)
-        setupBackButton()
+//        setupBackButton()
         tableView.reloadData()
     }
     
@@ -103,6 +104,9 @@ class SearchViewController: UIViewController {
             $0.keyboardDismissMode = .onDrag
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
             $0.es.addPullToRefresh {
+                DispatchQueue.main.async {
+                    self.getListUser()
+                }
                 self.search(text: self.searchBar.text ?? "")
             }
         }
@@ -129,6 +133,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         if let user = listResult {
             let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
             vc.currentModel = user[indexPath.row].convertToDetailModel()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -147,7 +152,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             self.listResult?.removeAll()
             setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")
         }
-        tableView.es.stopPullToRefresh()
     }
 }
 
