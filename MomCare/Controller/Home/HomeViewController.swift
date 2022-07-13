@@ -18,7 +18,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var theme: UIImageView!
         
     var model = [HomeModel]()
-    var listUser: [User]?
+    var listUser: [User]? {
+        didSet {
+            self.setupData()
+        }
+    }
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
@@ -192,7 +196,6 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
             }
-            self?.setupData()
             self?.tableView.es.stopPullToRefresh()
         }
     }
@@ -210,6 +213,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             $0.registerNibCellFor(type: BiggerHomeUserTableViewCell.self)
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 48, right: 0)
             $0.es.addPullToRefresh {
+                self.sortType = "Sắp xếp"
                 self.getListUser()
             }
         }
