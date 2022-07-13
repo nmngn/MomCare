@@ -40,7 +40,7 @@ class BadgeUserTableViewCell: UITableViewCell {
         let allPatient = NSMutableAttributedString(string: "\(list.count)", attributes: [
             .font : UIFont.systemFont(ofSize: 16, weight: .bold)
         ])
-        let textAll = NSMutableAttributedString(string: "Tổng số bệnh nhân hiện có: ", attributes: [
+        let textAll = NSMutableAttributedString(string: "Tổng số sản phụ hiện có: ", attributes: [
             .font : UIFont.systemFont(ofSize: 16, weight: .regular)
         ])
         
@@ -62,7 +62,7 @@ class BadgeUserTableViewCell: UITableViewCell {
         let inMonthPatient = NSMutableAttributedString(string: "\(newList.count)", attributes: [
             .font : UIFont.systemFont(ofSize: 16, weight: .bold)
         ])
-        let textMonth = NSMutableAttributedString(string: "Số bệnh nhân dự kiến sinh trong tháng này: ", attributes: [
+        let textMonth = NSMutableAttributedString(string: "Số sản phụ dự kiến sinh trong tháng này: ", attributes: [
             .font : UIFont.systemFont(ofSize: 16, weight: .regular)
         ])
         

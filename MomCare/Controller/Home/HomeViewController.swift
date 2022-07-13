@@ -18,11 +18,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var theme: UIImageView!
         
     var model = [HomeModel]()
-    var listUser: [User]? {
-        didSet {
-            setupData()
-        }
-    }
+    var listUser: [User]?
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
@@ -48,7 +44,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         utilityThread.async {
             self.getListUser()
         }
-        setupNavigationButton()
+//        setupNavigationButton()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
         self.requestNotificationAuthorization()
@@ -61,7 +57,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         changeTheme(theme)
-        setupNavigationButton()
+//        setupNavigationButton()
         tableView.reloadData()
     }
     
@@ -115,9 +111,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
                 "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
             }
         } else {
-            notificationContent.title = "Thông báo về \(self.notiModel.count) bệnh nhân tháng cuối"
+            notificationContent.title = "Thông báo về \(self.notiModel.count) sản phụ tháng cuối"
             notificationContent.body =
-            "Chú ý: \(self.notiModel.count) bệnh nhân đã bước vào tháng cuối \nCần chú ý !"
+            "Chú ý: \(self.notiModel.count) sản phụ đã bước vào tháng cuối \nCần chú ý !"
         }
         application.applicationIconBadgeNumber = noti.count
         
@@ -196,6 +192,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             case .failure(let error):
                 self?.openAlert(error?.errorMessage ?? "")
             }
+            self?.setupData()
             self?.tableView.es.stopPullToRefresh()
         }
     }
@@ -243,7 +240,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let sort = HomeModel(type: .sort)
         
         var header2 = HomeModel(type: .title)
-        header2.title = "Tất cả bệnh nhân(\(listUser.count))"
+        header2.title = "Tất cả sản phụ(\(listUser.count))"
         
         model.append(badge)
         model.append(addUser)

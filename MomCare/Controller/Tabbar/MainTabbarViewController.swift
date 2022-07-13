@@ -55,7 +55,7 @@ class MainTabbarViewController: ESTabBarController, UITabBarControllerDelegate {
         let notiVC = UINavigationController(rootViewController: NotificationViewController.init(nibName: "NotificationViewController", bundle: nil))
         notiVC.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông báo", image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell.fill")?.toHierachicalImage())
         
-        let account = UINavigationController(rootViewController: AdminViewController.init(nibName: "AdminViewController", bundle: nil))
+        let account = UINavigationController(rootViewController: AccountViewController.init(nibName: "AccountViewController", bundle: nil))
         account.tabBarItem = ESTabBarItem.init(ESTabbarBasicContentView(), title: "Thông tin cá nhân".localized, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill")?.toHierachicalImage())
 
         viewController.append(contentsOf: [homeVC, searchVC, notiVC, account])

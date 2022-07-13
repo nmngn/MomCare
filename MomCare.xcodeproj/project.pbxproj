@@ -130,6 +130,11 @@
 		D88A40A8287523C400C50D49 /* MainTabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D88A40A6287523C400C50D49 /* MainTabbar.storyboard */; };
 		D88A40AA287570F500C50D49 /* Home.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88A40A9287570F500C50D49 /* Home.xib */; };
 		D88A40AC2875767200C50D49 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A40AB2875767200C50D49 /* UIViewController+.swift */; };
+		D8C35F68287E6AD00012133A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C35F66287E6AD00012133A /* AccountViewController.swift */; };
+		D8C35F69287E6AD00012133A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C35F67287E6AD00012133A /* AccountViewController.xib */; };
+		D8C35F6C287E6B1A0012133A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C35F6B287E6B1A0012133A /* AccountModel.swift */; };
+		D8C35F70287E6C9E0012133A /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C35F6E287E6C9E0012133A /* AccountTableViewCell.swift */; };
+		D8C35F71287E6C9E0012133A /* AccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C35F6F287E6C9E0012133A /* AccountTableViewCell.xib */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +267,11 @@
 		D88A40A6287523C400C50D49 /* MainTabbar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainTabbar.storyboard; sourceTree = "<group>"; };
 		D88A40A9287570F500C50D49 /* Home.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Home.xib; sourceTree = "<group>"; };
 		D88A40AB2875767200C50D49 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		D8C35F66287E6AD00012133A /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		D8C35F67287E6AD00012133A /* AccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		D8C35F6B287E6B1A0012133A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		D8C35F6E287E6C9E0012133A /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		D8C35F6F287E6C9E0012133A /* AccountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +441,7 @@
 		366AE8BB2692BD2A00B5262C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8C35F65287E6AB90012133A /* Account */,
 				D8D6CACC28704E0300BEDE15 /* Tabbar */,
 				36B8A2EB279BEBB4009186FC /* User */,
 				36807831279A8D13008ACD0B /* Chat */,
@@ -745,6 +756,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D8C35F65287E6AB90012133A /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				D8C35F6D287E6C8F0012133A /* Cell */,
+				D8C35F6A287E6B110012133A /* Model */,
+				D8C35F66287E6AD00012133A /* AccountViewController.swift */,
+				D8C35F67287E6AD00012133A /* AccountViewController.xib */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		D8C35F6A287E6B110012133A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D8C35F6B287E6B1A0012133A /* AccountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8C35F6D287E6C8F0012133A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D8C35F6E287E6C9E0012133A /* AccountTableViewCell.swift */,
+				D8C35F6F287E6C9E0012133A /* AccountTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D8D6CACC28704E0300BEDE15 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -817,6 +856,7 @@
 				3615AA3E277B6E9B007F01C3 /* AddUserTableViewCell.xib in Resources */,
 				361DECDE27CB6F4C0021A343 /* CurrentTableViewCell.xib in Resources */,
 				367424182770C34F0016477E /* SearchItemTableViewCell.xib in Resources */,
+				D8C35F71287E6C9E0012133A /* AccountTableViewCell.xib in Resources */,
 				D88A40A8287523C400C50D49 /* MainTabbar.storyboard in Resources */,
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
@@ -836,6 +876,7 @@
 				36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */,
 				3694055F279D958400F1E3C6 /* Book2.csv in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
+				D8C35F69287E6AD00012133A /* AccountViewController.xib in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
 				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
@@ -920,6 +961,7 @@
 				3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */,
 				36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */,
 				366AE8CC2692C1FA00B5262C /* UITableView+.swift in Sources */,
+				D8C35F70287E6C9E0012133A /* AccountTableViewCell.swift in Sources */,
 				3694055A279D614C00F1E3C6 /* DataInfoTableViewCell.swift in Sources */,
 				367335D02695D90000EB9DC0 /* String+.swift in Sources */,
 				36607EFF279E9DD900F34640 /* BaseError.swift in Sources */,
@@ -928,6 +970,7 @@
 				36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */,
 				3680783C279A9011008ACD0B /* Message.swift in Sources */,
 				366AE8C02692BDEA00B5262C /* HomeModel.swift in Sources */,
+				D8C35F68287E6AD00012133A /* AccountViewController.swift in Sources */,
 				367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */,
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
@@ -955,6 +998,7 @@
 				36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */,
 				36D4FF9D2694ACC900985C25 /* GeneralInfoTableViewCell.swift in Sources */,
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
+				D8C35F6C287E6B1A0012133A /* AccountModel.swift in Sources */,
 				36607F07279EACF900F34640 /* SuperModel.swift in Sources */,
 				36607F09279EAFB300F34640 /* BaseRequest.swift in Sources */,
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,

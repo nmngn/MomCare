@@ -84,7 +84,7 @@ class DetailUserViewController: UIViewController {
     
     @objc func removeUser() {
         if currentModel.dateSave.isEmpty {
-            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Thông báo", message: "Sản phụ chưa được lưu lại", preferredStyle: .actionSheet)
             let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
                 self.saveData()
             }
@@ -93,7 +93,7 @@ class DetailUserViewController: UIViewController {
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa sản phụ này ?", preferredStyle: .alert)
             let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
                 self.deleteUser()
             }

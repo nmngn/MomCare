@@ -6,21 +6,26 @@
 //
 
 import UIKit
+import Presentr
 
 class AdminViewController: DetailUserViewController {
-        
+     
+    let presenter: Presentr = {
+        let customPresenter = Presentr(presentationType: .fullScreen)
+        customPresenter.transitionType = .coverHorizontalFromRight
+        customPresenter.dismissTransitionType = .coverHorizontalFromRight
+        customPresenter.dismissOnSwipe = true
+        customPresenter.dismissAnimated = true
+        customPresenter.dismissOnSwipeDirection = .default
+        return customPresenter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getDataAdmin()
+        setupNavigationButton()
         saveAdminImage = true
         navigationController?.isNavigationBarHidden = false
-    }
-    
-    override func setupNavigationButton() {
-//        self.navigationItem.setHidesBackButton(true, animated: true)
-//        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
-//                                       , style: .plain, target: self, action: #selector(touchBackButton))
-//        navigationItem.leftBarButtonItems = [backItem]
     }
     
     func getDataAdmin() {
