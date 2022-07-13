@@ -11,13 +11,18 @@ import WebKit
 class WebViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
+    var url = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationButton()
         self.title = "Thông tin thêm"
-        let myURL = URL(string: "https://eva.vn/mang-thai/che-do-dinh-duong-cho-ba-bau-theo-tung-thang-c383a410980.html")
-        let myRequest = URLRequest(url: myURL!)
+        callUrl()
+    }
+    
+    func callUrl() {
+        let myURL = URL(string: url)
+        let myRequest = URLRequest(url: myURL ?? URL(fileURLWithPath: ""))
         webView.load(myRequest)
     }
     

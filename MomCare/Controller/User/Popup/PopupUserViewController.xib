@@ -84,11 +84,11 @@
                     <rect key="frame" x="116" y="120" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2lf-Rb-Hsy">
-                            <rect key="frame" x="8" y="8.5" width="28" height="27"/>
+                            <rect key="frame" x="8" y="9" width="28" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="R5p-31-072"/>
                             </constraints>
-                            <imageReference key="image" image="network" catalog="system" renderingMode="hierarchical-single">
+                            <imageReference key="image" image="circles.hexagonpath.fill" catalog="system" renderingMode="hierarchical-single">
                                 <hierarchicalColors>
                                     <color systemColor="labelColor"/>
                                     <color systemColor="secondaryLabelColor"/>
@@ -96,7 +96,7 @@
                                 </hierarchicalColors>
                             </imageReference>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thông tin thêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xF-Cw-l7U">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thông tin dinh dưỡng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xF-Cw-l7U">
                             <rect key="frame" x="44" y="13" width="230" height="18"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <nil key="textColor"/>
@@ -131,7 +131,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbA-bN-9vU">
-                    <rect key="frame" x="116" y="172" width="282" height="44"/>
+                    <rect key="frame" x="116" y="224" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tx0-Ap-2mj">
                             <rect key="frame" x="8" y="8" width="28" height="28"/>
@@ -180,6 +180,56 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQc-cr-3fW">
+                    <rect key="frame" x="116" y="172" width="282" height="44"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tgY-BE-6Ym">
+                            <rect key="frame" x="8" y="9.5" width="28" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="28" id="BC0-BY-5bX"/>
+                            </constraints>
+                            <imageReference key="image" image="person.fill.checkmark" catalog="system" renderingMode="hierarchical-single">
+                                <hierarchicalColors>
+                                    <color systemColor="labelColor"/>
+                                    <color systemColor="secondaryLabelColor"/>
+                                    <color systemColor="tertiaryLabelColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dịch vụ chăm sóc trẻ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5B-zG-NXY">
+                            <rect key="frame" x="44" y="13" width="230" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USX-eY-zLK">
+                            <rect key="frame" x="0.0" y="0.0" width="282" height="44"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <connections>
+                                <action selector="openMore2:" destination="-1" eventType="touchUpInside" id="STh-QT-fjW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="USX-eY-zLK" firstAttribute="leading" secondItem="PQc-cr-3fW" secondAttribute="leading" id="1mQ-9B-rGI"/>
+                        <constraint firstAttribute="trailing" secondItem="USX-eY-zLK" secondAttribute="trailing" id="3Mu-hV-9O3"/>
+                        <constraint firstItem="U5B-zG-NXY" firstAttribute="leading" secondItem="tgY-BE-6Ym" secondAttribute="trailing" constant="8" id="HVE-Oj-iya"/>
+                        <constraint firstItem="tgY-BE-6Ym" firstAttribute="leading" secondItem="PQc-cr-3fW" secondAttribute="leading" constant="8" id="UUN-ns-E2V"/>
+                        <constraint firstItem="U5B-zG-NXY" firstAttribute="centerY" secondItem="tgY-BE-6Ym" secondAttribute="centerY" id="a3V-Uh-fh2"/>
+                        <constraint firstAttribute="trailing" secondItem="U5B-zG-NXY" secondAttribute="trailing" constant="8" id="mC4-h4-tRs"/>
+                        <constraint firstItem="USX-eY-zLK" firstAttribute="top" secondItem="PQc-cr-3fW" secondAttribute="top" id="naK-j7-glw"/>
+                        <constraint firstItem="tgY-BE-6Ym" firstAttribute="top" secondItem="PQc-cr-3fW" secondAttribute="top" constant="8" id="njM-KM-3n0"/>
+                        <constraint firstAttribute="bottom" secondItem="tgY-BE-6Ym" secondAttribute="bottom" constant="8" id="rjU-aw-MLr"/>
+                        <constraint firstAttribute="height" constant="44" id="y2Q-QM-q00"/>
+                        <constraint firstAttribute="bottom" secondItem="USX-eY-zLK" secondAttribute="bottom" id="yKl-zr-Ecz"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MomCare v1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqa-cw-JKP">
                     <rect key="frame" x="116" y="826" width="282" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -200,18 +250,21 @@
                 <constraint firstItem="b6g-kN-5Vb" firstAttribute="leading" secondItem="XPC-Uh-ntw" secondAttribute="leading" id="9vR-zF-grg"/>
                 <constraint firstAttribute="bottom" secondItem="5Ms-9K-ui7" secondAttribute="bottom" id="GwZ-ux-PDv"/>
                 <constraint firstItem="5Ms-9K-ui7" firstAttribute="leading" secondItem="b6g-kN-5Vb" secondAttribute="trailing" id="I9M-P3-TBb"/>
-                <constraint firstItem="GbA-bN-9vU" firstAttribute="top" secondItem="lgN-Kw-f43" secondAttribute="bottom" constant="8" id="KLX-CB-7AV"/>
                 <constraint firstItem="GbA-bN-9vU" firstAttribute="leading" secondItem="lgN-Kw-f43" secondAttribute="leading" id="L8x-yv-DEN"/>
+                <constraint firstItem="PQc-cr-3fW" firstAttribute="top" secondItem="lgN-Kw-f43" secondAttribute="bottom" constant="8" id="RVu-e3-aeQ"/>
                 <constraint firstItem="XPC-Uh-ntw" firstAttribute="trailing" secondItem="lgN-Kw-f43" secondAttribute="trailing" constant="16" id="S3q-6C-hxs"/>
                 <constraint firstItem="bqa-cw-JKP" firstAttribute="leading" secondItem="GeJ-ue-2Hb" secondAttribute="leading" id="TO5-xA-2s4"/>
                 <constraint firstItem="lgN-Kw-f43" firstAttribute="leading" secondItem="mfd-Sm-gZp" secondAttribute="leading" id="YxQ-Bg-fxl"/>
                 <constraint firstItem="5Ms-9K-ui7" firstAttribute="trailing" secondItem="XPC-Uh-ntw" secondAttribute="trailing" id="ZIW-P1-20I"/>
+                <constraint firstItem="XPC-Uh-ntw" firstAttribute="trailing" secondItem="PQc-cr-3fW" secondAttribute="trailing" constant="16" id="Zpk-7w-wjH"/>
+                <constraint firstItem="PQc-cr-3fW" firstAttribute="leading" secondItem="b6g-kN-5Vb" secondAttribute="trailing" constant="16" id="eVk-Xn-BSc"/>
                 <constraint firstItem="XPC-Uh-ntw" firstAttribute="trailing" secondItem="eVg-gB-7ID" secondAttribute="trailing" constant="16" id="fsS-0B-P1i"/>
                 <constraint firstItem="bqa-cw-JKP" firstAttribute="trailing" secondItem="GeJ-ue-2Hb" secondAttribute="trailing" id="hP6-VG-TBN"/>
                 <constraint firstItem="eVg-gB-7ID" firstAttribute="top" secondItem="XPC-Uh-ntw" secondAttribute="top" constant="24" id="ldw-Ki-9xF"/>
                 <constraint firstItem="b6g-kN-5Vb" firstAttribute="top" secondItem="5ZY-2O-L5C" secondAttribute="top" id="pf6-cK-R0A"/>
                 <constraint firstAttribute="bottom" secondItem="b6g-kN-5Vb" secondAttribute="bottom" id="qMJ-aY-tZw"/>
                 <constraint firstItem="eVg-gB-7ID" firstAttribute="leading" secondItem="5Ms-9K-ui7" secondAttribute="leading" constant="16" id="qYg-yr-rQ3"/>
+                <constraint firstItem="GbA-bN-9vU" firstAttribute="top" secondItem="PQc-cr-3fW" secondAttribute="bottom" constant="8" id="rL3-Uf-aZw"/>
                 <constraint firstItem="XPC-Uh-ntw" firstAttribute="bottom" secondItem="bqa-cw-JKP" secondAttribute="bottom" constant="16" id="wMb-QE-FRM"/>
                 <constraint firstItem="5Ms-9K-ui7" firstAttribute="leading" secondItem="XPC-Uh-ntw" secondAttribute="leading" constant="100" id="xNx-m6-Moi"/>
                 <constraint firstItem="5Ms-9K-ui7" firstAttribute="top" secondItem="5ZY-2O-L5C" secondAttribute="top" id="z3p-3B-xxx"/>
@@ -220,8 +273,9 @@
         </view>
     </objects>
     <resources>
+        <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="message" catalog="system" width="128" height="113"/>
-        <image name="network" catalog="system" width="128" height="121"/>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -80,6 +80,15 @@ class AdminViewController: DetailUserViewController {
         model.append(address)
     }
     
+    override func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.bottomHeightConstraint.constant = keyboardHeight - 64
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     override func setupView() {
         self.title = "Thông tin cá nhân"
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

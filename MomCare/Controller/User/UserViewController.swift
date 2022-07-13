@@ -131,6 +131,7 @@ class UserViewController: UIViewController {
                 print(error as Any)
             }
         }
+        tableView.es.stopPullToRefresh()
     }
     
     func setupData() {

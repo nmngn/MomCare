@@ -67,8 +67,16 @@ class PopupUserViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func openMore2(_ sender: UIButton) {
+        let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
+        vc.url = "https://fagomom.vn/dich-vu-cham-soc-tre-so-sinh-tai-nha/"
+        dismissVC()
+        navigation.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func openMore(_ sender: UIButton) {
         let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
+        vc.url = "https://eva.vn/mang-thai/che-do-dinh-duong-cho-ba-bau-theo-tung-thang-c383a410980.html"
         dismissVC()
         navigation.pushViewController(vc, animated: true)
     }
