@@ -28,6 +28,13 @@ class AdminViewController: DetailUserViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
+    override func setupNavigationButton() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+                                       , style: .plain, target: self, action: #selector(touchBackButton))
+        navigationItem.leftBarButtonItems = [backItem]
+    }
+    
     func getDataAdmin() {
         repo.getOneAdmin(idAdmin: idAdmin) { [weak self] value in
             switch value {
