@@ -11,6 +11,7 @@ import SwiftCSV
 import PopupDialog
 import Presentr
 import ESPullToRefresh
+import RealmSwift
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -26,9 +27,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var sortType = ""
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
-    let repo = Repositories(api: .share)
     let idAdmin = Session.shared.userProfile.idAdmin
-    let utilityThread = DispatchQueue.global(qos: .utility)
+    let asyncMainThread = DispatchQueue.main
+    let realm = try! Realm()
     
     let presenter: Presentr = {
         let customPresenter = Presentr(presentationType: .fullScreen)
@@ -43,12 +44,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Màn hình chính"
-        changeTheme(theme)
-        configView()
-        utilityThread.async {
-            self.getListUser()
+        asyncMainThread.async {
+            self.changeTheme(self.theme)
         }
-//        setupNavigationButton()
+        configView()
+        getListUser()
         userNotificationCenter.delegate = self
         navigationController?.isNavigationBarHidden = false
         self.requestNotificationAuthorization()
@@ -61,14 +61,13 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         changeTheme(theme)
-//        setupNavigationButton()
         tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if Session.shared.isPopToRoot {
-            utilityThread.async {
+            asyncMainThread.async {
                 self.getListUser()
             }
             Session.shared.isPopToRoot = false
@@ -181,23 +180,16 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func getListUser(reverse: Bool = false) {
-        repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
-            switch value {
-            case .success(let data):
-                if let data = data {
-                    let list = data.users?.filter({$0.idAdmin == self?.idAdmin})
-                    self?.getUserToPushNoti(listUser: list)
-                    if !reverse {
-                        self?.listUser = list
-                    } else {
-                        self?.listUser = list?.reversed()
-                    }
-                }
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
+        do {
+            let list = realm.objects(User.self).toArray()
+            self.getUserToPushNoti(listUser: list)
+            if !reverse {
+                self.listUser = list
+            } else {
+                self.listUser = list.reversed()
             }
-            self?.tableView.es.stopPullToRefresh()
         }
+        self.tableView.es.stopPullToRefresh()
     }
     
     func configView() {
@@ -295,9 +287,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         })
         let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
             self.sortType = "Theo ngày lưu"
-            self.utilityThread.async {
-                self.getListUser(reverse: true)
-            }
+            self.getListUser(reverse: true)
         })
         let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
             self.sortType = "Theo tuổi tuần thai"
@@ -386,20 +376,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
-            repo.getOneUser(idUser: model.id) { [weak self] response in
-                switch response {
-                case .success(let data):
-                    if let data = data {
-                        let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-                        vc.currentModel = data.convertToDetailModel()
-                        vc.hidesBottomBarWhenPushed = true
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                case .failure(let error):
-                    print(error as Any)
-                }
+            do {
+                let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+                vc.currentModel.id = model.id
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            
         default:
             break
         }
@@ -409,44 +391,39 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController {
     func saveStarStatus(id: String,_ isStar: Bool) {
-        repo.makeStar(idUser: id, isStar: isStar) { [weak self] response in
-            switch response {
-            case .success(_):
-                self?.utilityThread.async {
-                    self?.getListUser()
-                }
-//                self?.tableView.reloadData()
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
-            }
+        guard let selectedUser = self.realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
+        try! self.realm.write {
+            selectedUser.isStar = isStar
         }
+        getListUser()
     }
-    
 }
 
 extension HomeViewController {
     func getAgeData(_ age: Int) {
-        let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
-        
-        do {
-            let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
-            let rows = csv.namedRows
+        DispatchQueue.global(qos: .background).async {
+            let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
             
-            for row in rows {
-                if let data = row["\(age)"] {
-                    let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
-                    vc.age = age
-                    vc.text = data
-                    let popup = PopupDialog(viewController: vc,
-                                            buttonAlignment: .horizontal,
-                                            transitionStyle: .fadeIn,
-                                            tapGestureDismissal: true,
-                                            panGestureDismissal: false)
-                    self.present(popup, animated: true, completion: nil)
+            do {
+                let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
+                let rows = csv.namedRows
+                
+                for row in rows {
+                    if let data = row["\(age)"] {
+                        let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
+                        vc.age = age
+                        vc.text = data
+                        let popup = PopupDialog(viewController: vc,
+                                                buttonAlignment: .horizontal,
+                                                transitionStyle: .fadeIn,
+                                                tapGestureDismissal: true,
+                                                panGestureDismissal: false)
+                        self.present(popup, animated: true, completion: nil)
+                    }
                 }
+            } catch {
+                print("Parsing CSV file has error \(error)")
             }
-        } catch {
-            print("Parsing CSV file has error \(error)")
         }
     }
 }

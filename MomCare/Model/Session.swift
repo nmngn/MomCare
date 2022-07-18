@@ -22,23 +22,3 @@ final class UserLogIn {
     var idAdmin = ""
     var idUser = ""
 }
-
-struct URLs {
-    private static var baseUrl = "http://localhost:3001/"
-    
-    static var adminUrl = baseUrl + "admin/"
-    
-    static var adminDatabByNumberPhone = adminUrl + "phone/"
-    
-    static var userUrl = baseUrl + "user/"
-    
-    static var getAllUser = userUrl + "all/"
-    
-    static var userDatabByNumberPhone = userUrl + "phone/"
-    
-    static var noteUrl = baseUrl + "note/"
-    
-    static var getAllNote = noteUrl + "all/"
-    
-    static var deleteNotes = noteUrl + "deleteNotes/"
-}

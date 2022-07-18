@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class AccountViewController: UIViewController {
 
@@ -70,17 +69,7 @@ class AccountViewController: UIViewController {
     }
     
     func signOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            let storyboard = UIStoryboard(name: "LogInView", bundle: nil)
-            let vc = storyboard.instantiateInitialViewController()
-            UIApplication.shared.windows.first?.rootViewController = vc
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
-        } catch let signOutError as NSError {
-            print(signOutError)
-            popupErrorSignout()
-        }
+
     }
 }
 
@@ -106,9 +95,7 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch model.type {
         case .info:
-            let vc = AdminViewController.init(nibName: "AdminViewController", bundle: nil)
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            break
         case .logout:
             logOut()
         default:

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import LocalAuthentication
+import RealmSwift
 
 func saveImage(imageName: String, image: UIImage?, type: UserChoice) -> String {
     if let image = image {
@@ -154,5 +155,23 @@ extension NSObject {
     
     class var className: String {
         return String(describing: self).components(separatedBy: ".").last!
+    }
+}
+
+extension Results {
+    func toArray() -> [Element] {
+        return compactMap {
+            $0
+        }
+    }
+}
+
+extension Realm {
+    public func safeWrite(_ block: (() throws -> Void)) throws {
+        if isInWriteTransaction {
+            try block()
+        } else {
+            try write(block)
+        }
     }
 }

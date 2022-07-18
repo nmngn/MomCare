@@ -7,6 +7,7 @@
 
 import UIKit
 import ESPullToRefresh
+import RealmSwift
 
 class NotificationViewController: UIViewController {
 
@@ -15,20 +16,17 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var bellView: UIView!
     @IBOutlet weak var titleBell: UILabel!
     
+    let realm = try! Realm()
     var notiModel = [NotificationModel]() {
         didSet {
             self.tableView.reloadData()
         }
     }
-    let repo = Repositories(api: .share)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thông báo"
         self.notiModel.removeAll()
-        DispatchQueue.global(qos: .background).async {
-            self.getListUser()
-        }
         changeTheme(self.theme)
         configView()
         navigationController?.isNavigationBarHidden = false
@@ -61,7 +59,6 @@ class NotificationViewController: UIViewController {
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
             $0.es.addPullToRefresh {
                 self.notiModel.removeAll()
-                self.getListUser()
             }
         }
     }
@@ -85,21 +82,6 @@ class NotificationViewController: UIViewController {
             }
         }
         tableView.es.stopPullToRefresh()
-    }
-    
-    func getListUser() {
-        let idAdmin = Session.shared.userProfile.idAdmin
-        repo.getAllUser(idAdmin: idAdmin) { [weak self] value in
-            switch value {
-            case .success(let data):
-                if let data = data {
-                    let list = data.users?.filter({$0.idAdmin == idAdmin})
-                    self?.getUserToPushNoti(listUser: list)
-                }
-            case .failure(let error):
-                self?.openAlert(error?.errorMessage ?? "")
-            }
-        }
     }
     
     func setupStatus(isHidden: Bool, title: String) {
@@ -135,18 +117,12 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let id = notiModel[indexPath.row].id
-        repo.getOneUser(idUser: id) { [weak self] response in
-            switch response {
-            case .success(let data):
-                if let data = data {
-                    let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
-                    vc.currentModel = data.convertToDetailModel()
-                    vc.hidesBottomBarWhenPushed = true
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }
-            case .failure(let error):
-                print(error as Any)
-            }
+        do {
+            guard let infoUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
+            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            vc.currentModel = infoUser.convertToDetailModel()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

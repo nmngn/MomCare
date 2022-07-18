@@ -11,21 +11,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.window?.rootViewController = UIStoryboard(name: "LogInView", bundle: nil).instantiateInitialViewController()
+            let mainVC = MainTabbarViewController.init(nibName: "MainTabbarViewController", bundle: nil)
+            self.window?.rootViewController = mainVC
+            self.window?.makeKeyAndVisible()
         }
         guard let _ = (scene as? UIWindowScene) else { return }
-    }
-    
-    func switchViewController(animation: Bool) {
-        let mainVC = MainTabbarViewController.init(nibName: "MainTabbarViewController", bundle: nil)
-        self.window?.rootViewController = mainVC
-        self.window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -6,77 +6,21 @@
 //
 
 import UIKit
-import ObjectMapper
-import Alamofire
+import RealmSwift
 
-struct Admin: Mappable {
-    var idAdmin = ""
-    var name = ""
-    var email = ""
-    var address = ""
-    var image = ""
-    var numberPhone = ""
-    
-    init?(map: Map) {
-        mapping(map: map)
-    }
-    
-    mutating func mapping(map: Map) {
-        idAdmin <- map["id"]
-        name <- map["name"]
-        email <- map["email"]
-        address <- map["address"]
-        image <- map["image"]
-        numberPhone <- map["numberPhone"]
-    }
-    
-    func convertToDetailModel() -> DetailModel {
-        var model = DetailModel()
-        model.name = name
-        model.numberPhone = numberPhone
-        model.height = email
-        model.avatarImage = loadImageFromDiskWith(fileName: image)
-        model.address = address
-        return model
-    }
-
-}
-
-struct User : Mappable {
-    var idAdmin = ""
-    var idUser = ""
-    var name = ""
-    var address = ""
-    var momBirth = ""
-    var numberPhone = ""
-    var height = ""
-    var babyDateBorn = ""
-    var dateSave = ""
-    var note = ""
-    var avatar = ""
-    var imagePregnant = ""
-    var isStar = false
-    
-    init?(map: Map) {
-        mapping(map: map)
-    }
-    
-    mutating func mapping(map: Map) {
-        idAdmin <- map["idAdmin"]
-        idUser <- map["id"]
-        name <- map["name"]
-        address <- map["address"]
-        momBirth <- map["momBirth"]
-        numberPhone <- map["numberPhone"]
-        babyDateBorn <- map["babyDateBorn"]
-        height <- map["height"]
-        dateSave <- map["dateSave"]
-        note <- map["note"]
-        avatar <- map["avatar"]
-        imagePregnant <- map["imagePregnant"]
-        isStar <- map["isStar"]
-        
-    }
+class User: Object {
+    @objc dynamic var idUser = ""
+    @objc dynamic var name = ""
+    @objc dynamic var address = ""
+    @objc dynamic var momBirth = ""
+    @objc dynamic var numberPhone = ""
+    @objc dynamic var height = ""
+    @objc dynamic var babyDateBorn = ""
+    @objc dynamic var dateSave = ""
+    @objc dynamic var note = ""
+    @objc dynamic var avatar = ""
+    @objc dynamic var imagePregnant = ""
+    @objc dynamic var isStar = false
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
@@ -104,24 +48,6 @@ struct User : Mappable {
         return model
     }
     
-    func convertToUserModel() -> UserInfo {
-        var model = UserInfo()
-        model.name = name
-        model.idUser = idUser
-        model.idAdmin = idAdmin
-        model.address = address
-        model.numberPhone = numberPhone
-        model.height = height
-        model.momBirth = momBirth
-        model.dateCalculate = updateTime()
-        model.babyAge = babyDateBorn
-        model.note = note
-        model.dateSave = dateSave
-        model.avatarImage = loadImageFromDiskWith(fileName: avatar)
-        model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
-        return model
-    }
-    
     func updateTime() -> String {
         let dateFormatter = DateFormatter()
         let todayDate = Date()
@@ -140,22 +66,10 @@ struct User : Mappable {
     
 }
 
-struct HistoryNote: Mappable {
-    var idNote = ""
-    var idUser = ""
-    var time = ""
-    var image = ""
-    var title = ""
-    
-    init?(map: Map) {
-        mapping(map: map)
-    }
-    
-    mutating func mapping(map: Map) {
-        idNote <- map["id"]
-        idUser <- map["idUser"]
-        time <- map["time"]
-        image <- map["image"]
-        title <- map["title"]
-    }
+class HistoryNote: Object{
+    @objc dynamic var idNote = ""
+    @objc dynamic var idUser = ""
+    @objc dynamic var time = ""
+    @objc dynamic var image = ""
+    @objc dynamic var title = ""
 }

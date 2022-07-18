@@ -7,6 +7,7 @@
 
 import UIKit
 import ESPullToRefresh
+import RealmSwift
 
 class SearchViewController: UIViewController {
 
@@ -23,17 +24,14 @@ class SearchViewController: UIViewController {
             tableView.es.stopPullToRefresh()
         }
     }
+    let realm = try! Realm()
     var userSearch = ""
-    let repo = Repositories(api: .share)
     var listUser = [User]()
-    let utilityThread = DispatchQueue.global(qos: .utility)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tìm kiếm"
-        utilityThread.async {
-            self.getListUser()
-        }
+        self.getListUser()
         configView()
 //        setupBackButton()
         changeTheme(self.theme)
@@ -64,16 +62,8 @@ class SearchViewController: UIViewController {
     }
     
     func getListUser() {
-        let idAdmin = Session.shared.userProfile.idAdmin
-        repo.getAllUser(idAdmin: idAdmin) { [weak self] response in
-            switch response {
-            case .success(let data):
-                if let data = data?.users {
-                    self?.listUser = data
-                }
-            case .failure(let error):
-                print(error as Any)
-            }
+        do {
+            self.listUser = realm.objects(User.self).toArray()
         }
     }
     
