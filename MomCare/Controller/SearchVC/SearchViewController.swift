@@ -26,24 +26,40 @@ class SearchViewController: UIViewController {
     }
     let realm = try! Realm()
     var userSearch = ""
-    var listUser = [User]()
+    var listUser = [User]() {
+        didSet {
+            self.tableView.reloadData()
+            tableView.es.stopPullToRefresh()
+        }
+    }
+    let asyncMainThread = DispatchQueue.main
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tìm kiếm"
         self.getListUser()
         configView()
-//        setupBackButton()
         changeTheme(self.theme)
         setupStatus(isHidden: false, title: "Hãy bắt đầu tìm kiếm")
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if Session.shared.isPopToRoot {
+            searchBar.text = ""
+            asyncMainThread.async {
+                self.search(text: "")
+                self.getListUser()
+            }
+            Session.shared.isPopToRoot = false
+        }
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         changeTheme(theme)
-//        setupBackButton()
         tableView.reloadData()
     }
     
@@ -129,7 +145,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func search(text: String) {
-        if !text.isEmpty {
+        if !text.isEmpty && !listUser.isEmpty {
             let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
             if result.count == 0 {
                 self.listResult?.removeAll()

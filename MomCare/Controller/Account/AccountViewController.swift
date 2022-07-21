@@ -33,44 +33,24 @@ class AccountViewController: UIViewController {
     }
 
     func setupData() {
-        var account = AccountModel()
-        account.type = .info
-        account.image = UIImage(systemName: "person")
-        account.title = "Thông tin cá nhân"
+        var setting = AccountModel()
+        setting.type = .setting
+        setting.image = UIImage(systemName: "circle.hexagonpath")?.toHierachicalImage()
+        setting.title = "Cài đặt"
         
-        var logout = AccountModel()
-        logout.type = .logout
-        logout.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
-        logout.title = "Đăng xuất"
-        model.append(account)
-        model.append(logout)
+        var notiSetting = AccountModel()
+        notiSetting.type = .notiSetting
+        notiSetting.image = UIImage(systemName: "bell.badge")?.toHierachicalImage()
+        notiSetting.title = "Cài đặt thông báo"
+        
+        model.append(setting)
+        model.append(notiSetting)
     }
     
     func modelIndexPath(indexPath: IndexPath) -> AccountModel {
         return model[indexPath.row]
     }
     
-    func popupErrorSignout() {
-        let alert = UIAlertController(title: "Lỗi", message: "Đăng xuất lỗi", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-
-    func logOut() {
-        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất không?", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "Ok", style: .default) { _ in
-            self.signOut()
-        }
-        let noAction = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func signOut() {
-
-    }
 }
 
 extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
@@ -94,10 +74,10 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource {
         model = modelIndexPath(indexPath: indexPath)
         
         switch model.type {
-        case .info:
+        case .setting:
             break
-        case .logout:
-            logOut()
+        case .notiSetting:
+            break
         default:
             break
         }

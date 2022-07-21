@@ -26,7 +26,7 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thông báo"
-        self.notiModel.removeAll()
+        getUserToPushNoti()
         changeTheme(self.theme)
         configView()
         navigationController?.isNavigationBarHidden = false
@@ -59,13 +59,16 @@ class NotificationViewController: UIViewController {
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
             $0.es.addPullToRefresh {
                 self.notiModel.removeAll()
+                self.getUserToPushNoti()
             }
         }
     }
     
-    func getUserToPushNoti(listUser: [User]?) {
-        if let listUser = listUser {
-            let newList = listUser.filter ({ user in
+    func getUserToPushNoti() {
+        self.notiModel.removeAll()
+        do {
+            let list = realm.objects(User.self).toArray()
+            let newList = list.filter ({ user in
                 let text = updateTime(dateString: user.babyDateBorn)
                 if !text.isEmpty {
                     let wStartIndex = text.index(text.startIndex, offsetBy: 0)
@@ -81,7 +84,7 @@ class NotificationViewController: UIViewController {
                 self.notiModel.append(user.convertToNotiModel())
             }
         }
-        tableView.es.stopPullToRefresh()
+        self.tableView.es.stopPullToRefresh()
     }
     
     func setupStatus(isHidden: Bool, title: String) {

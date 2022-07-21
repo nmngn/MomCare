@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 enum AccountType {
-    case info
-    case logout
+    case setting
+    case notiSetting
 }
 
 struct AccountModel {
