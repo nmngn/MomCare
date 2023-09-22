@@ -31,7 +31,7 @@ enum Constant {
         static let listBullet = "list.bullet"
         static let avatarPlaceholder = "avatar_placeholder"
         static let star = "star"
-        static let unStar = "unstart"
+        static let unStar = "unstar"
         static let icBack = "ic_left_arrow"
         static let icTrash = "trash"
         

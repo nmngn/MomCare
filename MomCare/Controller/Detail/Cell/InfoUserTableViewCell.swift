@@ -37,9 +37,12 @@ class InfoUserTableViewCell: UITableViewCell {
         valueTextField.text = model.value
         userPhone = model.numberPhone
         if !model.isCall {
+            valueTextField.keyboardType = .default
             widthCallButtonConstraint.constant = 0
             callButton.isEnabled = false
             callButton.isHidden = true
+        } else {
+            valueTextField.keyboardType = .numberPad
         }
         if self.traitCollection.userInterfaceStyle == .light {
             valueTextField.backgroundColor = .white

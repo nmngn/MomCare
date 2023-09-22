@@ -76,7 +76,8 @@ class DetailUserViewController: UIViewController {
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
         
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: Constant.Text.icTrash)?.toHierachicalImage()
+        let rightItem = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
+                                        UIImage(systemName: Constant.Text.icTrash)?.toHierachicalImage() : UIImage(systemName: Constant.Text.icTrash)
                                         , style: .plain, target: self, action:
                                         #selector(removeUser))
         rightItem.isEnabled = !currentModel.dateSave.isEmpty

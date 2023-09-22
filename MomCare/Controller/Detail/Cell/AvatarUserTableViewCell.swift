@@ -31,7 +31,9 @@ class AvatarUserTableViewCell: UITableViewCell {
         if model.avatarImage == nil {
             avatarImage.image = UIImage(named: Constant.Text.avatarPlaceholder)
         } else {
-            avatarImage.image = model.avatarImage
+            DispatchQueue.main.async {
+                self.avatarImage.image = model.avatarImage
+            }
         }
     }
     

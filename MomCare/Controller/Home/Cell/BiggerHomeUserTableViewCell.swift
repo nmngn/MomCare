@@ -38,13 +38,14 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
             subView.backgroundColor = Constant.BrandColors.darkColorItem2
         }
         
-        DispatchQueue.main.async {
-            if !model.avatarImage.isEmpty {
+        if !model.avatarImage.isEmpty {
+            DispatchQueue.main.async {
                 self.avatarUser.image = loadImageFromDiskWith(fileName: model.avatarImage)
-            } else {
-                self.avatarUser.image = UIImage(named: Constant.Text.avatarPlaceholder)
             }
+        } else {
+            self.avatarUser.image = UIImage(named: Constant.Text.avatarPlaceholder)
         }
+        
         starImage.image = model.isStar ? UIImage(named: Constant.Text.star) : UIImage(named: Constant.Text.unStar)
         userNameLabel.text = model.name
         

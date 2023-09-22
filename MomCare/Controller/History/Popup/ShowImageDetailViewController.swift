@@ -46,7 +46,9 @@ class ShowImageDetailViewController: UIViewController {
     }
     
     @objc func pinchImage(sender: UIPinchGestureRecognizer) {
-        sender.view?.transform = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale) ?? CGAffineTransform()
-        sender.scale = 1.0
+        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
+        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
+        sender.view?.transform = scale
+        sender.scale = 1
     }
 }

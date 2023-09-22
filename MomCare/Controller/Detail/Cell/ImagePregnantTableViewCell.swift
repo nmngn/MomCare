@@ -16,12 +16,14 @@ class ImagePregnantTableViewCell: UITableViewCell {
     var showImage: (() -> ())?
     
     func setupData(model: DetailModel) {
-        if let image = model.imagePregnant {
-            imagePregnant.image = image
-            let ratio = image.size.width / image.size.height
-            let newHeight = imagePregnant.frame.width / ratio
-            constraintHeight.constant = newHeight
-            subView.layoutIfNeeded()
+        DispatchQueue.main.async {
+            if let image = model.imagePregnant {
+                self.imagePregnant.image = image
+                let ratio = image.size.width / image.size.height
+                let newHeight = self.imagePregnant.frame.width / ratio
+                self.constraintHeight.constant = newHeight
+                self.subView.layoutIfNeeded()
+            }
         }
     }
     
