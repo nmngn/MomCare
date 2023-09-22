@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,7 +32,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpd-BR-WLr">
-                    <rect key="frame" x="116" y="68" width="282" height="44"/>
+                    <rect key="frame" x="116" y="72" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ron-Sj-ASe">
                             <rect key="frame" x="8" y="8" width="28" height="27.5"/>
@@ -57,7 +57,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="282" height="44"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <connections>
-                                <action selector="openNoti:" destination="-1" eventType="touchUpInside" id="5ze-vV-ONb"/>
+                                <action selector="openNoti:" destination="-1" eventType="touchUpInside" id="cD9-4T-V9i"/>
                             </connections>
                         </button>
                     </subviews>
@@ -82,7 +82,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0II-fy-UiR">
-                    <rect key="frame" x="116" y="120" width="282" height="44"/>
+                    <rect key="frame" x="116" y="124" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yyl-oN-mbz">
                             <rect key="frame" x="8" y="8.5" width="28" height="27"/>
@@ -107,7 +107,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="282" height="44"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <connections>
-                                <action selector="openProfile:" destination="-1" eventType="touchUpInside" id="Tkk-dF-cyU"/>
+                                <action selector="openWebview:" destination="-1" eventType="touchUpInside" id="xOK-nD-2a5"/>
                             </connections>
                         </button>
                     </subviews>
@@ -132,7 +132,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K42-dG-2qm">
-                    <rect key="frame" x="116" y="172" width="282" height="44"/>
+                    <rect key="frame" x="116" y="176" width="282" height="44"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUD-MA-4Ip">
                             <rect key="frame" x="8" y="8" width="28" height="28.5"/>
@@ -157,7 +157,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="282" height="44"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <connections>
-                                <action selector="logOut:" destination="-1" eventType="touchUpInside" id="Yn7-cz-OC9"/>
+                                <action selector="settingAction:" destination="-1" eventType="touchUpInside" id="CRb-BY-Mab"/>
                             </connections>
                         </button>
                     </subviews>
@@ -221,11 +221,11 @@
         </view>
     </objects>
     <resources>
-        <image name="bell" catalog="system" width="128" height="124"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="network" catalog="system" width="128" height="121"/>
+        <image name="bell" catalog="system" width="125" height="128"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="network" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,7 +234,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

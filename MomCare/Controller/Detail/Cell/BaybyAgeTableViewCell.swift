@@ -41,8 +41,8 @@ class BaybyAgeTableViewCell: UITableViewCell {
             dobLabel.backgroundColor = .white
             ageLabel.backgroundColor = .white
         } else {
-            dobLabel.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
-            ageLabel.backgroundColor = UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+            dobLabel.backgroundColor = Constant.BrandColors.darkColorItem
+            ageLabel.backgroundColor = Constant.BrandColors.darkColorItem
         }
 
         delegate?.sendString(dataType: .babyAge, text: model.babyAge)

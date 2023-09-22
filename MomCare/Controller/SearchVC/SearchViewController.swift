@@ -28,21 +28,21 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Tìm kiếm"
-        getListUser()
-        configView()
-        setupBackButton()
-        changeTheme(self.theme)
-        setupStatus(isHidden: false, title: "Hãy bắt đầu tìm kiếm")
+        self.title = Constant.Text.search
+        self.getListUser()
+        self.configView()
+        self.setupBackButton()
+        self.changeTheme(self.theme)
+        self.setupStatus(isHidden: false, title: Constant.Text.letSearch)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        changeTheme(theme)
-        setupBackButton()
-        tableView.reloadData()
+        self.changeTheme(theme)
+        self.setupBackButton()
+        self.tableView.reloadData()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        bottomHeightConstraint.constant = 16
+        self.bottomHeightConstraint.constant = 16
         self.view.layoutIfNeeded()
     }
     
@@ -66,13 +66,13 @@ class SearchViewController: UIViewController {
     }
     
     func setupStatus(isHidden: Bool, title: String) {
-        resultView.isHidden = isHidden
-        statusLabel.text = title
+        self.resultView.isHidden = isHidden
+        self.statusLabel.text = title
     }
     
     func setupBackButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
     }
@@ -82,8 +82,8 @@ class SearchViewController: UIViewController {
     }
     
     func configView() {
-        searchBar.delegate = self
-        tableView.do {
+        self.searchBar.delegate = self
+        self.tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.tableFooterView = UIView()
@@ -93,16 +93,33 @@ class SearchViewController: UIViewController {
             $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         }
     }
-
+    
+    @objc func search(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            if !text.isEmpty {
+                let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
+                if result.count == 0 {
+                    self.listResult?.removeAll()
+                    setupStatus(isHidden: false, title: Constant.Text.noResult)
+                } else {
+                    setupStatus(isHidden: true, title: "")
+                    self.listResult = result
+                }
+            } else {
+                self.listResult?.removeAll()
+                setupStatus(isHidden: false, title: Constant.Text.letSearch)
+            }
+        }
+    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listResult?.count ?? 0
+        return self.listResult?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchItemTableViewCell", for: indexPath) as?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchItemTableViewCell.className, for: indexPath) as?
                 SearchItemTableViewCell else { return UITableViewCell()}
         cell.selectionStyle = .none
         if let listResult = self.listResult {
@@ -113,7 +130,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let user = listResult {
-            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
             vc.currentModel = user[indexPath.row].convertToDetailModel()
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -121,22 +138,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.search(_:)), object: searchBar)
+        perform(#selector(self.search(_:)), with: searchBar, afterDelay: 0.5)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            if !text.isEmpty {
-                let result = listUser.filter({$0.name.localizedCaseInsensitiveContains(text)})
-                if result.count == 0 {
-                    self.listResult?.removeAll()
-                    setupStatus(isHidden: false, title: "Không có kết quả tìm thấy")
-                } else {
-                    setupStatus(isHidden: true, title: "")
-                    self.listResult = result
-                }
-            } else {
-                self.listResult?.removeAll()
-                setupStatus(isHidden: false, title: "Hãy nhập từ khóa để tìm kiếm")
-            }
-        }
+        perform(#selector(self.search(_:)), with: searchBar)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

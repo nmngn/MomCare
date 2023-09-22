@@ -20,30 +20,30 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Thông báo"
-        setupNavigationButton()
-        changeTheme(self.theme)
-        configView()
+        self.title = Constant.Text.notification
+        self.setupNavigationButton()
+        self.changeTheme(self.theme)
+        self.configView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if notiModel.isEmpty {
-            setupStatus(isHidden: false, title: "Không có thông báo nào")
+        if self.notiModel.isEmpty {
+            self.setupStatus(isHidden: false, title: Constant.Text.noNotify)
         } else {
-            setupStatus(isHidden: true, title: "")
+            self.setupStatus(isHidden: true, title: "")
         }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        changeTheme(theme)
-        setupNavigationButton()
-        tableView.reloadData()
+        self.changeTheme(theme)
+        self.setupNavigationButton()
+        self.tableView.reloadData()
     }
     
     func configView() {
-        tableView.do {
+        self.tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.separatorStyle = .none
@@ -54,15 +54,15 @@ class NotificationViewController: UIViewController {
     }
     
     func setupStatus(isHidden: Bool, title: String) {
-        bellView.isHidden = isHidden
-        titleBell.text = title
+        self.bellView.isHidden = isHidden
+        self.titleBell.text = title
     }
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
-        navigationItem.leftBarButtonItems = [backItem]
+        self.navigationItem.leftBarButtonItems = [backItem]
     }
     
     @objc func touchBackButton() {
@@ -73,11 +73,11 @@ class NotificationViewController: UIViewController {
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notiModel.count
+        return self.notiModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationTableViewCell.className, for: indexPath) as?
                 NotificationTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.setupData(model: self.notiModel[indexPath.row])
@@ -88,7 +88,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         let id = notiModel[indexPath.row].id
         do {
             guard let infoUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
-            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
             vc.currentModel = infoUser.convertToDetailModel()
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)

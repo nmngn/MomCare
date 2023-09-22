@@ -29,7 +29,7 @@ class AvatarUserTableViewCell: UITableViewCell {
 
     func setupData(model: DetailModel) {
         if model.avatarImage == nil {
-            avatarImage.image = UIImage(named: "avatar_placeholder")
+            avatarImage.image = UIImage(named: Constant.Text.avatarPlaceholder)
         } else {
             avatarImage.image = model.avatarImage
         }

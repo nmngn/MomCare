@@ -25,28 +25,28 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeTheme(self.theme)
-        configView()
-        setupBackButton()
-        getListHistory()
-        self.title = "Lịch sử ghi chú"
+        self.changeTheme(self.theme)
+        self.configView()
+        self.setupBackButton()
+        self.getListHistory()
+        self.title = Constant.Text.historyVC
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        changeTheme(theme)
-        setupBackButton()
-        tableView.reloadData()
+        self.changeTheme(theme)
+        self.setupBackButton()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupData()
+        self.setupData()
     }
     
     func setupBackButton() {
       self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
     }
@@ -56,12 +56,12 @@ class HistoryViewController: UIViewController {
     }
     
     func getListHistory() {
-        listHistory = realm.objects(HistoryNote.self).filter("idUser == %@", idUser).toArray()
+        self.listHistory = realm.objects(HistoryNote.self).filter("idUser == %@", idUser).toArray()
         self.tableView.reloadData()
     }
     
     func configView() {
-        tableView.do {
+        self.tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.separatorStyle = .none
@@ -73,11 +73,11 @@ class HistoryViewController: UIViewController {
     }
     
     func setupData() {
-        model.removeAll()
+        self.model.removeAll()
         let add = HistoryModel(type: .add)
         
         var title = HistoryModel(type: .title)
-        title.title = "Các ghi chú đã ghi (\(self.listHistory?.count ?? 0))"
+        title.title = Constant.Text.noted + "( \(self.listHistory?.count ?? 0))"
         
         var cell = HistoryModel(type: .cell)
         
@@ -97,21 +97,21 @@ class HistoryViewController: UIViewController {
     }
 
     func modelIndexPath(indexPath: IndexPath) -> HistoryModel {
-        return model[indexPath.row]
+        return self.model[indexPath.row]
     }
     
     func removeNote(id: String) {
         guard let currentNote = realm.objects(HistoryNote.self).filter("idNote == %@", id).toArray().first else { return  }
         
-        try! realm.write({
-            realm.delete(currentNote)
+        try! self.realm.write({
+            self.realm.delete(currentNote)
         })
     }
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count
+        return self.model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,13 +142,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var model: HistoryModel
-        model = modelIndexPath(indexPath: indexPath)
+        model = self.modelIndexPath(indexPath: indexPath)
         
         switch model.type {
         case .add:
-            openLibararies()
+            self.openLibararies()
         case .cell:
-            let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
+            let vc = ShowImageDetailViewController.init(nibName: ShowImageDetailViewController.className, bundle: nil)
             vc.imageData = model.dataImage
             vc.titleData = model.title
             vc.time = model.time
@@ -160,7 +160,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         var model: HistoryModel
-        model = modelIndexPath(indexPath: indexPath)
+        model = self.modelIndexPath(indexPath: indexPath)
         switch model.type {
         case .cell:
             return true
@@ -171,11 +171,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.beginUpdates()
-            removeNote(id: model[indexPath.row].idNote)
+            self.tableView.beginUpdates()
+            self.removeNote(id: model[indexPath.row].idNote)
             self.model.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .none)
-            tableView.endUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
             self.getListHistory()
         }
     }
@@ -184,38 +184,35 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func openLibararies() {
-        let alert = UIAlertController(title: "Select Photo Type".localized, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Select Photo Type", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default , handler:{ (UIAlertAction)in
             self.openMedia(type: .photoLibrary)
         }))
         
-        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Camera", style: .default , handler:{ (UIAlertAction)in
             self.openMedia(type: .camera)
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
-            print("User click Dismiss button")
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
         }))
         
         self.present(alert, animated: true, completion: {
-            print("completion block")
         })
     }
     
     private func openMedia(type: UIImagePickerController.SourceType) {
         let vc = UIImagePickerController()
         vc.sourceType = type
-        vc.videoQuality = .typeMedium
         vc.allowsEditing = true
         vc.delegate = self
         present(vc, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             picker.dismiss(animated: true) {
-                let vc = TitleNoteViewController.init(nibName: "TitleNoteViewController", bundle: nil)
+                let vc = TitleNoteViewController.init(nibName: TitleNoteViewController.className, bundle: nil)
                 vc.saveNote = { [weak self] title in
                     self?.saveData(imageData: image, title: title)
                 }
@@ -234,7 +231,7 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension HistoryViewController {
     func saveData(imageData: UIImage, title: String) {
         let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        dateFormatter.dateFormat = Constant.Text.dateFormatDetail
         let date = Date()
         let dateString = dateFormatter.string(from: date).replacingOccurrences(of: "/", with: ".")
         
@@ -242,7 +239,7 @@ extension HistoryViewController {
         "note_\(dateString)", image: imageData, type: .baby)
         
         do {
-            realm.beginWrite()
+            self.realm.beginWrite()
             let currentNote = HistoryNote()
             currentNote.idUser = self.idUser
             currentNote.time = dateString
@@ -250,9 +247,9 @@ extension HistoryViewController {
             currentNote.idNote = NSUUID().uuidString.lowercased()
             currentNote.title = title
             
-            try? realm.commitWrite()
-            try? realm.safeWrite {
-                realm.add(currentNote)
+            try? self.realm.commitWrite()
+            try? self.realm.safeWrite {
+                self.realm.add(currentNote)
             }
         }
         self.getListHistory()

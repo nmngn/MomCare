@@ -36,7 +36,7 @@ class PopupCalendarViewController: UIViewController {
     
     func doneDatePicker(){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = Constant.Text.dateFormat
         let todaysDate = dateFormatter.string(from: calendar.date)
         selectDate?(todaysDate)
         closeCalendar?()

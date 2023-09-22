@@ -7,10 +7,25 @@
 
 import UIKit
 import NotificationCenter
-import SwiftCSV
 import PopupDialog
 import Presentr
 import RealmSwift
+
+enum SortType {
+    case name
+    case date
+    case age
+    case normal
+    
+    func toText() -> String {
+        switch self {
+        case .name: return Constant.Text.sortName
+        case .age: return Constant.Text.sortAge
+        case .date:  return Constant.Text.sortDate
+        default: return ""
+        }
+    }
+}
 
 class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
@@ -24,11 +39,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     let realm = try! Realm()
-    var sortType = ""
+    var sortType: SortType = .normal
     let userNotificationCenter = UNUserNotificationCenter.current()
     var notiModel = [NotificationModel]()
     let asyncMainThread = DispatchQueue.main
-    let userInitiatedhread = DispatchQueue.global(qos: .userInitiated)
+    let userInitiatedThread = DispatchQueue.global(qos: .userInitiated)
     let backgroundThread = DispatchQueue.global(qos: .background)
     
     let presenter: Presentr = {
@@ -43,8 +58,8 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Màn hình chính"
-        userInitiatedhread.async {
+        self.title = Constant.Text.home
+        self.userInitiatedThread.async {
             self.changeTheme(self.theme)
         }
         asyncMainThread.async {
@@ -71,7 +86,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if Session.shared.isPopToRoot {
-            getListUser()
+            self.getListUser()
             Session.shared.isPopToRoot = false
         }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -80,13 +95,13 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func setupNavigationButton() {
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet")?.toHierachicalImage()
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: Constant.Text.listBullet)?.toHierachicalImage()
                                         , style: .plain, target: self, action: #selector(openMore))
         navigationItem.rightBarButtonItem = rightItem
     }
     
     @objc func openMore() {
-        let vc = SmallOptionViewController.init(nibName: "SmallOptionViewController", bundle: nil)
+        let vc = SmallOptionViewController.init(nibName: SmallOptionViewController.className, bundle: nil)
         vc.notiModel = self.notiModel
         vc.navigation = self.navigationController ?? UINavigationController()
         customPresentViewController(presenter, viewController: vc, animated: true)
@@ -97,7 +112,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         
         self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
             if let error = error {
-                print("Error: ", error)
+                print(error)
             }
         }
     }
@@ -106,19 +121,19 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let application = UIApplication.shared
         let notificationContent = UNMutableNotificationContent()
         if noti.count == 1 {
-            notificationContent.title = "Thông báo về: \(noti.first?.name ?? "")"
+            notificationContent.title = Constant.Text.notificationAbout + "\(noti.first?.name ?? "")"
             notificationContent.body =
             "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
         } else {
-            notificationContent.title = "Thông báo về \(self.notiModel.count) bệnh nhân tháng cuối"
+            notificationContent.title = Constant.Text.notificationAbout + "\(self.notiModel.count) bệnh nhân tháng cuối"
             notificationContent.body =
             "Chú ý: \(self.notiModel.count) bệnh nhân đã bước vào tháng cuối \nCần chú ý !"
         }
         application.applicationIconBadgeNumber = noti.count
         
-        if let url = Bundle.main.url(forResource: "dune",
+        if let url = Bundle.main.url(forResource: Constant.Text.dune,
                                      withExtension: "png") {
-            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+            if let attachment = try? UNNotificationAttachment(identifier: Constant.Text.dune,
                                                               url: url,
                                                               options: nil) {
                 notificationContent.attachments = [attachment]
@@ -129,22 +144,21 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         date.hour = 7
         date.minute = 30
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-        //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "Notification",
+        let request = UNNotificationRequest(identifier: Constant.Text.notificationEn,
                                             content: notificationContent,
                                             trigger: trigger)
         
         if !noti.isEmpty {
             userNotificationCenter.add(request) { (error) in
                 if let error = error {
-                    print("Notification Error: ", error)
+                    print(error)
                 }
             }
         }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+        let vc = NotificationViewController.init(nibName: NotificationViewController.className, bundle: nil)
         vc.notiModel = self.notiModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -221,13 +235,13 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         let addUser = HomeModel(type: .addUser)
         
         var header1 = HomeModel(type: .title)
-        header1.title = "Dự kiến sinh trong tháng này(\(newList.count))"
+        header1.title = Constant.Text.patientInMonth + "(\(newList.count))"
         
         var infoCell = HomeModel(type: .infoUser)
         let sort = HomeModel(type: .sort)
         
         var header2 = HomeModel(type: .title)
-        header2.title = "Tất cả bệnh nhân(\(listUser.count))"
+        header2.title = Constant.Text.allPatient + "(\(listUser.count))"
         
         model.append(badge)
         model.append(addUser)
@@ -259,11 +273,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             infoCell.isStar = listUser[i].isStar
             model.append(infoCell)
         }
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     @IBAction func searchUser(_ sender: UIBarButtonItem) {
-        let vc = SearchViewController.init(nibName: "SearchViewController", bundle: nil)
+        let vc = SearchViewController.init(nibName: SearchViewController.className, bundle: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -272,21 +286,21 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func sortListUser() {
-        let alert = UIAlertController(title: "Sắp xếp", message: "Chọn cách sắp xếp", preferredStyle: .actionSheet)
-        let sortName = UIAlertAction(title: "Theo tên", style: .default, handler: { _ in
-            self.sortType = "Theo tên"
+        let alert = UIAlertController(title: Constant.Text.sort, message: Constant.Text.chooseSortType, preferredStyle: .actionSheet)
+        let sortName = UIAlertAction(title: Constant.Text.sortName, style: .default, handler: { _ in
+            self.sortType = .name
             if let listUser = self.listUser {
                 let items = listUser.sorted{$0.name < $1.name}
                 self.listUser?.removeAll()
                 self.listUser = items
             }
         })
-        let sortDateSave = UIAlertAction(title: "Theo ngày lưu", style: .default, handler: { _ in
-            self.sortType = "Theo ngày lưu"
+        let sortDateSave = UIAlertAction(title: Constant.Text.sortDate, style: .default, handler: { _ in
+            self.sortType = .date
             self.getListUser(reverse: true)
         })
-        let sortDateCal = UIAlertAction(title: "Theo tuổi tuần thai", style: .default, handler: { _ in
-            self.sortType = "Theo tuổi tuần thai"
+        let sortDateCal = UIAlertAction(title: Constant.Text.sortAge, style: .default, handler: { _ in
+            self.sortType = .age
             if let listUser = self.listUser {
                 let newList = listUser.sorted(by: {$0.updateTime() >
                     $1.updateTime()})
@@ -294,7 +308,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
                 self.listUser = newList
             }
         })
-        let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: { _ in
+        let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         })
         
@@ -317,7 +331,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch model.type {
         case .badge:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "BadgeUserTableViewCell", for: indexPath) as?
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BadgeUserTableViewCell.className, for: indexPath) as?
                     BadgeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             if let list = self.listUser {
@@ -325,13 +339,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
         case .addUser:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddUserTableViewCell", for: indexPath) as?
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddUserTableViewCell.className, for: indexPath) as?
                     AddUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setupData()
             return cell
         case .infoUser:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "BiggerHomeUserTableViewCell", for: indexPath) as?
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BiggerHomeUserTableViewCell.className, for: indexPath) as?
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             DispatchQueue.main.async {
@@ -340,21 +354,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.isStar = { [weak self] isStar in
                 self?.saveStarStatus(id: model.id, isStar)
             }
-            cell.showInfo = { [weak self] age in
-                self?.getAgeData(age)
-            }
             return cell
         case .sort:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SortListTableViewCell", for: indexPath) as?
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SortListTableViewCell.className, for: indexPath) as?
                     SortListTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            self.sortType == "" ? cell.setupTitle(title: "Sắp xếp") : cell.setupTitle(title: self.sortType)
+            self.sortType == .normal ? cell.setupTitle(title: Constant.Text.sort) : cell.setupTitle(title: self.sortType.toText())
             cell.selectSoft = { [weak self] in
                 self?.sortListUser()
             }
             return cell
         case .title:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTitleTableViewCell", for: indexPath) as?
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTitleTableViewCell.className, for: indexPath) as?
                     HomeTitleTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setupData(model: model)
@@ -368,11 +379,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch model.type {
         case .addUser:
-            let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+            let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
             do {
-                let vc = DetailUserViewController.init(nibName: "DetailUserViewController", bundle: nil)
+                let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
                 vc.currentModel.id = model.id
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -390,35 +401,6 @@ extension HomeViewController {
         try! self.realm.write {
             selectedUser.isStar = isStar
         }
-        getListUser()
-    }
-}
-
-extension HomeViewController {
-    func getAgeData(_ age: Int) {
-        backgroundThread.async {
-            let path = Bundle.main.path(forResource: "Book1", ofType: "csv")
-            
-            do {
-                let csv : CSV = try CSV(url: URL(fileURLWithPath: path!))
-                let rows = csv.namedRows
-                
-                for row in rows {
-                    if let data = row["\(age)"] {
-                        let vc = PopupInfoViewController.init(nibName: "PopupInfoViewController", bundle: nil)
-                        vc.age = age
-                        vc.text = data
-                        let popup = PopupDialog(viewController: vc,
-                                                buttonAlignment: .horizontal,
-                                                transitionStyle: .fadeIn,
-                                                tapGestureDismissal: true,
-                                                panGestureDismissal: false)
-                        self.present(popup, animated: true, completion: nil)
-                    }
-                }
-            } catch {
-                print("Parsing CSV file has error \(error)")
-            }
-        }
+        self.getListUser()
     }
 }

@@ -27,24 +27,24 @@ class SearchItemTableViewCell: UITableViewCell {
             if model.avatar != "" {
                 self.avatarUser.image = loadImageFromDiskWith(fileName: model.avatar)
             } else {
-                self.avatarUser.image = UIImage(named: "avatar_placeholder")
+                self.avatarUser.image = UIImage(named: Constant.Text.avatarPlaceholder)
             }
         }
 
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
         if model.updateTime().isEmpty {
-            babyAgeLabel.text = "Chưa cập nhật"
-            dateBornLabel.text = "Chưa cập nhật"
+            babyAgeLabel.text = Constant.Text.notUpdated
+            dateBornLabel.text = Constant.Text.notUpdated
         } else {
             babyAgeLabel.text = model.updateTime()
             dateBornLabel.text = model.babyDateBorn
         }
         
         if self.traitCollection.userInterfaceStyle == .light {
-            subView.backgroundColor = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
+            subView.backgroundColor = Constant.BrandColors.lightColorItem2
         } else {
-            subView.backgroundColor = UIColor(red: 0.36, green: 0.30, blue: 0.59, alpha: 1.00)
+            subView.backgroundColor = Constant.BrandColors.darkColorItem2
         }
     }
 }

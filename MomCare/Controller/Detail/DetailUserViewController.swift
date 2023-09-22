@@ -20,6 +20,7 @@ class DetailUserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var theme: UIImageView!
+    @IBOutlet weak var saveButton: UIButton!
     
     var model = [DetailModel]()
     var userChoice: UserChoice?
@@ -30,22 +31,22 @@ class DetailUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Thông tin sản phụ"
+        self.title = Constant.Text.patientInfo
         self.getInfoUser()
-        asyncMainThread.async {
+        self.asyncMainThread.async {
             self.changeTheme(self.theme)
             self.setupView()
         }
-        configView()
-        setupData()
+        self.configView()
+        self.setupData()
         self.setupNavigationButton()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        changeTheme(theme)
-        setupNavigationButton()
-        tableView.reloadData()
+        self.changeTheme(theme)
+        self.setupNavigationButton()
+        self.tableView.reloadData()
     }
     
     func setupView() {
@@ -65,19 +66,20 @@ class DetailUserViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        bottomHeightConstraint.constant = 16
+        self.bottomHeightConstraint.constant = 16
         self.view.layoutIfNeeded()
     }
     
     func setupNavigationButton() {
         self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: "ic_left_arrow")?.toHierachicalImage()
+        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
         
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "trash")?.toHierachicalImage()
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: Constant.Text.icTrash)?.toHierachicalImage()
                                         , style: .plain, target: self, action:
                                         #selector(removeUser))
+        rightItem.isEnabled = !currentModel.dateSave.isEmpty
         navigationItem.rightBarButtonItem = rightItem
     }
     
@@ -86,21 +88,21 @@ class DetailUserViewController: UIViewController {
     }
     
     @objc func removeUser() {
-        if currentModel.dateSave.isEmpty {
-            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+        if self.currentModel.dateSave.isEmpty {
+            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { _ in
                 self.saveData()
             }
-            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xóa bệnh nhân này ?", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Đồng ý", style: .default) { _ in
+            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.removeUser, preferredStyle: .alert)
+            let action = UIAlertAction(title: Constant.Text.accept, style: .default) { _ in
                 self.deleteUser()
             }
-            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
@@ -110,9 +112,9 @@ class DetailUserViewController: UIViewController {
     func deleteUser() {
         let currentUser = realm.objects(User.self).filter("idUser == %@",currentModel.id).toArray()
         let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == %@", currentModel.id).toArray()
-        try! realm.write{
-            realm.delete(currentUser)
-            realm.delete(noteOfUser)
+        try! self.realm.write{
+            self.realm.delete(currentUser)
+            self.realm.delete(noteOfUser)
         }
         
         self.navigationController?.popToRootViewController(animated: true)
@@ -125,7 +127,7 @@ class DetailUserViewController: UIViewController {
     }
         
     func configView() {
-        tableView.do {
+        self.tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.tableFooterView = UIView()
@@ -138,10 +140,11 @@ class DetailUserViewController: UIViewController {
             $0.registerNibCellFor(type: PhotoTableViewCell.self)
             $0.registerNibCellFor(type: ImagePregnantTableViewCell.self)
         }
+        self.currentModel.dateSave.isEmpty ? self.saveButton.setTitle(Constant.Text.save, for: .normal) : self.saveButton.setTitle(Constant.Text.saveChange, for: .normal)
     }
     
     func setupData() {
-        model.removeAll()
+        self.model.removeAll()
         var avatar = currentModel
         avatar.type = .avatar
         avatar.dataType = .momImage
@@ -153,32 +156,32 @@ class DetailUserViewController: UIViewController {
         var name = currentModel
         name.type = .info
         name.dataType = .name
-        name.title = "Họ và tên ⃰"
+        name.title = Constant.Text.name
         name.value = currentModel.name
         
         var address = currentModel
         address.type = .info
         address.dataType = .address
-        address.title = "Địa chỉ ⃰"
+        address.title = Constant.Text.address
         address.value = currentModel.address
         
         var momBirth = currentModel
         momBirth.type = .info
         momBirth.dataType = .dob
-        momBirth.title = "Năm sinh ⃰"
+        momBirth.title = Constant.Text.yearBorn
         momBirth.value = currentModel.momBirth
         
         var number = currentModel
         number.type = .info
         number.dataType = .numberPhone
-        number.title = "Số điện thoại ⃰"
+        number.title = Constant.Text.phone
         number.value = currentModel.numberPhone
         number.isCall = true
         
         var height = currentModel
         height.type = .info
         height.dataType = .height
-        height.title = "Chiều cao ⃰"
+        height.title = Constant.Text.height
         height.value = currentModel.height
         
         var age = currentModel
@@ -199,86 +202,79 @@ class DetailUserViewController: UIViewController {
         imagePregnant.dataType = .imagePregnant
         imagePregnant.imagePregnant = currentModel.imagePregnant
         
-        model.append(avatar)
-        model.append(general)
-        model.append(name)
-        model.append(address)
-        model.append(momBirth)
-        model.append(number)
-        model.append(height)
-        model.append(age)
-        model.append(note)
-        model.append(photo)
-        if currentModel.imagePregnant != nil {
-            model.append(imagePregnant)
+        self.model.append(avatar)
+        self.model.append(general)
+        self.model.append(name)
+        self.model.append(address)
+        self.model.append(momBirth)
+        self.model.append(number)
+        self.model.append(height)
+        self.model.append(age)
+        self.model.append(note)
+        self.model.append(photo)
+        if self.currentModel.imagePregnant != nil {
+            self.model.append(imagePregnant)
         }
     }
     
     func modelIndexPath(indexPath: IndexPath) -> DetailModel {
-        return model[indexPath.row]
+        return self.model[indexPath.row]
     }
     
     private func openLibararies() {
-        let alert = UIAlertController(title: "Select Photo Type".localized, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Select Photo Type", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Photo Library".localized, style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default , handler:{ (UIAlertAction)in
             self.openMedia(type: .photoLibrary)
         }))
         
-        alert.addAction(UIAlertAction(title: "Camera".localized, style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Camera", style: .default , handler:{ (UIAlertAction)in
             self.openMedia(type: .camera)
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
-            print("User click Dismiss button")
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
         }))
         
         self.present(alert, animated: true, completion: {
-            print("completion block")
         })
     }
     
     private func openMedia(type: UIImagePickerController.SourceType) {
         let vc = UIImagePickerController()
         vc.sourceType = type
-        vc.videoQuality = .typeMedium
-        if userChoice == .mom {
-            vc.allowsEditing = true
-        } else {
-            vc.allowsEditing = false
-        }
+        vc.allowsEditing = true
         vc.delegate = self
         present(vc, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            if userChoice == .mom {
-                currentModel.avatarImage = image
-                setupData()
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            if self.userChoice == .mom {
+                self.currentModel.avatarImage = image
+                self.setupData()
                 let indexPath = IndexPath(row: 0, section: 0)
-                tableView?.reloadRows(at: [indexPath], with: .none)
+                self.tableView?.reloadRows(at: [indexPath], with: .none)
             } else {
-                currentModel.imagePregnant = image
-                setupData()
-                tableView?.reloadData()
+                self.currentModel.imagePregnant = image
+                self.setupData()
+                self.tableView?.reloadData()
             }
         }
         picker.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showMore(_ sender: UIButton) {
-        if currentModel.id == "" {
-            let alert = UIAlertController(title: "Thông báo", message: "Bệnh nhân chưa được lưu lại", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Lưu lại", style: .default) { _ in
+        if self.currentModel.id == "" {
+            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { _ in
                 self.saveData()
             }
-            let cancel = UIAlertAction(title: "Hủy bỏ", style: .cancel, handler: nil)
+            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
         } else {
-            let vc = HistoryViewController.init(nibName: "HistoryViewController", bundle: nil)
+            let vc = HistoryViewController.init(nibName: HistoryViewController.className, bundle: nil)
             vc.hidesBottomBarWhenPushed = true
             vc.idUser = currentModel.id
             self.navigationController?.pushViewController(vc, animated: true)
@@ -286,27 +282,27 @@ class DetailUserViewController: UIViewController {
     }
     
     @IBAction func saveData(_ sender: UIButton) {
-        if currentModel.id != "" {
-            updateUser(id: currentModel.id)
+        if self.currentModel.id != "" {
+            self.updateUser(id: currentModel.id)
         } else {
-            saveData()
+            self.saveData()
         }
     }
     
     func saveData() {
-        if !currentModel.name.isEmpty && !currentModel.address.isEmpty &&
-            !currentModel.momBirth.isEmpty && !currentModel.height.isEmpty && !currentModel.numberPhone.isEmpty {
-            saveInfoUser()
+        if !self.currentModel.name.isEmpty && !self.currentModel.address.isEmpty &&
+            !self.currentModel.momBirth.isEmpty && !self.currentModel.height.isEmpty && !self.currentModel.numberPhone.isEmpty {
+            self.saveInfoUser()
         } else {
-            let alert = UIAlertController(title: "Thông báo", message: "Đang thiếu thông tin", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.missingInfo, preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
         }
     }
     
     func openDate() {
-        let vc = PopupCalendarViewController.init(nibName: "PopupCalendarViewController", bundle: nil)
+        let vc = PopupCalendarViewController.init(nibName: PopupCalendarViewController.className, bundle: nil)
         vc.openCalendar = { [weak self] in
             self?.view.alpha = 0.5
             self?.navigationController?.navigationBar.alpha = 0.3
@@ -329,12 +325,12 @@ class DetailUserViewController: UIViewController {
     func calculateBabyAge(dateString: String) {
         let dateFormatter = DateFormatter()
         let todayDate = Date()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.dateFormat = Constant.Text.dateFormat
         let date = dateFormatter.date(from:dateString)
         guard let timeLast = date?.millisecondsSince1970 else { return }
         let timeToday = todayDate.millisecondsSince1970
         let result = timeLast - timeToday
-        changeMilisToWeek(milis: result)
+        self.changeMilisToWeek(milis: result)
     }
     
     func changeMilisToWeek(milis: Int64) {
@@ -346,8 +342,8 @@ class DetailUserViewController: UIViewController {
     }
     
     func isInValidPhone() {
-        let alert = UIAlertController(title: "Thông báo", message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: Constant.Text.notification, message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
@@ -355,7 +351,7 @@ class DetailUserViewController: UIViewController {
 
 extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count
+        return self.model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -414,7 +410,7 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.selectionStyle = .none
             cell.setupData(model: currentModel)
             cell.showImage = { [weak self] in
-                let vc = ShowImageDetailViewController.init(nibName: "ShowImageDetailViewController", bundle: nil)
+                let vc = ShowImageDetailViewController.init(nibName: ShowImageDetailViewController.className, bundle: nil)
                 vc.inDetail = true
                 vc.imageInDetail = self?.currentModel.imagePregnant
                 self?.present(vc, animated: true, completion: nil)
@@ -444,8 +440,8 @@ extension DetailUserViewController: DetailUserInfo {
             break
         }
 
-        let alert = UIAlertController(title: "Thông báo", message: "Không được bỏ trống \(typeCellName)", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Đã hiểu", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: Constant.Text.notification, message: "Không được bỏ trống \(typeCellName)", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
@@ -475,31 +471,31 @@ extension DetailUserViewController: DetailUserInfo {
     }
     
     func chooseAvatar() {
-        userChoice = .mom
-        openLibararies()
+        self.userChoice = .mom
+        self.openLibararies()
     }
     
     func chooseBabyDOB() {
-        userChoice = .baby
-        openDate()
+        self.userChoice = .baby
+        self.openDate()
     }
     
     func chooseImage() {
-        userChoice = .baby
-        openLibararies()
+        self.userChoice = .baby
+        self.openLibararies()
     }
 }
 
 extension DetailUserViewController {
     func saveInfoUser() {
         let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        dateFormatter.dateFormat = Constant.Text.dateFormatDetail
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
-        if currentModel.numberPhone.isValidPhone() {
+        if self.currentModel.numberPhone.isValidPhone() {
             do {
-                realm.beginWrite()
+                self.realm.beginWrite()
                 currentUser.idUser = NSUUID().uuidString.lowercased()
                 currentUser.name = currentModel.name
                 currentUser.address = currentModel.address
@@ -509,17 +505,17 @@ extension DetailUserViewController {
                 currentUser.babyDateBorn = currentModel.babyAge
                 currentUser.dateSave = dateString
                 currentUser.note = currentModel.note
-                currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                               image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+                currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
+                                               image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
                                                type: .mom)
-                currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
+                currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(currentModel.id)",
                                                       image: currentModel.imagePregnant ?? nil,
                                                       type: .baby)
-                try? realm.commitWrite()
-                try? realm.safeWrite({
-                    realm.add(currentUser)
-                    let alert = UIAlertController(title: "Thông báo", message: "Lưu thành công", preferredStyle: .actionSheet)
-                    let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+                try? self.realm.commitWrite()
+                try? self.realm.safeWrite({
+                    self.realm.add(currentUser)
+                    let alert = UIAlertController(title: Constant.Text.notification, message: "Lưu thành công", preferredStyle: .actionSheet)
+                    let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) { _ in
                         self.navigationController?.popToRootViewController(animated: true)
                         Session.shared.isPopToRoot = true
                     }
@@ -528,19 +524,19 @@ extension DetailUserViewController {
                 })
             }
         } else {
-            isInValidPhone()
+            self.isInValidPhone()
         }
     }
     
     func updateUser(id: String) {
         let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        dateFormatter.dateFormat = Constant.Text.dateFormatDetail
         let date = Date()
         let dateString = dateFormatter.string(from: date)
         
         guard let currentUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
         
-        try! realm.write({
+        try! self.realm.write({
             currentUser.name = currentModel.name
             currentUser.address = currentModel.address
             currentUser.momBirth = currentModel.momBirth
@@ -549,22 +545,20 @@ extension DetailUserViewController {
             currentUser.babyDateBorn = currentModel.babyAge
             currentUser.dateSave = dateString
             currentUser.note = currentModel.note
-            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.numberPhone)",
-                                           image: currentModel.avatarImage ?? UIImage(named: "avatar_placeholder")!,
+            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
+                                           image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
                                            type: .mom)
-            currentUser.imagePregnant = saveImage(imageName: "imagePrgnant_\(currentModel.numberPhone)",
+            currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(currentModel.id)",
                                                   image: currentModel.imagePregnant ?? nil,
                                                   type: .baby)
             
-            let alert = UIAlertController(title: "Thông báo", message: "Cập nhật thành công", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "Đã hiểu", style: .cancel) { _ in
+            let alert = UIAlertController(title: Constant.Text.notification, message: "Cập nhật thành công", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) { _ in
                 self.navigationController?.popToRootViewController(animated: true)
                 Session.shared.isPopToRoot = true
             }
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
         })
-        
     }
-    
 }

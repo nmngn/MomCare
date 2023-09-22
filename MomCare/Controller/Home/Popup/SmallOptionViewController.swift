@@ -18,41 +18,41 @@ class SmallOptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        notiImage.image = UIImage(systemName: "bell")?.toHierachicalImage()
-        theme.applyBlurEffect()
+        self.notiImage.image = UIImage(systemName: Constant.Text.bell)?.toHierachicalImage()
+        self.theme.applyBlurEffect()
         let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
-        dismissView.addGestureRecognizer(tapGestureReconizer)
+        self.dismissView.addGestureRecognizer(tapGestureReconizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !notiModel.isEmpty {
+        if !self.notiModel.isEmpty {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                self.notiImage.image = UIImage(systemName: "bell.badge")?.toHierachicalImage()
+                self.notiImage.image = UIImage(systemName: Constant.Text.badgeBell)?.toHierachicalImage()
             }, completion: nil)
         }
     }
     
     @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func openNoti(_ sender: UIButton) {
-        let vc = NotificationViewController.init(nibName: "NotificationViewController", bundle: nil)
+        let vc = NotificationViewController.init(nibName: NotificationViewController.className, bundle: nil)
         vc.notiModel = self.notiModel
-        dismissVC()
+        self.dismissVC()
         self.navigation.pushViewController(vc, animated: true)
     }
     
-    @IBAction func openProfile(_ sender: UIButton) {
-        let vc = WebViewController.init(nibName: "WebViewController", bundle: nil)
-        dismissVC()
+    @IBAction func openWebview(_ sender: UIButton) {
+        let vc = WebViewController.init(nibName: WebViewController.className, bundle: nil)
+        self.dismissVC()
         self.navigation.pushViewController(vc, animated: true)
     }
         
-    @IBAction func logOut(_ sender: UIButton) {
-        let vc = SettingViewController.init(nibName: "SettingViewController", bundle: nil)
-        dismissVC()
+    @IBAction func settingAction(_ sender: UIButton) {
+        let vc = SettingViewController.init(nibName: SettingViewController.className, bundle: nil)
+        self.dismissVC()
         self.navigation.pushViewController(vc, animated: true)
     }
 }

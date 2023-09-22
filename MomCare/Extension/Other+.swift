@@ -51,6 +51,12 @@ func loadImageFromDiskWith(fileName: String) -> UIImage? {
     return nil
 }
 
+extension NSObject {
+    class var className: String {
+        return String(describing: self).components(separatedBy: ".").last!
+    }
+}
+
 extension UIViewController {
     func updateTime(dateString: String) -> String {
         let dateFormatter = DateFormatter()
@@ -86,6 +92,7 @@ extension UIViewController {
             } else {
                 theme.image = UIImage(named: "bed")
             }
+            theme.applyBlurEffect()
         }
     }
     

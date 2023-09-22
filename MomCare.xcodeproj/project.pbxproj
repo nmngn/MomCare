@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3600356E278415C30067ECEA /* Book1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3600356D278415C30067ECEA /* Book1.csv */; };
-		3600357227841F270067ECEA /* PopupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600357027841F270067ECEA /* PopupInfoViewController.swift */; };
-		3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3600357127841F270067ECEA /* PopupInfoViewController.xib */; };
 		36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090155285C802A0068A8C4 /* TitleNoteViewController.swift */; };
 		36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36090156285C802B0068A8C4 /* TitleNoteViewController.xib */; };
 		3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090159285C85BB0068A8C4 /* SettingViewController.swift */; };
@@ -92,8 +90,6 @@
 /* Begin PBXFileReference section */
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3600356D278415C30067ECEA /* Book1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Book1.csv; sourceTree = "<group>"; };
-		3600357027841F270067ECEA /* PopupInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupInfoViewController.swift; sourceTree = "<group>"; };
-		3600357127841F270067ECEA /* PopupInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupInfoViewController.xib; sourceTree = "<group>"; };
 		36090155285C802A0068A8C4 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		36090156285C802B0068A8C4 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 		36090159285C85BB0068A8C4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -191,8 +187,6 @@
 		3600356F27841F0E0067ECEA /* Popup */ = {
 			isa = PBXGroup;
 			children = (
-				3600357027841F270067ECEA /* PopupInfoViewController.swift */,
-				3600357127841F270067ECEA /* PopupInfoViewController.xib */,
 				365F0B1C27982E6C001BE7D1 /* SmallOptionViewController.swift */,
 				365F0B1D27982E6C001BE7D1 /* SmallOptionViewController.xib */,
 			);
@@ -585,7 +579,6 @@
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
 				3609015C285C85BB0068A8C4 /* SettingViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
-				3600357327841F270067ECEA /* PopupInfoViewController.xib in Resources */,
 				3600356E278415C30067ECEA /* Book1.csv in Resources */,
 				3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */,
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
@@ -692,7 +685,6 @@
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
-				3600357227841F270067ECEA /* PopupInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

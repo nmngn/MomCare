@@ -7,7 +7,6 @@ target 'MomCare' do
   pod 'Then'
   pod 'PopupDialog'
   pod 'IQKeyboardManagerSwift'
-  pod "SwiftCSV"
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'RealmSwift', '~> 10.28'
   pod 'Presentr'

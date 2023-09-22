@@ -21,23 +21,22 @@ class BadgeUserTableViewCell: UITableViewCell {
     }
     
     func getNumberPatient(list: [User]) {
-        let text = NSMutableAttributedString(string: "Xin chào ", attributes: [
-            .font : UIFont.systemFont(ofSize: 18, weight: .medium)])
+        let text = NSMutableAttributedString(string: Constant.Text.hello, attributes: [
+            .font : UIFont.systemFont(ofSize: Constant.Size.biggerFontSize, weight: .medium)])
 
         helloTitle.attributedText = text
         
         if self.traitCollection.userInterfaceStyle == .light {
-            subView.backgroundColor = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
-            
+            subView.backgroundColor = Constant.BrandColors.lightColorBadge
         } else {
-                subView.backgroundColor = UIColor(red: 0.34, green: 0.35, blue: 0.73, alpha: 1.00)
+            subView.backgroundColor = Constant.BrandColors.darkColorBadge
         }
         
         let allPatient = NSMutableAttributedString(string: "\(list.count)", attributes: [
-            .font : UIFont.systemFont(ofSize: 16, weight: .bold)
+            .font : UIFont.systemFont(ofSize: Constant.Size.normalFontSize, weight: .bold)
         ])
-        let textAll = NSMutableAttributedString(string: "Tổng số bệnh nhân hiện có: ", attributes: [
-            .font : UIFont.systemFont(ofSize: 16, weight: .regular)
+        let textAll = NSMutableAttributedString(string: Constant.Text.allPatient, attributes: [
+            .font : UIFont.systemFont(ofSize: Constant.Size.normalFontSize, weight: .regular)
         ])
         
         textAll.append(allPatient)
@@ -56,10 +55,10 @@ class BadgeUserTableViewCell: UITableViewCell {
         })
         
         let inMonthPatient = NSMutableAttributedString(string: "\(newList.count)", attributes: [
-            .font : UIFont.systemFont(ofSize: 16, weight: .bold)
+            .font : UIFont.systemFont(ofSize: Constant.Size.normalFontSize, weight: .bold)
         ])
-        let textMonth = NSMutableAttributedString(string: "Số bệnh nhân dự kiến sinh trong tháng này: ", attributes: [
-            .font : UIFont.systemFont(ofSize: 16, weight: .regular)
+        let textMonth = NSMutableAttributedString(string: Constant.Text.patientInMonth, attributes: [
+            .font : UIFont.systemFont(ofSize: Constant.Size.normalFontSize, weight: .regular)
         ])
         
         textMonth.append(inMonthPatient)

@@ -20,20 +20,20 @@ class GeneralInfoTableViewCell: UITableViewCell {
     func setupData(_ model: DetailModel?) {
         if model?.dateSave == "" {
             let dateFormatter : DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+            dateFormatter.dateFormat = Constant.Text.dateFormatDetail
             let date = Date()
             let dateString = dateFormatter.string(from: date)
             
-            let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
+            let text = NSMutableAttributedString(string: Constant.Text.dateCreated,
                                                  attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)])
             let day = NSMutableAttributedString(string: "\(dateString)",
                                                 attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .medium)])
             text.append(day)
             dayCreate.attributedText = text
         } else {
-            let text = NSMutableAttributedString(string: "Ngày đăng kí:  ",
+            let text = NSMutableAttributedString(string: Constant.Text.dateCreated,
                                                  attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)])
-            let day = NSMutableAttributedString(string: "\(model?.dateSave ?? "Chưa cập nhật")",
+            let day = NSMutableAttributedString(string: "\(model?.dateSave ?? Constant.Text.notUpdated)",
                                                 attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .medium)])
             text.append(day)
             dayCreate.attributedText = text
