@@ -11,38 +11,47 @@ class ShowImageDetailViewController: UIViewController {
 
     @IBOutlet weak var viewImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    var imageData = ""
-    var imageInDetail: UIImage?
-    var inDetail = false
+    var imagePath = ""
+    var imageData: UIImage?
     var titleData = ""
     var time = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !inDetail {
-            showImage()
-        } else {
-            showImageInDetail()
-        }
+        self.showImage()
         titleLabel.text = "\(titleData) \n\(time)"
     }
     
     func showImage() {
-        if self.imageData != "" {
-            if let image = loadImageFromDiskWith(fileName: imageData) {
-                viewImage.image = image
-                viewImage.isUserInteractionEnabled = true
-                let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchImage))
-                view.addGestureRecognizer(pinchGesture)
+        if let imageData = self.imageData, !self.imagePath.isEmpty {
+            DispatchQueue.main.async {
+                self.viewImage.image = imageData
+                self.viewImage.isUserInteractionEnabled = true
+                let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchImage))
+                self.view.addGestureRecognizer(pinchGesture)
+            }
+        } else {
+            if !self.imagePath.isEmpty {
+                let _ = loadImageFromDiskWith(fileName: self.imagePath) { [weak self] image in
+                    guard let strongSelf = self else { return }
+                    DispatchQueue.main.async {
+                        strongSelf.viewImage.image = image
+                        strongSelf.viewImage.isUserInteractionEnabled = true
+                        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(strongSelf.pinchImage))
+                        strongSelf.view.addGestureRecognizer(pinchGesture)
+                    }
+                }
+            }
+            
+            if let imageData = self.imageData {
+                DispatchQueue.main.async {
+                    self.viewImage.image = imageData
+                    self.viewImage.isUserInteractionEnabled = true
+                    let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchImage))
+                    self.view.addGestureRecognizer(pinchGesture)
+                }
             }
         }
-    }
-    
-    func showImageInDetail() {
-        viewImage.image = imageInDetail
-        viewImage.isUserInteractionEnabled = true
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchImage))
-        view.addGestureRecognizer(pinchGesture)
     }
     
     @objc func pinchImage(sender: UIPinchGestureRecognizer) {

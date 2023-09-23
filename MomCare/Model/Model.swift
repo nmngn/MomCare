@@ -27,7 +27,7 @@ class User: Object {
         model.id = idUser
         model.address = address
         model.numberPhone = numberPhone
-        model.avatarImage = loadImageFromDiskWith(fileName: avatar)
+        model.avatarImagePath = avatar
         model.name = name
         model.momBirth = momBirth
         model.height = height
@@ -35,7 +35,7 @@ class User: Object {
         model.dateCalculate = updateTime()
         model.babyAge = babyDateBorn
         model.note = note
-        model.imagePregnant = loadImageFromDiskWith(fileName: imagePregnant)
+        model.imagePregnantPath = imagePregnant
         return model
     }
     

@@ -37,6 +37,7 @@ struct DetailModel {
     var title = ""
     var value = ""
     var avatarImage: UIImage?
+    var avatarImagePath = ""
     var name = ""
     var address = ""
     var momBirth = ""
@@ -46,6 +47,7 @@ struct DetailModel {
     var babyAge = ""
     var note = ""
     var imagePregnant: UIImage?
+    var imagePregnantPath = ""
     var dateSave = ""
     var placeHolder = ""
     var dataType: DataType?

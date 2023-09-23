@@ -28,9 +28,21 @@ class AvatarUserTableViewCell: UITableViewCell {
     }
 
     func setupData(model: DetailModel) {
-        if model.avatarImage == nil {
+        if model.avatarImage == nil && model.avatarImagePath.isEmpty {
             avatarImage.image = UIImage(named: Constant.Text.avatarPlaceholder)
+        } else if model.avatarImage != nil && !model.avatarImagePath.isEmpty {
+            DispatchQueue.main.async {
+                self.avatarImage.image = model.avatarImage
+            }
         } else {
+            if !model.avatarImagePath.isEmpty {
+                let _ = loadImageFromDiskWith(fileName: model.avatarImagePath) { [weak self] image in
+                    DispatchQueue.main.async {
+                        self?.avatarImage.image = image
+                    }
+                }
+            }
+            
             DispatchQueue.main.async {
                 self.avatarImage.image = model.avatarImage
             }

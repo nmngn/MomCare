@@ -149,7 +149,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             self.openLibararies()
         case .cell:
             let vc = ShowImageDetailViewController.init(nibName: ShowImageDetailViewController.className, bundle: nil)
-            vc.imageData = model.dataImage
+            vc.imagePath = model.dataImage
             vc.titleData = model.title
             vc.time = model.time
             present(vc, animated: true, completion: nil)

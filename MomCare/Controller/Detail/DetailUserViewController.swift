@@ -149,7 +149,7 @@ class DetailUserViewController: UIViewController {
         var avatar = currentModel
         avatar.type = .avatar
         avatar.dataType = .momImage
-        avatar.avatarImage = currentModel.avatarImage
+        avatar.avatarImagePath = currentModel.avatarImagePath
         
         var general = currentModel
         general.type = .general
@@ -201,7 +201,7 @@ class DetailUserViewController: UIViewController {
         var imagePregnant = currentModel
         imagePregnant.type = .imagePregnant
         imagePregnant.dataType = .imagePregnant
-        imagePregnant.imagePregnant = currentModel.imagePregnant
+        imagePregnant.imagePregnantPath = currentModel.imagePregnantPath
         
         self.model.append(avatar)
         self.model.append(general)
@@ -213,7 +213,7 @@ class DetailUserViewController: UIViewController {
         self.model.append(age)
         self.model.append(note)
         self.model.append(photo)
-        if self.currentModel.imagePregnant != nil {
+        if !self.currentModel.imagePregnantPath.isEmpty || self.currentModel.imagePregnant != nil {
             self.model.append(imagePregnant)
         }
     }
@@ -412,8 +412,8 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.setupData(model: currentModel)
             cell.showImage = { [weak self] in
                 let vc = ShowImageDetailViewController.init(nibName: ShowImageDetailViewController.className, bundle: nil)
-                vc.inDetail = true
-                vc.imageInDetail = self?.currentModel.imagePregnant
+                vc.imagePath = self?.currentModel.imagePregnantPath ?? ""
+                vc.imageData = self?.currentModel.imagePregnant
                 self?.present(vc, animated: true, completion: nil)
             }
             return cell
@@ -497,7 +497,8 @@ extension DetailUserViewController {
         if self.currentModel.numberPhone.isValidPhone() {
             do {
                 self.realm.beginWrite()
-                currentUser.idUser = NSUUID().uuidString.lowercased()
+                currentModel.id = NSUUID().uuidString.lowercased()
+                currentUser.idUser = currentModel.id
                 currentUser.name = currentModel.name
                 currentUser.address = currentModel.address
                 currentUser.momBirth = currentModel.momBirth
@@ -546,12 +547,28 @@ extension DetailUserViewController {
             currentUser.babyDateBorn = currentModel.babyAge
             currentUser.dateSave = dateString
             currentUser.note = currentModel.note
-            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
-                                           image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
-                                           type: .mom)
-            currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(currentModel.id)",
-                                                  image: currentModel.imagePregnant ?? nil,
-                                                  type: .baby)
+            if currentUser.avatar.isEmpty {
+                currentUser.avatar = saveImage(imageName: "avatarUser_\(id)",
+                                               image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
+                                               type: .mom)
+            } else {
+                if let avatar = currentModel.avatarImage {
+                    currentUser.avatar = saveImage(imageName: "avatarUser_\(id)",
+                                                   image: avatar,
+                                                   type: .mom)
+                }
+            }
+            if currentUser.imagePregnant.isEmpty {
+                currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(id)",
+                                                      image: currentModel.imagePregnant ?? nil,
+                                                      type: .baby)
+            } else {
+                if let image = currentModel.imagePregnant {
+                    currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(id)",
+                                                          image: image,
+                                                          type: .baby)
+                }
+            }
             
             let alert = UIAlertController(title: Constant.Text.notification, message: "Cập nhật thành công", preferredStyle: .actionSheet)
             let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) { _ in

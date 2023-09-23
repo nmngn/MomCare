@@ -16,13 +16,39 @@ class ImagePregnantTableViewCell: UITableViewCell {
     var showImage: (() -> ())?
     
     func setupData(model: DetailModel) {
-        DispatchQueue.main.async {
+        if model.imagePregnant != nil && !model.imagePregnantPath.isEmpty {
             if let image = model.imagePregnant {
-                self.imagePregnant.image = image
-                let ratio = image.size.width / image.size.height
-                let newHeight = self.imagePregnant.frame.width / ratio
-                self.constraintHeight.constant = newHeight
-                self.subView.layoutIfNeeded()
+                DispatchQueue.main.async {
+                    self.imagePregnant.image = image
+                    let ratio = image.size.width / image.size.height
+                    let newHeight = self.imagePregnant.frame.width / ratio
+                    self.constraintHeight.constant = newHeight
+                    self.subView.layoutIfNeeded()
+                }
+            }
+        } else {
+            if !model.imagePregnantPath.isEmpty {
+                let _ = loadImageFromDiskWith(fileName: model.imagePregnantPath) { [weak self] image in
+                    guard let strongSelf = self else { return }
+                    DispatchQueue.main.async {
+                        strongSelf.imagePregnant.image = image
+                        let ratio = image.size.width / image.size.height
+                        let newHeight = strongSelf.imagePregnant.frame.width / ratio
+                        strongSelf.constraintHeight.constant = newHeight
+                        strongSelf.subView.layoutIfNeeded()
+                        
+                    }
+                }
+            }
+            
+            if let image = model.imagePregnant {
+                DispatchQueue.main.async {
+                    self.imagePregnant.image = image
+                    let ratio = image.size.width / image.size.height
+                    let newHeight = self.imagePregnant.frame.width / ratio
+                    self.constraintHeight.constant = newHeight
+                    self.subView.layoutIfNeeded()
+                }
             }
         }
     }

@@ -24,8 +24,12 @@ class SearchItemTableViewCell: UITableViewCell {
     
     func setupData(model: User) {
         DispatchQueue.main.async {
-            if model.avatar != "" {
-                self.avatarUser.image = loadImageFromDiskWith(fileName: model.avatar)
+            if !model.avatar.isEmpty {
+                let _ = loadImageFromDiskWith(fileName: model.avatar) { [weak self] image in
+                    DispatchQueue.main.async {
+                        self?.avatarUser.image = image
+                    }
+                }
             } else {
                 self.avatarUser.image = UIImage(named: Constant.Text.avatarPlaceholder)
             }
