@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ShowImageDetailViewController: UIViewController {
+class ShowImageDetailViewController: UIViewController, UIScrollViewDelegate {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     var imagePath = ""
@@ -18,6 +19,20 @@ class ShowImageDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.delegate = self
+        scrollView.maximumZoomScale = 5.0
+        scrollView.minimumZoomScale = 1.0
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTapGesture)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        viewImage.isUserInteractionEnabled = true
+        viewImage.addGestureRecognizer(panGesture)
+        
+        self.viewImage.isUserInteractionEnabled = true
+        
         self.showImage()
         titleLabel.text = "\(titleData) \n\(time)"
     }
@@ -26,9 +41,6 @@ class ShowImageDetailViewController: UIViewController {
         if let imageData = self.imageData, !self.imagePath.isEmpty {
             DispatchQueue.main.async {
                 self.viewImage.image = imageData
-                self.viewImage.isUserInteractionEnabled = true
-                let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchImage))
-                self.view.addGestureRecognizer(pinchGesture)
             }
         } else {
             if !self.imagePath.isEmpty {
@@ -36,9 +48,6 @@ class ShowImageDetailViewController: UIViewController {
                     guard let strongSelf = self else { return }
                     DispatchQueue.main.async {
                         strongSelf.viewImage.image = image
-                        strongSelf.viewImage.isUserInteractionEnabled = true
-                        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(strongSelf.pinchImage))
-                        strongSelf.view.addGestureRecognizer(pinchGesture)
                     }
                 }
             }
@@ -46,18 +55,31 @@ class ShowImageDetailViewController: UIViewController {
             if let imageData = self.imageData {
                 DispatchQueue.main.async {
                     self.viewImage.image = imageData
-                    self.viewImage.isUserInteractionEnabled = true
-                    let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchImage))
-                    self.view.addGestureRecognizer(pinchGesture)
                 }
             }
         }
     }
     
-    @objc func pinchImage(sender: UIPinchGestureRecognizer) {
-        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
-        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
-        sender.view?.transform = scale
-        sender.scale = 1
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return viewImage
+    }
+    
+    @objc func handleDoubleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        if scrollView.zoomScale == scrollView.minimumZoomScale {
+            let center = gestureRecognizer.location(in: viewImage)
+            let zoomRect = CGRect(x: center.x, y: center.y, width: 1, height: 1)
+            scrollView.zoom(to: zoomRect, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        }
+    }
+    
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let translation = gestureRecognizer.translation(in: view)
+        
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            viewImage.center = CGPoint(x: viewImage.center.x + translation.x, y: viewImage.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: view)
+        }
     }
 }

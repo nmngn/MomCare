@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowImageDetailViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
+                <outlet property="scrollView" destination="CLL-Z0-WSN" id="bT6-Qe-VlI"/>
                 <outlet property="titleLabel" destination="as6-MN-Pz0" id="1mC-Bn-jCZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewImage" destination="VAP-06-p5I" id="mNH-BL-qN5"/>
@@ -23,16 +23,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4C-cg-itK">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
+                    <rect key="frame" x="0.0" y="32" width="414" height="690"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAP-06-p5I">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLL-Z0-WSN">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="690"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAP-06-p5I">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="690"/>
+                                </imageView>
+                            </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="722" id="NJM-SA-MMx"/>
+                                <constraint firstAttribute="bottom" secondItem="VAP-06-p5I" secondAttribute="bottom" id="3l8-Ke-0UG"/>
+                                <constraint firstItem="VAP-06-p5I" firstAttribute="centerX" secondItem="CLL-Z0-WSN" secondAttribute="centerX" id="AvE-4I-Mgj"/>
+                                <constraint firstAttribute="trailing" secondItem="VAP-06-p5I" secondAttribute="trailing" id="IVw-uj-fGh"/>
+                                <constraint firstItem="VAP-06-p5I" firstAttribute="centerY" secondItem="CLL-Z0-WSN" secondAttribute="centerY" id="JZZ-Zm-SUC"/>
+                                <constraint firstItem="VAP-06-p5I" firstAttribute="top" secondItem="CLL-Z0-WSN" secondAttribute="top" id="bZu-VN-bQ4"/>
+                                <constraint firstItem="VAP-06-p5I" firstAttribute="leading" secondItem="CLL-Z0-WSN" secondAttribute="leading" id="xab-c7-9eZ"/>
                             </constraints>
-                        </imageView>
+                        </scrollView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="as6-MN-Pz0">
-                            <rect key="frame" x="16" y="698" width="382" height="0.0"/>
+                            <rect key="frame" x="16" y="666" width="382" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,19 +52,19 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="as6-MN-Pz0" secondAttribute="trailing" constant="16" id="C05-tS-NAF"/>
                         <constraint firstAttribute="bottom" secondItem="as6-MN-Pz0" secondAttribute="bottom" constant="24" id="ERt-uJ-QH5"/>
-                        <constraint firstItem="VAP-06-p5I" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" id="NP5-hv-UU5"/>
-                        <constraint firstItem="VAP-06-p5I" firstAttribute="top" secondItem="h4C-cg-itK" secondAttribute="top" id="NcN-Qm-Kuf"/>
-                        <constraint firstAttribute="bottom" secondItem="VAP-06-p5I" secondAttribute="bottom" id="Ta9-iz-Kwr"/>
+                        <constraint firstAttribute="trailing" secondItem="CLL-Z0-WSN" secondAttribute="trailing" id="OCp-Pc-Os3"/>
+                        <constraint firstAttribute="bottom" secondItem="CLL-Z0-WSN" secondAttribute="bottom" id="Uvf-Np-VSn"/>
+                        <constraint firstItem="CLL-Z0-WSN" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" id="VBf-JU-1Qh"/>
                         <constraint firstItem="as6-MN-Pz0" firstAttribute="leading" secondItem="h4C-cg-itK" secondAttribute="leading" constant="16" id="X2A-1d-U2B"/>
-                        <constraint firstAttribute="trailing" secondItem="VAP-06-p5I" secondAttribute="trailing" id="jYa-NQ-6AP"/>
+                        <constraint firstItem="CLL-Z0-WSN" firstAttribute="top" secondItem="h4C-cg-itK" secondAttribute="top" id="mbI-Jt-n35"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" name="NewBG"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="h4C-cg-itK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7hS-C4-12G"/>
-                <constraint firstItem="h4C-cg-itK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ex6-jJ-ufl"/>
+                <constraint firstItem="h4C-cg-itK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="Ex6-jJ-ufl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h4C-cg-itK" secondAttribute="trailing" id="rSR-PG-RbO"/>
                 <constraint firstAttribute="bottom" secondItem="h4C-cg-itK" secondAttribute="bottom" id="wpC-ub-1ru"/>
             </constraints>
@@ -63,9 +73,6 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="NewBG">
-            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
