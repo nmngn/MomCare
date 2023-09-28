@@ -204,13 +204,17 @@ extension HistoryViewController: UIImagePickerControllerDelegate, UINavigationCo
     private func openMedia(type: UIImagePickerController.SourceType) {
         let vc = UIImagePickerController()
         vc.sourceType = type
-        vc.allowsEditing = true
+        vc.allowsEditing = AppManager.shared.getIsEdittingValue()
         vc.delegate = self
         present(vc, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+        var typeImage = UIImagePickerController.InfoKey.originalImage
+        if AppManager.shared.getIsEdittingValue() {
+            typeImage = UIImagePickerController.InfoKey.editedImage
+        }
+        if let image = info[typeImage] as? UIImage {
             picker.dismiss(animated: true) {
                 let vc = TitleNoteViewController.init(nibName: TitleNoteViewController.className, bundle: nil)
                 vc.saveNote = { [weak self] title in

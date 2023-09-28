@@ -70,9 +70,16 @@ enum Constant {
         static let letSearch = "Hãy bắt đầu tìm kiếm"
         static let noResult = "Không có kết quả tìm thấy"
         static let noNotify = "Không có thông báo"
+        static let setting = "Cài đặt"
+        static let timeSetting = "Thời gian thông báo"
+        static let allowEditImage = "Cho phép sửa ảnh"
         
         static let dateFormat = "dd/MM/yyyy"
         static let dateFormatDetail = "dd/MM/yyyy HH:mm:ss"
+        
+        static let hourToPushNoti = "hourToPushNotification"
+        static let minuteToPushNoti = "minuteToPushNotification"
+        static let isEdittingImage = "isEditingImage"
     }
     
     enum Size {

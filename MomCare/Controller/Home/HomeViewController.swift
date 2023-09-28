@@ -141,8 +141,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
         
         var date = DateComponents()
-        date.hour = 7
-        date.minute = 30
+        (date.hour, date.minute) = AppManager.shared.getTime()
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
         let request = UNNotificationRequest(identifier: Constant.Text.notificationEn,
                                             content: notificationContent,

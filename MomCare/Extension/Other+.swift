@@ -39,11 +39,11 @@ func saveImage(imageName: String, image: UIImage?, type: UserChoice) -> String {
 }
 
 func loadImageFromDiskWith(fileName: String, completion: @escaping (UIImage)-> ()) {
-  let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-    let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-    let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
-
     DispatchQueue.global(qos: .background).async {
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+        
         if let dirPath = paths.first {
             let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
             if let image = UIImage(contentsOfFile: imageUrl.path) {

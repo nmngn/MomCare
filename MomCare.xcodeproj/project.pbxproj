@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -84,6 +84,12 @@
 		36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54672691F38000809FF3 /* LaunchScreen.storyboard */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
+		BCD15D362AC4341600BA7094 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D352AC4341600BA7094 /* AppManager.swift */; };
+		BCD15D392AC4356A00BA7094 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D382AC4356A00BA7094 /* SettingModel.swift */; };
+		BCD15D3D2AC435E800BA7094 /* SettingTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D3B2AC435E800BA7094 /* SettingTimeTableViewCell.swift */; };
+		BCD15D3E2AC435E800BA7094 /* SettingTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCD15D3C2AC435E800BA7094 /* SettingTimeTableViewCell.xib */; };
+		BCD15D412AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D3F2AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift */; };
+		BCD15D422AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCD15D402AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +176,12 @@
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
 		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
+		BCD15D352AC4341600BA7094 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		BCD15D382AC4356A00BA7094 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		BCD15D3B2AC435E800BA7094 /* SettingTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimeTableViewCell.swift; sourceTree = "<group>"; };
+		BCD15D3C2AC435E800BA7094 /* SettingTimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTimeTableViewCell.xib; sourceTree = "<group>"; };
+		BCD15D3F2AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		BCD15D402AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSwitchTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +248,7 @@
 		366AE8AB2692B60C00B5262C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BCD15D352AC4341600BA7094 /* AppManager.swift */,
 				3680783D279A913F008ACD0B /* Constant.swift */,
 				3600356D278415C30067ECEA /* Book1.csv */,
 				3694055E279D958400F1E3C6 /* Book2.csv */,
@@ -371,6 +384,8 @@
 		36B90BA228598BEF002C990C /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				BCD15D3A2AC435D700BA7094 /* Cell */,
+				BCD15D372AC4356400BA7094 /* Model */,
 				36090159285C85BB0068A8C4 /* SettingViewController.swift */,
 				3609015A285C85BB0068A8C4 /* SettingViewController.xib */,
 			);
@@ -496,6 +511,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BCD15D372AC4356400BA7094 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BCD15D382AC4356A00BA7094 /* SettingModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BCD15D3A2AC435D700BA7094 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BCD15D3B2AC435E800BA7094 /* SettingTimeTableViewCell.swift */,
+				BCD15D3C2AC435E800BA7094 /* SettingTimeTableViewCell.xib */,
+				BCD15D3F2AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift */,
+				BCD15D402AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -566,6 +600,7 @@
 				36D4FFA32694AEEA00985C25 /* InfoUserTableViewCell.xib in Resources */,
 				36D4FFAD2694B5FA00985C25 /* NoteTableViewCell.xib in Resources */,
 				36D4FFB22694B68200985C25 /* PhotoTableViewCell.xib in Resources */,
+				BCD15D422AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib in Resources */,
 				366AE8E72692D84000B5262C /* DetailUserViewController.xib in Resources */,
 				366AE8C52692BF3300B5262C /* BadgeUserTableViewCell.xib in Resources */,
 				365F0B1F27982E6C001BE7D1 /* SmallOptionViewController.xib in Resources */,
@@ -574,6 +609,7 @@
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
 				36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */,
+				BCD15D3E2AC435E800BA7094 /* SettingTimeTableViewCell.xib in Resources */,
 				368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */,
 				36D4FF9E2694ACC900985C25 /* GeneralInfoTableViewCell.xib in Resources */,
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
@@ -642,6 +678,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD15D392AC4356A00BA7094 /* SettingModel.swift in Sources */,
 				3666F1992699819900D80E06 /* AddPictureTableViewCell.swift in Sources */,
 				36EC54612691F37D00809FF3 /* HomeViewController.swift in Sources */,
 				366AE8CC2692C1FA00B5262C /* UITableView+.swift in Sources */,
@@ -649,6 +686,7 @@
 				367424172770C34F0016477E /* SearchItemTableViewCell.swift in Sources */,
 				36EC545D2691F37D00809FF3 /* AppDelegate.swift in Sources */,
 				366AE8C02692BDEA00B5262C /* HomeModel.swift in Sources */,
+				BCD15D362AC4341600BA7094 /* AppManager.swift in Sources */,
 				367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */,
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
@@ -673,6 +711,7 @@
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
 				36E9CBAE277C5B9600E1B319 /* NotificationTableViewCell.swift in Sources */,
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
+				BCD15D3D2AC435E800BA7094 /* SettingTimeTableViewCell.swift in Sources */,
 				36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
@@ -683,6 +722,7 @@
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,
+				BCD15D412AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,
 			);

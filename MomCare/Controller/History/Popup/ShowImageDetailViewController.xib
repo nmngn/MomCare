@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -59,12 +59,27 @@
                         <constraint firstItem="CLL-Z0-WSN" firstAttribute="top" secondItem="h4C-cg-itK" secondAttribute="top" id="mbI-Jt-n35"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j33-Cy-ZNQ">
+                    <rect key="frame" x="191" y="12" width="32" height="6"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.30291193181818182" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="6" id="W6G-HF-xNV"/>
+                        <constraint firstAttribute="width" constant="32" id="gVC-EG-JiQ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="j33-Cy-ZNQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2aA-VS-Vok"/>
                 <constraint firstItem="h4C-cg-itK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7hS-C4-12G"/>
                 <constraint firstItem="h4C-cg-itK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="Ex6-jJ-ufl"/>
+                <constraint firstItem="j33-Cy-ZNQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="c48-LA-lQq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h4C-cg-itK" secondAttribute="trailing" id="rSR-PG-RbO"/>
                 <constraint firstAttribute="bottom" secondItem="h4C-cg-itK" secondAttribute="bottom" id="wpC-ub-1ru"/>
             </constraints>

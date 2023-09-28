@@ -243,13 +243,17 @@ class DetailUserViewController: UIViewController {
     private func openMedia(type: UIImagePickerController.SourceType) {
         let vc = UIImagePickerController()
         vc.sourceType = type
-        vc.allowsEditing = true
+        vc.allowsEditing = AppManager.shared.getIsEdittingValue()
         vc.delegate = self
         present(vc, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+        var typeImage = UIImagePickerController.InfoKey.originalImage
+        if AppManager.shared.getIsEdittingValue() {
+            typeImage = UIImagePickerController.InfoKey.editedImage
+        }
+        if let image = info[typeImage] as? UIImage {
             if self.userChoice == .mom {
                 self.currentModel.avatarImage = image
                 self.setupData()
