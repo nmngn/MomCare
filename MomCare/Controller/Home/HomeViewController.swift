@@ -219,12 +219,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         model.removeAll()
         guard let listUser = self.listUser else { return }
         let newList = listUser.filter ({ user in
-            let text = updateTime(dateString: user.babyDateBorn)
-            if !text.isEmpty {
-                let startIndex = text.index(text.startIndex, offsetBy: 0)
-                let endIndex = text.index(text.startIndex, offsetBy: 1)
-                let data = String(text[startIndex...endIndex])
-                let result = Int(data) ?? 0 >= 36
+            if !user.babyDateBorn.isEmpty {
+                let startIndex = user.babyDateBorn.index(user.babyDateBorn.startIndex, offsetBy: 3)
+                let endIndex = user.babyDateBorn.index(user.babyDateBorn.startIndex, offsetBy: 4)
+                let data = String(user.babyDateBorn[startIndex...endIndex])
+                let result = Int(data) ?? 0 == getCurrentMonth()
                 return result
             }
             return false

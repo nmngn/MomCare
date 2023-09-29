@@ -15,10 +15,12 @@ extension String {
     subscript(idx: Int) -> String {
         String(self[index(startIndex, offsetBy: idx)])
     }
+    
     func isValidEmail() -> Bool {
         let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
         return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
     }
+    
     func isValidPhone() -> Bool {
         let phonenumberRegex = "^(\(Session.shared.validPhone))+([0-9]{7})$"
         print("Phone regex: \(phonenumberRegex)")

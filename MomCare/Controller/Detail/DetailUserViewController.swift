@@ -493,11 +493,6 @@ extension DetailUserViewController: DetailUserInfo {
 
 extension DetailUserViewController {
     func saveInfoUser() {
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constant.Text.dateFormatDetail
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        
         if self.currentModel.numberPhone.isValidPhone() {
             do {
                 self.realm.beginWrite()
@@ -509,7 +504,7 @@ extension DetailUserViewController {
                 currentUser.numberPhone = currentModel.numberPhone
                 currentUser.height = currentModel.height
                 currentUser.babyDateBorn = currentModel.babyAge
-                currentUser.dateSave = dateString
+                currentUser.dateSave = getCurrentDate()
                 currentUser.note = currentModel.note
                 currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
                                                image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
@@ -535,11 +530,6 @@ extension DetailUserViewController {
     }
     
     func updateUser(id: String) {
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Constant.Text.dateFormatDetail
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        
         guard let currentUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
         
         try! self.realm.write({
@@ -549,7 +539,7 @@ extension DetailUserViewController {
             currentUser.numberPhone = currentModel.numberPhone
             currentUser.height = currentModel.height
             currentUser.babyDateBorn = currentModel.babyAge
-            currentUser.dateSave = dateString
+            currentUser.dateSave = getCurrentDate()
             currentUser.note = currentModel.note
             if currentUser.avatar.isEmpty {
                 currentUser.avatar = saveImage(imageName: "avatarUser_\(id)",
