@@ -86,7 +86,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                     SettingTimeTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setupData(model: model)
-            cell.timeChanged = { [weak self] time in
+            cell.timeChanged = { time in
                 AppManager.shared.setTimeToPushNoti(hour: time.hour, minute: time.minute)
             }
             return cell

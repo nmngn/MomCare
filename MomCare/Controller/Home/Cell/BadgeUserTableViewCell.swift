@@ -43,12 +43,11 @@ class BadgeUserTableViewCell: UITableViewCell {
         allUserLabel.attributedText = textAll
         
         let newList = list.filter ({ user in
-            let text = user.updateTime()
-            if !text.isEmpty {
-                let startIndex = text.index(text.startIndex, offsetBy: 0)
-                let endIndex = text.index(text.startIndex, offsetBy: 1)
-                let data = String(text[startIndex...endIndex])
-                let result = Int(data) ?? 0 >= 36
+            if !user.babyDateBorn.isEmpty {
+                let startIndex = user.babyDateBorn.index(user.babyDateBorn.startIndex, offsetBy: 3)
+                let endIndex = user.babyDateBorn.index(user.babyDateBorn.startIndex, offsetBy: 4)
+                let data = String(user.babyDateBorn[startIndex...endIndex])
+                let result = Int(data) ?? 0 == Calendar.current.component(.month, from: Date())
                 return result
             }
             return false
