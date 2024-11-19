@@ -26,8 +26,6 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         subView.makeShadow()
         subView.makeBorderColor()
         buttonCheck.titleLabel?.text = ""
-        buttonCheck.adjustsImageWhenHighlighted = false
-        buttonCheck.adjustsImageWhenDisabled = false
     }
     
     func setupData(model: HomeModel) {
