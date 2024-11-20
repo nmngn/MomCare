@@ -19,8 +19,6 @@ class PopupCalendarViewController: UIViewController {
         super.viewDidLoad()
         calendar.datePickerMode = .date
         calendar.preferredDatePickerStyle = .wheels
-        calendar.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
-        calendar.maximumDate = Calendar.current.date(byAdding: .month, value: 10, to: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {

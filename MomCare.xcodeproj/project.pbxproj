@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3600356E278415C30067ECEA /* Book1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3600356D278415C30067ECEA /* Book1.csv */; };
 		36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090155285C802A0068A8C4 /* TitleNoteViewController.swift */; };
 		36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36090156285C802B0068A8C4 /* TitleNoteViewController.xib */; };
 		3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090159285C85BB0068A8C4 /* SettingViewController.swift */; };
@@ -53,7 +52,6 @@
 		368AAA522795CBC100F2DA2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */; };
 		368BE028279679EA00ED457C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE027279679EA00ED457C /* UITextField+.swift */; };
 		368BE0322796C34C00ED457C /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368BE0312796C34C00ED457C /* Session.swift */; };
-		3694055F279D958400F1E3C6 /* Book2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3694055E279D958400F1E3C6 /* Book2.csv */; };
 		36B615E6269B541F00F554E8 /* PopupCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */; };
 		36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */; };
 		36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90B952698AAC500817DC2 /* HistoryModel.swift */; };
@@ -96,7 +94,6 @@
 
 /* Begin PBXFileReference section */
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3600356D278415C30067ECEA /* Book1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Book1.csv; sourceTree = "<group>"; };
 		36090155285C802A0068A8C4 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		36090156285C802B0068A8C4 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 		36090159285C85BB0068A8C4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 		368AAA512795CBC100F2DA2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		368BE027279679EA00ED457C /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		368BE0312796C34C00ED457C /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		3694055E279D958400F1E3C6 /* Book2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Book2.csv; sourceTree = "<group>"; };
 		36B615E4269B541F00F554E8 /* PopupCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCalendarViewController.swift; sourceTree = "<group>"; };
 		36B615E5269B541F00F554E8 /* PopupCalendarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopupCalendarViewController.xib; sourceTree = "<group>"; };
 		36B90B952698AAC500817DC2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -252,8 +248,6 @@
 			children = (
 				BCD15D352AC4341600BA7094 /* AppManager.swift */,
 				3680783D279A913F008ACD0B /* Constant.swift */,
-				3600356D278415C30067ECEA /* Book1.csv */,
-				3694055E279D958400F1E3C6 /* Book2.csv */,
 				366AE8C72692C0AA00B5262C /* Roboto */,
 				36EC54652691F38000809FF3 /* Assets.xcassets */,
 				366AE8A82692B5FB00B5262C /* Color.xcassets */,
@@ -608,7 +602,6 @@
 				366AE8C52692BF3300B5262C /* BadgeUserTableViewCell.xib in Resources */,
 				365F0B1F27982E6C001BE7D1 /* SmallOptionViewController.xib in Resources */,
 				36B615E7269B541F00F554E8 /* PopupCalendarViewController.xib in Resources */,
-				3694055F279D958400F1E3C6 /* Book2.csv in Resources */,
 				36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */,
 				366AE8D62692C46400B5262C /* BiggerHomeUserTableViewCell.xib in Resources */,
 				36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */,
@@ -618,7 +611,6 @@
 				366AE8A92692B5FB00B5262C /* Color.xcassets in Resources */,
 				3609015C285C85BB0068A8C4 /* SettingViewController.xib in Resources */,
 				36E9CBAF277C5B9600E1B319 /* NotificationTableViewCell.xib in Resources */,
-				3600356E278415C30067ECEA /* Book1.csv in Resources */,
 				3614AA3927758F47005FC96D /* ShowImageDetailViewController.xib in Resources */,
 				36D4FF992694AAD700985C25 /* AvatarUserTableViewCell.xib in Resources */,
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,

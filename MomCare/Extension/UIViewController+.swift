@@ -39,9 +39,9 @@ extension UIViewController {
     func changeTheme(_ theme: UIImageView) {
         DispatchQueue.main.async {
             if self.traitCollection.userInterfaceStyle == .light {
-                theme.image = UIImage(named: "baby_light")
+                theme.backgroundColor = .lightGray
             } else {
-                theme.image = UIImage(named: "bed")
+                theme.backgroundColor = .darkGray
             }
             theme.applyBlurEffect()
         }
