@@ -30,10 +30,7 @@ enum Constant {
         static let dune = "dune"
         static let listBullet = "list.bullet"
         static let avatarPlaceholder = "avatar_placeholder"
-        static let star = "star"
-        static let unStar = "unstar"
         static let icBack = "ic_left_arrow"
-        static let icTrash = "trash"
         
         static let hello = "Xin chào "
         static let allPatient = "Tổng số sản phụ hiện có: "

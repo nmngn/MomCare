@@ -10,6 +10,7 @@ import NotificationCenter
 import PopupDialog
 import Presentr
 import RealmSwift
+import Toast_Swift
 
 enum SortType {
     case name
@@ -62,16 +63,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
         self.userInitiatedThread.async {
             self.changeTheme(self.theme)
         }
-        asyncMainThread.async {
-            self.getListUser()
-            self.userNotificationCenter.delegate = self
-            self.requestNotificationAuthorization()
-            self.setupNavigationButton()
-        }
         self.configView()
         self.navigationController?.isNavigationBarHidden = false
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")        
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -85,9 +81,11 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if Session.shared.isPopToRoot {
+        asyncMainThread.async {
             self.getListUser()
-            Session.shared.isPopToRoot = false
+            self.userNotificationCenter.delegate = self
+            self.requestNotificationAuthorization()
+            self.setupNavigationButton()
         }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -125,9 +123,9 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             notificationContent.body =
             "Chú ý: \(noti.first?.name ?? "") đã bước vào tháng cuối( \(noti.first?.dateCalculate ?? ""))\nCần chú ý !"
         } else {
-            notificationContent.title = Constant.Text.notificationAbout + "\(self.notiModel.count) bệnh nhân tháng cuối"
+            notificationContent.title = Constant.Text.notificationAbout + "\(self.notiModel.count) sản phụ tháng cuối"
             notificationContent.body =
-            "Chú ý: \(self.notiModel.count) bệnh nhân đã bước vào tháng cuối \nCần chú ý !"
+            "Chú ý: \(self.notiModel.count) sản phụ đã bước vào tháng cuối \nCần chú ý !"
         }
         application.applicationIconBadgeNumber = noti.count
         
@@ -253,6 +251,7 @@ class HomeViewController: UIViewController, UNUserNotificationCenterDelegate {
             infoCell.dateSave = newList[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: newList[i].babyDateBorn)
             infoCell.isStar = newList[i].isStar
+            infoCell.notificationTime = newList[i].setNotificationTime
             model.append(infoCell)
         }
         
@@ -346,11 +345,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BiggerHomeUserTableViewCell.className, for: indexPath) as?
                     BiggerHomeUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            DispatchQueue.main.async {
-                cell.setupData(model: model)
-            }
+            cell.setupData(model: model)
             cell.isStar = { [weak self] isStar in
                 self?.saveStarStatus(id: model.id, isStar)
+            }
+            cell.showNotificationTime = {[weak self] value in
+                self?.showAlert(text: value)
             }
             return cell
         case .sort:
@@ -380,20 +380,24 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
             self.navigationController?.pushViewController(vc, animated: true)
         case .infoUser:
-            do {
-                let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
-                vc.currentModel.id = model.id
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
+            vc.currentModel.id = model.id
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
     }
-    
 }
 
 extension HomeViewController {
+    func showAlert(text: String) {
+        let alert = UIAlertController(title: "Thông báo vào: " + text, message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func saveStarStatus(id: String,_ isStar: Bool) {
         guard let selectedUser = self.realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
         try! self.realm.write {

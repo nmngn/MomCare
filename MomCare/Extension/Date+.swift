@@ -15,4 +15,10 @@ extension Date {
     init(milliseconds:Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }
+    
+    func formattedString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh/mm/ss dd/MM/yyyy"
+        return dateFormatter.string(from: self)
+    }
 }

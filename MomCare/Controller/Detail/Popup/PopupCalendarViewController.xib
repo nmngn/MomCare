@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopupCalendarViewController" customModule="MomCare" customModuleProvider="target">
             <connections>
                 <outlet property="calendar" destination="X9g-J8-1mN" id="RTA-RE-zGi"/>
+                <outlet property="transparentView" destination="fsB-6s-FOL" id="Cas-3U-b6m"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,11 +21,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsB-6s-FOL">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7U-jq-BWh">
-                    <rect key="frame" x="0.0" y="606" width="414" height="256"/>
+                    <rect key="frame" x="0.0" y="616" width="414" height="280"/>
                     <subviews>
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="X9g-J8-1mN">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="246"/>
                         </datePicker>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d05-Ei-w6q">
                             <rect key="frame" x="350" y="0.0" width="64" height="48"/>
@@ -41,13 +46,13 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="X9g-J8-1mN" secondAttribute="bottom" id="3MV-Ij-fiN"/>
-                        <constraint firstItem="d05-Ei-w6q" firstAttribute="top" secondItem="m7U-jq-BWh" secondAttribute="top" id="U3c-PZ-r55"/>
-                        <constraint firstAttribute="trailing" secondItem="d05-Ei-w6q" secondAttribute="trailing" id="d6a-9Z-ibh"/>
-                        <constraint firstAttribute="trailing" secondItem="X9g-J8-1mN" secondAttribute="trailing" id="iCR-5B-KHq"/>
-                        <constraint firstItem="X9g-J8-1mN" firstAttribute="top" secondItem="m7U-jq-BWh" secondAttribute="top" id="o9u-F5-9ZW"/>
-                        <constraint firstAttribute="height" constant="256" id="yqQ-cm-Cx6"/>
-                        <constraint firstItem="X9g-J8-1mN" firstAttribute="leading" secondItem="m7U-jq-BWh" secondAttribute="leading" id="zB5-oH-REf"/>
+                        <constraint firstAttribute="height" constant="280" id="8rj-28-74v"/>
+                        <constraint firstItem="d05-Ei-w6q" firstAttribute="top" secondItem="m7U-jq-BWh" secondAttribute="top" id="D5N-vh-W6v"/>
+                        <constraint firstAttribute="trailing" secondItem="d05-Ei-w6q" secondAttribute="trailing" id="TAn-ap-1oz"/>
+                        <constraint firstItem="X9g-J8-1mN" firstAttribute="top" secondItem="m7U-jq-BWh" secondAttribute="top" id="TPk-nn-vCH"/>
+                        <constraint firstAttribute="trailing" secondItem="X9g-J8-1mN" secondAttribute="trailing" id="aGu-de-sbM"/>
+                        <constraint firstAttribute="bottom" secondItem="X9g-J8-1mN" secondAttribute="bottom" constant="34" id="qhj-WJ-ToH"/>
+                        <constraint firstItem="X9g-J8-1mN" firstAttribute="leading" secondItem="m7U-jq-BWh" secondAttribute="leading" id="ty1-f0-eXW"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -59,11 +64,15 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="m7U-jq-BWh" secondAttribute="bottom" id="CW7-oT-Sia"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m7U-jq-BWh" secondAttribute="trailing" id="Pmt-VI-F2E"/>
-                <constraint firstItem="m7U-jq-BWh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rEf-9S-TaE"/>
+                <constraint firstAttribute="bottom" secondItem="m7U-jq-BWh" secondAttribute="bottom" id="EdU-eJ-vQ8"/>
+                <constraint firstItem="fsB-6s-FOL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="I4J-YU-CJ8"/>
+                <constraint firstItem="fsB-6s-FOL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ie6-p6-Viu"/>
+                <constraint firstItem="m7U-jq-BWh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XUJ-6w-R4n"/>
+                <constraint firstItem="fsB-6s-FOL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gf0-PT-6RU"/>
+                <constraint firstAttribute="bottom" secondItem="fsB-6s-FOL" secondAttribute="bottom" id="ghA-Xw-bbY"/>
+                <constraint firstItem="m7U-jq-BWh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="s2f-ZI-wVF"/>
             </constraints>
-            <point key="canvasLocation" x="71" y="54"/>
+            <point key="canvasLocation" x="69.565217391304358" y="53.571428571428569"/>
         </view>
     </objects>
     <resources>

@@ -43,7 +43,6 @@ extension UIViewController {
             } else {
                 theme.backgroundColor = .darkGray
             }
-            theme.applyBlurEffect()
         }
     }
     

@@ -82,6 +82,9 @@
 		36EC54692691F38000809FF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36EC54672691F38000809FF3 /* LaunchScreen.storyboard */; };
 		36F5E1EE270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F5E1EC270C4CB8009B74D3 /* ImagePregnantTableViewCell.swift */; };
 		36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */; };
+		BC2979B42CEF7ED4004D123A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2979B32CEF7ED1004D123A /* HomeViewModel.swift */; };
+		BC2979B62CEF853B004D123A /* DetailUserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2979B52CEF8535004D123A /* DetailUserExtension.swift */; };
+		BC2979B82CEF8543004D123A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2979B72CEF8540004D123A /* DetailViewModel.swift */; };
 		BC6EECEE2AC66C2C00A36115 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6EECED2AC66C2C00A36115 /* UIViewController+.swift */; };
 		BCD15D362AC4341600BA7094 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D352AC4341600BA7094 /* AppManager.swift */; };
 		BCD15D392AC4356A00BA7094 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D382AC4356A00BA7094 /* SettingModel.swift */; };
@@ -173,6 +176,9 @@
 		36F5E1ED270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePregnantTableViewCell.xib; sourceTree = "<group>"; };
 		53338AE9001D5BBE66C1CC4D /* Pods-MomCare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.debug.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.debug.xcconfig"; sourceTree = "<group>"; };
 		7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MomCare.release.xcconfig"; path = "Target Support Files/Pods-MomCare/Pods-MomCare.release.xcconfig"; sourceTree = "<group>"; };
+		BC2979B32CEF7ED1004D123A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		BC2979B52CEF8535004D123A /* DetailUserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserExtension.swift; sourceTree = "<group>"; };
+		BC2979B72CEF8540004D123A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BC6EECED2AC66C2C00A36115 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		BCD15D352AC4341600BA7094 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		BCD15D382AC4356A00BA7094 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 				366AE8BC2692BD3C00B5262C /* Cell */,
 				36EC54602691F37D00809FF3 /* HomeViewController.swift */,
 				36EC54622691F37D00809FF3 /* Main.storyboard */,
+				BC2979B32CEF7ED1004D123A /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -314,6 +321,8 @@
 				36D4FF932694AABC00985C25 /* Model */,
 				366AE8E42692D84000B5262C /* DetailUserViewController.swift */,
 				366AE8E52692D84000B5262C /* DetailUserViewController.xib */,
+				BC2979B72CEF8540004D123A /* DetailViewModel.swift */,
+				BC2979B52CEF8535004D123A /* DetailUserExtension.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -696,6 +705,7 @@
 				36E9CBB2277C670900E1B319 /* NotificationModel.swift in Sources */,
 				365F0B1E27982E6C001BE7D1 /* SmallOptionViewController.swift in Sources */,
 				365EC7E32857901200709B74 /* Realm +.swift in Sources */,
+				BC2979B42CEF7ED4004D123A /* HomeViewModel.swift in Sources */,
 				366AE8D52692C46400B5262C /* BiggerHomeUserTableViewCell.swift in Sources */,
 				3666F19E269982A300D80E06 /* NoteHistoryTableViewCell.swift in Sources */,
 				3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */,
@@ -706,6 +716,7 @@
 				36EC545F2691F37D00809FF3 /* SceneDelegate.swift in Sources */,
 				36B90B962698AAC500817DC2 /* HistoryModel.swift in Sources */,
 				36E9CBAE277C5B9600E1B319 /* NotificationTableViewCell.swift in Sources */,
+				BC2979B82CEF8543004D123A /* DetailViewModel.swift in Sources */,
 				3680783E279A913F008ACD0B /* Constant.swift in Sources */,
 				BCD15D3D2AC435E800BA7094 /* SettingTimeTableViewCell.swift in Sources */,
 				36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */,
@@ -713,6 +724,7 @@
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
 				36BC4DC327991951006DFC30 /* WebViewController.swift in Sources */,
+				BC2979B62CEF853B004D123A /* DetailUserExtension.swift in Sources */,
 				368BE028279679EA00ED457C /* UITextField+.swift in Sources */,
 				36D4FFA72694B2A600985C25 /* BaybyAgeTableViewCell.swift in Sources */,
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,

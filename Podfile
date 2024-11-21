@@ -20,7 +20,8 @@ target 'MomCare' do
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'RealmSwift', '~> 10.28'
   pod 'Presentr'
-  pod "ESPullToRefresh"
+  pod 'RxSwift', '6.8.0'
+  pod 'RxCocoa', '6.8.0'
   # Pods for MomCare
 
 end

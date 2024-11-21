@@ -35,6 +35,7 @@ struct HomeModel {
     var imagePregnant = ""
     var dateSave = ""
     var isStar = false
+    var notificationTime = ""
     
     init(type: HomeType) {
         self.type = type

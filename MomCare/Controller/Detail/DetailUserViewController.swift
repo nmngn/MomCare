@@ -9,6 +9,7 @@ import UIKit
 import Then
 import PhotosUI
 import RealmSwift
+import UserNotifications
 
 enum UserChoice {
     case mom
@@ -28,6 +29,7 @@ class DetailUserViewController: UIViewController {
     let currentUser = User()
     let realm = try! Realm()
     let asyncMainThread = DispatchQueue.main
+    var infoNotification: (title: String, content: String) = ("", "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,23 +78,36 @@ class DetailUserViewController: UIViewController {
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
         
-        let rightItem = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
-                                        UIImage(systemName: Constant.Text.icTrash)?.toHierachicalImage() : UIImage(systemName: Constant.Text.icTrash)
-                                        , style: .plain, target: self, action:
-                                        #selector(removeUser))
-        rightItem.isEnabled = !currentModel.dateSave.isEmpty
-        navigationItem.rightBarButtonItem = rightItem
+        let deleteButton = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
+                                        UIImage(systemName: "trash")?.toHierachicalImage() : UIImage(systemName: "trash"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(removeUser))
+        deleteButton.isEnabled = !currentModel.dateSave.isEmpty
+        
+        let notiButton = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
+                                         UIImage(systemName: "bell")?.toHierachicalImage() : UIImage(systemName: "bell"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(setNotiTime))
+        notiButton.isEnabled = !currentModel.dateSave.isEmpty
+        
+        navigationItem.rightBarButtonItems = [deleteButton, notiButton]
     }
     
     @objc func touchBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func setNotiTime() {
+        self.showAlertWithFieldsAndDatePicker()
+    }
+    
     @objc func removeUser() {
         if self.currentModel.dateSave.isEmpty {
             let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { _ in
-                self.saveData()
+            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { [weak self] _ in
+                self?.saveData()
             }
             let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
@@ -100,8 +115,8 @@ class DetailUserViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.removeUser, preferredStyle: .alert)
-            let action = UIAlertAction(title: Constant.Text.accept, style: .default) { _ in
-                self.deleteUser()
+            let action = UIAlertAction(title: Constant.Text.accept, style: .default) { [weak self] _ in
+                self?.deleteUser()
             }
             let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
@@ -111,7 +126,7 @@ class DetailUserViewController: UIViewController {
     }
     
     func deleteUser() {
-        let currentUser = realm.objects(User.self).filter("idUser == %@",currentModel.id).toArray()
+        let currentUser = realm.objects(User.self).filter("idUser == %@", currentModel.id).toArray()
         let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == %@", currentModel.id).toArray()
         try! self.realm.write{
             self.realm.delete(currentUser)
@@ -271,8 +286,8 @@ class DetailUserViewController: UIViewController {
     @IBAction func showMore(_ sender: UIButton) {
         if self.currentModel.id == "" {
             let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { _ in
-                self.saveData()
+            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { [weak self] _ in
+                self?.saveData()
             }
             let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
             alert.addAction(action)
@@ -292,65 +307,6 @@ class DetailUserViewController: UIViewController {
         } else {
             self.saveData()
         }
-    }
-    
-    func saveData() {
-        if !self.currentModel.name.isEmpty && !self.currentModel.address.isEmpty &&
-            !self.currentModel.momBirth.isEmpty && !self.currentModel.height.isEmpty && !self.currentModel.numberPhone.isEmpty {
-            self.saveInfoUser()
-        } else {
-            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.missingInfo, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func openDate() {
-        let vc = PopupCalendarViewController.init(nibName: PopupCalendarViewController.className, bundle: nil)
-        vc.openCalendar = { [weak self] in
-            self?.view.alpha = 0.5
-            self?.navigationController?.navigationBar.alpha = 0.3
-        }
-        vc.closeCalendar = { [weak self] in
-            self?.view.alpha = 1
-            self?.navigationController?.navigationBar.alpha = 1
-        }
-        
-        vc.selectDate = { [weak self] date in
-            self?.currentModel.babyAge = date
-            self?.calculateBabyAge(dateString: date)
-            self?.setupData()
-            let indexPath = IndexPath(row: 7, section: 0)
-            self?.tableView.reloadRows(at: [indexPath], with: .none)
-        }
-        present(vc, animated: true, completion: nil)
-    }
-    
-    func calculateBabyAge(dateString: String) {
-        let dateFormatter = DateFormatter()
-        let todayDate = Date()
-        dateFormatter.dateFormat = Constant.Text.dateFormat
-        let date = dateFormatter.date(from:dateString)
-        guard let timeLast = date?.millisecondsSince1970 else { return }
-        let timeToday = todayDate.millisecondsSince1970
-        let result = timeLast - timeToday
-        self.changeMilisToWeek(milis: result)
-    }
-    
-    func changeMilisToWeek(milis: Int64) {
-        let toDay = milis / 86400000
-        let ageDay = 280 - Int(toDay)
-        let week = Int(ageDay / 7)
-        let day = Int(ageDay % 7)
-        self.currentModel.dateCalculate = week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
-    }
-    
-    func isInValidPhone() {
-        let alert = UIAlertController(title: Constant.Text.notification, message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -516,8 +472,8 @@ extension DetailUserViewController {
                 try? self.realm.safeWrite({
                     self.realm.add(currentUser)
                     let alert = UIAlertController(title: Constant.Text.notification, message: "Lưu thành công", preferredStyle: .actionSheet)
-                    let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) { _ in
-                        self.navigationController?.popToRootViewController(animated: true)
+                    let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
+                        self?.navigationController?.popToRootViewController(animated: true)
                         Session.shared.isPopToRoot = true
                     }
                     alert.addAction(action)
@@ -565,8 +521,8 @@ extension DetailUserViewController {
             }
             
             let alert = UIAlertController(title: Constant.Text.notification, message: "Cập nhật thành công", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) { _ in
-                self.navigationController?.popToRootViewController(animated: true)
+            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
+                self?.navigationController?.popToRootViewController(animated: true)
                 Session.shared.isPopToRoot = true
             }
             alert.addAction(action)

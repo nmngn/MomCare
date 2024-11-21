@@ -15,17 +15,17 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var dayCreateLabel: UILabel!
     @IBOutlet weak var babyAgeLabel: UILabel!
     @IBOutlet weak var dateBornLabel: UILabel!
-    @IBOutlet weak var starImage: UIImageView!
-    @IBOutlet weak var buttonCheck: UIButton!
+    @IBOutlet weak var widthNotiConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonStar: UIButton!
     
-    var isStar: ((Bool) -> ())?
-    var model : HomeModel?
+    var isStar: ((Bool) -> Void)?
+    var showNotificationTime: ((String) -> Void)?
+    var model = HomeModel(type: .infoUser)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         subView.makeShadow()
         subView.makeBorderColor()
-        buttonCheck.titleLabel?.text = ""
     }
     
     func setupData(model: HomeModel) {
@@ -46,7 +46,12 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
             self.avatarUser.image = UIImage(named: Constant.Text.avatarPlaceholder)
         }
         
-        starImage.image = model.isStar ? UIImage(named: Constant.Text.star) : UIImage(named: Constant.Text.unStar)
+        widthNotiConstraint.constant = model.notificationTime.isEmpty ? 0: 36
+        
+        buttonStar.setImage(model.isStar
+                            ? UIImage(systemName: "star.fill")?.toHierachicalImage()
+                            : UIImage(systemName: "star")?.toHierachicalImage(),
+                            for: .normal)
         userNameLabel.text = model.name
         
         dayCreateLabel.text = model.dateSave
@@ -61,11 +66,16 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func makeHightlight(_ sender: UIButton) {
-        if let model = self.model {
-            sender.isSelected = model.isStar ? false : true
-        }
-        starImage.image = sender.isSelected ? UIImage(named: Constant.Text.star) : UIImage(named: Constant.Text.unStar)
+        sender.isSelected = model.isStar ? false : true
+        buttonStar.setImage(sender.isSelected
+                             ? UIImage(systemName: "star.fill")?.toHierachicalImage()
+                             : UIImage(systemName: "star")?.toHierachicalImage(),
+                             for: .normal)
         isStar?(sender.isSelected)
         sender.isSelected = !sender.isSelected
+    }
+    
+    @IBAction func setNotificationAction(_ sender: UIButton) {
+        self.showNotificationTime?(model.notificationTime)
     }
 }

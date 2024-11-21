@@ -9,35 +9,30 @@ import UIKit
 
 class PopupCalendarViewController: UIViewController {
     
+    @IBOutlet weak var transparentView: UIView!
     @IBOutlet weak var calendar: UIDatePicker!
     
-    var openCalendar: (() -> ())?
-    var closeCalendar: (() -> ())?
     var selectDate: ((String) -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.datePickerMode = .date
         calendar.preferredDatePickerStyle = .wheels
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
+        transparentView.addGestureRecognizer(tap)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        openCalendar?()
+    @objc func dismissView() {
+        self.dismiss(animated: true)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        closeCalendar?()
-    }
-    
     
     func doneDatePicker(){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constant.Text.dateFormat
         let todaysDate = dateFormatter.string(from: calendar.date)
         selectDate?(todaysDate)
-        closeCalendar?()
+        self.dismiss(animated: true)
     }
     
     @IBAction func selectDay(_ sender: UIButton) {
@@ -45,5 +40,4 @@ class PopupCalendarViewController: UIViewController {
             self.doneDatePicker()
         }
     }
-    
 }

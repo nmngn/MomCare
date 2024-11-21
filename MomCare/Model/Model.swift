@@ -21,6 +21,7 @@ class User: Object {
     @objc dynamic var avatar = ""
     @objc dynamic var imagePregnant = ""
     @objc dynamic var isStar = false
+    @objc dynamic var setNotificationTime = ""
     
     func convertToDetailModel() -> DetailModel {
         var model = DetailModel()
