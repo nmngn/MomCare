@@ -18,7 +18,17 @@ class InfoUserTableViewCell: UITableViewCell {
     
     var cellType: DataType?
     var userPhone = ""
-    var invalidPhone: (() -> ())?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if self.traitCollection.userInterfaceStyle == .light {
+            valueTextField.backgroundColor = .white
+            callButton.backgroundColor = .white
+        } else {
+            valueTextField.backgroundColor = Constant.BrandColors.darkColorItem
+            callButton.backgroundColor = Constant.BrandColors.darkColorItem
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,13 +53,6 @@ class InfoUserTableViewCell: UITableViewCell {
             callButton.isHidden = true
         } else {
             valueTextField.keyboardType = .numberPad
-        }
-        if self.traitCollection.userInterfaceStyle == .light {
-            valueTextField.backgroundColor = .white
-            callButton.backgroundColor = .white
-        } else {
-            valueTextField.backgroundColor = Constant.BrandColors.darkColorItem
-            callButton.backgroundColor = Constant.BrandColors.darkColorItem
         }
     }
     
@@ -83,11 +86,7 @@ extension InfoUserTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
             if cellType == .numberPhone {
-                if text.isValidPhone() {
-                    self.saveInModel(text)
-                } else {
-                    invalidPhone?()
-                }
+                self.saveInModel(text)
             }
         }
     }

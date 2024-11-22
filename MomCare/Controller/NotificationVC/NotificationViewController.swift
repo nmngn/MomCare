@@ -8,9 +8,8 @@
 import UIKit
 import RealmSwift
 
-class NotificationViewController: UIViewController {
+class NotificationViewController: BaseViewController {
 
-    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bellView: UIView!
     @IBOutlet weak var titleBell: UILabel!
@@ -22,7 +21,6 @@ class NotificationViewController: UIViewController {
         super.viewDidLoad()
         self.title = Constant.Text.notification
         self.setupNavigationButton()
-        self.changeTheme(self.theme)
         self.configView()
     }
     
@@ -37,7 +35,6 @@ class NotificationViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.changeTheme(theme)
         self.setupNavigationButton()
         self.tableView.reloadData()
     }

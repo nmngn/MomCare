@@ -12,10 +12,9 @@ import RealmSwift
 import Toast_Swift
 import RxSwift
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var theme: UIImageView!
     
     let disposedBag = DisposeBag()
     let viewModel: HomeViewModel = HomeViewModel()
@@ -40,6 +39,16 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.viewModel.getListUserData()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.setupNavigationButton()
+        self.tableView.reloadData()
     }
     
     func bindViewModel() {

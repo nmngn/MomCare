@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2E93872CF08BCE006D4B56 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2E93862CF08BC8006D4B56 /* BaseViewController.swift */; };
 		36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090155285C802A0068A8C4 /* TitleNoteViewController.swift */; };
 		36090158285C802B0068A8C4 /* TitleNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36090156285C802B0068A8C4 /* TitleNoteViewController.xib */; };
 		3609015B285C85BB0068A8C4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36090159285C85BB0068A8C4 /* SettingViewController.swift */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		08E9659231038AC3957DB0AF /* Pods_MomCare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MomCare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B2E93862CF08BC8006D4B56 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		36090155285C802A0068A8C4 /* TitleNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNoteViewController.swift; sourceTree = "<group>"; };
 		36090156285C802B0068A8C4 /* TitleNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNoteViewController.xib; sourceTree = "<group>"; };
 		36090159285C85BB0068A8C4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B2E93832CF08BB8006D4B56 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1B2E93842CF08BBE006D4B56 /* Common */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		1B2E93842CF08BBE006D4B56 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1B2E93862CF08BC8006D4B56 /* BaseViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		3600356F27841F0E0067ECEA /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +491,7 @@
 		36EC545B2691F37D00809FF3 /* MomCare */ = {
 			isa = PBXGroup;
 			children = (
+				1B2E93832CF08BB8006D4B56 /* Component */,
 				3666F1AC26998D7900D80E06 /* Model */,
 				366AE89C2692A96600B5262C /* AppDelegate */,
 				36FC461926921AD400AAB868 /* Extension */,
@@ -695,6 +714,7 @@
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
+				1B2E93872CF08BCE006D4B56 /* BaseViewController.swift in Sources */,
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
 				3666F1AE26998D8600D80E06 /* Model.swift in Sources */,
 				368BE0322796C34C00ED457C /* Session.swift in Sources */,

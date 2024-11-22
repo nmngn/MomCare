@@ -7,9 +7,8 @@
 
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: BaseViewController {
 
-    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var model = [SettingModel]()
@@ -17,7 +16,6 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Constant.Text.setting
-        self.changeTheme(self.theme)
         self.setupNavigationButton()
         self.configView()
         self.setupData()
@@ -52,7 +50,6 @@ class SettingViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.changeTheme(self.theme)
         self.setupNavigationButton()
     }
     

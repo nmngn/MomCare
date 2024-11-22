@@ -8,11 +8,10 @@
 import UIKit
 import RealmSwift
 
-class SearchViewController: UIViewController {
+class SearchViewController: BaseViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
@@ -32,7 +31,6 @@ class SearchViewController: UIViewController {
         self.getListUser()
         self.configView()
         self.setupBackButton()
-        self.changeTheme(self.theme)
         self.setupStatus(isHidden: false, title: Constant.Text.letSearch)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -40,7 +38,6 @@ class SearchViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.changeTheme(theme)
         self.setupBackButton()
         self.tableView.reloadData()
     }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +23,6 @@
                 <outlet property="searchBar" destination="NJg-fv-WCy" id="sq3-Nt-Qwh"/>
                 <outlet property="statusLabel" destination="g8o-Nd-dhv" id="6tL-C4-YD9"/>
                 <outlet property="tableView" destination="g16-j4-Rtq" id="NJs-VL-TtI"/>
-                <outlet property="theme" destination="CX3-1B-bSt" id="KLN-6U-zJS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,9 +31,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CX3-1B-bSt">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dux-5d-g7E">
                     <rect key="frame" x="87" y="305" width="240" height="286"/>
                     <subviews>
@@ -83,19 +80,15 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="Background"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="g16-j4-Rtq" secondAttribute="trailing" id="2VL-9d-8Cd"/>
                 <constraint firstItem="NJg-fv-WCy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7nA-nm-Xwq"/>
                 <constraint firstItem="g16-j4-Rtq" firstAttribute="top" secondItem="NJg-fv-WCy" secondAttribute="bottom" id="AwU-wj-rby"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CX3-1B-bSt" secondAttribute="trailing" id="Jew-05-Fyn"/>
-                <constraint firstItem="CX3-1B-bSt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ucx-jg-JxO"/>
                 <constraint firstItem="NJg-fv-WCy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="V4t-Ne-YP3"/>
                 <constraint firstItem="dux-5d-g7E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bLZ-xU-O3O"/>
-                <constraint firstAttribute="bottom" secondItem="CX3-1B-bSt" secondAttribute="bottom" id="bVd-p9-3eG"/>
                 <constraint firstItem="NJg-fv-WCy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ceg-A0-zvW"/>
                 <constraint firstItem="g16-j4-Rtq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gr2-y9-l1k"/>
-                <constraint firstItem="CX3-1B-bSt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="j1i-g7-V4p"/>
                 <constraint firstItem="dux-5d-g7E" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="laX-Qh-WDh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="g16-j4-Rtq" secondAttribute="bottom" id="y5o-py-vOI"/>
             </constraints>
@@ -104,6 +97,9 @@
     </objects>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <namedColor name="Background">
+            <color red="0.20784313725490194" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

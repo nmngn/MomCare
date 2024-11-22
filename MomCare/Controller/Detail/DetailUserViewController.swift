@@ -16,11 +16,10 @@ enum UserChoice {
     case baby
 }
 
-class DetailUserViewController: UIViewController {
+class DetailUserViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     
     var model = [DetailModel]()
@@ -36,7 +35,6 @@ class DetailUserViewController: UIViewController {
         self.title = Constant.Text.patientInfo
         self.getInfoUser()
         self.asyncMainThread.async {
-            self.changeTheme(self.theme)
             self.setupView()
         }
         self.configView()
@@ -46,7 +44,6 @@ class DetailUserViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.changeTheme(theme)
         self.setupNavigationButton()
         self.tableView.reloadData()
     }
@@ -338,9 +335,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
             cell.selectionStyle = .none
             cell.delegate = self
             cell.setupData(model: currentModel)
-            cell.invalidPhone = { [weak self] in
-                self?.isInValidPhone()
-            }
             return cell
         case .age:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BaybyAgeTableViewCell.name, for: indexPath) as?
@@ -449,39 +443,35 @@ extension DetailUserViewController: DetailUserInfo {
 
 extension DetailUserViewController {
     func saveInfoUser() {
-        if self.currentModel.numberPhone.isValidPhone() {
-            do {
-                self.realm.beginWrite()
-                currentModel.id = NSUUID().uuidString.lowercased()
-                currentUser.idUser = currentModel.id
-                currentUser.name = currentModel.name
-                currentUser.address = currentModel.address
-                currentUser.momBirth = currentModel.momBirth
-                currentUser.numberPhone = currentModel.numberPhone
-                currentUser.height = currentModel.height
-                currentUser.babyDateBorn = currentModel.babyAge
-                currentUser.dateSave = getCurrentDate()
-                currentUser.note = currentModel.note
-                currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
-                                               image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
-                                               type: .mom)
-                currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(currentModel.id)",
-                                                      image: currentModel.imagePregnant ?? nil,
-                                                      type: .baby)
-                try? self.realm.commitWrite()
-                try? self.realm.safeWrite({
-                    self.realm.add(currentUser)
-                    let alert = UIAlertController(title: Constant.Text.notification, message: "Lưu thành công", preferredStyle: .actionSheet)
-                    let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
-                        self?.navigationController?.popToRootViewController(animated: true)
-                        Session.shared.isPopToRoot = true
-                    }
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
-                })
-            }
-        } else {
-            self.isInValidPhone()
+        do {
+            self.realm.beginWrite()
+            currentModel.id = NSUUID().uuidString.lowercased()
+            currentUser.idUser = currentModel.id
+            currentUser.name = currentModel.name
+            currentUser.address = currentModel.address
+            currentUser.momBirth = currentModel.momBirth
+            currentUser.numberPhone = currentModel.numberPhone
+            currentUser.height = currentModel.height
+            currentUser.babyDateBorn = currentModel.babyAge
+            currentUser.dateSave = getCurrentDate()
+            currentUser.note = currentModel.note
+            currentUser.avatar = saveImage(imageName: "avatarUser_\(currentModel.id)",
+                                           image: currentModel.avatarImage ?? UIImage(named: Constant.Text.avatarPlaceholder)!,
+                                           type: .mom)
+            currentUser.imagePregnant = saveImage(imageName: "imagePregnant_\(currentModel.id)",
+                                                  image: currentModel.imagePregnant ?? nil,
+                                                  type: .baby)
+            try? self.realm.commitWrite()
+            try? self.realm.safeWrite({
+                self.realm.add(currentUser)
+                let alert = UIAlertController(title: Constant.Text.notification, message: "Lưu thành công", preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    Session.shared.isPopToRoot = true
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            })
         }
     }
     

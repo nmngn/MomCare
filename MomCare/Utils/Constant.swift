@@ -15,13 +15,13 @@ enum Constant {
         static let blue = "BrandBlue"
         static let lighBlue = "BrandLightBlue"
         
-        static let darkColorItem =  UIColor(red: 0.39, green: 0.43, blue: 0.45, alpha: 1.00)
+        static let darkColorItem = UIColor.systemGray2.withAlphaComponent(0.5)
         
         static let lightColorBadge = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
-        static let darkColorBadge = UIColor(red: 0.34, green: 0.35, blue: 0.73, alpha: 1.00)
+        static let darkColorBadge = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
         
         static let lightColorItem2 = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
-        static let darkColorItem2 = UIColor(red: 0.36, green: 0.30, blue: 0.59, alpha: 1.00)
+        static let darkColorItem2 = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
     }
     
     enum Text {

@@ -9,9 +9,8 @@ import UIKit
 import RealmSwift
 import PopupDialog
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: BaseViewController {
 
-    @IBOutlet weak var theme: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var model = [HistoryModel]()
@@ -25,7 +24,6 @@ class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.changeTheme(self.theme)
         self.configView()
         self.setupBackButton()
         self.getListHistory()
@@ -34,7 +32,6 @@ class HistoryViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        self.changeTheme(theme)
         self.setupBackButton()
         self.tableView.reloadData()
     }
@@ -123,7 +120,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddPictureTableViewCell.name, for: indexPath) as?
                     AddPictureTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData(model: model)
             return cell
         case .title:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTitleTableViewCell.name, for: indexPath) as?

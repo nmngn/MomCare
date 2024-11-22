@@ -17,13 +17,16 @@ class NoteHistoryTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func setupData(model: HistoryModel) {
-        titleLabel.text = "Thời gian: \(model.time)"
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = .white
         } else {
             subView.backgroundColor = Constant.BrandColors.darkColorItem
         }
     }
-
+    
+    func setupData(model: HistoryModel) {
+        titleLabel.text = "Thời gian: \(model.time)"
+    }
 }

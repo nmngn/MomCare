@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmallOptionViewController: UIViewController {
+class SmallOptionViewController: BaseViewController {
     
     @IBOutlet weak var notiImage: UIImageView!
     @IBOutlet weak var dismissView: UIView!

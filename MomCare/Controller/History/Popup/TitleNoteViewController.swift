@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleNoteViewController: UIViewController, UITextViewDelegate {
+class TitleNoteViewController: BaseViewController, UITextViewDelegate {
 
     @IBOutlet private var textView: UITextView!
     

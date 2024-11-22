@@ -32,11 +32,8 @@ class BaybyAgeTableViewCell: UITableViewCell {
         ageLabel.isEnabled = false
     }
     
-    func setupData(model: DetailModel) {
-        self.cellType = model.dataType
-        dobLabel.text = model.babyAge
-        ageLabel.text = model.dateCalculate
-        
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             dobLabel.backgroundColor = .white
             ageLabel.backgroundColor = .white
@@ -44,7 +41,12 @@ class BaybyAgeTableViewCell: UITableViewCell {
             dobLabel.backgroundColor = Constant.BrandColors.darkColorItem
             ageLabel.backgroundColor = Constant.BrandColors.darkColorItem
         }
-
+    }
+    
+    func setupData(model: DetailModel) {
+        self.cellType = model.dataType
+        dobLabel.text = model.babyAge
+        ageLabel.text = model.dateCalculate
         delegate?.sendString(dataType: .babyAge, text: model.babyAge)
     }
 

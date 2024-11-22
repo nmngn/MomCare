@@ -25,13 +25,17 @@ class NoteTableViewCell: UITableViewCell {
         noteTextView.isScrollEnabled = false
     }
     
-    func setupData(model: DetailModel) {
-        noteTextView.text = model.note
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             noteTextView.backgroundColor = .white
         } else {
             noteTextView.backgroundColor = Constant.BrandColors.darkColorItem
         }
+    }
+    
+    func setupData(model: DetailModel) {
+        noteTextView.text = model.note
     }
 }
 

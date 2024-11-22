@@ -17,7 +17,8 @@ class AddPictureTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func setupData(model: HistoryModel) {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = .white
         } else {

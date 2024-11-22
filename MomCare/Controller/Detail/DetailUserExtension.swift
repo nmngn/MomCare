@@ -86,13 +86,6 @@ extension DetailUserViewController {
         self.currentModel.dateCalculate = week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
     }
     
-    func isInValidPhone() {
-        let alert = UIAlertController(title: Constant.Text.notification, message: "Số điện thoại không hợp lệ", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     func scheduleNotifications(time: String) {
         let center = UNUserNotificationCenter.current()
         
