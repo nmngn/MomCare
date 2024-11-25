@@ -162,6 +162,9 @@ class HomeViewModel {
                     print(error)
                 }
             }
+        } else {
+            localNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constant.Text.notificationEn])
+            localNotificationCenter.removeDeliveredNotifications(withIdentifiers: [Constant.Text.notificationEn])
         }
     }
 

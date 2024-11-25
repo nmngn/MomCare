@@ -57,9 +57,7 @@ class SearchViewController: BaseViewController {
     }
     
     func getListUser() {
-        do {
-            self.listUser = realm.objects(User.self).toArray()
-        }
+        self.listUser = realm.objects(User.self).toArray()
     }
     
     func setupStatus(isHidden: Bool, title: String) {

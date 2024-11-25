@@ -83,12 +83,10 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let id = notiModel[indexPath.row].id
-        do {
-            guard let infoUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
-            let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
-            vc.currentModel = infoUser.convertToDetailModel()
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        guard let infoUser = realm.objects(User.self).first(where: {$0.idUser == id}) else { return }
+        let vc = DetailUserViewController.init(nibName: DetailUserViewController.className, bundle: nil)
+        vc.currentModel = infoUser.convertToDetailModel()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
