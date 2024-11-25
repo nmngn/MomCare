@@ -77,7 +77,8 @@ class HomeViewController: BaseViewController {
     
     @objc func openMore() {
         let vc = SmallOptionViewController.init(nibName: SmallOptionViewController.className, bundle: nil)
-        vc.notiModel = self.viewModel.listNotificationData.value
+        let data = Array(Set(viewModel.listNotificationData.value + viewModel.listCustomNotificationData.value))
+        vc.notiModel = data
         vc.navigation = self.navigationController ?? UINavigationController()
         customPresentViewController(presenter, viewController: vc, animated: true)
     }

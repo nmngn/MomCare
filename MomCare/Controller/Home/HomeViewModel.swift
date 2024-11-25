@@ -31,6 +31,7 @@ class HomeViewModel {
     
     let listUserData = BehaviorRelay<[User]>(value: [])
     let listHomeData = BehaviorRelay<[HomeModel]>(value: [])
+    let listCustomNotificationData = BehaviorRelay<[NotificationModel]>(value: [])
     let listNotificationData = BehaviorRelay<[NotificationModel]>(value: [])
     let sortType = BehaviorRelay<SortType>(value: .normal)
     let localNotificationCenter: UNUserNotificationCenter
@@ -99,6 +100,7 @@ class HomeViewModel {
             infoCell.dateSave = listUser[i].dateSave
             infoCell.dateCalculate = updateTime(dateString: listUser[i].babyDateBorn)
             infoCell.isStar = listUser[i].isStar
+            infoCell.notificationTime = listUser[i].setNotificationTime
             model.append(infoCell)
         }
         self.listHomeData.accept(model)
@@ -106,7 +108,9 @@ class HomeViewModel {
     
     func getUserToPushNoti() {
         var notiModel = [NotificationModel]()
+        var customNotiModel = [NotificationModel]()
         let listUser = self.listUserData.value
+        
         let newList = listUser.filter ({ user in
             let text = updateTime(dateString: user.babyDateBorn)
             if !text.isEmpty {
@@ -122,11 +126,18 @@ class HomeViewModel {
         for user in newList {
             notiModel.append(user.convertToNotiModel())
         }
+        
+        for user in listUser.filter({!$0.setNotificationTime.isEmpty}) {
+            customNotiModel.append(user.convertToNotiModel())
+        }
+        
+        self.listCustomNotificationData.accept(customNotiModel)
         self.listNotificationData.accept(notiModel)
         self.sendNotification(noti: listNotificationData.value)
     }
     
     func sendNotification(noti: [NotificationModel]) {
+        self.removeTriggerNotification()
         let application = UIApplication.shared
         let notificationContent = UNMutableNotificationContent()
         if noti.count == 1 {
@@ -163,9 +174,12 @@ class HomeViewModel {
                 }
             }
         } else {
-            localNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constant.Text.notificationEn])
-            localNotificationCenter.removeDeliveredNotifications(withIdentifiers: [Constant.Text.notificationEn])
+            removeTriggerNotification()
         }
+    }
+    
+    func removeTriggerNotification() {
+        localNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constant.Text.notificationEn])
     }
 
     func saveStarStatus(id: String,_ isStar: Bool) {

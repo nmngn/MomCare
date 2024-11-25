@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
-struct NotificationModel {
+struct NotificationModel: Hashable {
     var name = ""
     var babyDateBorn = ""
     var dateCalculate = ""
     var id = ""
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
+
