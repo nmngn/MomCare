@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class UserBornViewController: UIViewController {
+class UserBornViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!

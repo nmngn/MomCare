@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         }
+//        self.migrateRealm()
         application.registerForRemoteNotifications()
         return true
     }
@@ -35,5 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func migrateRealm() {
+        let config = Realm.Configuration(
+            schemaVersion: 2,
+            deleteRealmIfMigrationNeeded: false
+        )
+        Realm.Configuration.defaultConfiguration = config
+    }
 }
