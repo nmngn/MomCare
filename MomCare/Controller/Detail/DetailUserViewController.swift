@@ -376,7 +376,7 @@ extension DetailUserViewController {
             try? self.realm.safeWrite({[weak self] in
                 guard let self = self else { return }
                 self.realm.add(currentUser)
-                self.showNoticeAlert(title: Constant.Text.notification, message: Constant.Text.notification) {[weak self] in
+                self.showNoticeAlert(title: Constant.Text.notification, message: "Lưu thành công") {[weak self] in
                     self?.navigationController?.popToRootViewController(animated: true)
                 }
             })

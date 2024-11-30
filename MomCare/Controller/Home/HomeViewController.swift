@@ -224,8 +224,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch model.type {
         case .infoUser:
             let action = UIContextualAction(style: .normal, title: nil) {[weak self] _, _, _ in
-                
-                self?.viewModel.moveToBorn(id: model.id)
+                self?.showConfirmAlert(title: Constant.Text.notification, message: "Bạn có muốn dánh dấu đã sinh?", completion: {[weak self] in
+                    self?.viewModel.moveToBorn(id: model.id)
+                })
             }
             
             action.image = UIImage(systemName: "person.fill.checkmark")
