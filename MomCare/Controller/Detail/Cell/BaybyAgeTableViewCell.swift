@@ -38,8 +38,8 @@ class BaybyAgeTableViewCell: UITableViewCell {
             dobLabel.backgroundColor = .white
             ageLabel.backgroundColor = .white
         } else {
-            dobLabel.backgroundColor = Constant.BrandColors.darkColorItem
-            ageLabel.backgroundColor = Constant.BrandColors.darkColorItem
+            dobLabel.backgroundColor = Constant.BrandColors.darkColorTextField
+            ageLabel.backgroundColor = Constant.BrandColors.darkColorTextField
         }
     }
     

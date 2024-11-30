@@ -28,6 +28,7 @@ class DetailUserViewController: BaseViewController {
     let currentUser = User()
     let realm = try! Realm()
     let asyncMainThread = DispatchQueue.main
+    var isEnableRightButton = true
     var infoNotification: (title: String, content: String) = ("", "")
     
     override func viewDidLoad() {
@@ -48,94 +49,14 @@ class DetailUserViewController: BaseViewController {
         self.tableView.reloadData()
     }
     
-    func setupView() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            self.bottomHeightConstraint.constant = keyboardHeight - 18
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.bottomHeightConstraint.constant = 16
-        self.view.layoutIfNeeded()
-    }
-    
-    func setupNavigationButton() {
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
-                                       , style: .plain, target: self, action: #selector(touchBackButton))
-        navigationItem.leftBarButtonItems = [backItem]
-        
-        let deleteButton = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
-                                        UIImage(systemName: "trash")?.toHierachicalImage() : UIImage(systemName: "trash"),
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(removeUser))
-        deleteButton.isEnabled = !currentModel.dateSave.isEmpty
-        
-        let notiButton = UIBarButtonItem(image: !currentModel.dateSave.isEmpty ?
-                                         UIImage(systemName: "bell")?.toHierachicalImage() : UIImage(systemName: "bell"),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(setNotiTime))
-        notiButton.isEnabled = !currentModel.dateSave.isEmpty
-        
-        navigationItem.rightBarButtonItems = [deleteButton, notiButton]
-    }
-    
-    @objc func touchBackButton() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func setNotiTime() {
-        self.showAlertWithFieldsAndDatePicker()
-    }
-    
-    @objc func removeUser() {
-        if self.currentModel.dateSave.isEmpty {
-            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { [weak self] _ in
-                self?.saveData()
-            }
-            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.removeUser, preferredStyle: .alert)
-            let action = UIAlertAction(title: Constant.Text.accept, style: .default) { [weak self] _ in
-                self?.deleteUser()
-            }
-            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func deleteUser() {
-        let currentUser = realm.objects(User.self).filter("idUser == %@", currentModel.id).toArray()
-        let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == %@", currentModel.id).toArray()
-        try! self.realm.write{
-            self.realm.delete(currentUser)
-            self.realm.delete(noteOfUser)
-        }
-        
-        self.navigationController?.popToRootViewController(animated: true)
-        Session.shared.isPopToRoot = true
-    }
-    
     func getInfoUser() {
-        guard let data = realm.objects(User.self).filter("idUser == %@", currentModel.id).toArray().first else { return }
+        guard let data = realm.objects(User.self).first(where: {$0.idUser == currentModel.id}) else {
+            if let data = realm.objects(UserBornModel.self).first(where: {$0.idUser == currentModel.id}) {
+                self.currentModel = data.convertToDetailModel()
+                self.isEnableRightButton = false
+            }
+            return
+        }
         self.currentModel = data.convertToDetailModel()
     }
         
@@ -230,10 +151,6 @@ class DetailUserViewController: BaseViewController {
         }
     }
     
-    func modelIndexPath(indexPath: IndexPath) -> DetailModel {
-        return self.model[indexPath.row]
-    }
-    
     private func openLibararies() {
         let alert = UIAlertController(title: "Select Photo Type", message: nil, preferredStyle: .actionSheet)
         
@@ -282,14 +199,11 @@ class DetailUserViewController: BaseViewController {
     
     @IBAction func showMore(_ sender: UIButton) {
         if self.currentModel.id == "" {
-            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.patientNotSave, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.saveIt, style: .default) { [weak self] _ in
+            self.showConfirmAlert(title: Constant.Text.notification,
+                                  message: Constant.Text.patientNotSave,
+                                  confirmTitle: Constant.Text.saveIt) {[weak self] in
                 self?.saveData()
             }
-            let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
         } else {
             let vc = HistoryViewController.init(nibName: HistoryViewController.className, bundle: nil)
             vc.hidesBottomBarWhenPushed = true
@@ -394,11 +308,8 @@ extension DetailUserViewController: DetailUserInfo {
         default:
             break
         }
-
-        let alert = UIAlertController(title: Constant.Text.notification, message: "Không được bỏ trống \(typeCellName)", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        
+        self.showNoticeAlert(title: Constant.Text.notification, message: "Không được bỏ trống \(typeCellName)")
     }
     
     func sendString(dataType: DataType, text: String) {
@@ -462,15 +373,12 @@ extension DetailUserViewController {
                                                   image: currentModel.imagePregnant ?? nil,
                                                   type: .baby)
             try? self.realm.commitWrite()
-            try? self.realm.safeWrite({
+            try? self.realm.safeWrite({[weak self] in
+                guard let self = self else { return }
                 self.realm.add(currentUser)
-                let alert = UIAlertController(title: Constant.Text.notification, message: "Lưu thành công", preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
+                self.showNoticeAlert(title: Constant.Text.notification, message: Constant.Text.notification) {[weak self] in
                     self?.navigationController?.popToRootViewController(animated: true)
-                    Session.shared.isPopToRoot = true
                 }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
             })
         }
     }
@@ -478,7 +386,8 @@ extension DetailUserViewController {
     func updateUser(id: String) {
         guard let currentUser = realm.objects(User.self).filter("idUser == %@", id).toArray().first else { return }
         
-        try! self.realm.write({
+        try! self.realm.safeWrite ({[weak self] in
+            guard let self = self else { return }
             currentUser.name = currentModel.name
             currentUser.address = currentModel.address
             currentUser.momBirth = currentModel.momBirth
@@ -510,13 +419,9 @@ extension DetailUserViewController {
                 }
             }
             
-            let alert = UIAlertController(title: Constant.Text.notification, message: "Cập nhật thành công", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel) {[weak self] _ in
+            self.showNoticeAlert(title: Constant.Text.notification, message: "Cập nhật thành công") {[weak self] in
                 self?.navigationController?.popToRootViewController(animated: true)
-                Session.shared.isPopToRoot = true
             }
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
         })
     }
 }

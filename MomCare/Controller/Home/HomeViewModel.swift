@@ -178,13 +178,25 @@ class HomeViewModel {
         }
     }
     
+    func moveToBorn(id: String) {
+        guard let selectedUser = self.realm.objects(User.self).first(where: {$0.idUser == id}) else { return }
+        let model = UserBornModel()
+        selectedUser.copy(to: model)
+        
+        try! realm.safeWrite {[weak self] in
+            self?.realm.add(model)
+            self?.realm.delete(selectedUser)
+            self?.getListUserData()
+        }
+    }
+    
     func removeTriggerNotification() {
         localNotificationCenter.removePendingNotificationRequests(withIdentifiers: [Constant.Text.notificationEn])
     }
 
     func saveStarStatus(id: String,_ isStar: Bool) {
         guard let selectedUser = self.realm.objects(User.self).first(where: {$0.idUser == id}) else { return }
-        try! self.realm.write {
+        try! self.realm.safeWrite {
             selectedUser.isStar = isStar
         }
         self.getListUserData()

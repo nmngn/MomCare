@@ -12,10 +12,6 @@ class SettingSwitchTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var switchView: UISwitch!
     var switchChanged: ((Bool) -> ())?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
     func setupData(model: SettingModel) {
         self.titleLabel.text = model.title

@@ -20,17 +20,20 @@ class BadgeUserTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func getNumberPatient(list: [User]) {
-        let text = NSMutableAttributedString(string: Constant.Text.hello, attributes: [
-            .font : UIFont.systemFont(ofSize: Constant.Size.biggerFontSize, weight: .medium)])
-
-        helloTitle.attributedText = text
-        
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = Constant.BrandColors.lightColorBadge
         } else {
             subView.backgroundColor = Constant.BrandColors.darkColorBadge
         }
+    }
+    
+    func getNumberPatient(list: [User]) {
+        let text = NSMutableAttributedString(string: Constant.Text.hello, attributes: [
+            .font : UIFont.systemFont(ofSize: Constant.Size.biggerFontSize, weight: .medium)])
+
+        helloTitle.attributedText = text
         
         let allPatient = NSMutableAttributedString(string: "\(list.count)", attributes: [
             .font : UIFont.systemFont(ofSize: Constant.Size.normalFontSize, weight: .bold)

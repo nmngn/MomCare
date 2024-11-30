@@ -22,7 +22,7 @@ class AddPictureTableViewCell: UITableViewCell {
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = .white
         } else {
-            subView.backgroundColor = Constant.BrandColors.darkColorItem
+            subView.backgroundColor = Constant.BrandColors.darkColorTextField
         }
     }
 }

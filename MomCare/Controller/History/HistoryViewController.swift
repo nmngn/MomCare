@@ -42,7 +42,6 @@ class HistoryViewController: BaseViewController {
     }
     
     func setupBackButton() {
-      self.navigationItem.setHidesBackButton(true, animated: true)
         let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
                                        , style: .plain, target: self, action: #selector(touchBackButton))
         navigationItem.leftBarButtonItems = [backItem]
@@ -100,8 +99,8 @@ class HistoryViewController: BaseViewController {
     func removeNote(id: String) {
         guard let currentNote = realm.objects(HistoryNote.self).filter("idNote == %@", id).toArray().first else { return  }
         
-        try! self.realm.write({
-            self.realm.delete(currentNote)
+        try! self.realm.safeWrite ({[weak self] in
+            self?.realm.delete(currentNote)
         })
     }
 }
@@ -248,8 +247,8 @@ extension HistoryViewController {
             currentNote.title = title
             
             try? self.realm.commitWrite()
-            try? self.realm.safeWrite {
-                self.realm.add(currentNote)
+            try? self.realm.safeWrite {[weak self] in
+                self?.realm.add(currentNote)
             }
         }
         self.getListHistory()

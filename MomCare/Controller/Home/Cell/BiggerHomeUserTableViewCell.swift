@@ -28,13 +28,17 @@ class BiggerHomeUserTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
-    func setupData(model: HomeModel) {
-        self.model = model
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = Constant.BrandColors.lightColorItem2
         } else {
             subView.backgroundColor = Constant.BrandColors.darkColorItem2
         }
+    }
+    
+    func setupData(model: HomeModel) {
+        self.model = model
         
         if !model.avatarImage.isEmpty {
             let _ = loadImageFromDiskWith(fileName: model.avatarImage) { [weak self] image in

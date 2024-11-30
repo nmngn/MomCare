@@ -1,18 +1,17 @@
 //
-//  NotificationTableViewCell.swift
+//  UserBornTableViewCell.swift
 //  MomCare
 //
-//  Created by Nam Ngây on 29/12/2021.
+//  Created by NamNT1 on 30/11/24.
 //
 
 import UIKit
 
-class NotificationTableViewCell: UITableViewCell {
+class UserBornTableViewCell: UITableViewCell {
 
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -23,9 +22,8 @@ class NotificationTableViewCell: UITableViewCell {
         }
     }
     
-    func setupData(model: NotificationModel) {
+    func setupData(model: UserBornModel) {
         titleLabel.text = "Họ và tên: \(model.name)"
-        timeLabel.text = "Ngày dự sinh: \(model.babyDateBorn)"
-        descriptionLabel.text = "Tuổi tuần thai: \(model.dateCalculate)"
+        descriptionLabel.text = "Ngày dự sinh: \(model.babyDateBorn)"
     }
 }

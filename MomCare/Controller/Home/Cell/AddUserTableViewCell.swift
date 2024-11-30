@@ -17,12 +17,12 @@ class AddUserTableViewCell: UITableViewCell {
         subView.makeShadow()
     }
     
-    func setupData() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         if self.traitCollection.userInterfaceStyle == .light {
             subView.backgroundColor = Constant.BrandColors.lightColorItem2
         } else {
             subView.backgroundColor = Constant.BrandColors.darkColorItem2
         }
     }
-    
 }

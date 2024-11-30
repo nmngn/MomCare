@@ -22,6 +22,15 @@ class SearchItemTableViewCell: UITableViewCell {
         subView.makeBorderColor()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if self.traitCollection.userInterfaceStyle == .light {
+            subView.backgroundColor = Constant.BrandColors.lightColorItem2
+        } else {
+            subView.backgroundColor = Constant.BrandColors.darkColorItem2
+        }
+    }
+    
     func setupData(model: User) {
         DispatchQueue.main.async {
             if !model.avatar.isEmpty {
@@ -37,18 +46,12 @@ class SearchItemTableViewCell: UITableViewCell {
 
         userNameLabel.text = model.name
         dayCreateLabel.text = model.dateSave
-        if model.updateTime().isEmpty {
+        if updateTime(dateString: model.babyDateBorn).isEmpty {
             babyAgeLabel.text = Constant.Text.notUpdated
             dateBornLabel.text = Constant.Text.notUpdated
         } else {
-            babyAgeLabel.text = model.updateTime()
+            babyAgeLabel.text = updateTime(dateString: model.babyDateBorn)
             dateBornLabel.text = model.babyDateBorn
-        }
-        
-        if self.traitCollection.userInterfaceStyle == .light {
-            subView.backgroundColor = Constant.BrandColors.lightColorItem2
-        } else {
-            subView.backgroundColor = Constant.BrandColors.darkColorItem2
         }
     }
 }

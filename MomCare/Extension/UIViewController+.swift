@@ -20,36 +20,24 @@ extension UIViewController {
         present(customVcTransition, animated: false, completion: nil)
     }
     
-    func changeTheme(_ theme: UIImageView) {
-        DispatchQueue.main.async {
-            if self.traitCollection.userInterfaceStyle == .light {
-                theme.backgroundColor = .lightGray
-            } else {
-                theme.backgroundColor = .darkGray
-            }
+    func showNoticeAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "OK", style: .cancel) { _ in
+            completion?()
         }
-    }
-    
-    func loading() {
-        let alert = UIAlertController(title: nil, message: "Vui lòng đợi...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .medium
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
+        alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
     
-    func dismissLoading() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func openAlert(_ message: String) {
-        let alert = UIAlertController(title: "Lỗi", message: message, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+    func showConfirmAlert(title: String, message: String, confirmTitle: String = "", completion: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: confirmTitle.isEmpty ? "OK" : confirmTitle, style: .default) { _ in
+            completion?()
+        }
+        
+        let cancel = UIAlertAction(title: Constant.Text.cancel, style: .cancel, handler: nil)
         alert.addAction(action)
+        alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
 }

@@ -30,7 +30,7 @@ class NoteTableViewCell: UITableViewCell {
         if self.traitCollection.userInterfaceStyle == .light {
             noteTextView.backgroundColor = .white
         } else {
-            noteTextView.backgroundColor = Constant.BrandColors.darkColorItem
+            noteTextView.backgroundColor = Constant.BrandColors.darkColorTextField
         }
     }
     

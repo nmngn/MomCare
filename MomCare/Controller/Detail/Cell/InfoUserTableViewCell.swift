@@ -25,8 +25,8 @@ class InfoUserTableViewCell: UITableViewCell {
             valueTextField.backgroundColor = .white
             callButton.backgroundColor = .white
         } else {
-            valueTextField.backgroundColor = Constant.BrandColors.darkColorItem
-            callButton.backgroundColor = Constant.BrandColors.darkColorItem
+            valueTextField.backgroundColor = Constant.BrandColors.darkColorTextField
+            callButton.backgroundColor = Constant.BrandColors.darkColorTextField
         }
     }
     
@@ -53,6 +53,15 @@ class InfoUserTableViewCell: UITableViewCell {
             callButton.isHidden = true
         } else {
             valueTextField.keyboardType = .numberPad
+            if model.numberPhone.isEmpty {
+                widthCallButtonConstraint.constant = 0
+                callButton.isEnabled = false
+                callButton.isHidden = true
+            } else {
+                widthCallButtonConstraint.constant = 40
+                callButton.isEnabled = true
+                callButton.isHidden = false
+            }
         }
     }
     

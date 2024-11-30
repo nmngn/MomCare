@@ -7,6 +7,90 @@
 import UIKit
 
 extension DetailUserViewController {
+    func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.bottomHeightConstraint.constant = keyboardHeight - 18
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.bottomHeightConstraint.constant = 16
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc func touchBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func setNotiTime() {
+        self.showAlertWithFieldsAndDatePicker()
+    }
+    
+    @objc func removeUser() {
+        if self.currentModel.dateSave.isEmpty {
+            self.showConfirmAlert(title: Constant.Text.notification,
+                                  message: Constant.Text.patientNotSave,
+                                  confirmTitle: Constant.Text.saveIt
+            ) {[weak self] in
+                self?.saveData()
+            }
+        } else {
+            self.showConfirmAlert(title: Constant.Text.notification, message: Constant.Text.removeUser) {[weak self] in
+                self?.deleteUser()
+            }
+        }
+    }
+    
+    func modelIndexPath(indexPath: IndexPath) -> DetailModel {
+        return self.model[indexPath.row]
+    }
+    
+    func deleteUser() {
+        let currentUser = realm.objects(User.self).filter("idUser == %@", currentModel.id).toArray()
+        let noteOfUser = realm.objects(HistoryNote.self).filter("idUser == %@", currentModel.id).toArray()
+        try! self.realm.safeWrite {[weak self] in
+            self?.realm.delete(currentUser)
+            self?.realm.delete(noteOfUser)
+        }
+        
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func setupNavigationButton() {
+        let backItem = UIBarButtonItem(image:  UIImage(named: Constant.Text.icBack)?.toHierachicalImage()
+                                       , style: .plain, target: self, action: #selector(touchBackButton))
+        navigationItem.leftBarButtonItems = [backItem]
+        
+        let isEnable = !currentModel.dateSave.isEmpty && isEnableRightButton
+        
+        let deleteButton = UIBarButtonItem(image: isEnable ?
+                                        UIImage(systemName: "trash")?.toHierachicalImage() : UIImage(systemName: "trash"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(removeUser))
+        
+        let notiButton = UIBarButtonItem(image: isEnable ?
+                                         UIImage(systemName: "bell")?.toHierachicalImage() : UIImage(systemName: "bell"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(setNotiTime))
+        
+        deleteButton.isEnabled = isEnable
+        notiButton.isEnabled = isEnable
+        
+        navigationItem.rightBarButtonItems = [deleteButton, notiButton]
+    }
+    
     func showAlertWithFieldsAndDatePicker() {
         let alert = UIAlertController(title: "Nhập nội dung thông báo", message: nil, preferredStyle: .alert)
         
@@ -41,10 +125,7 @@ extension DetailUserViewController {
             !self.currentModel.momBirth.isEmpty && !self.currentModel.height.isEmpty && !self.currentModel.numberPhone.isEmpty {
             self.saveInfoUser()
         } else {
-            let alert = UIAlertController(title: Constant.Text.notification, message: Constant.Text.missingInfo, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Constant.Text.understand, style: .cancel, handler: nil)
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            self.showNoticeAlert(title: Constant.Text.notification, message: Constant.Text.missingInfo)
         }
     }
     
@@ -114,8 +195,13 @@ extension DetailUserViewController {
             } else {
                 DispatchQueue.main.async {
                     if let currentUser = self?.realm.objects(User.self).first(where: {$0.idUser == self?.currentModel.id}) {
-                        try! self?.realm.write{
-                            currentUser.setNotificationTime = "\(dateComponents.day ?? 0)/\(dateComponents.month ?? 0)/\(dateComponents.year ?? 0) \(dateComponents.hour ?? 0):\(dateComponents.minute ?? 0)"
+                        try! self?.realm.safeWrite {
+                            currentUser.setNotificationTime = 
+                            "\(dateComponents.day ?? 0)/\(dateComponents.month ?? 0)/\(dateComponents.year ?? 0) \(dateComponents.hour ?? 0):\(dateComponents.minute ?? 0)"
+                            
+                            self?.showNoticeAlert(title: Constant.Text.notification, message: "Cập nhật thành công", completion: {[weak self] in
+                                self?.navigationController?.popToRootViewController(animated: true)
+                            })
                         }
                     }
                 }

@@ -15,13 +15,13 @@ enum Constant {
         static let blue = "BrandBlue"
         static let lighBlue = "BrandLightBlue"
         
-        static let darkColorItem = UIColor.systemGray2.withAlphaComponent(0.5)
+        static let darkColorTextField = UIColor.systemGray2.withAlphaComponent(0.5)
         
-        static let lightColorBadge = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
-        static let darkColorBadge = UIColor(red: 0.38, green: 0.64, blue: 0.74, alpha: 1.00)
+        static let lightColorBadge = UIColor(hexString: "DEAA79")
+        static let darkColorBadge = UIColor(hexString: "DEAA79")
         
-        static let lightColorItem2 = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
-        static let darkColorItem2 = UIColor(red: 0.45, green: 0.66, blue: 0.85, alpha: 1.00)
+        static let lightColorItem2 = UIColor(hexString: "FFE6A9")
+        static let darkColorItem2 = UIColor(hexString: "B59F78")
     }
     
     enum Text {
@@ -34,7 +34,7 @@ enum Constant {
         
         static let hello = "Xin chào "
         static let allPatient = "Tổng số sản phụ hiện có: "
-        static let patientInMonth = "Số sản phụ dự kiến sinh trong tháng này: "
+        static let patientInMonth = "Số sản phụ dự kiến sinh dưới 4 tuần: "
         static let notUpdated = "Chưa cập nhật"
         static let home = "Màn hình chính"
         static let notificationAbout = "Thông báo về "

@@ -33,7 +33,7 @@ class User: Object {
         model.momBirth = momBirth
         model.height = height
         model.dateSave = dateSave
-        model.dateCalculate = updateTime()
+        model.dateCalculate = updateTime(dateString: babyDateBorn)
         model.babyAge = babyDateBorn
         model.note = note
         model.imagePregnantPath = imagePregnant
@@ -44,27 +44,26 @@ class User: Object {
         var model = NotificationModel()
         model.name = name
         model.babyDateBorn = babyDateBorn
-        model.dateCalculate = updateTime()
+        model.dateCalculate = updateTime(dateString: babyDateBorn)
         model.id = idUser
         return model
     }
     
-    func updateTime() -> String {
-        let dateFormatter = DateFormatter()
-        let todayDate = Date()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let date = dateFormatter.date(from: babyDateBorn)
-        guard let timeLast = date?.millisecondsSince1970 else { return ""}
-        let timeToday = todayDate.millisecondsSince1970
-        let result = timeLast - timeToday
-        
-        let toDay = result / 86400000
-        let ageDay = 280 - Int(toDay)
-        let week = Int(ageDay / 7)
-        let day = Int(ageDay % 7)
-        return week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
+    func copy(to target: UserBornModel) {
+        target.idUser = self.idUser
+        target.name = self.name
+        target.address = self.address
+        target.momBirth = self.momBirth
+        target.numberPhone = self.numberPhone
+        target.height = self.height
+        target.babyDateBorn = self.babyDateBorn
+        target.dateSave = self.dateSave
+        target.note = self.note
+        target.avatar = self.avatar
+        target.imagePregnant = self.imagePregnant
+        target.isStar = self.isStar
+        target.setNotificationTime = self.setNotificationTime
     }
-    
 }
 
 class HistoryNote: Object{
@@ -73,4 +72,37 @@ class HistoryNote: Object{
     @objc dynamic var time = ""
     @objc dynamic var image = ""
     @objc dynamic var title = ""
+}
+
+class UserBornModel: Object {
+    @objc dynamic var idUser = ""
+    @objc dynamic var name = ""
+    @objc dynamic var address = ""
+    @objc dynamic var momBirth = ""
+    @objc dynamic var numberPhone = ""
+    @objc dynamic var height = ""
+    @objc dynamic var babyDateBorn = ""
+    @objc dynamic var dateSave = ""
+    @objc dynamic var note = ""
+    @objc dynamic var avatar = ""
+    @objc dynamic var imagePregnant = ""
+    @objc dynamic var isStar = false
+    @objc dynamic var setNotificationTime = ""
+    
+    func convertToDetailModel() -> DetailModel {
+        var model = DetailModel()
+        model.id = idUser
+        model.address = address
+        model.numberPhone = numberPhone
+        model.avatarImagePath = avatar
+        model.name = name
+        model.momBirth = momBirth
+        model.height = height
+        model.dateSave = dateSave
+        model.dateCalculate = updateTime(dateString: babyDateBorn)
+        model.babyAge = babyDateBorn
+        model.note = note
+        model.imagePregnantPath = imagePregnant
+        return model
+    }
 }

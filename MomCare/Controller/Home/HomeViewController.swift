@@ -127,8 +127,9 @@ class HomeViewController: BaseViewController {
         let sortDateCal = UIAlertAction(title: Constant.Text.sortAge, style: .default, handler: {[weak self] _ in
             self?.viewModel.sortType.accept(.age)
             let listUser = self?.viewModel.listUserData.value
-            if let newList = listUser?.sorted(by: {$0.updateTime() >
-                $1.updateTime()}) {
+            if let newList = listUser?.sorted(by: {
+                updateTime(dateString: $0.babyDateBorn) > updateTime(dateString: $1.babyDateBorn)
+            }) {
                 self?.viewModel.listUserData.accept(newList)
             }
         })
@@ -165,7 +166,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddUserTableViewCell.className, for: indexPath) as?
                     AddUserTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setupData()
             return cell
         case .infoUser:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BiggerHomeUserTableViewCell.className, for: indexPath) as?
@@ -215,6 +215,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var model: HomeModel
+        model = modelIndexPath(indexPath: indexPath)
+        
+        switch model.type {
+        case .infoUser:
+            let action = UIContextualAction(style: .normal, title: nil) {[weak self] _, _, _ in
+                
+                self?.viewModel.moveToBorn(id: model.id)
+            }
+            
+            action.image = UIImage(systemName: "person.fill.checkmark")
+            action.backgroundColor = UIColor(named: "Background")
+            let swipeActions = UISwipeActionsConfiguration(actions: [action])
+            return swipeActions
+        default:
+            break
+        }
+        return nil
     }
 }
 

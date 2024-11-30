@@ -87,12 +87,18 @@
 		BC2979B62CEF853B004D123A /* DetailUserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2979B52CEF8535004D123A /* DetailUserExtension.swift */; };
 		BC2979B82CEF8543004D123A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2979B72CEF8540004D123A /* DetailViewModel.swift */; };
 		BC6EECEE2AC66C2C00A36115 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6EECED2AC66C2C00A36115 /* UIViewController+.swift */; };
+		BCBC06492CFAC43600458099 /* UserBornViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC06472CFAC43600458099 /* UserBornViewController.swift */; };
+		BCBC064A2CFAC43600458099 /* UserBornViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCBC06482CFAC43600458099 /* UserBornViewController.xib */; };
+		BCBC064C2CFAC43F00458099 /* UserBornViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC064B2CFAC43F00458099 /* UserBornViewModel.swift */; };
+		BCBC06502CFAC6EF00458099 /* UserBornTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC064E2CFAC6EF00458099 /* UserBornTableViewCell.swift */; };
+		BCBC06512CFAC6EF00458099 /* UserBornTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCBC064F2CFAC6EF00458099 /* UserBornTableViewCell.xib */; };
 		BCD15D362AC4341600BA7094 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D352AC4341600BA7094 /* AppManager.swift */; };
 		BCD15D392AC4356A00BA7094 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D382AC4356A00BA7094 /* SettingModel.swift */; };
 		BCD15D3D2AC435E800BA7094 /* SettingTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D3B2AC435E800BA7094 /* SettingTimeTableViewCell.swift */; };
 		BCD15D3E2AC435E800BA7094 /* SettingTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCD15D3C2AC435E800BA7094 /* SettingTimeTableViewCell.xib */; };
 		BCD15D412AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD15D3F2AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift */; };
 		BCD15D422AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCD15D402AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib */; };
+		BCFA27E42CFAE88F00509601 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFA27E32CFAE88C00509601 /* UIColor+.swift */; };
 		F14B48B4459D617719B0DD46 /* Pods_MomCare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E9659231038AC3957DB0AF /* Pods_MomCare.framework */; };
 /* End PBXBuildFile section */
 
@@ -182,12 +188,18 @@
 		BC2979B52CEF8535004D123A /* DetailUserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserExtension.swift; sourceTree = "<group>"; };
 		BC2979B72CEF8540004D123A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BC6EECED2AC66C2C00A36115 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		BCBC06472CFAC43600458099 /* UserBornViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBornViewController.swift; sourceTree = "<group>"; };
+		BCBC06482CFAC43600458099 /* UserBornViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserBornViewController.xib; sourceTree = "<group>"; };
+		BCBC064B2CFAC43F00458099 /* UserBornViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBornViewModel.swift; sourceTree = "<group>"; };
+		BCBC064E2CFAC6EF00458099 /* UserBornTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBornTableViewCell.swift; sourceTree = "<group>"; };
+		BCBC064F2CFAC6EF00458099 /* UserBornTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserBornTableViewCell.xib; sourceTree = "<group>"; };
 		BCD15D352AC4341600BA7094 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		BCD15D382AC4356A00BA7094 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		BCD15D3B2AC435E800BA7094 /* SettingTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimeTableViewCell.swift; sourceTree = "<group>"; };
 		BCD15D3C2AC435E800BA7094 /* SettingTimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTimeTableViewCell.xib; sourceTree = "<group>"; };
 		BCD15D3F2AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		BCD15D402AC43B3A00BA7094 /* SettingSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSwitchTableViewCell.xib; sourceTree = "<group>"; };
+		BCFA27E32CFAE88C00509601 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +314,7 @@
 				367335CD2695D41800EB9DC0 /* History */,
 				3674240F2770C0EC0016477E /* SearchVC */,
 				3626C3F7277C3DBC00434B63 /* NotificationVC */,
+				BCBC06462CFAC41C00458099 /* UserBorn */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -514,6 +527,7 @@
 				3674240D27706EA10016477E /* Other+.swift */,
 				368BE027279679EA00ED457C /* UITextField+.swift */,
 				365EC7E22857901200709B74 /* Realm +.swift */,
+				BCFA27E32CFAE88C00509601 /* UIColor+.swift */,
 				BC6EECED2AC66C2C00A36115 /* UIViewController+.swift */,
 			);
 			path = Extension;
@@ -534,6 +548,26 @@
 				7871A8189E0EFE36FB220C9D /* Pods-MomCare.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BCBC06462CFAC41C00458099 /* UserBorn */ = {
+			isa = PBXGroup;
+			children = (
+				BCBC064D2CFAC6E400458099 /* Cell */,
+				BCBC06472CFAC43600458099 /* UserBornViewController.swift */,
+				BCBC06482CFAC43600458099 /* UserBornViewController.xib */,
+				BCBC064B2CFAC43F00458099 /* UserBornViewModel.swift */,
+			);
+			path = UserBorn;
+			sourceTree = "<group>";
+		};
+		BCBC064D2CFAC6E400458099 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BCBC064E2CFAC6EF00458099 /* UserBornTableViewCell.swift */,
+				BCBC064F2CFAC6EF00458099 /* UserBornTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		BCD15D372AC4356400BA7094 /* Model */ = {
@@ -620,6 +654,7 @@
 				367AACEE2697FC4C0056601C /* HistoryViewController.xib in Resources */,
 				366AE8E22692D2CC00B5262C /* SortListTableViewCell.xib in Resources */,
 				366AE8D12692C2DE00B5262C /* HomeTitleTableViewCell.xib in Resources */,
+				BCBC06512CFAC6EF00458099 /* UserBornTableViewCell.xib in Resources */,
 				3666F19F269982A300D80E06 /* NoteHistoryTableViewCell.xib in Resources */,
 				36F5E1EF270C4CB8009B74D3 /* ImagePregnantTableViewCell.xib in Resources */,
 				36D4FFA32694AEEA00985C25 /* InfoUserTableViewCell.xib in Resources */,
@@ -644,6 +679,7 @@
 				36EC54662691F38000809FF3 /* Assets.xcassets in Resources */,
 				3666F19A2699819900D80E06 /* AddPictureTableViewCell.xib in Resources */,
 				367424132770C1090016477E /* SearchViewController.xib in Resources */,
+				BCBC064A2CFAC43600458099 /* UserBornViewController.xib in Resources */,
 				36D4FFA82694B2A600985C25 /* BaybyAgeTableViewCell.xib in Resources */,
 				36EC54642691F37D00809FF3 /* Main.storyboard in Resources */,
 				36BC4DC427991951006DFC30 /* WebViewController.xib in Resources */,
@@ -713,6 +749,7 @@
 				367AACED2697FC4C0056601C /* HistoryViewController.swift in Sources */,
 				36D4FFA22694AEEA00985C25 /* InfoUserTableViewCell.swift in Sources */,
 				366AE8C42692BF3300B5262C /* BadgeUserTableViewCell.swift in Sources */,
+				BCBC06492CFAC43600458099 /* UserBornViewController.swift in Sources */,
 				36D4FFB52694B99F00985C25 /* DetailModel.swift in Sources */,
 				1B2E93872CF08BCE006D4B56 /* BaseViewController.swift in Sources */,
 				367424122770C1090016477E /* SearchViewController.swift in Sources */,
@@ -741,7 +778,9 @@
 				BCD15D3D2AC435E800BA7094 /* SettingTimeTableViewCell.swift in Sources */,
 				36090157285C802B0068A8C4 /* TitleNoteViewController.swift in Sources */,
 				36D4FF982694AAD700985C25 /* AvatarUserTableViewCell.swift in Sources */,
+				BCFA27E42CFAE88F00509601 /* UIColor+.swift in Sources */,
 				366AE8E12692D2CC00B5262C /* SortListTableViewCell.swift in Sources */,
+				BCBC064C2CFAC43F00458099 /* UserBornViewModel.swift in Sources */,
 				3615AA3D277B6E9B007F01C3 /* AddUserTableViewCell.swift in Sources */,
 				36BC4DC327991951006DFC30 /* WebViewController.swift in Sources */,
 				BC2979B62CEF853B004D123A /* DetailUserExtension.swift in Sources */,
@@ -750,6 +789,7 @@
 				36D4FFB12694B68200985C25 /* PhotoTableViewCell.swift in Sources */,
 				366AE8E62692D84000B5262C /* DetailUserViewController.swift in Sources */,
 				36C012B32744AE220085A329 /* Date+.swift in Sources */,
+				BCBC06502CFAC6EF00458099 /* UserBornTableViewCell.swift in Sources */,
 				BCD15D412AC43B3A00BA7094 /* SettingSwitchTableViewCell.swift in Sources */,
 				366AE8B72692BC0C00B5262C /* UIView+.swift in Sources */,
 				36D4FFAC2694B5FA00985C25 /* NoteTableViewCell.swift in Sources */,

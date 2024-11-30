@@ -50,6 +50,13 @@ class SmallOptionViewController: BaseViewController {
         self.navigation.pushViewController(vc, animated: true)
     }
         
+    @IBAction func checkedUser(_ sender: UIButton) {
+        let viewModel = UserBornViewModel()
+        let vc = UserBornViewController(viewModel: viewModel)
+        self.dismissVC()
+        self.navigation.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func settingAction(_ sender: UIButton) {
         let vc = SettingViewController.init(nibName: SettingViewController.className, bundle: nil)
         self.dismissVC()
