@@ -121,12 +121,7 @@ extension DetailUserViewController {
     }
 
     func saveData() {
-        if !self.currentModel.name.isEmpty && !self.currentModel.address.isEmpty &&
-            !self.currentModel.momBirth.isEmpty && !self.currentModel.height.isEmpty && !self.currentModel.numberPhone.isEmpty {
-            self.saveInfoUser()
-        } else {
-            self.showNoticeAlert(title: Constant.Text.notification, message: Constant.Text.missingInfo)
-        }
+        self.saveInfoUser()
     }
     
     func openDate(isSetNotification: Bool = false) {

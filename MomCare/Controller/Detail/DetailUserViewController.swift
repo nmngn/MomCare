@@ -292,26 +292,6 @@ extension DetailUserViewController: UITableViewDelegate, UITableViewDataSource, 
 }
 
 extension DetailUserViewController: DetailUserInfo {
-    func showAlert(dataType: DataType) {
-        var typeCellName = ""
-        switch dataType {
-        case .name:
-            typeCellName = "tên tuổi"
-        case .address:
-            typeCellName = "địa chỉ"
-        case .dob:
-            typeCellName = "năm sinh"
-        case .numberPhone:
-            typeCellName = "số điện thoại"
-        case .height:
-            typeCellName = "chiều cao"
-        default:
-            break
-        }
-        
-        self.showNoticeAlert(title: Constant.Text.notification, message: "Không được bỏ trống \(typeCellName)")
-    }
-    
     func sendString(dataType: DataType, text: String) {
         switch dataType {
         case .name:
@@ -358,7 +338,7 @@ extension DetailUserViewController {
             self.realm.beginWrite()
             currentModel.id = NSUUID().uuidString.lowercased()
             currentUser.idUser = currentModel.id
-            currentUser.name = currentModel.name
+            currentUser.name = currentModel.name.isEmpty ? "Sản phụ" : currentModel.name
             currentUser.address = currentModel.address
             currentUser.momBirth = currentModel.momBirth
             currentUser.numberPhone = currentModel.numberPhone
