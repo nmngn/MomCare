@@ -156,7 +156,7 @@ extension DetailUserViewController {
     
     func changeMilisToWeek(milis: Int64) {
         let toDay = milis / 86400000
-        let ageDay = 280 - Int(toDay)
+        let ageDay = 280 - Int(toDay) - 1
         let week = Int(ageDay / 7)
         let day = Int(ageDay % 7)
         self.currentModel.dateCalculate = week < 10 ?  "0\(week)W \(day)D" : "\(week)W \(day)D"
